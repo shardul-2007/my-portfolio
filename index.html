@@ -6,158 +6,312 @@
   <title>Shardul Parihar | Software Developer &amp; Full Stack Developer</title>
   <meta name="description" content="Shardul Parihar is a software developer building modern web applications, full-stack projects and AI-powered digital experiences.">
   <meta name="author" content="Shardul Parihar">
-  <meta name="keywords" content="Shardul Parihar, Software Developer, Full Stack Developer, AI Developer, Web Developer, Open Source, React, Node.js, MERN, CivicOS">
+  <meta name="keywords" content="Shardul Parihar, Software Developer, Full Stack Developer, AI Developer, Web Developer, Open Source, React, Node.js, MERN, CivicOS, Pune">
   <link rel="canonical" href="https://shardul-2007.github.io/my-portfolio/">
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://shardul-2007.github.io/my-portfolio/">
   <meta property="og:title" content="Shardul Parihar | Software Developer &amp; Full Stack Developer">
   <meta property="og:description" content="Shardul Parihar is a software developer building modern web applications, full-stack projects and AI-powered digital experiences.">
   <meta property="og:image" content="https://shardul-2007.github.io/my-portfolio/imageshardul.png">
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Shardul Parihar | Software Developer &amp; Full Stack Developer">
   <meta name="twitter:description" content="Shardul Parihar is a software developer building modern web applications, full-stack projects and AI-powered digital experiences.">
   <meta name="twitter:image" content="https://shardul-2007.github.io/my-portfolio/imageshardul.png">
-  <meta name="theme-color" content="#0a0f1e">
+  <meta name="theme-color" content="#080d1a">
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <!-- Styles -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- ===== GLOBAL ELEMENTS ===== -->
 <div id="scroll-progress" aria-hidden="true"></div>
 <div id="cursor-dot" aria-hidden="true"></div>
-<div id="cursor-halo" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
+<div id="cursor-glow" aria-hidden="true"></div>
 
+<!-- ===== LOADER ===== -->
 <div id="loader" role="status" aria-label="Loading">
   <div class="loader-inner">
-    <span class="loader-name">SHARDUL</span>
+    <div class="loader-letters" aria-hidden="true">
+      <span style="--d:0">S</span><span style="--d:1">H</span><span style="--d:2">A</span><span style="--d:3">R</span><span style="--d:4">D</span><span style="--d:5">U</span><span style="--d:6">L</span>
+    </div>
     <div class="loader-bar"><div class="loader-fill"></div></div>
   </div>
 </div>
 
+<!-- ===== HEADER ===== -->
 <header id="header" role="banner">
-  <a href="#home" class="logo" aria-label="Shardul Parihar home">
-    <span class="logo-text">S</span><span class="logo-dot">.</span>
+  <a href="#home" class="logo" aria-label="Shardul Parihar — back to top">
+    <span class="logo-s">S</span><span class="logo-dot">.</span>
   </a>
+
   <nav role="navigation" aria-label="Main navigation">
-    <a href="#home" class="nav-link" data-section="home">Home</a>
-    <a href="#about" class="nav-link" data-section="about">About</a>
-    <a href="#skills" class="nav-link" data-section="skills">Skills</a>
+    <a href="#home"     class="nav-link" data-section="home">Home</a>
+    <a href="#about"    class="nav-link" data-section="about">About</a>
+    <a href="#skills"   class="nav-link" data-section="skills">Skills</a>
     <a href="#projects" class="nav-link" data-section="projects">Projects</a>
-    <a href="#journey" class="nav-link" data-section="journey">Journey</a>
-    <a href="#contact" class="nav-link" data-section="contact">Contact</a>
+    <a href="#journey"  class="nav-link" data-section="journey">Journey</a>
+    <a href="#contact"  class="nav-link" data-section="contact">Contact</a>
   </nav>
+
   <div class="header-actions">
-    <a href="https://github.com/shardul-2007" target="_blank" rel="noopener noreferrer" class="header-github" aria-label="GitHub profile">
+    <a href="https://github.com/shardul-2007" target="_blank" rel="noopener noreferrer"
+       class="header-gh" aria-label="GitHub profile">
       <i class="fab fa-github" aria-hidden="true"></i>
     </a>
-    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle menu">
+    <button class="menu-toggle" id="menuToggle"
+            aria-expanded="false" aria-controls="mobileMenu" aria-label="Toggle menu">
       <span class="bar"></span><span class="bar"></span><span class="bar"></span>
     </button>
   </div>
 </header>
 
-<div id="mobileMenu" class="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu" hidden>
+<!-- ===== MOBILE MENU ===== -->
+<div id="mobileMenu" class="mobile-menu" role="dialog" aria-modal="true"
+     aria-label="Navigation" hidden>
   <div class="mobile-menu-inner">
     <button class="mobile-close" id="mobileClose" aria-label="Close menu">
       <i class="fa-solid fa-xmark" aria-hidden="true"></i>
     </button>
     <nav class="mobile-nav">
-      <a href="#home" class="mobile-link">Home</a>
-      <a href="#about" class="mobile-link">About</a>
-      <a href="#skills" class="mobile-link">Skills</a>
+      <a href="#home"     class="mobile-link">Home</a>
+      <a href="#about"    class="mobile-link">About</a>
+      <a href="#skills"   class="mobile-link">Skills</a>
       <a href="#projects" class="mobile-link">Projects</a>
-      <a href="#journey" class="mobile-link">Journey</a>
-      <a href="#contact" class="mobile-link">Contact</a>
+      <a href="#journey"  class="mobile-link">Journey</a>
+      <a href="#contact"  class="mobile-link">Contact</a>
     </nav>
     <div class="mobile-social">
-      <a href="https://github.com/shardul-2007" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
-      <a href="https://www.linkedin.com/in/shardul-parihar-/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://github.com/shardul-2007" target="_blank" rel="noopener noreferrer"
+         aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/shardul-parihar-/" target="_blank" rel="noopener noreferrer"
+         aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="mailto:shardulparihar2007@gmail.com" aria-label="Email">
+        <i class="fa-solid fa-envelope"></i></a>
     </div>
   </div>
 </div>
 
+<!-- ===== HERO ===== -->
 <section class="hero" id="home" aria-labelledby="hero-heading">
+
   <div class="hero-bg" aria-hidden="true">
     <div class="hero-grid"></div>
-    <div class="hero-spotlight" id="heroSpotlight"></div>
+    <div class="hero-radial"></div>
+    <div class="hero-blob hero-blob-1"></div>
+    <div class="hero-blob hero-blob-2"></div>
     <canvas id="dotCanvas"></canvas>
   </div>
-  <div class="hero-content">
-    <div class="hero-text">
-      <p class="hero-greeting"><span class="greeting-bar"></span> Hello, I'm</p>
-      <h1 id="hero-heading" class="hero-name">
-        <span class="name-char" style="--i:0">S</span><span class="name-char" style="--i:1">h</span><span class="name-char" style="--i:2">a</span><span class="name-char" style="--i:3">r</span><span class="name-char" style="--i:4">d</span><span class="name-char" style="--i:5">u</span><span class="name-char" style="--i:6">l</span><span class="name-char name-dot" style="--i:7">.</span>
-      </h1>
-      <div class="hero-role">
-        <span class="role-static">I build </span>
-        <span id="roleText" class="role-animated" aria-live="polite"></span>
-        <span class="role-cursor" aria-hidden="true">|</span>
-      </div>
-      <p class="hero-desc">Software Developer building modern web experiences,<br class="hero-br"> full-stack applications and AI-powered products.</p>
-      <div class="hero-actions">
-        <a href="#projects" class="btn btn-primary magnetic"><span>View My Work</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
-        <a href="#contact" class="btn btn-secondary magnetic"><span>Let's Connect</span></a>
-      </div>
-      <div class="hero-social" role="list">
-        <a href="https://github.com/shardul-2007" target="_blank" rel="noopener noreferrer" class="social-icon" role="listitem" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
-        <a href="https://www.linkedin.com/in/shardul-parihar-/" target="_blank" rel="noopener noreferrer" class="social-icon" role="listitem" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-        <a href="mailto:shardulparihar2007@gmail.com" class="social-icon" role="listitem" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
-      </div>
-    </div>
-    <div class="hero-visual" aria-hidden="true">
-      <div class="profile-ring">
-        <div class="profile-glow"></div>
-        <div class="profile-frame">
-          <img src="imageshardul.png" alt="Shardul Parihar" class="profile-img" loading="eager" width="320" height="320">
-        </div>
-        <div class="profile-badge badge-1"><i class="fa-solid fa-code"></i> <span>Dev</span></div>
-        <div class="profile-badge badge-2"><i class="fab fa-github"></i> <span>Open Source</span></div>
-      </div>
-    </div>
-  </div>
-  <div class="hero-scroll-hint" aria-hidden="true"><div class="scroll-line-anim"></div></div>
-</section>
 
+  <div class="hero-content">
+
+    <!-- TEXT SIDE -->
+    <div class="hero-text">
+
+      <p class="hero-greeting">
+        <span class="greeting-line" aria-hidden="true"></span>
+        <span>Hello, I'm</span>
+      </p>
+
+      <h1 id="hero-heading" class="hero-name">
+        <span class="name-char" style="--i:0">S</span><span
+             class="name-char" style="--i:1">h</span><span
+             class="name-char" style="--i:2">a</span><span
+             class="name-char" style="--i:3">r</span><span
+             class="name-char" style="--i:4">d</span><span
+             class="name-char" style="--i:5">u</span><span
+             class="name-char" style="--i:6">l</span><span
+             class="name-char name-period" style="--i:7">.</span>
+      </h1>
+
+      <!-- ROLE ROTATOR — fade+blur word swap -->
+      <div class="hero-role" aria-live="polite" aria-atomic="true">
+        <span class="role-prefix">I build </span>
+        <div class="role-words">
+          <span class="role-word active">modern web apps.</span>
+          <span class="role-word">full-stack systems.</span>
+          <span class="role-word">AI-powered products.</span>
+          <span class="role-word">open source software.</span>
+          <span class="role-word">scalable backends.</span>
+        </div>
+      </div>
+
+      <p class="hero-desc">
+        Software Developer building modern web experiences,
+        full-stack applications and AI-powered products.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary magnetic">
+          <span>View My Work</span>
+          <i class="fa-solid fa-arrow-right btn-arrow" aria-hidden="true"></i>
+        </a>
+        <a href="#contact" class="btn btn-outline magnetic">
+          <span>Let's Connect</span>
+        </a>
+      </div>
+
+      <div class="hero-social" role="list">
+        <a href="https://github.com/shardul-2007" target="_blank" rel="noopener noreferrer"
+           class="social-btn" role="listitem" aria-label="GitHub — shardul-2007">
+          <i class="fab fa-github" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/shardul-parihar-/" target="_blank" rel="noopener noreferrer"
+           class="social-btn" role="listitem" aria-label="LinkedIn">
+          <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+        </a>
+        <a href="mailto:shardulparihar2007@gmail.com"
+           class="social-btn" role="listitem" aria-label="Email">
+          <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+        </a>
+      </div>
+
+    </div><!-- /.hero-text -->
+
+    <!-- VISUAL SIDE -->
+    <div class="hero-visual" aria-hidden="true">
+      <div class="profile-wrap">
+        <div class="profile-glow"></div>
+        <div class="profile-border-ring"></div>
+        <div class="profile-frame">
+          <img src="imageshardul.png"
+               alt="Shardul Parihar — Software Developer"
+               class="profile-img"
+               width="340" height="340"
+               loading="eager">
+        </div>
+        <div class="profile-chip chip-dev">
+          <i class="fa-solid fa-code"></i><span>Dev</span>
+        </div>
+        <div class="profile-chip chip-os">
+          <i class="fab fa-github"></i><span>Open Source</span>
+        </div>
+        <div class="profile-chip chip-ai">
+          <i class="fa-solid fa-brain"></i><span>AI Builder</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.hero-content -->
+
+  <!-- SCROLL HINT -->
+  <div class="hero-scroll-cue" aria-hidden="true">
+    <span class="scroll-cue-text">Scroll to explore</span>
+    <div class="scroll-cue-line"></div>
+  </div>
+
+</section><!-- /#home -->
+
+
+<!-- ===== ABOUT ===== -->
 <section id="about" aria-labelledby="about-heading">
   <div class="section-container">
+
     <div class="section-header reveal-item">
       <span class="section-tag">01 / About</span>
       <h2 id="about-heading" class="section-title">Who I Am</h2>
+      <div class="section-line" aria-hidden="true"></div>
     </div>
+
     <div class="about-layout">
-      <div class="about-text reveal-item">
-        <p class="about-intro">I am a passionate software developer interested in web development, full-stack development, modern technologies and creative digital projects. I enjoy turning ideas into real-world applications and continuously improving my technical skills.</p>
-        <p class="about-sub">Based in <strong>Pune, India</strong> — building real-world projects in Web Dev &amp; AI, contributing to open source, and focused on DSA and scalable systems.</p>
-        <div class="about-links">
-          <a href="https://github.com/shardul-2007" target="_blank" rel="noopener noreferrer" class="about-link"><i class="fab fa-github" aria-hidden="true"></i> GitHub Profile</a>
-          <a href="#projects" class="about-link"><i class="fa-solid fa-folder-open" aria-hidden="true"></i> View Projects</a>
+
+      <div class="about-text reveal-item" data-reveal="left">
+        <p class="about-intro">
+          I am a passionate software developer interested in web development,
+          full-stack development, modern technologies and creative digital projects.
+          I enjoy turning ideas into real-world applications and continuously
+          improving my technical skills.
+        </p>
+        <p class="about-sub">
+          Based in <strong>Pune, India</strong> — building real-world projects in
+          Web Dev &amp; AI, contributing to open source, and focused on
+          DSA and scalable systems.
+        </p>
+        <div class="about-actions">
+          <a href="https://github.com/shardul-2007" target="_blank" rel="noopener noreferrer"
+             class="about-action-link">
+            <i class="fab fa-github" aria-hidden="true"></i> GitHub Profile
+          </a>
+          <a href="#projects" class="about-action-link">
+            <i class="fa-solid fa-folder-open" aria-hidden="true"></i> View Projects
+          </a>
         </div>
       </div>
-      <div class="capability-grid reveal-item">
-        <div class="cap-card" tabindex="0"><div class="cap-icon"><i class="fa-solid fa-layer-group" aria-hidden="true"></i></div><h3>Frontend</h3><p>Responsive, accessible, performant UIs with modern HTML, CSS and JavaScript.</p></div>
-        <div class="cap-card" tabindex="0"><div class="cap-icon"><i class="fa-solid fa-server" aria-hidden="true"></i></div><h3>Full Stack</h3><p>End-to-end development with the MERN stack — React, Node.js, Express and MongoDB.</p></div>
-        <div class="cap-card" tabindex="0"><div class="cap-icon"><i class="fa-solid fa-brain" aria-hidden="true"></i></div><h3>AI &amp; Modern Tech</h3><p>Integrating AI capabilities into web applications and building intelligent products.</p></div>
-        <div class="cap-card" tabindex="0"><div class="cap-icon"><i class="fab fa-github" aria-hidden="true"></i></div><h3>Open Source</h3><p>Active contributor to GirlScript Summer of Code and NSOC programs.</p></div>
-        <div class="cap-card" tabindex="0"><div class="cap-icon"><i class="fa-solid fa-users" aria-hidden="true"></i></div><h3>Community</h3><p>Campus Ambassador across Google, Internshala, GUVI, Physics Wallah and more.</p></div>
-      </div>
-    </div>
+
+      <div class="capability-grid reveal-item" data-reveal="right">
+
+        <div class="cap-card" tabindex="0">
+          <div class="cap-icon-wrap">
+            <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+          </div>
+          <h3 class="cap-title">Frontend</h3>
+          <p class="cap-desc">Responsive, accessible, performant UIs with modern HTML, CSS and JavaScript.</p>
+        </div>
+
+        <div class="cap-card" tabindex="0">
+          <div class="cap-icon-wrap">
+            <i class="fa-solid fa-server" aria-hidden="true"></i>
+          </div>
+          <h3 class="cap-title">Full Stack</h3>
+          <p class="cap-desc">End-to-end MERN stack — React, Node.js, Express and MongoDB.</p>
+        </div>
+
+        <div class="cap-card" tabindex="0">
+          <div class="cap-icon-wrap">
+            <i class="fa-solid fa-brain" aria-hidden="true"></i>
+          </div>
+          <h3 class="cap-title">AI &amp; Modern Tech</h3>
+          <p class="cap-desc">Integrating AI capabilities into web applications and building intelligent products.</p>
+        </div>
+
+        <div class="cap-card" tabindex="0">
+          <div class="cap-icon-wrap">
+            <i class="fab fa-github" aria-hidden="true"></i>
+          </div>
+          <h3 class="cap-title">Open Source</h3>
+          <p class="cap-desc">Active contributor to GirlScript Summer of Code and NSOC programs.</p>
+        </div>
+
+        <div class="cap-card" tabindex="0">
+          <div class="cap-icon-wrap">
+            <i class="fa-solid fa-users" aria-hidden="true"></i>
+          </div>
+          <h3 class="cap-title">Community</h3>
+          <p class="cap-desc">Campus Ambassador across Google, Internshala, GUVI, Physics Wallah and more.</p>
+        </div>
+
+      </div><!-- /.capability-grid -->
+    </div><!-- /.about-layout -->
   </div>
 </section>
 
+
+<!-- ===== SKILLS ===== -->
 <section id="skills" aria-labelledby="skills-heading">
   <div class="section-container">
+
     <div class="section-header reveal-item">
       <span class="section-tag">02 / Skills</span>
       <h2 id="skills-heading" class="section-title">Technology Ecosystem</h2>
+      <div class="section-line" aria-hidden="true"></div>
       <p class="section-desc">Technologies and tools I work with and am continuously learning.</p>
     </div>
-    <div class="skills-layout reveal-item">
+
+    <div class="skills-grid reveal-item">
+
       <div class="skill-group">
-        <h3 class="skill-group-label"><i class="fa-solid fa-code" aria-hidden="true"></i> Languages</h3>
-        <div class="skill-chips">
+        <h3 class="skill-group-label">
+          <i class="fa-solid fa-code" aria-hidden="true"></i> Languages
+        </h3>
+        <div class="chips">
           <span class="chip"><i class="fab fa-html5" aria-hidden="true"></i> HTML</span>
           <span class="chip"><i class="fab fa-css3-alt" aria-hidden="true"></i> CSS</span>
           <span class="chip"><i class="fab fa-js" aria-hidden="true"></i> JavaScript</span>
@@ -166,9 +320,12 @@
           <span class="chip chip-mono">C++</span>
         </div>
       </div>
+
       <div class="skill-group">
-        <h3 class="skill-group-label"><i class="fa-solid fa-cubes" aria-hidden="true"></i> Development</h3>
-        <div class="skill-chips">
+        <h3 class="skill-group-label">
+          <i class="fa-solid fa-cubes" aria-hidden="true"></i> Development
+        </h3>
+        <div class="chips">
           <span class="chip"><i class="fab fa-react" aria-hidden="true"></i> React</span>
           <span class="chip"><i class="fab fa-node-js" aria-hidden="true"></i> Node.js</span>
           <span class="chip chip-mono">Express</span>
@@ -177,359 +334,642 @@
           <span class="chip chip-mono">REST APIs</span>
         </div>
       </div>
+
       <div class="skill-group">
-        <h3 class="skill-group-label"><i class="fa-solid fa-wrench" aria-hidden="true"></i> Tools</h3>
-        <div class="skill-chips">
+        <h3 class="skill-group-label">
+          <i class="fa-solid fa-wrench" aria-hidden="true"></i> Tools
+        </h3>
+        <div class="chips">
           <span class="chip"><i class="fab fa-git-alt" aria-hidden="true"></i> Git</span>
           <span class="chip"><i class="fab fa-github" aria-hidden="true"></i> GitHub</span>
           <span class="chip chip-mono">VS Code</span>
         </div>
       </div>
+
       <div class="skill-group">
-        <h3 class="skill-group-label"><i class="fa-solid fa-compass" aria-hidden="true"></i> Areas</h3>
-        <div class="skill-chips">
-          <span class="chip chip-area">Frontend</span>
-          <span class="chip chip-area">Backend</span>
-          <span class="chip chip-area">Full Stack</span>
-          <span class="chip chip-area">AI Integration</span>
-          <span class="chip chip-area">Web Development</span>
-          <span class="chip chip-area">Open Source</span>
+        <h3 class="skill-group-label">
+          <i class="fa-solid fa-compass" aria-hidden="true"></i> Areas
+        </h3>
+        <div class="chips">
+          <span class="chip chip-accent">Frontend</span>
+          <span class="chip chip-accent">Backend</span>
+          <span class="chip chip-accent">Full Stack</span>
+          <span class="chip chip-accent">AI Integration</span>
+          <span class="chip chip-accent">Web Development</span>
+          <span class="chip chip-accent">Open Source</span>
+        </div>
+      </div>
+
+    </div><!-- /.skills-grid -->
+
+    <!-- TECH MARQUEE -->
+    <div class="marquee-wrap reveal-item" aria-hidden="true">
+      <div class="marquee-track">
+        <div class="marquee-inner">
+          <span class="mq-item"><i class="fab fa-html5"></i> HTML</span>
+          <span class="mq-item"><i class="fab fa-css3-alt"></i> CSS</span>
+          <span class="mq-item"><i class="fab fa-js"></i> JavaScript</span>
+          <span class="mq-item"><i class="fab fa-react"></i> React</span>
+          <span class="mq-item"><i class="fab fa-node-js"></i> Node.js</span>
+          <span class="mq-item"><i class="fab fa-python"></i> Python</span>
+          <span class="mq-item"><i class="fab fa-git-alt"></i> Git</span>
+          <span class="mq-item"><i class="fab fa-github"></i> GitHub</span>
+          <span class="mq-item chip-mono-text">MongoDB</span>
+          <span class="mq-item chip-mono-text">Express</span>
+          <span class="mq-item chip-mono-text">REST APIs</span>
+          <span class="mq-item"><i class="fa-solid fa-brain"></i> AI</span>
+          <span class="mq-item chip-mono-text">MERN</span>
+          <span class="mq-item chip-mono-text">VS Code</span>
+          <!-- Duplicate for seamless loop -->
+          <span class="mq-item"><i class="fab fa-html5"></i> HTML</span>
+          <span class="mq-item"><i class="fab fa-css3-alt"></i> CSS</span>
+          <span class="mq-item"><i class="fab fa-js"></i> JavaScript</span>
+          <span class="mq-item"><i class="fab fa-react"></i> React</span>
+          <span class="mq-item"><i class="fab fa-node-js"></i> Node.js</span>
+          <span class="mq-item"><i class="fab fa-python"></i> Python</span>
+          <span class="mq-item"><i class="fab fa-git-alt"></i> Git</span>
+          <span class="mq-item"><i class="fab fa-github"></i> GitHub</span>
+          <span class="mq-item chip-mono-text">MongoDB</span>
+          <span class="mq-item chip-mono-text">Express</span>
+          <span class="mq-item chip-mono-text">REST APIs</span>
+          <span class="mq-item"><i class="fa-solid fa-brain"></i> AI</span>
+          <span class="mq-item chip-mono-text">MERN</span>
+          <span class="mq-item chip-mono-text">VS Code</span>
         </div>
       </div>
     </div>
+
   </div>
 </section>
 
+
+<!-- ===== PROJECTS ===== -->
 <section id="projects" aria-labelledby="projects-heading">
   <div class="section-container">
+
     <div class="section-header reveal-item">
       <span class="section-tag">03 / Projects</span>
       <h2 id="projects-heading" class="section-title">What I've Built</h2>
+      <div class="section-line" aria-hidden="true"></div>
       <p class="section-desc">A showcase of projects — from featured work to explorations.</p>
     </div>
 
-    <div class="featured-label reveal-item">
-      <span><i class="fa-solid fa-star" aria-hidden="true"></i> Featured Project</span>
+    <!-- FEATURED LABEL -->
+    <div class="featured-badge reveal-item">
+      <i class="fa-solid fa-star" aria-hidden="true"></i>
+      <span>Featured Project</span>
     </div>
 
-    <article class="featured-project reveal-item" aria-labelledby="civicos-heading">
+    <!-- CIVICOS FEATURED PROJECT -->
+    <article class="featured-project reveal-item" data-reveal="scale"
+             aria-labelledby="civicos-heading">
+
+      <!-- LEFT: visual mockup -->
       <div class="fp-visual">
-        <div class="fp-browser-chrome" aria-hidden="true">
-          <div class="fp-dots"><span></span><span></span><span></span></div>
-          <span class="fp-url-bar">civicos-beta.vercel.app</span>
-        </div>
-        <div class="fp-screenshot">
-          <div class="fp-screen-placeholder" aria-label="CivicOS platform preview">
-            <div class="fp-screen-content">
-              <div class="fp-screen-nav"><div></div><div></div><div></div></div>
-              <div class="fp-screen-hero">
-                <div class="fp-screen-title">CivicOS</div>
-                <div class="fp-screen-subtitle">AI Municipal Intelligence Platform</div>
-                <div class="fp-screen-tags"><span>AI</span><span>Maps</span><span>Analytics</span></div>
+        <div class="fp-browser" aria-hidden="true">
+          <div class="fp-browser-bar">
+            <div class="fp-dots">
+              <span class="dot-red"></span>
+              <span class="dot-yellow"></span>
+              <span class="dot-green"></span>
+            </div>
+            <span class="fp-url">civicos-beta.vercel.app</span>
+          </div>
+          <div class="fp-screen">
+            <!-- Simulated UI -->
+            <div class="fps-nav">
+              <div class="fps-nav-logo">CivicOS</div>
+              <div class="fps-nav-links">
+                <span></span><span></span><span></span>
               </div>
-              <div class="fp-screen-grid"><div></div><div></div><div></div><div></div></div>
-              <div class="fp-map-block"><div class="fp-map-pin"></div></div>
+            </div>
+            <div class="fps-hero">
+              <div class="fps-h-eyebrow">AI Municipal Intelligence Platform</div>
+              <div class="fps-h-title">CivicOS</div>
+              <div class="fps-h-tags">
+                <span>AI</span><span>Maps</span><span>Analytics</span><span>Civic</span>
+              </div>
+            </div>
+            <div class="fps-body">
+              <div class="fps-card"><div class="fps-card-head"></div><div class="fps-card-body"></div></div>
+              <div class="fps-card"><div class="fps-card-head"></div><div class="fps-card-body"></div></div>
+              <div class="fps-map">
+                <div class="fps-map-pulse"></div>
+                <div class="fps-map-grid"></div>
+              </div>
             </div>
           </div>
-          <div class="fp-overlay-glow" aria-hidden="true"></div>
         </div>
-      </div>
+        <div class="fp-visual-glow" aria-hidden="true"></div>
+      </div><!-- /.fp-visual -->
+
+      <!-- RIGHT: content -->
       <div class="fp-content">
-        <span class="fp-tag"><i class="fa-solid fa-microchip" aria-hidden="true"></i> AI Platform</span>
+        <span class="fp-eyebrow">
+          <i class="fa-solid fa-microchip" aria-hidden="true"></i> AI Platform
+        </span>
+
         <h3 id="civicos-heading" class="fp-title">CivicOS</h3>
         <p class="fp-subtitle">AI Municipal Intelligence Platform</p>
-        <p class="fp-description">CivicOS is an AI-powered municipal intelligence platform designed to make civic information, workflows and public-service interactions more accessible, structured and intelligent. It brings together maps, data analytics and an intelligent interface to connect citizens with civic services.</p>
-        <div class="fp-features">
-          <div class="fp-feature"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i><span>Interactive Maps</span></div>
-          <div class="fp-feature"><i class="fa-solid fa-chart-line" aria-hidden="true"></i><span>Data Analytics</span></div>
-          <div class="fp-feature"><i class="fa-solid fa-brain" aria-hidden="true"></i><span>AI Intelligence Layer</span></div>
-          <div class="fp-feature"><i class="fa-solid fa-city" aria-hidden="true"></i><span>Civic Services</span></div>
+
+        <p class="fp-desc">
+          CivicOS is an AI-powered municipal intelligence platform designed to make
+          civic information, workflows and public-service interactions more accessible,
+          structured and intelligent. It brings together maps, data analytics and an
+          intelligent interface to connect citizens with civic services.
+        </p>
+
+        <ul class="fp-features" aria-label="Key features">
+          <li><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i><span>Interactive Maps</span></li>
+          <li><i class="fa-solid fa-chart-line" aria-hidden="true"></i><span>Data Analytics</span></li>
+          <li><i class="fa-solid fa-brain" aria-hidden="true"></i><span>AI Intelligence Layer</span></li>
+          <li><i class="fa-solid fa-city" aria-hidden="true"></i><span>Civic Services Interface</span></li>
+        </ul>
+
+        <div class="fp-stack">
+          <span class="stack-tag">React</span>
+          <span class="stack-tag">Vite</span>
+          <span class="stack-tag">Leaflet</span>
+          <span class="stack-tag">Recharts</span>
+          <span class="stack-tag">AI Integration</span>
+          <span class="stack-tag">REST APIs</span>
         </div>
-        <div class="fp-tech">
-          <span class="tech-tag">React</span>
-          <span class="tech-tag">Vite</span>
-          <span class="tech-tag">Leaflet</span>
-          <span class="tech-tag">Recharts</span>
-          <span class="tech-tag">AI Integration</span>
-          <span class="tech-tag">REST APIs</span>
-        </div>
+
         <div class="fp-actions">
-          <a href="https://civicos-beta.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-primary magnetic">
-            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i><span>Live Demo</span>
+          <a href="https://civicos-beta.vercel.app/"
+             target="_blank" rel="noopener noreferrer"
+             class="btn btn-primary magnetic">
+            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+            <span>Live Demo</span>
           </a>
-          <button class="btn btn-ghost case-study-toggle" aria-expanded="false" aria-controls="civicosCase">
-            <i class="fa-solid fa-book-open" aria-hidden="true"></i><span>Case Study</span>
+          <button class="btn btn-ghost case-study-btn"
+                  aria-expanded="false" aria-controls="civicosStudy">
+            <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+            <span>Case Study</span>
           </button>
         </div>
-      </div>
-      <div id="civicosCase" class="case-study" hidden>
-        <div class="case-study-inner">
-          <div class="cs-section">
-            <h4><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Problem</h4>
-            <p>Civic information is often fragmented, difficult to navigate and inaccessible to ordinary citizens. Public services lack a unified, intelligent interface — leaving people without clear ways to understand, access or engage with municipal resources and processes.</p>
-          </div>
-          <div class="cs-section">
-            <h4><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Solution</h4>
-            <p>CivicOS addresses this by providing a structured, AI-augmented interface that consolidates civic data, maps infrastructure and presents public-service information in an accessible, human-readable form.</p>
-          </div>
-          <div class="cs-section">
-            <h4><i class="fa-solid fa-diagram-project" aria-hidden="true"></i> How It Works</h4>
-            <div class="cs-flow">
-              <div class="cs-node"><i class="fa-solid fa-user" aria-hidden="true"></i><span>User</span></div>
-              <div class="cs-arrow" aria-hidden="true">&#8595;</div>
-              <div class="cs-node"><i class="fa-solid fa-display" aria-hidden="true"></i><span>CivicOS Interface</span></div>
-              <div class="cs-arrow" aria-hidden="true">&#8595;</div>
-              <div class="cs-node"><i class="fa-solid fa-brain" aria-hidden="true"></i><span>AI Processing Layer</span></div>
-              <div class="cs-arrow" aria-hidden="true">&#8595;</div>
-              <div class="cs-node"><i class="fa-solid fa-database" aria-hidden="true"></i><span>Structured Information</span></div>
-              <div class="cs-arrow" aria-hidden="true">&#8595;</div>
-              <div class="cs-node cs-node-accent"><i class="fa-solid fa-city" aria-hidden="true"></i><span>Useful Civic Output</span></div>
-            </div>
-          </div>
-          <div class="cs-section">
-            <h4><i class="fa-solid fa-microchip" aria-hidden="true"></i> Technology</h4>
-            <div class="cs-tech-grid">
-              <span>React (Vite)</span><span>Leaflet — Interactive Maps</span>
-              <span>Recharts — Data Visualization</span><span>Inter &amp; Outfit Fonts</span>
-              <span>AI Integration Layer</span><span>REST APIs</span>
-            </div>
-          </div>
-          <div class="cs-section">
-            <h4><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Impact</h4>
-            <p>CivicOS demonstrates how AI and modern web technology can make civic systems more human — reducing friction between citizens and public services, and establishing a foundation for intelligent municipal tooling.</p>
-          </div>
-          <a href="https://civicos-beta.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> Open Project
-          </a>
-        </div>
-      </div>
-    </article>
+      </div><!-- /.fp-content -->
 
-    <div class="more-projects-header reveal-item">
+      <!-- CASE STUDY PANEL -->
+      <div id="civicosStudy" class="case-study-panel" hidden>
+        <div class="cs-inner">
+
+          <div class="cs-col">
+            <div class="cs-block">
+              <h4 class="cs-block-title">
+                <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Problem
+              </h4>
+              <p>Civic information is often fragmented and inaccessible. Public services lack a unified, intelligent interface — leaving citizens without clear ways to access or engage with municipal resources.</p>
+            </div>
+
+            <div class="cs-block">
+              <h4 class="cs-block-title">
+                <i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Solution
+              </h4>
+              <p>CivicOS provides a structured, AI-augmented interface that consolidates civic data, maps infrastructure and presents public-service information in an accessible, human-readable form.</p>
+            </div>
+
+            <div class="cs-block">
+              <h4 class="cs-block-title">
+                <i class="fa-solid fa-circle-check" aria-hidden="true"></i> Impact
+              </h4>
+              <p>CivicOS demonstrates how AI and modern web technology can reduce friction between citizens and public services — establishing a foundation for intelligent municipal tooling.</p>
+            </div>
+          </div>
+
+          <div class="cs-col">
+            <div class="cs-block">
+              <h4 class="cs-block-title">
+                <i class="fa-solid fa-diagram-project" aria-hidden="true"></i> How It Works
+              </h4>
+              <div class="cs-flow">
+                <div class="cs-step">
+                  <div class="cs-step-icon"><i class="fa-solid fa-user" aria-hidden="true"></i></div>
+                  <span>User</span>
+                </div>
+                <div class="cs-step-arrow" aria-hidden="true">↓</div>
+                <div class="cs-step">
+                  <div class="cs-step-icon"><i class="fa-solid fa-display" aria-hidden="true"></i></div>
+                  <span>CivicOS Interface</span>
+                </div>
+                <div class="cs-step-arrow" aria-hidden="true">↓</div>
+                <div class="cs-step">
+                  <div class="cs-step-icon"><i class="fa-solid fa-brain" aria-hidden="true"></i></div>
+                  <span>AI Processing Layer</span>
+                </div>
+                <div class="cs-step-arrow" aria-hidden="true">↓</div>
+                <div class="cs-step">
+                  <div class="cs-step-icon"><i class="fa-solid fa-database" aria-hidden="true"></i></div>
+                  <span>Structured Information</span>
+                </div>
+                <div class="cs-step-arrow" aria-hidden="true">↓</div>
+                <div class="cs-step cs-step-accent">
+                  <div class="cs-step-icon"><i class="fa-solid fa-city" aria-hidden="true"></i></div>
+                  <span>Useful Civic Output</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="cs-block">
+              <h4 class="cs-block-title">
+                <i class="fa-solid fa-microchip" aria-hidden="true"></i> Technology
+              </h4>
+              <div class="cs-tech">
+                <span>React (Vite)</span>
+                <span>Leaflet — Maps</span>
+                <span>Recharts — Charts</span>
+                <span>AI Integration Layer</span>
+                <span>REST APIs</span>
+                <span>Inter &amp; Outfit Fonts</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="cs-footer">
+            <a href="https://civicos-beta.vercel.app/"
+               target="_blank" rel="noopener noreferrer"
+               class="btn btn-primary">
+              <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+              Open Project
+            </a>
+          </div>
+
+        </div>
+      </div><!-- /#civicosStudy -->
+
+    </article><!-- /.featured-project -->
+
+    <!-- MORE PROJECTS -->
+    <div class="more-header reveal-item">
       <h3>More Projects</h3>
-      <div class="project-filters" role="group" aria-label="Filter projects">
+      <div class="filters" role="group" aria-label="Filter projects by category">
         <button class="filter-btn active" data-filter="all">All</button>
         <button class="filter-btn" data-filter="web">Web</button>
         <button class="filter-btn" data-filter="fullstack">Full Stack</button>
+        <button class="filter-btn" data-filter="ai">AI</button>
         <button class="filter-btn" data-filter="opensource">Open Source</button>
       </div>
     </div>
 
     <div class="projects-grid reveal-item" id="projectsGrid">
-      <article class="project-card" data-category="web" tabindex="0">
-        <div class="pc-header">
-          <div class="pc-icon"><i class="fa-solid fa-laptop-code" aria-hidden="true"></i></div>
-          <div class="pc-links">
-            <a href="https://shardul-2007.github.io/my-portfolio/" target="_blank" rel="noopener noreferrer" aria-label="View live" class="pc-link-icon"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
-            <a href="https://github.com/shardul-2007/my-portfolio" target="_blank" rel="noopener noreferrer" aria-label="View source" class="pc-link-icon"><i class="fab fa-github" aria-hidden="true"></i></a>
+
+      <article class="proj-card" data-category="web" tabindex="0">
+        <div class="pj-top">
+          <div class="pj-icon">
+            <i class="fa-solid fa-laptop-code" aria-hidden="true"></i>
+          </div>
+          <div class="pj-links">
+            <a href="https://shardul-2007.github.io/my-portfolio/"
+               target="_blank" rel="noopener noreferrer"
+               aria-label="View live" class="pj-link">
+              <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+            </a>
+            <a href="https://github.com/shardul-2007/my-portfolio"
+               target="_blank" rel="noopener noreferrer"
+               aria-label="View source" class="pj-link">
+              <i class="fab fa-github" aria-hidden="true"></i>
+            </a>
           </div>
         </div>
-        <div class="pc-body">
-          <span class="pc-tag">Web</span>
-          <h3 class="pc-title">Portfolio Website</h3>
-          <p class="pc-desc">Modern personal portfolio with premium animations and responsive design — built without a framework.</p>
+        <div class="pj-body">
+          <span class="pj-cat">Web</span>
+          <h3 class="pj-title">Portfolio Website</h3>
+          <p class="pj-desc">Premium personal portfolio with animations, scroll reveals and responsive design — built without a framework.</p>
         </div>
-        <div class="pc-footer">
-          <span class="pc-tech">HTML</span><span class="pc-tech">CSS</span><span class="pc-tech">JavaScript</span>
-        </div>
-      </article>
-      <article class="project-card project-card-add" tabindex="0" aria-label="More projects coming soon">
-        <div class="pc-add-inner">
-          <i class="fa-solid fa-plus" aria-hidden="true"></i>
-          <p>More projects<br>coming soon</p>
+        <div class="pj-stack">
+          <span>HTML</span><span>CSS</span><span>JavaScript</span>
         </div>
       </article>
-    </div>
+
+      <article class="proj-card proj-card-soon" tabindex="0"
+               aria-label="More projects coming soon">
+        <i class="fa-solid fa-plus" aria-hidden="true"></i>
+        <p>More projects<br>coming soon</p>
+      </article>
+
+    </div><!-- /#projectsGrid -->
+
   </div>
 </section>
 
+
+<!-- ===== JOURNEY ===== -->
 <section id="journey" aria-labelledby="journey-heading">
   <div class="section-container">
+
     <div class="section-header reveal-item">
       <span class="section-tag">04 / Journey</span>
       <h2 id="journey-heading" class="section-title">My Journey</h2>
+      <div class="section-line" aria-hidden="true"></div>
       <p class="section-desc">My path through campus communities, leadership and open source contributions.</p>
     </div>
 
+    <!-- CAMPUS AMBASSADOR -->
     <div class="journey-block reveal-item">
-      <div class="journey-block-header">
-        <div class="jb-icon"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></div>
-        <div><h3>Campus Ambassador Journey</h3><p>Community Building &#183; Networking &#183; Student Engagement</p></div>
+      <div class="jb-header">
+        <div class="jb-icon-wrap">
+          <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+        </div>
+        <div>
+          <h3>Campus Ambassador Journey</h3>
+          <p>Community Building &#183; Networking &#183; Student Engagement</p>
+        </div>
       </div>
+
       <div class="timeline">
-        <div class="timeline-item reveal-timeline">
-          <div class="tl-marker" aria-hidden="true"><div class="tl-dot"></div><div class="tl-line"></div></div>
-          <div class="tl-content">
-            <span class="tl-year">2025</span><h4>Google</h4>
+
+        <div class="tl-item reveal-timeline">
+          <div class="tl-track" aria-hidden="true">
+            <div class="tl-node"></div>
+            <div class="tl-connector"></div>
+          </div>
+          <div class="tl-body">
+            <time class="tl-year">2025</time>
+            <h4>Google</h4>
             <p class="tl-role">Campus Ambassador</p>
             <p class="tl-desc">Participated in student community initiatives and helped promote technology and learning opportunities.</p>
-            <a href="images/google-offer.jpg" target="_blank" rel="noopener noreferrer" class="tl-proof"><i class="fa-solid fa-file" aria-hidden="true"></i> View Proof</a>
+            <a href="images/google-offer.jpg" target="_blank" rel="noopener noreferrer" class="tl-proof-link">
+              <i class="fa-solid fa-file" aria-hidden="true"></i> View Proof
+            </a>
           </div>
         </div>
-        <div class="timeline-item reveal-timeline">
-          <div class="tl-marker" aria-hidden="true"><div class="tl-dot"></div><div class="tl-line"></div></div>
-          <div class="tl-content">
-            <span class="tl-year">2025</span><h4>Internshala</h4>
+
+        <div class="tl-item reveal-timeline">
+          <div class="tl-track" aria-hidden="true">
+            <div class="tl-node"></div>
+            <div class="tl-connector"></div>
+          </div>
+          <div class="tl-body">
+            <time class="tl-year">2025</time>
+            <h4>Internshala</h4>
             <p class="tl-role">Campus Ambassador</p>
             <p class="tl-desc">Engaged with students and promoted internships, learning opportunities and career programs.</p>
-            <a href="images/internshala.jpg" target="_blank" rel="noopener noreferrer" class="tl-proof"><i class="fa-solid fa-certificate" aria-hidden="true"></i> View Proof</a>
+            <a href="images/internshala.jpg" target="_blank" rel="noopener noreferrer" class="tl-proof-link">
+              <i class="fa-solid fa-certificate" aria-hidden="true"></i> View Proof
+            </a>
           </div>
         </div>
-        <div class="timeline-item reveal-timeline">
-          <div class="tl-marker" aria-hidden="true"><div class="tl-dot"></div><div class="tl-line"></div></div>
-          <div class="tl-content">
-            <span class="tl-year">2025</span><h4>GUVI</h4>
+
+        <div class="tl-item reveal-timeline">
+          <div class="tl-track" aria-hidden="true">
+            <div class="tl-node"></div>
+            <div class="tl-connector"></div>
+          </div>
+          <div class="tl-body">
+            <time class="tl-year">2025</time>
+            <h4>GUVI</h4>
             <p class="tl-role">Campus Ambassador</p>
             <p class="tl-desc">Supported student engagement and promoted technology and skill-development initiatives.</p>
-            <a href="images/guvi.jpg" target="_blank" rel="noopener noreferrer" class="tl-proof"><i class="fa-solid fa-award" aria-hidden="true"></i> View Proof</a>
+            <a href="images/guvi.jpg" target="_blank" rel="noopener noreferrer" class="tl-proof-link">
+              <i class="fa-solid fa-award" aria-hidden="true"></i> View Proof
+            </a>
           </div>
         </div>
-        <div class="timeline-item reveal-timeline">
-          <div class="tl-marker" aria-hidden="true"><div class="tl-dot"></div><div class="tl-line"></div></div>
-          <div class="tl-content">
-            <span class="tl-year">2025</span><h4>Physics Wallah</h4>
+
+        <div class="tl-item reveal-timeline">
+          <div class="tl-track" aria-hidden="true">
+            <div class="tl-node"></div>
+            <div class="tl-connector"></div>
+          </div>
+          <div class="tl-body">
+            <time class="tl-year">2025</time>
+            <h4>Physics Wallah</h4>
             <p class="tl-role">Campus Ambassador</p>
             <p class="tl-desc">Participated in student community activities and promoted educational opportunities.</p>
-            <a href="images/physics-wallah.jpg" target="_blank" rel="noopener noreferrer" class="tl-proof"><i class="fa-solid fa-certificate" aria-hidden="true"></i> View Proof</a>
+            <a href="images/physics-wallah.jpg" target="_blank" rel="noopener noreferrer" class="tl-proof-link">
+              <i class="fa-solid fa-certificate" aria-hidden="true"></i> View Proof
+            </a>
           </div>
         </div>
-        <div class="timeline-item reveal-timeline">
-          <div class="tl-marker" aria-hidden="true"><div class="tl-dot"></div><div class="tl-line"></div></div>
-          <div class="tl-content">
-            <span class="tl-year">2026</span><h4>RemoteRecruit</h4>
+
+        <div class="tl-item reveal-timeline">
+          <div class="tl-track" aria-hidden="true">
+            <div class="tl-node"></div>
+            <div class="tl-connector"></div>
+          </div>
+          <div class="tl-body">
+            <time class="tl-year">2026</time>
+            <h4>RemoteRecruit</h4>
             <p class="tl-role">Student Ambassador</p>
             <p class="tl-desc">Selected as a Student Ambassador and participated in a student-focused technology community.</p>
-            <a href="images/remote-recruit.jpg" target="_blank" rel="noopener noreferrer" class="tl-proof"><i class="fa-solid fa-file" aria-hidden="true"></i> View Proof</a>
+            <a href="images/remote-recruit.jpg" target="_blank" rel="noopener noreferrer" class="tl-proof-link">
+              <i class="fa-solid fa-file" aria-hidden="true"></i> View Proof
+            </a>
           </div>
         </div>
-        <div class="timeline-item reveal-timeline">
-          <div class="tl-marker" aria-hidden="true"><div class="tl-dot"></div></div>
-          <div class="tl-content">
-            <span class="tl-year">2026</span><h4>HackerRank</h4>
+
+        <div class="tl-item reveal-timeline">
+          <div class="tl-track" aria-hidden="true">
+            <div class="tl-node"></div>
+          </div>
+          <div class="tl-body">
+            <time class="tl-year">2026</time>
+            <h4>HackerRank</h4>
             <p class="tl-role">Campus Community</p>
             <p class="tl-desc">Involved in student community engagement, contests and developer activities.</p>
-            <a href="images/hackerrank.jpg" target="_blank" rel="noopener noreferrer" class="tl-proof"><i class="fa-solid fa-award" aria-hidden="true"></i> View Proof</a>
+            <a href="images/hackerrank.jpg" target="_blank" rel="noopener noreferrer" class="tl-proof-link">
+              <i class="fa-solid fa-award" aria-hidden="true"></i> View Proof
+            </a>
           </div>
         </div>
-      </div>
-    </div>
 
+      </div><!-- /.timeline -->
+    </div><!-- /.journey-block -->
+
+    <!-- OPEN SOURCE -->
     <div class="journey-block reveal-item">
-      <div class="journey-block-header">
-        <div class="jb-icon"><i class="fab fa-github" aria-hidden="true"></i></div>
-        <div><h3>Open Source Journey</h3><p>Contributions &#183; Collaboration &#183; GitHub</p></div>
+      <div class="jb-header">
+        <div class="jb-icon-wrap">
+          <i class="fab fa-github" aria-hidden="true"></i>
+        </div>
+        <div>
+          <h3>Open Source Journey</h3>
+          <p>Contributions &#183; Collaboration &#183; GitHub</p>
+        </div>
       </div>
+
       <div class="timeline">
-        <div class="timeline-item reveal-timeline">
-          <div class="tl-marker" aria-hidden="true"><div class="tl-dot"></div><div class="tl-line"></div></div>
-          <div class="tl-content">
-            <span class="tl-year">2025</span><h4>GirlScript Summer of Code</h4>
+
+        <div class="tl-item reveal-timeline">
+          <div class="tl-track" aria-hidden="true">
+            <div class="tl-node"></div>
+            <div class="tl-connector"></div>
+          </div>
+          <div class="tl-body">
+            <time class="tl-year">2025</time>
+            <h4>GirlScript Summer of Code</h4>
             <p class="tl-role">Open Source Contributor</p>
             <p class="tl-desc">Participated in open source, collaborated through GitHub and contributed to community projects.</p>
-            <div class="tl-actions">
-              <a href="images/gssoc.jpg" target="_blank" rel="noopener noreferrer" class="tl-proof"><i class="fa-solid fa-certificate" aria-hidden="true"></i> View Proof</a>
-              <a href="https://github.com/shardul-2007" target="_blank" rel="noopener noreferrer" class="tl-proof tl-github"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
+            <div class="tl-link-row">
+              <a href="images/gssoc.jpg" target="_blank" rel="noopener noreferrer" class="tl-proof-link">
+                <i class="fa-solid fa-certificate" aria-hidden="true"></i> View Proof
+              </a>
+              <a href="https://github.com/shardul-2007" target="_blank" rel="noopener noreferrer"
+                 class="tl-proof-link tl-gh-link">
+                <i class="fab fa-github" aria-hidden="true"></i> GitHub
+              </a>
             </div>
           </div>
         </div>
-        <div class="timeline-item reveal-timeline">
-          <div class="tl-marker" aria-hidden="true"><div class="tl-dot"></div></div>
-          <div class="tl-content">
-            <span class="tl-year">2025</span><h4>NSOC</h4>
+
+        <div class="tl-item reveal-timeline">
+          <div class="tl-track" aria-hidden="true">
+            <div class="tl-node"></div>
+          </div>
+          <div class="tl-body">
+            <time class="tl-year">2025</time>
+            <h4>NSOC</h4>
             <p class="tl-role">Open Source Contributor</p>
             <p class="tl-desc">Participated in an open source program and collaborated on development projects.</p>
-            <div class="tl-actions">
-              <a href="images/nsoc.jpg" target="_blank" rel="noopener noreferrer" class="tl-proof"><i class="fa-solid fa-certificate" aria-hidden="true"></i> View Proof</a>
-              <a href="https://github.com/shardul-2007" target="_blank" rel="noopener noreferrer" class="tl-proof tl-github"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
+            <div class="tl-link-row">
+              <a href="images/nsoc.jpg" target="_blank" rel="noopener noreferrer" class="tl-proof-link">
+                <i class="fa-solid fa-certificate" aria-hidden="true"></i> View Proof
+              </a>
+              <a href="https://github.com/shardul-2007" target="_blank" rel="noopener noreferrer"
+                 class="tl-proof-link tl-gh-link">
+                <i class="fab fa-github" aria-hidden="true"></i> GitHub
+              </a>
             </div>
           </div>
         </div>
-      </div>
+
+      </div><!-- /.timeline -->
     </div>
 
-    <div class="github-cta reveal-item">
-      <div class="gc-inner">
-        <i class="fab fa-github gc-icon" aria-hidden="true"></i>
-        <div class="gc-text"><h3>Find me on GitHub</h3><p>Explore my repositories, contributions and open source work.</p></div>
-        <a href="https://github.com/shardul-2007" target="_blank" rel="noopener noreferrer" class="btn btn-secondary magnetic">
-          <i class="fab fa-github" aria-hidden="true"></i> <span>shardul-2007</span>
-        </a>
+    <!-- GITHUB CTA -->
+    <div class="gh-cta reveal-item" data-reveal="scale">
+      <i class="fab fa-github gh-cta-icon" aria-hidden="true"></i>
+      <div class="gh-cta-text">
+        <h3>Find me on GitHub</h3>
+        <p>Explore my repositories, contributions and open source work.</p>
       </div>
+      <a href="https://github.com/shardul-2007"
+         target="_blank" rel="noopener noreferrer"
+         class="btn btn-outline magnetic">
+        <i class="fab fa-github" aria-hidden="true"></i>
+        <span>shardul-2007</span>
+      </a>
     </div>
+
   </div>
 </section>
 
+
+<!-- ===== CONTACT ===== -->
 <section id="contact" aria-labelledby="contact-heading">
+  <!-- Background decorations -->
+  <div class="contact-bg-glow" aria-hidden="true"></div>
+  <div class="contact-bg-grid" aria-hidden="true"></div>
+
   <div class="section-container">
+
     <div class="section-header reveal-item">
       <span class="section-tag">05 / Contact</span>
-      <h2 id="contact-heading" class="section-title">Let's build something impactful.</h2>
+      <h2 id="contact-heading" class="section-title">Let's build something<br>impactful.</h2>
+      <div class="section-line" aria-hidden="true"></div>
       <p class="section-desc">Have a project, opportunity or collaboration in mind? Let's connect.</p>
     </div>
+
     <div class="contact-layout reveal-item">
-      <div class="contact-info">
-        <div class="contact-item">
-          <div class="ci-icon"><i class="fab fa-github" aria-hidden="true"></i></div>
-          <div><span class="ci-label">GitHub</span><a href="https://github.com/shardul-2007" target="_blank" rel="noopener noreferrer" class="ci-value">github.com/shardul-2007</a></div>
+
+      <div class="contact-info-col">
+        <div class="contact-card">
+          <div class="cc-icon"><i class="fab fa-github" aria-hidden="true"></i></div>
+          <div>
+            <span class="cc-label">GitHub</span>
+            <a href="https://github.com/shardul-2007" target="_blank" rel="noopener noreferrer"
+               class="cc-val">github.com/shardul-2007</a>
+          </div>
         </div>
-        <div class="contact-item">
-          <div class="ci-icon"><i class="fab fa-linkedin-in" aria-hidden="true"></i></div>
-          <div><span class="ci-label">LinkedIn</span><a href="https://www.linkedin.com/in/shardul-parihar-/" target="_blank" rel="noopener noreferrer" class="ci-value">Shardul Parihar</a></div>
+        <div class="contact-card">
+          <div class="cc-icon"><i class="fab fa-linkedin-in" aria-hidden="true"></i></div>
+          <div>
+            <span class="cc-label">LinkedIn</span>
+            <a href="https://www.linkedin.com/in/shardul-parihar-/" target="_blank" rel="noopener noreferrer"
+               class="cc-val">Shardul Parihar</a>
+          </div>
         </div>
-        <div class="contact-item">
-          <div class="ci-icon"><i class="fa-solid fa-envelope" aria-hidden="true"></i></div>
-          <div><span class="ci-label">Email</span><a href="mailto:shardulparihar2007@gmail.com" class="ci-value">shardulparihar2007@gmail.com</a></div>
+        <div class="contact-card">
+          <div class="cc-icon"><i class="fa-solid fa-envelope" aria-hidden="true"></i></div>
+          <div>
+            <span class="cc-label">Email</span>
+            <a href="mailto:shardulparihar2007@gmail.com"
+               class="cc-val">shardulparihar2007@gmail.com</a>
+          </div>
         </div>
-        <div class="contact-item">
-          <div class="ci-icon"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></div>
-          <div><span class="ci-label">Location</span><span class="ci-value">Pune, Maharashtra, India</span></div>
+        <div class="contact-card">
+          <div class="cc-icon"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></div>
+          <div>
+            <span class="cc-label">Location</span>
+            <span class="cc-val">Pune, Maharashtra, India</span>
+          </div>
         </div>
-      </div>
+      </div><!-- /.contact-info-col -->
+
       <form id="contactForm" class="contact-form" novalidate>
-        <div class="form-group">
-          <label for="contactName">Name</label>
-          <input type="text" id="contactName" name="name" placeholder="Your Name" required autocomplete="name">
+        <div class="form-row">
+          <label for="cName">Name</label>
+          <input type="text" id="cName" name="name" placeholder="Your Name"
+                 required autocomplete="name">
         </div>
-        <div class="form-group">
-          <label for="contactEmail">Email</label>
-          <input type="email" id="contactEmail" name="email" placeholder="Your Email" required autocomplete="email">
+        <div class="form-row">
+          <label for="cEmail">Email</label>
+          <input type="email" id="cEmail" name="email" placeholder="Your Email"
+                 required autocomplete="email">
         </div>
-        <div class="form-group">
-          <label for="contactMessage">Message</label>
-          <textarea id="contactMessage" name="message" placeholder="Your Message" rows="5" required></textarea>
+        <div class="form-row">
+          <label for="cMsg">Message</label>
+          <textarea id="cMsg" name="message" placeholder="Your Message"
+                    rows="5" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary btn-submit magnetic">
-          <i class="fa-solid fa-paper-plane" aria-hidden="true"></i><span>Send Message</span>
+        <button type="submit" class="btn btn-primary btn-full magnetic">
+          <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+          <span>Send Message</span>
         </button>
         <p id="formStatus" class="form-status" role="alert" aria-live="polite"></p>
       </form>
-    </div>
+
+    </div><!-- /.contact-layout -->
   </div>
 </section>
 
+
+<!-- ===== FOOTER ===== -->
 <footer role="contentinfo">
-  <div class="footer-inner">
+  <div class="footer-wrap">
     <div class="footer-brand">
-      <span class="footer-logo">Shardul<span class="footer-dot">.</span></span>
-      <span class="footer-tagline">Software Developer</span>
+      <span class="foot-logo">Shardul<span class="foot-dot">.</span></span>
+      <span class="foot-role">Software Developer</span>
     </div>
-    <nav class="footer-nav" aria-label="Footer navigation">
-      <a href="#home">Home</a><a href="#about">About</a><a href="#projects">Projects</a><a href="#journey">Journey</a><a href="#contact">Contact</a>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#journey">Journey</a>
+      <a href="#contact">Contact</a>
     </nav>
-    <div class="footer-social">
-      <a href="https://github.com/shardul-2007" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github" aria-hidden="true"></i></a>
-      <a href="https://www.linkedin.com/in/shardul-parihar-/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
-      <a href="mailto:shardulparihar2007@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
+    <div class="footer-socials">
+      <a href="https://github.com/shardul-2007" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <i class="fab fa-github" aria-hidden="true"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/shardul-parihar-/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+      </a>
+      <a href="mailto:shardulparihar2007@gmail.com" aria-label="Email">
+        <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+      </a>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>&#169; 2026 Shardul Parihar. Built with care.</p>
+    <p>&#169; 2026 Shardul Parihar &#183; Built with care.</p>
   </div>
 </footer>
 
+<!-- BACK TO TOP -->
 <button id="topBtn" aria-label="Back to top">
   <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
 </button>
+
 <script src="script.js"></script>
 </body>
 </html>
