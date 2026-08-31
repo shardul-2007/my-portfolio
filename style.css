@@ -6,23 +6,26 @@
 /* ============================================================
    1. DESIGN TOKENS
    ============================================================ */
-:root {
-  /* Backgrounds */
-  --bg:        #080d1a;
-  --bg-alt:    #0b1121;
-  --surface:   #0f172a;
-  --surface-2: #162032;
-  --surface-3: #1e2d45;
+
+/* ── DARK THEME (default) — warm yellow-tinted dark ── */
+:root,
+[data-theme="dark"] {
+  /* Backgrounds — warm yellow-tinted, NOT cold blue-black */
+  --bg:        #0d0c00;
+  --bg-alt:    #111000;
+  --surface:   #1a1800;
+  --surface-2: #222000;
+  --surface-3: #2d2b00;
 
   /* Text */
-  --text:      #eef2ff;
-  --text-muted: #8b9cbf;
-  --text-sub:  #5a6a8a;
+  --text:      #fefce8;
+  --text-muted: #a39e70;
+  --text-sub:  #6b6640;
 
   /* Borders */
-  --border:    rgba(255,255,255,0.07);
-  --border-md: rgba(255,255,255,0.12);
-  --border-accent: rgba(16,185,129,0.28);
+  --border:    rgba(255,248,0,0.07);
+  --border-md: rgba(255,248,0,0.12);
+  --border-accent: rgba(16,185,129,0.30);
 
   /* Accent */
   --accent:    #10b981;
@@ -31,23 +34,60 @@
   --accent-soft: rgba(16,185,129,0.08);
 
   /* Semantic */
-  --green:     #10b981;
-  --red:       #ef4444;
-  --yellow:    #10b981;
+  --green:  #10b981;
+  --red:    #ef4444;
 
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.5);
+  --shadow:    0 4px 24px rgba(0,0,0,0.6);
+  --shadow-lg: 0 12px 60px rgba(0,0,0,0.7);
+}
+
+/* ── LIGHT THEME — warm cream/yellow-white ── */
+[data-theme="light"] {
+  /* Backgrounds */
+  --bg:        #fefce8;
+  --bg-alt:    #fef9c3;
+  --surface:   #fffde7;
+  --surface-2: #fef08a;
+  --surface-3: #fde047;
+
+  /* Text */
+  --text:      #1a1200;
+  --text-muted: #4a3f00;
+  --text-sub:  #7a6b00;
+
+  /* Borders */
+  --border:    rgba(0,0,0,0.08);
+  --border-md: rgba(0,0,0,0.14);
+  --border-accent: rgba(16,185,129,0.35);
+
+  /* Accent — same accents work on light bg */
+  --accent:    #059669;
+  --accent-2:  #ea6c00;
+  --accent-glow: rgba(5,150,105,0.18);
+  --accent-soft: rgba(5,150,105,0.10);
+
+  /* Semantic */
+  --green:  #059669;
+  --red:    #dc2626;
+
+  /* Shadows — lighter for light bg */
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.10);
+  --shadow:    0 4px 24px rgba(0,0,0,0.12);
+  --shadow-lg: 0 12px 60px rgba(0,0,0,0.14);
+}
+
+/* Shared tokens (not theme-specific) */
+:root {
   /* Radii */
   --r-sm:  6px;
   --r:     12px;
   --r-lg:  20px;
   --r-xl:  28px;
 
-  /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(0,0,0,0.35);
-  --shadow:    0 4px 24px rgba(0,0,0,0.45);
-  --shadow-lg: 0 12px 60px rgba(0,0,0,0.55);
-
   /* Transitions */
-  --ease:  0.25s ease;
+  --ease:     0.25s ease;
   --ease-out: 0.45s cubic-bezier(0.16,1,0.3,1);
 
   /* Typography */
@@ -64,6 +104,15 @@
    ============================================================ */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
+/* Smooth theme cross-fade */
+body, header, footer, section,
+.cap-card, .proj-card, .featured-project,
+.contact-card, .contact-form, .tl-body,
+.journey-block, .gh-cta, .jb-header {
+  transition: background-color 0.4s ease, border-color 0.4s ease,
+              color 0.3s ease, box-shadow 0.3s ease;
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
@@ -73,6 +122,7 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font);
+
   font-size: 16px;
   line-height: 1.7;
   overflow-x: hidden;
@@ -94,6 +144,77 @@ input, textarea { font-family:inherit; }
 ::-webkit-scrollbar       { width:5px; }
 ::-webkit-scrollbar-track { background:var(--bg); }
 ::-webkit-scrollbar-thumb { background:var(--accent); border-radius:99px; }
+
+/* ============================================================
+   LIGHT MODE — Element overrides
+   ============================================================ */
+[data-theme="light"] #loader           { background: var(--bg); }
+[data-theme="light"] #cursor-dot       { background: var(--accent); }
+[data-theme="light"] #cursor-ring      { border-color: rgba(5,150,105,0.5); }
+[data-theme="light"] .hero-grid {
+  background-image:
+    linear-gradient(rgba(0,0,0,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,.05) 1px, transparent 1px);
+}
+[data-theme="light"] .hero-blob-1      { background: rgba(16,185,129,.09); }
+[data-theme="light"] .hero-blob-2      { background: rgba(249,115,22,.07); }
+[data-theme="light"] .hero-radial      {
+  background: radial-gradient(ellipse 60% 50% at 50% 0%,
+    rgba(16,185,129,.08), transparent 70%);
+}
+[data-theme="light"] #header.scrolled  {
+  background: rgba(254,252,232,0.90);
+  border-bottom-color: rgba(0,0,0,0.09);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+[data-theme="light"] .mobile-menu      { background: var(--bg); }
+[data-theme="light"] .fps-screen       { background: #fff; }
+[data-theme="light"] .fp-browser-bar   { background: #f3f4f6; }
+[data-theme="light"] .fp-url           { background: #fff; color: #374151; }
+[data-theme="light"] .fps-nav          { background: #f9fafb; }
+[data-theme="light"] .fps-card         { background: #f3f4f6; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .fps-card-head,
+[data-theme="light"] .fps-card-body    { background: #e5e7eb; }
+[data-theme="light"] .cs-step          { background: #f9fafb; border-color: rgba(0,0,0,0.08); }
+[data-theme="light"] .contact-bg-glow  {
+  background: radial-gradient(circle, rgba(16,185,129,.07), transparent 70%);
+}
+[data-theme="light"] .contact-bg-grid  {
+  background-image:
+    linear-gradient(rgba(0,0,0,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,.03) 1px, transparent 1px);
+}
+[data-theme="light"] .profile-frame    {
+  border-color: rgba(5,150,105,.3);
+  box-shadow: 0 0 30px rgba(5,150,105,.12), var(--shadow-lg);
+}
+[data-theme="light"] .loader-fill      {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+
+/* ============================================================
+   THEME TOGGLE BUTTON
+   ============================================================ */
+#themeToggle {
+  display: flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-sm); cursor: pointer;
+  font-size: 1rem; color: var(--text-muted); flex-shrink: 0;
+  transition: color var(--ease), border-color var(--ease),
+              box-shadow var(--ease), transform 0.3s var(--ease-out);
+}
+#themeToggle:hover {
+  color: var(--accent); border-color: var(--accent);
+  box-shadow: 0 0 14px var(--accent-glow);
+  transform: rotate(15deg) scale(1.1);
+}
+#themeToggle .t-sun  { display: none; }
+#themeToggle .t-moon { display: block; }
+[data-theme="light"] #themeToggle .t-sun  { display: block; }
+[data-theme="light"] #themeToggle .t-moon { display: none; }
+
+
 
 /* ============================================================
    4. SCROLL PROGRESS (GPU — transform: scaleX)

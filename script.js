@@ -18,6 +18,33 @@ const touchDevice = () =>
   window.matchMedia('(hover: none)').matches;
 
 /* ============================================================
+   THEME TOGGLE — dark / light, saved to localStorage
+   ============================================================ */
+function initThemeToggle() {
+  const html = document.documentElement;
+  const btn  = qs('#themeToggle');
+
+  // Apply saved preference immediately (before paint)
+  const saved = localStorage.getItem('sp-theme');
+  if (saved) html.dataset.theme = saved;
+
+  if (!btn) return;
+
+  btn.addEventListener('click', () => {
+    const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
+    html.dataset.theme = next;
+    localStorage.setItem('sp-theme', next);
+    btn.setAttribute('aria-label',
+      next === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+  });
+
+  // Set initial aria-label
+  btn.setAttribute('aria-label',
+    html.dataset.theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+}
+
+
+/* ============================================================
    LOADER
    ============================================================ */
 function initLoader() {
@@ -563,7 +590,15 @@ function initBackToTop() {
 /* ============================================================
    BOOT — run all modules
    ============================================================ */
+
+// Apply saved theme IMMEDIATELY (avoids flash of wrong theme)
+(function applyThemeEarly() {
+  const saved = localStorage.getItem('sp-theme');
+  if (saved) document.documentElement.dataset.theme = saved;
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
+  initThemeToggle();
   initLoader();
   initScrollProgress();
   initCursor();
