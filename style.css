@@ -7,20 +7,22 @@
    1. DESIGN TOKENS
    ============================================================ */
 
-/* ── DARK THEME (default) — warm yellow-tinted dark ── */
-:root,
-[data-theme="dark"] {
+/* ── DARK THEME default (first paint fallback on :root) + explicit [data-theme=dark] ── */
+:root { color-scheme: dark; }
+
+[data-theme="dark"],
+:root:not([data-theme="light"]) {
   /* Backgrounds — warm yellow-tinted, NOT cold blue-black */
-  --bg:        #0d0c00;
-  --bg-alt:    #111000;
-  --surface:   #1a1800;
-  --surface-2: #222000;
-  --surface-3: #2d2b00;
+  --bg:        #1c1500;
+  --bg-alt:    #231a00;
+  --surface:   #2a1f00;
+  --surface-2: #332800;
+  --surface-3: #3d3000;
 
   /* Text */
   --text:      #fefce8;
-  --text-muted: #a39e70;
-  --text-sub:  #6b6640;
+  --text-muted: #b5a55a;
+  --text-sub:  #7a6e40;
 
   /* Borders */
   --border:    rgba(255,248,0,0.07);

@@ -21,26 +21,23 @@ const touchDevice = () =>
    THEME TOGGLE — dark / light, saved to localStorage
    ============================================================ */
 function initThemeToggle() {
-  const html = document.documentElement;
-  const btn  = qs('#themeToggle');
-
-  // Apply saved preference immediately (before paint)
-  const saved = localStorage.getItem('sp-theme');
-  if (saved) html.dataset.theme = saved;
-
+  const btn = document.getElementById('themeToggle');
   if (!btn) return;
 
-  btn.addEventListener('click', () => {
-    const next = html.dataset.theme === 'dark' ? 'light' : 'dark';
-    html.dataset.theme = next;
-    localStorage.setItem('sp-theme', next);
+  // Set theme on <html> and save
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('sp-theme', theme);
+    // Update aria-label
     btn.setAttribute('aria-label',
-      next === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
-  });
+      theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode');
+  }
 
-  // Set initial aria-label
-  btn.setAttribute('aria-label',
-    html.dataset.theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+  // Toggle on click
+  btn.addEventListener('click', function () {
+    const current = document.documentElement.getAttribute('data-theme');
+    setTheme(current === 'light' ? 'dark' : 'light');
+  });
 }
 
 
@@ -593,8 +590,8 @@ function initBackToTop() {
 
 // Apply saved theme IMMEDIATELY (avoids flash of wrong theme)
 (function applyThemeEarly() {
-  const saved = localStorage.getItem('sp-theme');
-  if (saved) document.documentElement.dataset.theme = saved;
+  var saved = localStorage.getItem('sp-theme');
+  if (saved) document.documentElement.setAttribute('data-theme', saved);
 })();
 
 document.addEventListener('DOMContentLoaded', () => {
