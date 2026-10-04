@@ -27,7 +27,7 @@ export default function Skills() {
     : GROUPS;
 
   return (
-    <section id="skills" className="py-28 relative" style={{ background: '#060a14' }}>
+    <section id="skills" className="py-28 relative" style={{ background: 'var(--bg)' }}>
       <div className="section-container">
 
         {/* ── Header ─────────────────────────────────────────────── */}

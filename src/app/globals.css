@@ -355,43 +355,115 @@ body {
 }
 
 /* ═══════════════════════════════════════
-   LIGHT THEME
+   THEME SYSTEM — 2 THEMES ONLY:
+   1. MAJOR: Pure Black Background & White Text
+   2. YELLOW: High-Contrast Cyber Yellow Background & Black Text
    ═══════════════════════════════════════ */
-html[data-theme="light"] {
-  --bg: #f0f4f8;
-  --surface: rgba(0,0,0,0.04);
-  --surface-2: rgba(0,0,0,0.07);
-  --border: rgba(0,0,0,0.10);
-  --border-md: rgba(0,0,0,0.18);
-  --border-glow: rgba(0,170,130,0.35);
-  --accent: #00a882;
-  --accent-dim: rgba(0,168,130,0.12);
-  --accent-glow: rgba(0,168,130,0.25);
-  --text: #0f172a;
-  --text-muted: #475569;
-  --text-sub: #94a3b8;
-  --shadow-glass: 0 4px 24px rgba(0,0,0,0.10), inset 0 1px 0 rgba(255,255,255,0.7);
-  --shadow-glass-hover: 0 8px 32px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.8);
-}
-html[data-theme="light"] body { background-color: var(--bg); color: var(--text); }
-html[data-theme="light"] .glass {
-  background: rgba(255,255,255,0.65);
-  border-color: var(--border);
-}
-html[data-theme="light"] .gradient-text {
-  background: linear-gradient(135deg, #00a882, #006655);
-  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-}
-html[data-theme="light"] ::-webkit-scrollbar-thumb { background: rgba(0,168,130,0.35); }
-html[data-theme="light"] ::selection { background: rgba(0,168,130,0.2); color: var(--accent); }
 
-/* Grid bg light mode */
-html[data-theme="light"] .grid-bg {
-  background-image: linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+/* 1. MAJOR / DEFAULT DARK THEME */
+:root,
+html[data-theme="dark"] {
+  --bg: #050810;
+  --surface: rgba(255,255,255,0.04);
+  --surface-2: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.09);
+  --border-md: rgba(255,255,255,0.16);
+  --border-glow: rgba(0,245,200,0.25);
+  --accent: #00F5C8;
+  --accent-dim: rgba(0,245,200,0.12);
+  --accent-glow: rgba(0,245,200,0.25);
+  --text: #FFFFFF;
+  --text-muted: #94A3B8;
+  --text-sub: #64748B;
+  --shadow-glass: 0 8px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
+  --shadow-glass-hover: 0 16px 48px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.12);
 }
 
+/* 2. YELLOW THEME: Yellow Background + Black Text */
+html[data-theme="yellow"] {
+  --bg: #FFE500;
+  --surface: rgba(0,0,0,0.05);
+  --surface-2: rgba(0,0,0,0.10);
+  --border: rgba(0,0,0,0.16);
+  --border-md: rgba(0,0,0,0.28);
+  --border-glow: rgba(0,0,0,0.55);
+  --accent: #000000;
+  --accent-dim: rgba(0,0,0,0.12);
+  --accent-glow: rgba(0,0,0,0.25);
+  --text: #000000;
+  --text-muted: #18181B;
+  --text-sub: #3F3F46;
+  --shadow-glass: 0 4px 20px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.5);
+  --shadow-glass-hover: 0 8px 30px rgba(0,0,0,0.16), inset 0 1px 0 rgba(255,255,255,0.6);
+}
 
+html[data-theme="yellow"] body {
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+html[data-theme="yellow"] .glass {
+  background: rgba(255, 255, 255, 0.42);
+  border-color: rgba(0, 0, 0, 0.16);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+html[data-theme="yellow"] .gradient-text {
+  background: linear-gradient(135deg, #000000 0%, #27272A 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+html[data-theme="yellow"] .glow-btn-primary {
+  background: #000000 !important;
+  color: #FFE500 !important;
+  border-color: #000000 !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
+}
+
+html[data-theme="yellow"] .glow-btn-primary:hover {
+  background: #27272A !important;
+  color: #FFFFFF !important;
+}
+
+html[data-theme="yellow"] .glow-btn-ghost {
+  background: rgba(0, 0, 0, 0.06) !important;
+  color: #000000 !important;
+  border-color: rgba(0, 0, 0, 0.22) !important;
+}
+
+html[data-theme="yellow"] .glow-btn-ghost:hover {
+  background: #000000 !important;
+  color: #FFE500 !important;
+}
+
+html[data-theme="yellow"] .tech-pill {
+  background: rgba(0, 0, 0, 0.06);
+  color: #000000;
+  border-color: rgba(0, 0, 0, 0.16);
+}
+
+html[data-theme="yellow"] .sys-label-accent {
+  color: #000000;
+  font-weight: 700;
+}
+
+html[data-theme="yellow"] ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+html[data-theme="yellow"] ::selection {
+  background: #000000;
+  color: #FFE500;
+}
+
+html[data-theme="yellow"] .grid-bg {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+}
 
 /* ═══════════════════════════════════════
    MIND SPACE ANIMATIONS

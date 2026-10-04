@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Menu, Sun, Moon } from 'lucide-react';
+import { X, Menu, Sun, Moon, Zap } from 'lucide-react';
 import { PERSONAL } from '@/data/portfolio';
 
 const NAV_LINKS = [
@@ -18,17 +18,17 @@ export default function Navbar() {
   const [scrolled,  setScrolled]  = useState(false);
   const [menuOpen,  setMenuOpen]  = useState(false);
   const [active,    setActive]    = useState('home');
-  const [theme,     setTheme]     = useState<'dark'|'light'>('dark');
+  const [theme,     setTheme]     = useState<'dark'|'yellow'>('dark');
 
   useEffect(() => {
-    const saved = localStorage.getItem('sp-theme') as 'dark'|'light' | null;
-    const initial = saved ?? 'dark';
+    const saved = localStorage.getItem('sp-theme') as 'dark'|'yellow' | null;
+    const initial = saved === 'yellow' ? 'yellow' : 'dark';
     setTheme(initial);
     document.documentElement.setAttribute('data-theme', initial);
   }, []);
 
   function toggleTheme() {
-    const next = theme === 'dark' ? 'light' : 'dark';
+    const next = theme === 'dark' ? 'yellow' : 'dark';
     setTheme(next);
     document.documentElement.setAttribute('data-theme', next);
     localStorage.setItem('sp-theme', next);
@@ -69,12 +69,12 @@ export default function Navbar() {
         className="fixed top-3 left-3 right-3 z-50 rounded-2xl transition-all duration-300"
         style={{
           background: scrolled
-            ? (theme === 'dark' ? 'rgba(5,8,16,0.95)' : 'rgba(255,255,255,0.92)')
-            : (theme === 'dark' ? 'rgba(5,8,16,0.75)' : 'rgba(255,255,255,0.80)'),
+            ? (theme === 'dark' ? 'rgba(5,8,16,0.95)' : 'rgba(255,229,0,0.92)')
+            : (theme === 'dark' ? 'rgba(5,8,16,0.75)' : 'rgba(255,229,0,0.80)'),
           backdropFilter: 'blur(24px)',
           WebkitBackdropFilter: 'blur(24px)',
           border: scrolled ? '1px solid var(--border-glow)' : '1px solid var(--border)',
-          boxShadow: scrolled ? '0 8px 32px rgba(0,0,0,0.35)' : '0 2px 16px rgba(0,0,0,0.15)',
+          boxShadow: scrolled ? '0 8px 32px rgba(0,0,0,0.25)' : '0 2px 16px rgba(0,0,0,0.12)',
         }}
       >
         <div className="flex items-center justify-between px-4 sm:px-6 py-2.5 max-w-7xl mx-auto gap-2">
@@ -83,7 +83,7 @@ export default function Navbar() {
           <a href="#home" className="flex items-center gap-2.5 group flex-shrink-0">
             <span className="status-dot status-dot-pulse" style={{ width: 7, height: 7 }} />
             <div>
-              <div className="mono font-bold text-xs sm:text-sm tracking-widest group-hover:text-[var(--accent)] transition-colors">
+              <div className="mono font-bold text-xs sm:text-sm tracking-widest group-hover:text-[var(--accent)] transition-colors" style={{ color: 'var(--text)' }}>
                 {PERSONAL.shortName}
               </div>
               <div className="mono text-[8px] tracking-[0.16em] text-[var(--text-sub)] hidden xs:block">
@@ -92,7 +92,7 @@ export default function Navbar() {
             </div>
           </a>
 
-          {/* Desktop Nav Links - Always Fully Visible & Crisp */}
+          {/* Desktop Nav Links */}
           <div className="hidden md:flex items-center gap-1 lg:gap-1.5 flex-wrap justify-center">
             {NAV_LINKS.map(link => {
               const isActive = active === link.href.slice(1);
@@ -103,25 +103,25 @@ export default function Navbar() {
                   className="mono text-[10px] lg:text-[11px] tracking-wider px-2.5 lg:px-3 py-1.5 rounded-xl transition-all duration-200 select-none font-medium flex items-center gap-1.5"
                   style={{
                     color: isActive
-                      ? 'var(--accent)'
-                      : (theme === 'dark' ? '#E2E8F0' : '#334155'),
+                      ? (theme === 'yellow' ? '#000000' : 'var(--accent)')
+                      : (theme === 'yellow' ? '#000000' : '#E2E8F0'),
                     background: isActive
-                      ? 'var(--accent-dim)'
+                      ? (theme === 'yellow' ? 'rgba(0,0,0,0.14)' : 'var(--accent-dim)')
                       : 'transparent',
                     border: isActive
                       ? '1px solid var(--border-glow)'
                       : '1px solid transparent',
-                    fontWeight: isActive ? 600 : 500,
+                    fontWeight: isActive ? 700 : 500,
                   }}
                   onMouseEnter={e => {
                     if (!isActive) {
-                      e.currentTarget.style.color = 'var(--accent)';
+                      e.currentTarget.style.color = theme === 'yellow' ? '#000000' : 'var(--accent)';
                       e.currentTarget.style.background = 'var(--surface-2)';
                     }
                   }}
                   onMouseLeave={e => {
                     if (!isActive) {
-                      e.currentTarget.style.color = theme === 'dark' ? '#E2E8F0' : '#334155';
+                      e.currentTarget.style.color = theme === 'yellow' ? '#000000' : '#E2E8F0';
                       e.currentTarget.style.background = 'transparent';
                     }
                   }}
@@ -149,27 +149,44 @@ export default function Navbar() {
               AVAILABLE
             </span>
 
-            {/* Theme toggle */}
+            {/* 2-Theme Toggle Button: Major (Black & White) vs Yellow (Yellow & Black) */}
             <motion.button
-              whileTap={{ scale: 0.9 }}
+              whileTap={{ scale: 0.92 }}
               onClick={toggleTheme}
-              className="glass rounded-xl p-2 text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors flex items-center justify-center"
-              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-              title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
+              className="glass rounded-xl px-2.5 py-1.5 text-xs transition-colors flex items-center gap-1.5 font-mono select-none"
+              style={{
+                borderColor: theme === 'yellow' ? 'rgba(0,0,0,0.3)' : 'var(--border-glow)',
+                background: theme === 'yellow' ? 'rgba(0,0,0,0.08)' : 'var(--surface)',
+                color: 'var(--text)',
+              }}
+              aria-label={theme === 'dark' ? 'Switch to Yellow & Black Theme' : 'Switch to Black & White Theme'}
+              title={theme === 'dark' ? 'Switch to Yellow & Black Theme' : 'Switch to Black & White Theme'}
             >
               <motion.div
                 key={theme}
                 initial={{ rotate: -20, opacity: 0 }}
                 animate={{ rotate: 0, opacity: 1 }}
                 transition={{ duration: 0.2 }}
+                className="flex items-center gap-1.5"
               >
-                {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
+                {theme === 'dark' ? (
+                  <>
+                    <span className="w-2 h-2 rounded-full bg-[#FFE500] inline-block shadow-[0_0_8px_#FFE500]" />
+                    <span className="text-[10px] tracking-wider hidden sm:inline-block font-semibold">YELLOW</span>
+                  </>
+                ) : (
+                  <>
+                    <Moon size={13} className="text-black" />
+                    <span className="text-[10px] tracking-wider hidden sm:inline-block font-bold">DARK (B&W)</span>
+                  </>
+                )}
               </motion.div>
             </motion.button>
 
             {/* Mobile hamburger */}
             <button
-              className="md:hidden glass rounded-xl p-2 text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors flex items-center justify-center"
+              className="md:hidden glass rounded-xl p-2 transition-colors flex items-center justify-center"
+              style={{ color: 'var(--text)' }}
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label="Toggle navigation"
             >
@@ -189,11 +206,11 @@ export default function Navbar() {
             transition={{ duration: 0.2 }}
             className="fixed inset-x-3 top-[62px] z-40 rounded-2xl overflow-hidden"
             style={{
-              background: theme === 'dark' ? 'rgba(5,8,16,0.98)' : 'rgba(255,255,255,0.98)',
+              background: theme === 'dark' ? 'rgba(5,8,16,0.98)' : 'rgba(255,229,0,0.98)',
               backdropFilter: 'blur(24px)',
               WebkitBackdropFilter: 'blur(24px)',
               border: '1px solid var(--border-glow)',
-              boxShadow: '0 24px 64px rgba(0,0,0,0.6)',
+              boxShadow: '0 24px 64px rgba(0,0,0,0.4)',
             }}
           >
             <div className="p-4 flex flex-col gap-1.5">
@@ -210,12 +227,13 @@ export default function Navbar() {
                     className="mono text-xs tracking-wider px-4 py-2.5 rounded-xl transition-all flex items-center justify-between font-medium"
                     style={{
                       color: isActive
-                        ? 'var(--accent)'
-                        : (theme === 'dark' ? '#F1F5F9' : '#1E293B'),
+                        ? (theme === 'yellow' ? '#000000' : 'var(--accent)')
+                        : (theme === 'yellow' ? '#000000' : '#F1F5F9'),
                       background: isActive
-                        ? 'var(--accent-dim)'
+                        ? (theme === 'yellow' ? 'rgba(0,0,0,0.15)' : 'var(--accent-dim)')
                         : 'transparent',
                       border: '1px solid ' + (isActive ? 'var(--border-glow)' : 'transparent'),
+                      fontWeight: isActive ? 700 : 500,
                     }}
                   >
                     <span>{link.label}</span>
@@ -239,10 +257,20 @@ export default function Navbar() {
                 </span>
                 <button
                   onClick={toggleTheme}
-                  className="flex items-center gap-2 glass rounded-xl px-3 py-1.5 text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors text-xs"
+                  className="flex items-center gap-2 glass rounded-xl px-3 py-1.5 text-xs font-mono font-bold"
+                  style={{ color: 'var(--text)' }}
                 >
-                  {theme === 'dark' ? <Sun size={13} /> : <Moon size={13} />}
-                  <span className="mono text-[10px]">{theme === 'dark' ? 'LIGHT' : 'DARK'}</span>
+                  {theme === 'dark' ? (
+                    <>
+                      <span className="w-2 h-2 rounded-full bg-[#FFE500]" />
+                      <span className="text-[10px]">YELLOW</span>
+                    </>
+                  ) : (
+                    <>
+                      <Moon size={12} />
+                      <span className="text-[10px]">DARK (B&W)</span>
+                    </>
+                  )}
                 </button>
               </div>
             </div>

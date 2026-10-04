@@ -42,7 +42,7 @@ export default function GitHubSection() {
   }, []);
 
   return (
-    <section id="github" className="py-32 relative" style={{ background: '#060a14' }}>
+    <section id="github" className="py-32 relative" style={{ background: 'var(--bg)' }}>
       <div className="section-container">
 
         <motion.div

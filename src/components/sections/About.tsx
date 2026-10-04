@@ -9,7 +9,7 @@ export default function About() {
 
   return (
     <section id="about" className="py-32 relative">
-      <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, #060a14 0%, #050810 100%)' }} />
+      <div className="absolute inset-0" style={{ background: 'var(--bg)' }} />
       <div className="section-container relative z-10">
 
         <motion.div

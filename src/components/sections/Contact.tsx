@@ -24,7 +24,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="py-32 relative" style={{ background: '#050810' }}>
+    <section id="contact" className="py-32 relative" style={{ background: 'var(--bg)' }}>
       <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 60% 60% at 50% 100%, rgba(0,245,200,0.04) 0%, transparent 70%)' }} />
       <div className="section-container relative z-10">
 

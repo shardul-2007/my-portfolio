@@ -84,7 +84,7 @@ export default function Achievements() {
   };
 
   return (
-    <section id="achievements" className="py-28 relative" style={{ background: '#060a14' }}>
+    <section id="achievements" className="py-28 relative" style={{ background: 'var(--bg)' }}>
       <div className="section-container">
 
         {/* Header */}

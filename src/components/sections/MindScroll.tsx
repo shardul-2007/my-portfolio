@@ -13,21 +13,21 @@ const TORN_BTM  = 'polygon(0% 38%, 1% 41%, 4% 37%, 7% 42%, 10% 38%, 13% 43%, 16%
 // Mind content nodes — positioned in mind space
 const MIND_NODES = [
   // Row 1 — top
-  { label: 'Google',       sub: 'Campus Ambassador',    x: '8%',  y: '15%', color: '#4285F4', delay: 0.1 },
+  { label: 'Google',       sub: 'Student Ambassador',    x: '8%',  y: '15%', color: '#4285F4', delay: 0.1 },
   { label: 'CivicOS',      sub: 'AI Civic Platform',    x: '35%', y: '10%', color: '#00F5C8', delay: 0.15 },
-  { label: 'Full Stack',   sub: 'React · Next.js',      x: '62%', y: '14%', color: '#00F5C8', delay: 0.2 },
-  { label: 'GSSoC',        sub: 'Open Source 2025',     x: '82%', y: '18%', color: '#5B8DEF', delay: 0.25 },
+  { label: 'AssemblyOS',   sub: '3D AI Guidance',       x: '62%', y: '14%', color: '#00F5C8', delay: 0.2 },
+  { label: 'GSSOC\'26',     sub: 'Open Source',     x: '82%', y: '18%', color: '#5B8DEF', delay: 0.25 },
   // Row 2 — middle-upper
-  { label: 'HackerRank',   sub: 'Campus Community',     x: '5%',  y: '38%', color: '#2EC866', delay: 0.3 },
+  { label: 'HackerRank',   sub: 'Campus Crew',     x: '5%',  y: '38%', color: '#2EC866', delay: 0.3 },
   { label: 'Internshala',  sub: 'Campus Ambassador',    x: '26%', y: '35%', color: '#A78BFA', delay: 0.35 },
-  { label: 'AI / ML',      sub: 'Intelligent systems',  x: '50%', y: '40%', color: '#F59E0B', delay: 0.4 },
-  { label: 'NSOC',         sub: 'Open Source 2025',     x: '72%', y: '38%', color: '#5B8DEF', delay: 0.45 },
+  { label: 'SkillCert',    sub: 'Cert Platform',        x: '50%', y: '40%', color: '#F59E0B', delay: 0.4 },
+  { label: 'NSOC\'26',      sub: 'Open Source',     x: '72%', y: '38%', color: '#5B8DEF', delay: 0.45 },
   { label: 'Cybersecurity',sub: 'Web Security',         x: '90%', y: '40%', color: '#EF4444', delay: 0.5  },
   // Row 3 — middle-lower
   { label: 'GUVI',         sub: 'Campus Ambassador',    x: '10%', y: '60%', color: '#A78BFA', delay: 0.55 },
   { label: 'Physics Wallah',sub:'Campus Ambassador',    x: '30%', y: '62%', color: '#F59E0B', delay: 0.6  },
   { label: 'SHARDUL.OS',   sub: 'v5 · Next.js',        x: '55%', y: '63%', color: '#00F5C8', delay: 0.65 },
-  { label: 'RemoteRecruit',sub: 'Student Ambassador',   x: '78%', y: '60%', color: '#A78BFA', delay: 0.7  },
+  { label: 'RemoteRecruit',sub: 'Campus Ambassador',   x: '78%', y: '60%', color: '#A78BFA', delay: 0.7  },
   // Row 4 — bottom
   { label: 'TypeScript',   sub: 'Languages',            x: '15%', y: '80%', color: '#3178C6', delay: 0.75 },
   { label: 'Python',       sub: 'Languages',            x: '38%', y: '82%', color: '#3776AB', delay: 0.8  },
