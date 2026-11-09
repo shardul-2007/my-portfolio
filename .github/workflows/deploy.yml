@@ -1,4 +1,4 @@
-﻿name: Deploy SHARDUL.OS to GitHub Pages
+name: Deploy SHARDUL.LAB to GitHub Pages
 
 on:
   push:

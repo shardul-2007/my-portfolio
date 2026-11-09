@@ -1,117 +1,123 @@
 'use client';
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, MapPin } from 'lucide-react';
-import { ABOUT_PANELS, PERSONAL } from '@/data/portfolio';
+import { motion } from 'framer-motion';
+import { User, MapPin, Terminal, Award, CheckCircle2, BookOpen } from 'lucide-react';
+import { PROFILE } from '@/data/profile';
 
 export default function About() {
-  const [open, setOpen] = useState<string | null>('engineer');
-
   return (
-    <section id="about" className="py-32 relative">
-      <div className="absolute inset-0" style={{ background: 'var(--bg)' }} />
-      <div className="section-container relative z-10">
-
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-16"
-        >
-          <div className="flex items-center gap-3 mb-5">
-            <div className="h-px w-8 bg-[var(--accent)] opacity-60" />
-            <span className="sys-label-accent">A BIT ABOUT ME</span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 leading-tight">
-            Not just a dev.<br />
-            <span className="gradient-text">A builder with context.</span>
-          </h2>
-          <p className="text-[var(--text-muted)] max-w-lg leading-relaxed">
-            I wear a few hats. Click any one to see what that actually means in practice.
-          </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 gap-4">
-          {ABOUT_PANELS.map((panel, i) => (
-            <motion.div
-              key={panel.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-            >
-              <button
-                onClick={() => setOpen(open === panel.id ? null : panel.id)}
-                className="w-full text-left glass glass-hover rounded-2xl p-6 block"
-                aria-expanded={open === panel.id}
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex items-center gap-4">
-                    <span
-                      className="mono text-3xl font-bold leading-none select-none"
-                      style={{ color: open === panel.id ? 'rgba(0,245,200,0.4)' : 'rgba(255,255,255,0.08)' }}
-                    >
-                      {panel.num}
-                    </span>
-                    <div>
-                      <div className="sys-label-accent mb-1">{panel.label}</div>
-                      <div className="font-semibold text-lg leading-tight">{panel.title}</div>
-                    </div>
-                  </div>
-                  <motion.div animate={{ rotate: open === panel.id ? 180 : 0 }} transition={{ duration: 0.22 }} className="text-[var(--text-muted)] flex-shrink-0 mt-1">
-                    <ChevronDown size={18} />
-                  </motion.div>
-                </div>
-
-                <AnimatePresence initial={false}>
-                  {open === panel.id && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-                      className="overflow-hidden"
-                    >
-                      <p className="text-[var(--text-muted)] text-sm leading-relaxed mt-5 mb-4">{panel.body}</p>
-                      <div className="flex flex-wrap gap-2">
-                        {panel.tags.map(t => (
-                          <span key={t} className="tech-pill" style={{ borderColor: 'var(--border-glow)', color: 'var(--accent)', background: 'var(--accent-dim)' }}>{t}</span>
-                        ))}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </button>
-            </motion.div>
-          ))}
+    <section id="about" className="py-28 relative border-b border-[var(--border)]">
+      <div className="section-container">
+        {/* Section Tag */}
+        <div className="flex items-center gap-2 mb-4">
+          <span className="w-2 h-2 rounded-full bg-[var(--accent-orange)]" />
+          <span className="sys-label-orange">EDITORIAL DOSSIER // BIOGRAPHY</span>
         </div>
 
-        {/* Personal card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-6 glass rounded-2xl p-6 flex flex-wrap items-center gap-6"
-          style={{ borderColor: 'rgba(0,245,200,0.1)' }}
-        >
-          <div className="w-14 h-14 rounded-full flex items-center justify-center flex-shrink-0 glass"
-            style={{ borderColor: 'var(--border-glow)', boxShadow: '0 0 20px rgba(0,245,200,0.1)' }}>
-            <span className="mono text-sm font-bold text-[var(--accent)]">SP</span>
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="font-semibold text-[var(--text)] text-lg">{PERSONAL.name}</div>
-            <div className="flex items-center gap-2 mt-1">
-              <MapPin size={11} className="text-[var(--text-sub)]" />
-              <span className="sys-label">{PERSONAL.role} · {PERSONAL.location}</span>
+        <div className="grid lg:grid-cols-12 gap-12 items-start">
+          {/* Left Editorial Narrative */}
+          <div className="lg:col-span-7 space-y-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[var(--text)] font-editorial leading-[1.1]">
+              Engineering with <br />
+              <span className="gradient-orange">First Principles</span> &amp; Precision.
+            </h2>
+
+            <div className="space-y-4 text-base sm:text-lg text-[var(--text-muted)] font-light leading-relaxed">
+              <p>
+                I am <strong className="font-semibold text-[var(--text)]">{PROFILE.fullName}</strong>, a software engineering student and builder based in <span className="text-[var(--text)] font-medium">Pune, Maharashtra, India</span> at PCET&apos;s Nutan Maharashtra Institute of Engineering and Technology (NMIET).
+              </p>
+              <p>
+                My focus centers on the entire life cycle of software: from foundational data structures and algorithm analysis to high-concurrency backend services, interactive 3D WebGL interfaces, and applied AI systems.
+              </p>
+              <p>
+                Rather than treating software as arbitrary syntax, I view engineering through a systems lens — understanding hardware constraints, memory models, network round-trips, and human cognitive patterns to ship digital products that operate reliably at scale.
+              </p>
+            </div>
+
+            {/* Technical Annotations Box */}
+            <div className="p-6 rounded-2xl glass border border-[var(--border-strong)] space-y-4">
+              <div className="flex items-center justify-between text-xs mono text-[var(--text-sub)] pb-3 border-b border-[var(--border)]">
+                <span className="text-[var(--accent)] font-semibold flex items-center gap-1.5">
+                  <Terminal size={14} /> ENGINEERING PHILOSOPHY &amp; ETHICS
+                </span>
+                <span>DOC_ID: SHARDUL.SPEC</span>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-4 text-xs font-light text-[var(--text-muted)]">
+                <div className="space-y-1">
+                  <div className="font-bold text-[var(--text)] mono text-xs">
+                    01. Zero Fake Metrics
+                  </div>
+                  <p className="leading-relaxed">
+                    Every project claim, link, and experience listed is backed by real source repositories and verifiable credentials.
+                  </p>
+                </div>
+                <div className="space-y-1">
+                  <div className="font-bold text-[var(--text)] mono text-xs">
+                    02. Product Utility Over Tutorials
+                  </div>
+                  <p className="leading-relaxed">
+                    Building standalone tools (CivicOS, AssemblyOS, SkillCert) solving real municipal, spatial 3D, and SaaS credential problems.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="flex flex-wrap gap-2">
-            {PERSONAL.focus.map(f => (
-              <span key={f} className="tech-pill" style={{ borderColor: 'var(--border-glow)', color: 'var(--accent)', background: 'var(--accent-dim)' }}>{f}</span>
-            ))}
+
+          {/* Right Column: Key Technical Interests & Campus Evidence */}
+          <div className="lg:col-span-5 space-y-6">
+            {/* Quick Profile Card */}
+            <div className="p-6 rounded-2xl glass border border-[var(--border-strong)] space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-2xl bg-[var(--accent-dim)] border border-[var(--border-glow)] flex items-center justify-center text-[var(--accent)] font-bold mono">
+                  SP
+                </div>
+                <div>
+                  <div className="font-bold text-base text-[var(--text)]">{PROFILE.fullName}</div>
+                  <div className="mono text-xs text-[var(--accent-orange)]">PCET&apos;s NMIET · Pune, India</div>
+                </div>
+              </div>
+
+              <div className="space-y-2 pt-2 border-t border-[var(--border)] text-xs mono text-[var(--text-muted)]">
+                <div className="flex justify-between py-1">
+                  <span className="text-[var(--text-sub)]">DEGREE FOCUS:</span>
+                  <span className="text-[var(--text)] font-semibold">Computer Engineering</span>
+                </div>
+                <div className="flex justify-between py-1">
+                  <span className="text-[var(--text-sub)]">CAMPUS AMBASSADOR:</span>
+                  <span className="text-[var(--text)] font-semibold">Google, HackerRank, PW</span>
+                </div>
+                <div className="flex justify-between py-1">
+                  <span className="text-[var(--text-sub)]">OPEN SOURCE:</span>
+                  <span className="text-[var(--text)] font-semibold">GSSOC, NSOC, OSC</span>
+                </div>
+                <div className="flex justify-between py-1">
+                  <span className="text-[var(--text-sub)]">CURRENT FOCUS:</span>
+                  <span className="text-[var(--accent)] font-semibold">Full Stack &amp; Applied AI</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Core Pillars Grid */}
+            <div className="p-6 rounded-2xl glass border border-[var(--border)]">
+              <div className="mono text-xs font-semibold text-[var(--text-sub)] uppercase tracking-wider mb-4 flex items-center gap-1.5">
+                <BookOpen size={14} className="text-[var(--accent)]" />
+                <span>CORE ENGINEERING INTERESTS</span>
+              </div>
+
+              <div className="space-y-2">
+                {PROFILE.interests.map(interest => (
+                  <div
+                    key={interest}
+                    className="flex items-center gap-2.5 p-2 rounded-xl bg-[var(--surface-2)] text-xs text-[var(--text)] font-medium"
+                  >
+                    <CheckCircle2 size={13} className="text-[var(--accent-lime)] flex-shrink-0" />
+                    <span>{interest}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -1,135 +1,254 @@
 'use client';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowDown, MapPin, Zap } from 'lucide-react';
-import { PERSONAL } from '@/data/portfolio';
-import { useRef } from 'react';
+import { motion } from 'framer-motion';
+import {
+  ArrowDown,
+  ExternalLink,
+  Github,
+  Linkedin,
+  Terminal,
+  UserCheck,
+  MapPin,
+  Sparkles,
+} from 'lucide-react';
+import { PROFILE } from '@/data/profile';
+import { assetPath } from '@/lib/basePath';
+import { labAudio } from '@/lib/audio';
 
-const BASE = process.env.NODE_ENV === 'production' ? '/my-portfolio' : '';
+interface HeroProps {
+  onOpenRecruiter: () => void;
+  onOpenCommand: () => void;
+}
 
-const CHIPS = [
-  { label: 'Full Stack',    accent: true  },
-  { label: 'AI / ML',       accent: false },
-  { label: 'Web Dev',       accent: false },
-  { label: 'Cybersecurity', accent: false },
-  { label: 'Open Source',   accent: false },
-];
-
-export default function Hero() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
-  const textY    = useTransform(scrollYProgress, [0, 1], [0, -80]);
-  const photoY   = useTransform(scrollYProgress, [0, 1], [0, 40]);
-  const photoOpa = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-
+export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
   return (
-    <section ref={ref} id="home" className="relative min-h-screen overflow-hidden flex items-center">
-      <div className="absolute inset-0 grid-bg opacity-20 pointer-events-none" />
+    <section
+      id="hero"
+      className="relative min-h-[92vh] flex items-center pt-28 pb-16 overflow-hidden border-b border-[var(--border)]"
+    >
+      {/* Background Ambience & Engineering Coordinates */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        <div className="absolute top-1/4 right-1/4 w-[480px] h-[480px] rounded-full bg-[radial-gradient(circle,rgba(0,245,200,0.07)_0%,transparent_70%)] blur-3xl" />
+        <div className="absolute bottom-1/3 left-10 w-[360px] h-[360px] rounded-full bg-[radial-gradient(circle,rgba(255,107,53,0.06)_0%,transparent_70%)] blur-2xl" />
 
-      {/* Large background portrait — right side */}
-      <motion.div
-        style={{ y: photoY, opacity: photoOpa }}
-        className="absolute inset-0 pointer-events-none"
-        aria-hidden="true"
-      >
-        <motion.div
-          className="absolute right-0 top-0 bottom-0"
-          style={{ width: '58%' }}
-          initial={{ clipPath: 'circle(0% at 50% 36%)' }}
-          animate={{ clipPath: 'circle(130% at 50% 36%)' }}
-          transition={{ duration: 1.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <img
-            src={BASE + '/imageshardul.png'}
-            alt=""
-            style={{
-              width: '100%', height: '100%',
-              objectFit: 'cover', objectPosition: 'center top',
-              filter: 'brightness(0.55) contrast(1.1) saturate(0.85)',
-            }}
-          />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, var(--bg) 0%, rgba(5,8,16,0.6) 22%, transparent 50%)' }} />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--bg) 0%, transparent 22%)' }} />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, var(--bg) 0%, transparent 16%)' }} />
-          <div style={{ position: 'absolute', inset: 0, backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px)' }} />
-        </motion.div>
-        {/* Sweep on reveal */}
-        <motion.div
-          initial={{ top: '36%', opacity: 0 }}
-          animate={{ top: ['-5%'], opacity: [0, 0.6, 0] }}
-          transition={{ duration: 1.6, delay: 0.2 }}
-          style={{ position: 'absolute', right: 0, width: '58%', height: 2, background: 'linear-gradient(90deg, transparent, rgba(0,245,200,0.7), transparent)', boxShadow: '0 0 20px rgba(0,245,200,0.4)' }}
-        />
-        <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 50% 70% at 20% 50%, rgba(0,245,200,0.05) 0%, transparent 60%)' }} />
-      </motion.div>
-
-      {/* Hero text — left */}
-      <motion.div style={{ y: textY }} className="section-container relative z-20 w-full py-28 pt-36">
-        <div className="max-w-[480px]">
-          <motion.div initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 1.8 }}
-            className="flex items-center gap-3 mb-7">
-            <span className="status-dot status-dot-pulse" style={{ width: 7, height: 7 }} />
-            <span className="mono text-[10px] tracking-[0.22em] text-[var(--accent)]">AVAILABLE FOR WORK</span>
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.95, ease: [0.16, 1, 0.3, 1] }}
-            className="font-bold tracking-tight leading-none mb-5"
-            style={{ fontSize: 'clamp(3rem, 6.5vw, 5.5rem)', letterSpacing: '-0.025em' }}
-          >
-            <span className="block" style={{ color: 'var(--text)' }}>Shardul</span>
-            <span className="block gradient-text">Parihar.</span>
-          </motion.h1>
-
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 2.1 }}
-            className="mono text-xs tracking-[0.18em] mb-6 uppercase" style={{ color: 'var(--text-sub)' }}>
-            Software Engineer &nbsp;·&nbsp; Builder &nbsp;·&nbsp; AI Enthusiast
-          </motion.p>
-
-          <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 2.2 }} className="flex flex-wrap gap-2 mb-7">
-            {CHIPS.map((c, i) => (
-              <motion.span key={c.label} initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 2.25 + i * 0.07 }}
-                className="mono text-[11px] px-3 py-1.5 rounded-full select-none"
-                style={{
-                  background: c.accent ? 'var(--accent-dim)' : 'var(--surface)',
-                  border: c.accent ? '1px solid var(--border-glow)' : '1px solid var(--border)',
-                  color: c.accent ? 'var(--accent)' : 'var(--text-muted)',
-                  letterSpacing: '0.1em',
-                }}>
-                {c.label}
-              </motion.span>
-            ))}
-          </motion.div>
-
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.45 }}
-            className="text-sm leading-relaxed mb-9" style={{ color: 'var(--text-muted)', fontWeight: 300 }}>
-            {PERSONAL.bio}
-          </motion.p>
-
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 2.6 }} className="flex flex-wrap gap-3">
-            <a href="#projects" className="glow-btn glow-btn-primary">View My Work</a>
-            <a href="#contact"  className="glow-btn glow-btn-ghost">Get In Touch</a>
-            <a href="https://www.linkedin.com/in/shardul-parihar/" target="_blank" rel="noopener noreferrer" className="glow-btn glow-btn-ghost">LinkedIn ↗</a>
-          </motion.div>
-
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.8 }}
-            className="flex items-center gap-4 mt-7 text-xs mono" style={{ color: 'var(--text-sub)' }}>
-            <span className="flex items-center gap-1.5"><MapPin size={11} /> Pune, India</span>
-            <span className="w-px h-3" style={{ background: 'var(--border)' }} />
-            <span className="flex items-center gap-1.5"><Zap size={11} style={{ color: 'var(--accent)' }} /> Open to work</span>
-          </motion.div>
+        {/* Technical Coordinate Annotations */}
+        <div className="hidden lg:block absolute top-28 right-12 mono text-[10px] text-[var(--text-sub)] tracking-widest text-right">
+          <div>LAT: 18.5204° N // LON: 73.8567° E</div>
+          <div>LOC: PUNE, MAHARASHTRA, IN</div>
+          <div>SYS_NODE: SHARDUL.LAB.PROD</div>
         </div>
-      </motion.div>
+      </div>
 
-      {/* Scroll indicator */}
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 3.1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-1.5 pointer-events-none">
-        <span className="mono text-[9px] tracking-[0.25em]" style={{ color: 'var(--text-sub)' }}>SCROLL</span>
-        <motion.div animate={{ y: [0, 5, 0] }} transition={{ repeat: Infinity, duration: 1.8 }}>
-          <ArrowDown size={13} style={{ color: 'var(--text-sub)' }} />
-        </motion.div>
-      </motion.div>
-      <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none z-10" style={{ background: 'linear-gradient(to top, var(--bg), transparent)' }} />
+      <div className="section-container relative z-10 w-full">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          {/* Left Column: Editorial Headline & Identity */}
+          <div className="lg:col-span-7 space-y-6">
+            {/* Status & Availability Tag */}
+            <motion.div
+              initial={{ opacity: 0, y: -12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="flex flex-wrap items-center gap-3"
+            >
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--surface-2)] border border-[var(--border-strong)]">
+                <span className="status-dot status-dot-pulse" />
+                <span className="mono text-xs font-semibold tracking-wider text-[var(--accent-lime)]">
+                  AVAILABLE FOR WORK
+                </span>
+              </div>
+              <div className="flex items-center gap-1.5 mono text-xs text-[var(--text-sub)]">
+                <MapPin size={12} className="text-[var(--accent)]" />
+                <span>Pune, India (UTC+5:30)</span>
+              </div>
+            </motion.div>
+
+            {/* Giant Editorial Title */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="space-y-2"
+            >
+              <div className="mono text-xs uppercase tracking-[0.22em] text-[var(--accent-orange)] font-semibold flex items-center gap-2">
+                <span className="w-6 h-px bg-[var(--accent-orange)]" />
+                <span>PERSONAL ENGINEERING UNIVERSE</span>
+              </div>
+              <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-[var(--text)] font-editorial leading-[1.05]">
+                Shardul <br />
+                <span className="gradient-text">Parihar.</span>
+              </h1>
+              <div className="text-xl sm:text-2xl font-medium text-[var(--accent)] tracking-tight">
+                {PROFILE.role}
+              </div>
+            </motion.div>
+
+            {/* Bio Prose */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-base sm:text-lg leading-relaxed text-[var(--text-muted)] max-w-xl font-light"
+            >
+              {PROFILE.bio}
+            </motion.p>
+
+            {/* Verified Statistics Bar */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="grid grid-cols-2 sm:grid-cols-4 gap-3 py-4 border-y border-[var(--border)] max-w-xl"
+            >
+              {[
+                { val: '17+', label: 'Programs & Roles', sub: 'Campus & Open Source' },
+                { val: '16', label: 'Achievements', sub: 'Verified Credentials' },
+                { val: '23', label: 'Tech Stack Skills', sub: 'Daily & Proficient' },
+                { val: '04', label: 'Featured Systems', sub: 'Shipped to Prod' },
+              ].map(stat => (
+                <div key={stat.label} className="space-y-0.5">
+                  <div className="text-2xl sm:text-3xl font-bold mono text-[var(--accent)] tracking-tight">
+                    {stat.val}
+                  </div>
+                  <div className="mono text-[11px] font-semibold text-[var(--text)] leading-tight">
+                    {stat.label}
+                  </div>
+                  <div className="mono text-[9px] text-[var(--text-sub)]">
+                    {stat.sub}
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+
+            {/* Action Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="flex flex-wrap items-center gap-3 pt-2"
+            >
+              <a
+                href="#projects"
+                onClick={() => labAudio.playClick(1000)}
+                className="glow-btn glow-btn-primary"
+              >
+                <span>EXPLORE SHIPPED SYSTEMS</span>
+                <ArrowDown size={14} />
+              </a>
+
+              <button
+                onClick={() => {
+                  labAudio.playClick(1100);
+                  onOpenRecruiter();
+                }}
+                className="glow-btn glow-btn-orange"
+              >
+                <UserCheck size={14} />
+                <span>90s RECRUITER TOUR</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  labAudio.playClick(900);
+                  onOpenCommand();
+                }}
+                className="glow-btn glow-btn-ghost hidden sm:inline-flex"
+                title="Command Palette"
+              >
+                <Terminal size={14} />
+                <span>CTRL+K</span>
+              </button>
+            </motion.div>
+
+            {/* Social / Evidence Quick Links */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="flex items-center gap-4 pt-2 text-xs mono text-[var(--text-sub)]"
+            >
+              <a
+                href={PROFILE.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 hover:text-[var(--accent)] transition-colors"
+              >
+                <Github size={14} />
+                <span>@shardul-2007</span>
+              </a>
+              <span>·</span>
+              <a
+                href={PROFILE.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 hover:text-[var(--accent)] transition-colors"
+              >
+                <Linkedin size={14} />
+                <span>/in/shardul-parihar</span>
+              </a>
+              <span>·</span>
+              <a
+                href={PROFILE.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 hover:text-[var(--accent)] transition-colors"
+              >
+                <ExternalLink size={12} />
+                <span>Resume Credentials</span>
+              </a>
+            </motion.div>
+          </div>
+
+          {/* Right Column: Engineering Visual & Shardul Portrait Card */}
+          <div className="lg:col-span-5 relative">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="relative mx-auto max-w-md"
+            >
+              {/* Outer Technical Frame */}
+              <div className="relative rounded-3xl p-3 bg-gradient-to-b from-[rgba(255,255,255,0.12)] via-[rgba(255,255,255,0.03)] to-transparent border border-[var(--border-strong)] shadow-[0_20px_80px_rgba(0,0,0,0.6)] backdrop-blur-xl">
+                {/* Status Bar */}
+                <div className="flex items-center justify-between px-3 py-2 border-b border-[var(--border)] mb-3 text-[10px] mono text-[var(--text-sub)]">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[var(--accent)]" />
+                    <span>ENGINEER_PORTRAIT.RAW</span>
+                  </div>
+                  <span>PROD_IDENT: #007</span>
+                </div>
+
+                {/* Portrait Image with Vignette & Subtle Technical Mesh */}
+                <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-[#0A0D14]">
+                  <img
+                    src={assetPath('/imageshardul.png')}
+                    alt="Shardul Parihar — Software Engineer"
+                    className="w-full h-full object-cover object-top filter brightness-[0.92] contrast-[1.08] hover:scale-105 transition-transform duration-700"
+                  />
+                  {/* Subtle Technical Scanline & Vignette */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#080A0F] via-transparent to-transparent opacity-80 pointer-events-none" />
+                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(8,10,15,0.7)_100%)] pointer-events-none" />
+
+                  {/* Floating Identity Overlay Badge */}
+                  <div className="absolute bottom-4 inset-x-4 p-3 rounded-xl bg-[rgba(8,10,15,0.85)] border border-[rgba(255,255,255,0.12)] backdrop-blur-md">
+                    <div className="flex items-center justify-between text-xs font-semibold text-[var(--text)]">
+                      <span>Shardul Parihar</span>
+                      <span className="mono text-[10px] text-[var(--accent)] font-bold">SHARDUL.LAB</span>
+                    </div>
+                    <div className="mono text-[10px] text-[var(--text-muted)] mt-0.5">
+                      PCET&apos;s NMIET · Pune, India
+                    </div>
+                  </div>
+                </div>
+
+                {/* Technical Bottom Tickers */}
+                <div className="mt-3 px-2 py-1 flex items-center justify-between text-[9px] mono text-[var(--text-sub)]">
+                  <span>HASH: e7f8b92c4d</span>
+                  <span className="text-[var(--accent-lime)]">● 100% VERIFIED CLAIMS</span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
