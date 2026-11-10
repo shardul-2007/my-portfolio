@@ -36,19 +36,35 @@ export default function Projects() {
   return (
     <section id="projects" className="py-28 relative border-b border-[var(--border)]">
       <div className="section-container">
-        {/* Section Header */}
-        <div className="max-w-3xl mb-16">
-          <div className="flex items-center gap-2 mb-3">
-            <Layers size={14} className="text-[var(--accent)]" />
-            <span className="sys-label-accent">FEATURED ENGINEERING // 04 SHIPPED SYSTEMS</span>
+        {/* Section Header matching Rishika Reference */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+          <div className="max-w-2xl">
+            <span className="eyebrow">selected work · 2026</span>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[var(--text)] font-editorial mt-1">
+              things i&rsquo;ve <span className="font-serif-italic font-normal text-amber-500">built</span>.
+            </h2>
+            <p className="text-sm sm:text-base text-[var(--text-muted)] font-light mt-3 leading-relaxed">
+              projects i designed, built and shipped, from full-stack platforms and 3D WebGL applications to AI municipal operating systems. each card is a <b>live interactive mock</b> of the real thing, built in plain HTML/WebGL, because screenshots are boring.
+            </p>
           </div>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[var(--text)] font-editorial">
-            Projects &amp; <br />
-            <span className="gradient-text">Shipped Systems.</span>
-          </h2>
-          <p className="text-base sm:text-lg text-[var(--text-muted)] font-light mt-3 leading-relaxed">
-            Real production platforms with interactive working simulations, verified GitHub repositories, live deployments, and full architectural breakdowns.
-          </p>
+
+          {/* Work / Play Lever Toggle */}
+          <div className="inline-flex items-center gap-2 p-1.5 rounded-full bg-[var(--surface-2)] border border-[var(--border)] self-start md:self-end">
+            <a
+              href="#projects"
+              onClick={() => labAudio.playClick(900)}
+              className="px-4 py-1.5 rounded-full text-xs mono font-bold bg-[var(--accent)] text-black shadow-sm"
+            >
+              all work
+            </a>
+            <a
+              href="#arcade"
+              onClick={() => labAudio.playClick(1050)}
+              className="px-4 py-1.5 rounded-full text-xs mono font-semibold text-[var(--text-muted)] hover:text-[var(--text)]"
+            >
+              some play →
+            </a>
+          </div>
         </div>
 
         {/* 4 Project Articles */}
@@ -266,6 +282,78 @@ export default function Projects() {
               </motion.article>
             );
           })}
+        </div>
+
+        {/* Secondary Works: The Bench matching Rishika Reference */}
+        <div className="mt-20 pt-12 border-t border-[var(--border)]">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+            <div>
+              <span className="eyebrow">secondary prototypes</span>
+              <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[var(--text)] font-editorial mt-1">
+                the <span className="font-serif-italic font-normal text-amber-500">bench</span>.
+              </h3>
+            </div>
+            <p className="text-xs text-[var(--text-muted)] mono">
+              experiments, utilities and tools deployed to production.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              {
+                name: 'Crucion',
+                tag: 'COLLABORATIVE CODE',
+                desc: 'Real-time collaborative code editor with live syntax highlighting and team presence.',
+                url: 'https://crucion.vercel.app',
+              },
+              {
+                name: 'SentinelMesh',
+                tag: 'CYBERSECURITY MESH',
+                desc: 'Distributed cybersecurity telemetry monitor with automated anomaly detection.',
+                url: 'https://sentinelmesh-five.vercel.app',
+              },
+              {
+                name: 'MetroMate GPT',
+                tag: 'TRANSIT AI AGENT',
+                desc: 'Intelligent urban commute planner with natural-language route synthesis.',
+                url: 'https://metromate-gpt.vercel.app',
+              },
+              {
+                name: 'CampusCrew OS',
+                tag: 'COMMUNITY MANAGER',
+                desc: 'Programming contest dispatcher & event tracking platform for HackerRank crew.',
+                url: 'https://campus-crew-os.vercel.app',
+              },
+            ].map(benchItem => (
+              <a
+                key={benchItem.name}
+                href={benchItem.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => labAudio.playClick(950)}
+                onMouseEnter={() => labAudio.playHover()}
+                className="p-5 rounded-2xl glass border border-[var(--border)] hover:border-[var(--border-strong)] transition-all flex flex-col justify-between group cursor-pointer"
+              >
+                <div>
+                  <div className="mono text-[9px] font-bold text-amber-500 tracking-wider mb-2">
+                    {benchItem.tag}
+                  </div>
+                  <div className="font-bold text-base text-[var(--text)] group-hover:text-[var(--accent)] transition-colors flex items-center justify-between">
+                    <span>{benchItem.name}</span>
+                    <ExternalLink size={13} className="opacity-60 group-hover:opacity-100" />
+                  </div>
+                  <p className="text-xs text-[var(--text-muted)] font-light mt-2 leading-relaxed">
+                    {benchItem.desc}
+                  </p>
+                </div>
+
+                <div className="pt-3 mt-4 border-t border-[var(--border)] flex items-center justify-between text-[10px] mono text-[var(--text-sub)]">
+                  <span>STATUS: LIVE</span>
+                  <span className="text-[var(--accent)]">LAUNCH ↗</span>
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </section>

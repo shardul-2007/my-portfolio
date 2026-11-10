@@ -107,18 +107,44 @@ export default function ArcadeSection() {
   return (
     <section id="arcade" className="py-28 relative border-b border-[var(--border)] overflow-hidden">
       <div className="section-container">
-        {/* Header */}
+        {/* Header matching Rishika Reference */}
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-2 mb-3">
             <Gamepad2 size={14} className="text-[var(--accent-orange)]" />
-            <span className="sys-label-orange">ENGINEERING ARCADE // COGNITIVE MINI EXPERIENCES</span>
+            <span className="eyebrow">some play · off screen</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-[var(--text)] font-editorial">
-            Arcade &amp; <span className="gradient-orange">Mini Labs.</span>
-          </h2>
-          <p className="text-base text-[var(--text-muted)] font-light mt-3 leading-relaxed">
-            Lightweight interactive code typing challenges and memory matrix puzzles. Test typing speed and cognitive recall.
+          <div className="flex items-baseline gap-2">
+            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-[var(--text)] font-editorial">
+              i also have <span className="font-serif-italic font-normal text-amber-500">range</span>
+            </h2>
+            <span className="text-2xl text-amber-500 font-serif">*</span>
+          </div>
+          <p className="text-xs text-amber-500 mono mt-0.5">*allegedly</p>
+
+          <p className="text-sm sm:text-base text-[var(--text-muted)] font-light mt-3 leading-relaxed">
+            hackathons, campus leadership, open-source sprints, and algorithmic mini-games. this is what happens while the code compiles.
           </p>
+
+          {/* Marquee Ticker */}
+          <div className="overflow-hidden py-3 my-6 border-y border-[var(--border)] relative bg-[var(--surface-2)]">
+            <motion.div
+              animate={{ x: ['0%', '-50%'] }}
+              transition={{ duration: 18, ease: 'linear', repeat: Infinity }}
+              className="flex whitespace-nowrap gap-6 mono text-xs font-bold tracking-widest text-[var(--accent)]"
+            >
+              {[...Array(2)].map((_, i) => (
+                <div key={i} className="flex gap-6 items-center">
+                  <span>BUILD <span className="text-amber-500">✦</span></span>
+                  <span>HACK <span className="text-amber-500">✦</span></span>
+                  <span>LEAD <span className="text-amber-500">✦</span></span>
+                  <span>CODE <span className="text-amber-500">✦</span></span>
+                  <span>SOLVE <span className="text-amber-500">✦</span></span>
+                  <span>DESIGN <span className="text-amber-500">✦</span></span>
+                  <span>SHIP <span className="text-amber-500">✦</span></span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
         </div>
 
         {/* Game Switcher Tabs */}

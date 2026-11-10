@@ -24,6 +24,7 @@ interface DeveloperDeskProps {
 export default function DeveloperDesk({ onOpenRecruiter }: DeveloperDeskProps) {
   const [selectedItem, setSelectedItem] = useState<DeskItemSpec>(DESK_ITEMS[0]);
   const [coffeeSips, setCoffeeSips] = useState(3);
+  const [deskMode, setDeskMode] = useState<'knolled' | 'chaos'>('knolled');
 
   const ICONS: Record<string, LucideIcon> = {
     Laptop,
@@ -61,9 +62,40 @@ export default function DeveloperDesk({ onOpenRecruiter }: DeveloperDeskProps) {
           <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-[var(--text)] font-editorial">
             Developer <span className="gradient-text">Desk.</span>
           </h2>
-          <p className="text-base text-[var(--text-muted)] font-light mt-3 leading-relaxed">
-            An interactive representation of my actual engineering workspace. Click on stations, terminals, notebooks, and tools to trigger contextual subsystems.
+          <p className="text-sm text-[var(--text-muted)] font-mono mt-3 leading-relaxed">
+            my desk, live. type <code className="text-[var(--accent)] font-bold">help</code> on the screen, or go straight for <code className="text-amber-500 font-bold">sudo hire shardul</code>.<br className="hidden sm:inline" />
+            designer mode is 10 a.m. and knolled. developer mode is 2 a.m. and isn&apos;t. pick a side →
           </p>
+
+          {/* Desk Mode Toggle */}
+          <div className="inline-flex items-center gap-1.5 p-1 rounded-full bg-[var(--surface-2)] border border-[var(--border)] mt-6">
+            <button
+              onClick={() => {
+                labAudio.playClick(900);
+                setDeskMode('knolled');
+              }}
+              className={`px-4 py-1.5 rounded-full text-xs mono font-bold transition-all cursor-pointer ${
+                deskMode === 'knolled'
+                  ? 'bg-[var(--accent)] text-black shadow-md'
+                  : 'text-[var(--text-muted)] hover:text-[var(--text)]'
+              }`}
+            >
+              ☀ designer mode (10 a.m. knolled)
+            </button>
+            <button
+              onClick={() => {
+                labAudio.playClick(1050);
+                setDeskMode('chaos');
+              }}
+              className={`px-4 py-1.5 rounded-full text-xs mono font-bold transition-all cursor-pointer ${
+                deskMode === 'chaos'
+                  ? 'bg-amber-500 text-black shadow-md'
+                  : 'text-[var(--text-muted)] hover:text-[var(--text)]'
+              }`}
+            >
+              🌙 developer mode (2 a.m. chaos)
+            </button>
+          </div>
         </div>
 
         {/* Workbench Layout */}
@@ -77,7 +109,11 @@ export default function DeveloperDesk({ onOpenRecruiter }: DeveloperDeskProps) {
               return (
                 <motion.button
                   key={item.id}
-                  whileHover={{ y: -3 }}
+                  whileHover={{ y: -3, scale: 1.02 }}
+                  style={{
+                    transform: deskMode === 'chaos' ? `rotate(${((idx % 4) - 1.5) * 2.2}deg)` : 'none',
+                    transition: 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
+                  }}
                   onClick={() => handleItemClick(item)}
                   onMouseEnter={() => labAudio.playHover()}
                   className={`text-left p-5 rounded-2xl glass border transition-all cursor-pointer relative overflow-hidden flex flex-col justify-between min-h-[140px] ${

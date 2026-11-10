@@ -13,6 +13,48 @@ export default function Footer() {
   return (
     <footer className="border-t border-[var(--border)] bg-[var(--bg-deep)] py-16 text-xs mono text-[var(--text-sub)]">
       <div className="section-container space-y-12">
+        {/* Signature Header matching Rishika Reference */}
+        <div className="pb-12 border-b border-[var(--border)]">
+          <span className="eyebrow">transmission</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[var(--text)] font-editorial mt-2">
+            let&rsquo;s make it work <span className="font-serif-italic font-normal text-amber-500">on everyone&rsquo;s machine</span>.
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-8 pt-6 border-t border-[var(--border)]">
+            <div>
+              <div className="text-[10px] font-bold text-amber-500 uppercase tracking-wider mb-1">people</div>
+              <p className="text-xs text-[var(--text-muted)] font-light leading-relaxed">
+                open for full-stack engineering, applied AI collaborations, and student programs.
+              </p>
+            </div>
+            <div>
+              <div className="text-[10px] font-bold text-cyan-400 uppercase tracking-wider mb-1">work</div>
+              <p className="text-xs text-[var(--text-muted)] font-light leading-relaxed">
+                inspect repositories at github.com/shardul-2007 with 100% verified source code.
+              </p>
+            </div>
+            <div>
+              <div className="text-[10px] font-bold text-purple-400 uppercase tracking-wider mb-1">voice</div>
+              <a
+                href={`mailto:${PROFILE.email}`}
+                className="text-xs text-[var(--text)] hover:text-[var(--accent)] underline block leading-relaxed"
+              >
+                {PROFILE.email}
+              </a>
+            </div>
+            <div>
+              <div className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider mb-1">paperwork</div>
+              <a
+                href={PROFILE.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-[var(--text)] hover:text-[var(--accent)] underline block leading-relaxed"
+              >
+                curriculum vitae / linkedin ↗
+              </a>
+            </div>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
           {/* Brand & Manifesto */}
           <div className="md:col-span-5 space-y-3">

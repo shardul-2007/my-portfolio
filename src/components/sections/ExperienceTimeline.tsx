@@ -38,15 +38,31 @@ export default function ExperienceTimeline() {
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-2 mb-3">
             <GitBranch size={14} className="text-[var(--accent)]" />
-            <span className="sys-label-accent">GIT COMMIT TIMELINE // 17 VERIFIED PROGRAMS</span>
+            <span className="eyebrow">the journey · git log --graph</span>
           </div>
           <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-[var(--text)] font-editorial">
-            My Journey &amp; <br />
-            <span className="gradient-text">Experience Matrix.</span>
+            release notes <span className="font-serif-italic font-normal text-amber-500">for</span> shardul.
           </h2>
-          <p className="text-base text-[var(--text-muted)] font-light mt-3 leading-relaxed">
-            Exactly 17 documented community leadership roles, campus ambassador positions, student programs, and open-source contributions.
+          <p className="text-sm sm:text-base text-[var(--text-muted)] font-light mt-3 leading-relaxed">
+            every version so far, on one branch graph. breaking changes documented, known issues disclosed, and no version was skipped. unlike windows 9.
           </p>
+
+          {/* Git HUD Banner matching Rishika Reference */}
+          <div className="flex flex-wrap items-center justify-between gap-4 mt-6 p-4 rounded-2xl bg-[var(--surface-2)] border border-[var(--border)] mono text-xs">
+            <div className="flex items-center gap-3">
+              <span className="text-amber-500 font-bold">HEAD →</span>
+              <span className="px-2 py-0.5 rounded bg-[var(--accent)] text-black font-bold">v0.6-prod</span>
+              <span className="text-[var(--text-sub)]">2026</span>
+              <span className="px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 text-[10px]">main-release</span>
+            </div>
+
+            <div className="flex items-center gap-4 text-[11px] text-[var(--text-muted)]">
+              <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-[var(--accent)]" /> main</span>
+              <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-amber-500" /> work</span>
+              <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-purple-500" /> side-quests</span>
+              <span className="text-[var(--text)] font-bold">commit 01/17</span>
+            </div>
+          </div>
 
           {/* Counts Bar */}
           <div className="flex flex-wrap items-center gap-6 mt-6 pt-4 border-t border-[var(--border)] text-xs mono">

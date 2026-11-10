@@ -1,240 +1,213 @@
 'use client';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Sparkles,
-  Search,
-  CheckCircle2,
-  Layers,
-  ArrowUpRight,
-  ExternalLink,
-} from 'lucide-react';
-import { SKILLS, SKILL_CATEGORIES, SkillCategory, SkillItem } from '@/data/skills';
+import { Sparkles, ArrowUpRight, CheckCircle2, Terminal } from 'lucide-react';
+import { SKILLS, SkillItem } from '@/data/skills';
 import { PROJECTS } from '@/data/projects';
 import { labAudio } from '@/lib/audio';
 
+interface SkillColumn {
+  key: string;
+  categoryTitle: string;
+  skills: SkillItem[];
+}
+
 export default function SkillsConstellation() {
-  const [activeCategory, setActiveCategory] = useState<SkillCategory | 'ALL'>('ALL');
-  const [searchQuery, setSearchQuery] = useState('');
   const [selectedSkill, setSelectedSkill] = useState<SkillItem | null>(null);
+  const [hoveredSkillId, setHoveredSkillId] = useState<string | null>(null);
 
-  const filteredSkills = SKILLS.filter(skill => {
-    const matchesCategory = activeCategory === 'ALL' || skill.category === activeCategory;
-    const matchesSearch =
-      skill.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      skill.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      skill.category.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
-
-  const LEVEL_COLORS: Record<string, { label: string; dotColor: string }> = {
-    Daily: { label: 'Daily Core', dotColor: 'var(--accent)' },
-    Proficient: { label: 'Proficient', dotColor: '#38BDF8' },
-    Learning: { label: 'Active Exploration', dotColor: '#F59E0B' },
-  };
+  // Group the 23 skills into 5 editorial columns matching Rishika's "the stack" layout
+  const columns: SkillColumn[] = [
+    {
+      key: 'languages',
+      categoryTitle: 'languages',
+      skills: SKILLS.filter(s => s.category === 'LANGUAGES'),
+    },
+    {
+      key: 'frontend',
+      categoryTitle: 'web / frontend',
+      skills: SKILLS.filter(s => s.category === 'FRONTEND'),
+    },
+    {
+      key: 'backend-security',
+      categoryTitle: 'backend & api',
+      skills: SKILLS.filter(s => s.category === 'BACKEND' || s.category === 'SECURITY'),
+    },
+    {
+      key: 'aiml',
+      categoryTitle: 'ai / ml systems',
+      skills: SKILLS.filter(s => s.category === 'AI / ML'),
+    },
+    {
+      key: 'tools-cs',
+      categoryTitle: 'tools & cs core',
+      skills: SKILLS.filter(s => s.category === 'TOOLS' || s.category === 'CS'),
+    },
+  ];
 
   return (
-    <section id="skills" className="py-28 relative border-b border-[var(--border)] overflow-hidden">
-      <div className="section-container">
-        {/* Header */}
-        <div className="max-w-3xl mb-12">
-          <div className="flex items-center gap-2 mb-3">
-            <Sparkles size={14} className="text-[var(--accent)]" />
-            <span className="sys-label-accent">CONSTELLATION // 23 VALIDATED CAPABILITIES</span>
-          </div>
-          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-[var(--text)] font-editorial">
-            What I <span className="gradient-text">Work With.</span>
-          </h2>
-          <p className="text-sm sm:text-base text-[var(--text-muted)] font-light mt-3 leading-relaxed">
-            Exactly 23 technical capabilities honed across production platforms, algorithmic challenges, and open-source software repositories.
-          </p>
+    <section id="skills" className="py-24 relative border-b border-[var(--border)] overflow-hidden">
+      {/* Background blueprint subtle texture */}
+      <div className="absolute inset-0 blueprint-grid opacity-20 pointer-events-none" />
 
-          {/* Level Legend */}
-          <div className="flex flex-wrap items-center gap-6 mt-6 pt-4 border-t border-[var(--border)] text-xs mono text-[var(--text-sub)]">
-            <span className="font-semibold text-[var(--text)]">PROFICIENCY DEPTH:</span>
-            {Object.entries(LEVEL_COLORS).map(([lvl, { label, dotColor }]) => (
-              <div key={lvl} className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full" style={{ background: dotColor }} />
-                <span>{label}</span>
+      <div className="section-container relative z-10">
+        {/* Editorial Section Header */}
+        <div className="max-w-3xl mb-14">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="eyebrow">the stack</span>
+            <span className="mono text-[10px] text-[var(--text-sub)]">· 23 validated capabilities</span>
+          </div>
+
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-[var(--text)] tracking-tight leading-[1.15]">
+            things i&apos;ll happily talk about{' '}
+            <span className="font-serif-italic text-[var(--accent)] font-normal">
+              until you politely leave.
+            </span>
+          </h2>
+
+          <p className="text-sm sm:text-base text-[var(--text-muted)] font-light mt-4 leading-relaxed max-w-2xl">
+            Verified across production platforms, algorithmic challenges, and open-source software repositories.
+            No superficial buzzwords—only tools with commits to back them up.
+          </p>
+        </div>
+
+        {/* 5-Column Editorial Stack Layout (Parity with Rishika's .skills grid) */}
+        <div className="border-t border-[var(--border)] pt-8 pb-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-0 lg:divide-x lg:divide-[var(--border)]">
+            {columns.map(col => (
+              <div key={col.key} className="lg:px-6 first:pl-0 last:pr-0">
+                {/* Column Eyebrow Header */}
+                <div className="mono text-xs uppercase tracking-[0.08em] text-[var(--text-sub)] pb-4 border-b border-[var(--border)]/50 flex items-center justify-between">
+                  <span>{col.categoryTitle}</span>
+                  <span className="text-[10px] opacity-60">[{col.skills.length}]</span>
+                </div>
+
+                {/* Skill List Items */}
+                <ul className="mt-5 space-y-2.5">
+                  {col.skills.map(skill => {
+                    const isSelected = selectedSkill?.id === skill.id;
+                    const isHovered = hoveredSkillId === skill.id;
+
+                    return (
+                      <li key={skill.id}>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            labAudio.playClick(950);
+                            setSelectedSkill(isSelected ? null : skill);
+                          }}
+                          onMouseEnter={() => {
+                            setHoveredSkillId(skill.id);
+                            labAudio.playHover();
+                          }}
+                          onMouseLeave={() => setHoveredSkillId(null)}
+                          className={`group w-full text-left py-1.5 px-2 rounded-lg transition-all duration-300 flex items-center justify-between cursor-pointer ${
+                            isSelected
+                              ? 'bg-[var(--accent)] text-black font-semibold translate-x-2'
+                              : 'text-[var(--text)] hover:text-[var(--accent)] hover:translate-x-2'
+                          }`}
+                        >
+                          <div className="flex items-center gap-2">
+                            <span
+                              className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                                isSelected
+                                  ? 'bg-black'
+                                  : isHovered
+                                  ? 'bg-[var(--accent)] scale-125'
+                                  : 'bg-[var(--text-sub)]/40 group-hover:bg-[var(--accent)]'
+                              }`}
+                            />
+                            <span className="text-[16px] sm:text-[17px] tracking-tight font-medium">
+                              {skill.name}
+                            </span>
+                          </div>
+
+                          {skill.level === 'Daily' && (
+                            <span
+                              className={`mono text-[9px] px-1.5 py-0.5 rounded ${
+                                isSelected
+                                  ? 'bg-black/20 text-black'
+                                  : 'bg-[var(--surface-2)] text-[var(--text-sub)] opacity-0 group-hover:opacity-100 transition-opacity'
+                              }`}
+                            >
+                              core
+                            </span>
+                          )}
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Filter Controls & Search Bar */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-          {/* Category Filter Pills */}
-          <div className="flex flex-wrap gap-1.5">
-            <button
-              onClick={() => {
-                labAudio.playClick(900);
-                setActiveCategory('ALL');
-              }}
-              className={`mono text-xs px-3.5 py-1.5 rounded-full transition-all cursor-pointer font-medium ${
-                activeCategory === 'ALL'
-                  ? 'bg-[var(--accent)] text-black font-bold shadow-[0_0_12px_var(--accent-glow)]'
-                  : 'bg-[var(--surface)] border border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--surface-2)]'
-              }`}
-            >
-              ALL ({SKILLS.length})
-            </button>
-            {SKILL_CATEGORIES.map(cat => {
-              const count = SKILLS.filter(s => s.category === cat.key).length;
-              const isActive = activeCategory === cat.key;
-              return (
-                <button
-                  key={cat.key}
-                  onClick={() => {
-                    labAudio.playClick(950);
-                    setActiveCategory(cat.key);
-                  }}
-                  className={`mono text-xs px-3 py-1.5 rounded-full transition-all cursor-pointer font-medium ${
-                    isActive
-                      ? 'bg-[var(--text)] text-[var(--text-dark)] font-bold'
-                      : 'bg-[var(--surface)] border border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--surface-2)]'
-                  }`}
-                >
-                  <span>{cat.label}</span>
-                  <span className="ml-1 text-[10px] opacity-70">({count})</span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Search Box */}
-          <div className="relative min-w-[240px]">
-            <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[var(--text-sub)]" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={e => setSearchQuery(e.target.value)}
-              placeholder="Search 23 skills..."
-              className="w-full pl-9 pr-4 py-2 rounded-full bg-[var(--surface)] border border-[var(--border)] text-xs mono text-[var(--text)] placeholder-[var(--text-sub)] outline-none focus:border-[var(--accent)] transition-all"
-            />
-          </div>
-        </div>
-
-        {/* Skills Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5">
-          {filteredSkills.map(skill => {
-            const isSelected = selectedSkill?.id === skill.id;
-            const levelInfo = LEVEL_COLORS[skill.level] || LEVEL_COLORS.Daily;
-
-            return (
-              <motion.div
-                key={skill.id}
-                layout
-                onClick={() => {
-                  labAudio.playClick(1000);
-                  setSelectedSkill(isSelected ? null : skill);
-                }}
-                onMouseEnter={() => labAudio.playHover()}
-                className={`p-4 rounded-2xl glass transition-all cursor-pointer relative overflow-hidden ${
-                  isSelected
-                    ? 'border-[var(--border-glow)] bg-[var(--surface-2)] shadow-[0_8px_30px_rgba(0,245,200,0.12)]'
-                    : 'border-[var(--border)] hover:border-[var(--border-strong)] hover:bg-[var(--surface-2)]'
-                }`}
-              >
-                <div className="flex items-start justify-between gap-2 mb-2">
-                  <div className="flex items-center gap-2">
-                    <span
-                      className="w-2 h-2 rounded-full flex-shrink-0"
-                      style={{ background: levelInfo.dotColor }}
-                    />
-                    <span className="font-bold text-sm text-[var(--text)]">
-                      {skill.name}
-                    </span>
-                  </div>
-                  <span className="mono text-[9px] px-2 py-0.5 rounded-full bg-[var(--surface-2)] text-[var(--text-sub)]">
-                    {skill.category}
-                  </span>
-                </div>
-
-                <p className="text-xs text-[var(--text-muted)] font-light leading-relaxed line-clamp-2">
-                  {skill.description}
-                </p>
-
-                {/* Connected Projects Indicator */}
-                {skill.associatedProjects.length > 0 && (
-                  <div className="mt-3 pt-2.5 border-t border-[var(--border)] flex items-center justify-between text-[10px] mono text-[var(--text-sub)]">
-                    <span>USED IN PROJECTS:</span>
-                    <span className="text-[var(--accent)] font-semibold">
-                      {skill.associatedProjects.length} System{skill.associatedProjects.length > 1 ? 's' : ''}
-                    </span>
-                  </div>
-                )}
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* Deep Skill Inspector Drawer */}
+        {/* Selected Skill Telemetry Drawer (Minimal & Editorial) */}
         <AnimatePresence>
           {selectedSkill && (
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 16 }}
-              className="mt-8 p-6 sm:p-8 rounded-3xl glass border border-[var(--border-strong)] bg-[var(--bg-elevated)]"
+              exit={{ opacity: 0, y: 12 }}
+              transition={{ duration: 0.25 }}
+              className="mt-6 p-6 rounded-2xl border border-[var(--border)] bg-[var(--surface)] backdrop-blur-md"
             >
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[var(--border)] mb-4 gap-2">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-[var(--border)]">
                 <div className="flex items-center gap-3">
-                  <div className="text-xl font-bold text-[var(--text)]">
+                  <span className="font-serif-italic text-2xl text-[var(--text)]">
                     {selectedSkill.name}
-                  </div>
-                  <span className="mono text-xs px-2.5 py-1 rounded-full bg-[var(--accent-dim)] text-[var(--accent)] font-semibold">
+                  </span>
+                  <span className="mono text-[11px] px-2.5 py-0.5 rounded-full bg-[var(--accent-dim)] text-[var(--accent)] font-semibold uppercase">
                     {selectedSkill.category}
                   </span>
-                  <span className="mono text-xs px-2.5 py-1 rounded-full bg-[var(--surface-3)] text-[var(--text)]">
-                    {selectedSkill.level}
+                  <span className="mono text-[11px] px-2.5 py-0.5 rounded-full bg-[var(--surface-2)] text-[var(--text-sub)]">
+                    Proficiency: {selectedSkill.level}
                   </span>
                 </div>
+
                 <button
                   onClick={() => setSelectedSkill(null)}
-                  className="mono text-xs text-[var(--text-sub)] hover:text-[var(--text)] self-start sm:self-auto cursor-pointer"
+                  className="mono text-xs text-[var(--text-sub)] hover:text-[var(--text)] transition-colors self-start md:self-auto cursor-pointer"
                 >
-                  CLOSE INSPECTOR [×]
+                  [DISMISS ESC]
                 </button>
               </div>
 
-              <p className="text-sm sm:text-base text-[var(--text-muted)] font-light leading-relaxed max-w-2xl mb-6">
-                {selectedSkill.description}
-              </p>
-
-              {/* Connected Production Systems */}
-              <div>
-                <div className="mono text-xs text-[var(--text-sub)] uppercase tracking-wider mb-3">
-                  PRODUCTION SYSTEM PROOF:
+              <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                <div className="md:col-span-2">
+                  <p className="text-sm text-[var(--text-muted)] font-light leading-relaxed">
+                    {selectedSkill.description}
+                  </p>
                 </div>
-                {selectedSkill.associatedProjects.length === 0 ? (
-                  <div className="text-xs mono text-[var(--text-sub)] italic">
-                    Core computer science foundation / algorithm challenge applications.
+
+                <div className="border-t md:border-t-0 md:border-l border-[var(--border)] pt-4 md:pt-0 md:pl-6">
+                  <div className="mono text-[10px] text-[var(--text-sub)] uppercase tracking-wider mb-2">
+                    Production Systems:
                   </div>
-                ) : (
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                    {selectedSkill.associatedProjects.map(projId => {
-                      const proj = PROJECTS.find(p => p.id === projId);
-                      if (!proj) return null;
-                      return (
-                        <a
-                          key={proj.id}
-                          href="#projects"
-                          className="p-3.5 rounded-xl bg-[var(--surface-2)] border border-[var(--border)] hover:border-[var(--accent)] transition-all flex items-center justify-between group"
-                        >
-                          <div>
-                            <div className="font-semibold text-xs text-[var(--text)] group-hover:text-[var(--accent)]">
-                              {proj.name}
-                            </div>
-                            <div className="mono text-[10px] text-[var(--text-sub)]">
-                              {proj.category}
-                            </div>
-                          </div>
-                          <ArrowUpRight size={14} className="text-[var(--accent)]" />
-                        </a>
-                      );
-                    })}
-                  </div>
-                )}
+                  {selectedSkill.associatedProjects.length === 0 ? (
+                    <span className="text-xs text-[var(--text-sub)] italic">
+                      Algorithmic rigor & foundational CS problem solving.
+                    </span>
+                  ) : (
+                    <div className="flex flex-wrap gap-2">
+                      {selectedSkill.associatedProjects.map(projId => {
+                        const proj = PROJECTS.find(p => p.id === projId);
+                        if (!proj) return null;
+                        return (
+                          <a
+                            key={proj.id}
+                            href="#projects"
+                            className="inline-flex items-center gap-1 mono text-xs px-2.5 py-1 rounded-md bg-[var(--surface-2)] border border-[var(--border)] hover:border-[var(--accent)] text-[var(--text)] hover:text-[var(--accent)] transition-all"
+                          >
+                            <span>{proj.name}</span>
+                            <ArrowUpRight size={11} />
+                          </a>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
               </div>
             </motion.div>
           )}

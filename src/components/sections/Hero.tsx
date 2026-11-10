@@ -265,6 +265,17 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
                     <span>SHARDUL.LAB // ARCHITECTURAL DOSSIER</span>
                   </div>
 
+                  {/* Rishika-Style Short Version Statement & Typography Caliper */}
+                  <div className="space-y-1.5 pt-1">
+                    <div className="flex items-center justify-between text-[10px] mono text-[#8B5CF6] font-bold">
+                      <span>h1 · Space Grotesk · fit-to-width · -0.066em</span>
+                      <span className="text-[#A1A1AA] dark:text-[#64748B]">SYS_CORE: #007</span>
+                    </div>
+                    <p className="text-xs sm:text-sm text-[#52525B] dark:text-[#CBD5E1] font-mono leading-relaxed">
+                      they said pick one: <span className="font-bold text-[#FF6B35]">systems rigor</span> or <span className="font-bold text-[#8B5CF6]">product velocity</span>. i kept both, compiled with zero warnings, and shipped 4 production platforms.
+                    </p>
+                  </div>
+
                   <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight leading-[0.92] font-editorial">
                     SHARDUL <br />
                     <span className="italic font-serif font-normal text-amber-600 dark:text-amber-400">
@@ -463,9 +474,14 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
                     BOX_SPEC // W: 58.3% · H: AUTO · DISPLAY: FLEX_COL
                   </div>
 
-                  <div className="mono text-[10px] font-bold text-cyan-400 uppercase tracking-widest flex items-center justify-between">
-                    <span>[TYPOGRAPHY: SPACE_GROTESK · WEIGHT: 800 · TRACKING: -0.04em]</span>
-                    <span className="text-purple-400">LAYER_01: DOM_NODE</span>
+                  <div className="space-y-1.5 pt-1">
+                    <div className="flex items-center justify-between text-[10px] mono text-cyan-400 font-bold border-b border-purple-500/30 pb-1">
+                      <span>h1 · Space Grotesk · fit-to-width · -0.066em</span>
+                      <span className="text-purple-400">LAYER_01: DOM_NODE</span>
+                    </div>
+                    <p className="text-xs text-purple-300 font-mono leading-relaxed">
+                      {'// MANIFEST: ZERO COMPILER WARNINGS · 4 SYSTEMS DEPLOYED TO PRODUCTION'}
+                    </p>
                   </div>
 
                   <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight leading-[0.92] outline-text text-purple-300">

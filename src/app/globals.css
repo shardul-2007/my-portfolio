@@ -343,6 +343,22 @@ html[data-theme="yellow"] .gradient-orange {
    RISHIKA-INSPIRED SPLIT CANVAS & EDITORIAL CRAFT UTILITIES
    ═══════════════════════════════════════════════════════════════ */
 
+/* Editorial Serif & Eyebrow Typography */
+.font-serif-italic {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent-orange);
+}
+
 /* Outlined / Ghost Typography */
 .outline-text {
   -webkit-text-stroke: 1.5px currentColor;

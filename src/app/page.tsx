@@ -9,6 +9,7 @@ import Footer from '@/components/layout/Footer';
 
 // Sections
 import Hero from '@/components/sections/Hero';
+import Receipts from '@/components/sections/Receipts';
 import CommandCenter from '@/components/sections/CommandCenter';
 import InsideMind from '@/components/sections/InsideMind';
 import About from '@/components/sections/About';
@@ -89,11 +90,14 @@ export default function Home() {
 
       {/* Main Connected Engineering Universe */}
       <main className="relative">
-        {/* Section 02: Cinematic Hero */}
+        {/* Section 02: Cinematic Hero with REALITY / X-RAY Split */}
         <Hero
           onOpenRecruiter={() => setIsRecruiterOpen(true)}
           onOpenCommand={() => setIsCommandOpen(true)}
         />
+
+        {/* Section 02.5: Receipts & Verified Counters */}
+        <Receipts />
 
         {/* Section 03: Engineering Command Center */}
         <CommandCenter
