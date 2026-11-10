@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowDown,
   ArrowUpRight,
@@ -10,23 +11,59 @@ import {
   Terminal,
   Cpu,
   Layers,
+  Sparkles,
+  GitBranch,
+  FolderGit2,
+  Users,
+  Compass,
+  CheckCircle2,
+  ExternalLink,
 } from 'lucide-react';
 import { PROFILE } from '@/data/profile';
 import { assetPath } from '@/lib/basePath';
 import { labAudio } from '@/lib/audio';
-import TornPaperEdge from '@/components/ui/TornPaperEdge';
 
 interface HeroProps {
   onOpenRecruiter: () => void;
   onOpenCommand: () => void;
 }
 
+interface ConstellationNode {
+  id: string;
+  label: string;
+  category: 'PROJECT' | 'TECH' | 'CONTRIBUTION' | 'COMMUNITY';
+  tag: string;
+  detail: string;
+  target?: string;
+  color: string;
+}
+
+const CONSTELLATION_NODES: ConstellationNode[] = [
+  { id: 'civicos', label: 'CivicOS', category: 'PROJECT', tag: 'Web3 & Governance', detail: 'Decentralized civic governance & transparency protocol', target: '#projects', color: '#D9363E' },
+  { id: 'assemblyos', label: 'AssemblyOS', category: 'PROJECT', tag: 'Simulated CPU', detail: '8-bit educational CPU simulator with live register visualizer', target: '#projects', color: '#EF493F' },
+  { id: 'skillcert', label: 'SkillCert', category: 'PROJECT', tag: 'Credentials Engine', detail: 'Cryptographic skills verification & proof issuance', target: '#projects', color: '#A91F2C' },
+  { id: 'shardulos', label: 'SHARDUL.OS', category: 'PROJECT', tag: 'Interactive Universe', detail: 'Award-grade interactive engineering universe', target: '#hero', color: '#D9363E' },
+  { id: 'fullstack', label: 'Full Stack', category: 'TECH', tag: 'MERN & Next.js', detail: 'Production architectures, server actions & real-time sockets', target: '#skills', color: '#171416' },
+  { id: 'java', label: 'Java', category: 'TECH', tag: 'OOP & Systems', detail: 'Object-oriented architecture & algorithmic problem solving', target: '#skills', color: '#711C27' },
+  { id: 'typescript', label: 'TypeScript', category: 'TECH', tag: 'Type-Safe Web', detail: 'Strict static typing & resilient frontend systems', target: '#skills', color: '#3178C6' },
+  { id: 'python', label: 'Python', category: 'TECH', tag: 'AI & Scripting', detail: 'Data manipulation, automation & neural APIs', target: '#skills', color: '#4B8BBE' },
+  { id: 'dsa', label: 'DSA & Algorithms', category: 'TECH', tag: 'Problem Solving', detail: 'Competitive programming & algorithmic efficiency', target: '#skills', color: '#10B981' },
+  { id: 'osci', label: 'OSCI 2026', category: 'CONTRIBUTION', tag: 'Open Source', detail: 'Open Source Connect India active contributor badge', target: '#contributions', color: '#FF6B1A' },
+  { id: 'gssoc', label: 'GSSoC 2026', category: 'CONTRIBUTION', tag: 'Open Source', detail: 'GirlScript Summer of Code official contributor rosette', target: '#contributions', color: '#3B82F6' },
+  { id: 'nsoc', label: 'NSoC 2026', category: 'CONTRIBUTION', tag: 'Open Source', detail: 'Nexus Spring of Code tech contributor medallion', target: '#contributions', color: '#10B981' },
+  { id: 'google', label: 'Google SA', category: 'COMMUNITY', tag: 'Gemini Ambassador', detail: 'Selected Google Student Ambassador for campus outreach', target: '#engagements', color: '#4285F4' },
+  { id: 'hackerrank', label: 'HackerRank', category: 'COMMUNITY', tag: 'Campus Crew', detail: 'PCET NMIET campus crew lead & contest facilitator', target: '#engagements', color: '#10B981' },
+  { id: 'mygov', label: 'MyGov India', category: 'COMMUNITY', tag: 'Level 5 Change Maker', detail: '102,020 points for digital civic engagement', target: '#engagements', color: '#F59E0B' },
+  { id: 'guesss', label: 'GUESSS India', category: 'COMMUNITY', tag: 'CA-419 Ambassador', detail: 'REVA University entrepreneurship survey outreach', target: '#engagements', color: '#8B5CF6' },
+];
+
 export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
-  const [sliderPos, setSliderPos] = useState<number>(50); // 0 (all x-ray) to 100 (all reality)
+  const [sliderPos, setSliderPos] = useState<number>(50); // 0 (all systems) to 100 (all reality)
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<string>('');
-  const [draftVer, setDraftVer] = useState<number>(7);
+  const [mobileMode, setMobileMode] = useState<'reality' | 'systems'>('reality');
+  const [activeNode, setActiveNode] = useState<ConstellationNode | null>(null);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const resetTimerRef = useRef<NodeJS.Timeout | null>(null);
@@ -48,12 +85,12 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
     return () => clearInterval(interval);
   }, []);
 
-  // Pointer & Drag Tracking Engine with smooth bounds
+  // Pointer & Drag Tracking Engine
   const updatePosition = useCallback((clientX: number) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
     const rawPos = ((clientX - rect.left) / rect.width) * 100;
-    const clamped = Math.max(8, Math.min(92, rawPos));
+    const clamped = Math.max(10, Math.min(90, rawPos));
     setSliderPos(clamped);
   }, []);
 
@@ -89,7 +126,7 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
     if (isDragging) return;
     resetTimerRef.current = setTimeout(() => {
       setSliderPos(50);
-    }, 2800);
+    }, 3000);
   };
 
   function handleCopyEmail() {
@@ -99,42 +136,97 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
     setTimeout(() => setCopied(false), 2400);
   }
 
+  function handleNodeClick(node: ConstellationNode) {
+    labAudio.playClick(950);
+    setActiveNode(node);
+    if (node.target) {
+      const targetEl = document.querySelector(node.target);
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }
+
+  // Active split percentage used across desktop & mobile
+  const activeSplit = typeof window !== 'undefined' && window.innerWidth < 768
+    ? (mobileMode === 'reality' ? 100 : 0)
+    : sliderPos;
+
   return (
     <section
       id="hero"
-      className="relative min-h-[92vh] flex flex-col justify-center pt-16 sm:pt-20 pb-16 overflow-hidden select-none bg-[var(--paper)]"
+      className="relative min-h-[92vh] flex flex-col justify-center pt-16 sm:pt-20 pb-16 overflow-hidden select-none bg-[#F8F5F1]"
     >
       <div className="section-container relative z-10 w-full flex-1">
+        {/* Mobile View Toggle (Accessible Buttons for Touch Viewports) */}
+        <div className="flex md:hidden items-center justify-between mb-3 px-1">
+          <div className="mono text-[10px] text-[var(--text-sub)] font-bold">
+            VIEWPORT: {mobileMode.toUpperCase()}
+          </div>
+          <div className="flex items-center gap-1 bg-white p-1 rounded-full border border-[var(--border)] shadow-sm mono text-[10px]">
+            <button
+              type="button"
+              onClick={() => {
+                labAudio.playClick(900);
+                setMobileMode('reality');
+              }}
+              className={`px-3 py-1 rounded-full font-bold transition-all ${
+                mobileMode === 'reality'
+                  ? 'bg-[#171416] text-white'
+                  : 'text-[#171416]'
+              }`}
+            >
+              HUMAN
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                labAudio.playClick(950);
+                setMobileMode('systems');
+              }}
+              className={`px-3 py-1 rounded-full font-bold transition-all ${
+                mobileMode === 'systems'
+                  ? 'bg-[#D9363E] text-white'
+                  : 'text-[#171416]'
+              }`}
+            >
+              ENGINEERING
+            </button>
+          </div>
+        </div>
+
+        {/* Master Asymmetric Canvas with 50/50 Dual Synchronized Systems */}
         <div
           ref={containerRef}
           onPointerMove={handlePointerMove}
           onPointerLeave={handlePointerLeave}
-          className="relative w-full min-h-[720px] sm:min-h-[780px] md:h-[820px] rounded-3xl overflow-hidden border border-[var(--border)] shadow-[0_16px_50px_rgba(23,20,22,0.08)] bg-[var(--paper)]"
+          className="relative w-full min-h-[760px] sm:min-h-[800px] md:h-[840px] rounded-3xl overflow-hidden border border-[#E7DEDA] shadow-[0_16px_50px_rgba(23,20,22,0.08)] bg-[#F8F5F1]"
         >
           {/* ══════════════════════════════════════════════════════════════
-              LAYER B: X-RAY / CODE (Engineering Inspection View)
-              Clean reciprocal clip-path so it never overlaps or leaks
+              LAYER B: ENGINEERING / SYSTEMS (Right Reveal)
+              The same original portrait, surrounded by technical calipers,
+              precision guides, active metadata, and the constellation.
               ══════════════════════════════════════════════════════════════ */}
           <div
-            style={{ clipPath: `polygon(${sliderPos}% 0%, 100% 0%, 100% 100%, ${sliderPos}% 100%)` }}
-            className="absolute inset-0 w-full h-full bg-[#F1ECE8] text-[#D9363E] flex flex-col justify-between p-4 sm:p-8 md:p-10 overflow-hidden blueprint-grid transition-none pointer-events-none"
+            style={{ clipPath: `polygon(${activeSplit}% 0%, 100% 0%, 100% 100%, ${activeSplit}% 100%)` }}
+            className="absolute inset-0 w-full h-full bg-[#F1ECE8] text-[#171416] flex flex-col justify-between p-4 sm:p-8 md:p-10 overflow-hidden blueprint-grid transition-none"
           >
-            {/* Top Bar (Code / Blueprint) */}
-            <div className="relative z-10 flex flex-wrap items-center justify-between gap-2 sm:gap-3 text-xs mono pointer-events-auto">
-              <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#FDF6F6] border border-[#F2D2D4]">
-                <span>SHARDUL.LAB · ~/ git:(<b>main</b>) ✓</span>
-                <span className="text-[10px] text-[#A91F2C] hidden sm:inline">BUILDING IN PUBLIC</span>
+            {/* Top Bar (Engineering / Systems) */}
+            <div className="relative z-10 flex flex-wrap items-center justify-between gap-2 sm:gap-3 text-xs mono">
+              <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#FDF6F6] border border-[#F2D2D4] text-[#D9363E]">
+                <span>SHARDUL.LAB // ARCHITECTURE · ~/ git:(<b>main</b>)</span>
+                <span className="text-[10px] text-[#A91F2C] hidden sm:inline">SYS_VER: 9.0</span>
               </div>
 
               <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#FDF6F6] border border-[#F2D2D4]">
                 <span className="w-2 h-2 rounded-full bg-[#D9363E] animate-pulse" />
-                <span className="font-bold">AVAILABLE FOR WORK</span>
-                <span className="text-[11px] opacity-80 hidden md:inline">INFORMATION TECHNOLOGY</span>
+                <span className="font-bold text-[#D9363E]">ENGINEERING STACK ACTIVE</span>
+                <span className="text-[11px] text-[#711C27] hidden md:inline">INFORMATION TECHNOLOGY</span>
               </div>
 
-              <div className="flex items-center gap-2 text-xs">
+              <div className="flex items-center gap-2 text-xs text-[#81777A]">
                 <span>PUNE, IN {currentTime}</span>
-                <span className="text-[10px] opacity-70 hidden sm:inline">SYSTEM ARCHITECTURE</span>
+                <span className="text-[10px] opacity-70 hidden sm:inline">COORD: 18.5204° N, 73.8567° E</span>
               </div>
             </div>
 
@@ -144,133 +236,134 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
               <div className="relative text-center pt-2 sm:pt-4">
                 <div className="inline-block relative">
                   <div className="absolute -top-4 sm:-top-5 right-0 mono text-[8px] sm:text-[9px] text-[#D9363E] uppercase font-bold tracking-wider">
-                    COMPONENT: HERO_SECTION · X-HEIGHT 86PX · CAP_HEIGHT 114PX
+                    MODULE: HERO_ARCHITECTURE · GRID_UNIT: 8PX · HYDRATED
                   </div>
 
                   <h1
                     className="text-[clamp(28px,7.2vw,96px)] font-bold tracking-tight leading-none uppercase text-transparent whitespace-nowrap"
                     style={{ WebkitTextStroke: '1.5px #D9363E' }}
                   >
-                    shardul parihar.
+                    shardul.parihar
                   </h1>
 
                   <div className="absolute -bottom-4 sm:-bottom-5 left-0 mono text-[8px] sm:text-[9px] text-[#D9363E] uppercase font-bold tracking-wider">
-                    FULL-STACK ARCHITECTURE · RED ENGINEERING GRID
+                    SYSTEMS ARCHITECTURE · RED ENGINEERING MATRIX
                   </div>
                 </div>
               </div>
 
               {/* Middle 3-Column Split Stage */}
               <div className="relative flex-1 w-full flex items-center justify-between gap-3 sm:gap-6 mt-4 sm:mt-6">
-                {/* Left Wireframe Column — Blueprint Calipers (No Duplicate English Text!) */}
+                {/* Left Systems Diagnostic Column */}
                 <div className="w-1/2 md:w-[32%] max-w-[320px] z-10 space-y-2 sm:space-y-3">
                   <div className="p-3 sm:p-3.5 rounded-2xl border border-dashed border-[#D9363E]/60 bg-[#FDF6F6]/90 space-y-2">
                     <div className="flex items-center justify-between text-[9px] mono uppercase font-bold text-[#D9363E]">
-                      <span>&lt;HeroIntro /&gt;</span>
-                      <span className="text-[8px] bg-[#D9363E]/10 px-1.5 py-0.5 rounded">HYDRATED</span>
+                      <span>&lt;SystemProfile /&gt;</span>
+                      <span className="text-[8px] bg-[#D9363E]/10 px-1.5 py-0.5 rounded text-[#D9363E]">
+                        VERIFIED 100%
+                      </span>
                     </div>
 
                     <div className="mono text-[10px] sm:text-[11px] text-[#A91F2C] space-y-1">
                       <div className="flex justify-between border-b border-[#D9363E]/20 pb-0.5">
-                        <span className="text-[#81777A]">spec.role:</span>
-                        <span className="font-bold">Info Tech Student</span>
+                        <span className="text-[#81777A]">academics:</span>
+                        <span className="font-bold">Information Technology</span>
                       </div>
                       <div className="flex justify-between border-b border-[#D9363E]/20 pb-0.5">
-                        <span className="text-[#81777A]">spec.focus:</span>
-                        <span className="font-bold">Full-Stack / AI</span>
-                      </div>
-                      <div className="flex justify-between border-b border-[#D9363E]/20 pb-0.5">
-                        <span className="text-[#81777A]">spec.campus:</span>
+                        <span className="text-[#81777A]">campus:</span>
                         <span className="font-bold">PCET NMIET Pune</span>
                       </div>
+                      <div className="flex justify-between border-b border-[#D9363E]/20 pb-0.5">
+                        <span className="text-[#81777A]">focus:</span>
+                        <span className="font-bold">Full-Stack · AI · Systems</span>
+                      </div>
                       <div className="flex justify-between">
-                        <span className="text-[#81777A]">spec.render:</span>
-                        <span className="font-bold">60 FPS · React 18</span>
+                        <span className="text-[#81777A]">status:</span>
+                        <span className="font-bold text-[#10B981]">Open to Internships</span>
                       </div>
                     </div>
                   </div>
 
+                  {/* Systems Hooks */}
                   <div className="p-2 sm:p-2.5 rounded-xl border border-[#D9363E]/40 bg-[#FDF6F6]/80 mono text-[9px] sm:text-[10px] text-[#D9363E] space-y-1">
-                    <div className="text-[8px] sm:text-[9px] opacity-70 uppercase font-bold">WIREFRAME NODES</div>
-                    <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
-                      <span className="px-2 py-0.5 rounded bg-white font-bold border border-[#F2D2D4]">flex.gap: 12px</span>
-                      <span className="px-2 py-0.5 rounded bg-white border border-[#F2D2D4]">box-model: 320x160</span>
-                      <span className="px-2 py-0.5 rounded bg-white border border-[#F2D2D4]">DOM: 48 nodes</span>
+                    <div className="text-[8px] opacity-70 uppercase font-bold">SYSTEM ANNOTATIONS</div>
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      <span className="px-2 py-0.5 rounded bg-white border border-[#F2D2D4]">DOM: 64 nodes</span>
+                      <span className="px-2 py-0.5 rounded bg-white border border-[#F2D2D4]">LATENCY: &lt;16ms</span>
+                      <span className="px-2 py-0.5 rounded bg-white border border-[#F2D2D4]">60 FPS</span>
                     </div>
                   </div>
                 </div>
 
-                {/* Center Wireframe Silhouette (Aligned Perfectly with Center Photo!) */}
-                <div className="relative w-36 h-48 sm:w-56 sm:h-72 md:w-60 md:h-80 mx-auto flex items-center justify-center">
-                  {/* Wireframe Technical Spec Bubble (Positioned top-right to avoid left column) */}
-                  <div className="absolute -top-8 -right-2 sm:-right-4 z-20 max-w-[170px] sm:max-w-[200px] p-2 rounded-2xl border border-dashed border-[#D9363E] bg-[#FDF6F6] text-[#D9363E] mono text-left text-[9px] sm:text-[10px] leading-snug shadow-sm">
-                    <div className="text-[8px] opacity-70 uppercase font-bold flex items-center gap-1">
-                      <Cpu size={10} /> X-RAY SCANNER
+                {/* Center Real Portrait with Engineering Calipers Framing */}
+                <div className="relative w-44 h-60 sm:w-60 sm:h-80 md:w-68 md:h-92 mx-auto flex items-center justify-center">
+                  {/* Caliper Dimensions Annotation — Top Right */}
+                  <div className="absolute -top-7 -right-2 sm:-right-4 z-20 max-w-[190px] sm:max-w-[220px] p-2 sm:p-2.5 rounded-2xl bg-[#FDF6F6] border border-dashed border-[#D9363E] shadow-sm text-left mono text-[9px] sm:text-[10px] text-[#D9363E] leading-snug">
+                    <div className="flex items-center gap-1 font-bold text-[#A91F2C] uppercase">
+                      <Cpu size={11} />
+                      <span>OPTICAL SENSOR // 50MM</span>
                     </div>
-                    <span className="font-mono font-bold text-[#711C27]">BIOMETRIC WIREFRAME</span>
-                    <div className="text-[8px] opacity-70 mt-0.5">CPU: ACTIVE · PUNE, IN</div>
+                    <div className="text-[8px] text-[#81777A] mt-0.5">
+                      FRAME: 280×360 · ASPECT: 3:4 · PUNE
+                    </div>
                   </div>
 
-                  <div className="relative w-full h-full rounded-3xl border-2 border-dashed border-[#D9363E] bg-[#FDF6F6]/80 flex items-center justify-center p-3">
-                    <svg viewBox="0 0 100 130" className="w-full h-full text-[#D9363E] stroke-current fill-none stroke-1">
-                      {/* Skull */}
-                      <circle cx="50" cy="22" r="14" strokeWidth="1.5" />
-                      <circle cx="45" cy="20" r="2" fill="currentColor" />
-                      <circle cx="55" cy="20" r="2" fill="currentColor" />
-                      <path d="M44 28 Q50 32 56 28" strokeWidth="1.2" />
+                  {/* Clean Natural Photograph with Engineering Technical Bounding Frame */}
+                  <div className="relative w-full h-full rounded-3xl overflow-hidden bg-gradient-to-b from-[#F7EBEB] to-[#F1ECE8] border-2 border-[#D9363E] shadow-xl flex items-center justify-center">
+                    <img
+                      src={assetPath('/imageshardul.png')}
+                      alt="Shardul Parihar — Software Engineer"
+                      className="w-full h-full object-cover object-top filter contrast-[1.03]"
+                    />
+                    {/* Architectural Grid Tint around image */}
+                    <div className="absolute inset-0 blueprint-grid opacity-15 pointer-events-none" />
 
-                      {/* Spine & Ribs */}
-                      <line x1="50" y1="36" x2="50" y2="85" strokeWidth="2" strokeDasharray="2 2" />
-                      <path d="M36 48 Q50 42 64 48" strokeWidth="1.2" />
-                      <path d="M34 58 Q50 52 66 58" strokeWidth="1.2" />
-                      <path d="M36 68 Q50 62 64 68" strokeWidth="1.2" />
+                    {/* Corner Caliper Reticle Accents */}
+                    <div className="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-[#D9363E] pointer-events-none" />
+                    <div className="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-[#D9363E] pointer-events-none" />
+                    <div className="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-[#D9363E] pointer-events-none" />
+                    <div className="absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-[#D9363E] pointer-events-none" />
+                  </div>
 
-                      {/* Arms */}
-                      <path d="M36 48 L22 75 L30 95" strokeWidth="1.5" />
-                      <path d="M64 48 L78 75 L70 95" strokeWidth="1.5" />
-
-                      {/* Pelvis & Legs */}
-                      <path d="M42 85 Q50 92 58 85" strokeWidth="1.8" />
-                      <path d="M44 88 L38 125" strokeWidth="1.5" />
-                      <path d="M56 88 L62 125" strokeWidth="1.5" />
-
-                      {/* Pulsating Crimson Heart */}
-                      <circle cx="47" cy="54" r="5" fill="#D9363E" className="animate-ping opacity-75" />
-                      <circle cx="47" cy="54" r="4" fill="#D9363E" />
-                    </svg>
-
-                    {/* Spec tags over skeleton */}
-                    <div className="absolute top-2 right-2 mono text-[8px] bg-white/90 px-1.5 py-0.5 rounded text-[#D9363E] font-bold">
-                      DSA &amp; LOGIC
-                    </div>
-                    <div className="absolute bottom-2 left-2 mono text-[8px] bg-white/90 px-1.5 py-0.5 rounded text-[#711C27] font-bold">
-                      OPEN SOURCE
-                    </div>
+                  {/* Coordinate Tag Underneath */}
+                  <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 z-20 px-2.5 py-0.5 rounded-full bg-white border border-[#D9363E]/40 mono text-[8px] text-[#D9363E] font-bold shadow-xs whitespace-nowrap">
+                    IDENTIFIER: SHARDUL_PARIHAR · AUTH: VERIFIED
                   </div>
                 </div>
 
-                {/* Right Wireframe Column */}
+                {/* Right Interactive Constellation Grid (Systems) */}
                 <div className="hidden md:block md:w-[32%] max-w-[320px] z-10 text-right space-y-2">
-                  <div className="p-3 rounded-2xl border border-dashed border-[#D9363E]/50 bg-[#FDF6F6]/80 space-y-1">
-                    <div className="mono text-[9px] text-[#D9363E] uppercase font-bold">SYSTEM METRICS</div>
+                  <div className="p-3 rounded-2xl border border-dashed border-[#D9363E]/50 bg-[#FDF6F6]/80 space-y-1.5">
+                    <div className="mono text-[9px] text-[#D9363E] uppercase font-bold flex items-center justify-between">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#D9363E] animate-pulse" />
+                      <span>ENGINEERING CONSTELLATION</span>
+                    </div>
+
                     <div className="flex flex-wrap justify-end gap-1.5 pt-1">
-                      <span className="px-2 py-0.5 rounded bg-white text-[10px] font-bold mono border border-[#F2D2D4]">FULL-STACK</span>
-                      <span className="px-2 py-0.5 rounded bg-white text-[10px] font-bold mono border border-[#F2D2D4]">AI APIS</span>
-                      <span className="px-2 py-0.5 rounded bg-white text-[10px] font-bold mono border border-[#F2D2D4]">CYBERSECURITY</span>
+                      {CONSTELLATION_NODES.slice(0, 8).map(node => (
+                        <button
+                          key={node.id}
+                          type="button"
+                          onClick={() => handleNodeClick(node)}
+                          className="px-2 py-0.5 rounded-md bg-white border border-[#F2D2D4] text-[10px] mono font-bold text-[#171416] hover:bg-[#D9363E] hover:text-white transition-all cursor-pointer"
+                        >
+                          {node.label}
+                        </button>
+                      ))}
                     </div>
                   </div>
 
                   <div className="mono text-[9px] bg-[#FDF6F6] p-2.5 rounded-xl text-[#711C27] font-bold uppercase text-right border border-[#F2D2D4]">
-                    INFORMATION TECHNOLOGY · 2024–2028
+                    CLICK ANY NODE TO INSPECT OR NAVIGATE
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Bottom Yellow Ticker Strip in X-Ray */}
+            {/* Bottom Yellow Ticker Strip in Systems */}
             <div className="relative z-10 w-full bg-[#FFE500] text-[#171416] py-2 px-3 sm:px-4 rounded-xl mono text-[11px] sm:text-xs font-bold flex flex-wrap items-center justify-between gap-2 shadow-sm border border-black/10">
               <div className="flex items-center gap-2 sm:gap-3">
-                <span>✈ BEEN AROUND</span>
+                <span>✈ ACADEMIC CONTINUUM</span>
                 <span className="opacity-40">|</span>
                 <span className="tracking-widest">P C E T &nbsp; N M I E T</span>
                 <span className="opacity-40 hidden sm:inline">|</span>
@@ -284,28 +377,20 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
           </div>
 
           {/* ══════════════════════════════════════════════════════════════
-              LAYER A: REALITY / EDITORIAL (Finished Master Layer)
-              Clean reciprocal clip-path from 0% to sliderPos%
+              LAYER A: HUMAN / REALITY (Left Reveal)
+              The same original natural portrait in an editorial art-directed
+              frame, warm ivory aesthetic, and clean typography.
               ══════════════════════════════════════════════════════════════ */}
           <div
-            style={{ clipPath: `polygon(0% 0%, ${sliderPos}% 0%, ${sliderPos}% 100%, 0% 100%)` }}
-            className="absolute inset-0 w-full h-full bg-[#F1ECE8] text-[#171416] flex flex-col justify-between p-4 sm:p-8 md:p-10 overflow-hidden transition-none"
+            style={{ clipPath: `polygon(0% 0%, ${activeSplit}% 0%, ${activeSplit}% 100%, 0% 100%)` }}
+            className="absolute inset-0 w-full h-full bg-[#F8F5F1] text-[#171416] flex flex-col justify-between p-4 sm:p-8 md:p-10 overflow-hidden transition-none"
           >
-            {/* Top Bar (Reality / Editorial) */}
+            {/* Top Bar (Human / Reality) */}
             <div className="relative z-10 flex flex-wrap items-center justify-between gap-2 sm:gap-3 text-xs mono">
               <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-[var(--border)] shadow-sm">
-                <span className="text-[var(--text-sub)]"># brand /</span>
-                <button
-                  type="button"
-                  onClick={() => {
-                    labAudio.playClick(950);
-                    setDraftVer(v => v + 1);
-                  }}
-                  className="font-bold text-[#171416] hover:text-[#D9363E] cursor-pointer"
-                >
-                  SHARDUL.LAB_v{draftVer}
-                </button>
-                <ChevronDown size={11} className="text-[var(--text-sub)]" />
+                <span className="text-[var(--text-sub)]"># identity /</span>
+                <span className="font-bold text-[#171416]">SHARDUL.LAB</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#D9363E]" />
               </div>
 
               <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[var(--border)] shadow-sm">
@@ -331,7 +416,7 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
                   </div>
 
                   <h1 className="text-[clamp(28px,7.2vw,96px)] font-bold tracking-tight leading-none uppercase text-[#171416] whitespace-nowrap">
-                    shardul parihar.
+                    shardul.parihar
                   </h1>
                 </div>
               </div>
@@ -345,12 +430,12 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
                       Information Technology Student
                     </div>
                     <h2 className="text-base sm:text-lg md:text-xl font-bold tracking-tight text-[#171416] leading-tight">
-                      Software Developer · Builder · AI Enthusiast
+                      Software Engineer · Builder · AI Enthusiast
                     </h2>
                   </div>
 
                   <p className="text-xs text-[var(--text-muted)] font-normal leading-relaxed">
-                    I build digital products through full-stack engineering, explore emerging technologies and turn creative ideas into practical solutions.
+                    &ldquo;Building useful digital products through engineering, experimentation and continuous learning.&rdquo;
                   </p>
 
                   <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 pt-1">
@@ -359,7 +444,7 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
                       onClick={() => labAudio.playClick(900)}
                       className="flex items-center gap-1 mono text-[11px] sm:text-xs px-3 sm:px-3.5 py-1.5 rounded-full bg-[#D9363E] text-white hover:bg-[#A91F2C] font-bold transition-all shadow-sm"
                     >
-                      <span>VIEW MY WORK</span>
+                      <span>EXPLORE PROJECTS</span>
                     </a>
 
                     <a
@@ -367,7 +452,7 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
                       onClick={() => labAudio.playClick(950)}
                       className="flex items-center gap-1 mono text-[11px] sm:text-xs px-3 sm:px-3.5 py-1.5 rounded-full bg-white border border-[var(--border)] text-[#171416] hover:border-[#D9363E] hover:text-[#D9363E] transition-all cursor-pointer font-medium shadow-sm"
                     >
-                      <span>GET IN TOUCH</span>
+                      <span>LET&apos;S CONNECT</span>
                     </a>
 
                     <a
@@ -412,41 +497,48 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
                   </div>
                 </div>
 
-                {/* Center Photo (Positioned safely with speech bubble top-right) */}
-                <div className="relative w-36 h-48 sm:w-56 sm:h-72 md:w-60 md:h-80 mx-auto flex items-center justify-center">
-                  {/* Floating Annotation Pill — Top Right, avoids colliding with left headline or column */}
-                  <div className="absolute -top-8 -right-2 sm:-right-4 z-20 max-w-[170px] sm:max-w-[200px] p-2 rounded-2xl bg-white border border-[var(--border)] shadow-md text-left text-[10px] sm:text-[11px] font-medium leading-snug">
+                {/* Center Real Portrait with Editorial Framing */}
+                <div className="relative w-44 h-60 sm:w-60 sm:h-80 md:w-68 md:h-92 mx-auto flex items-center justify-center">
+                  {/* Floating Annotation Pill — Top Right */}
+                  <div className="absolute -top-7 -right-2 sm:-right-4 z-20 max-w-[190px] sm:max-w-[220px] p-2 sm:p-2.5 rounded-2xl bg-white border border-[var(--border)] shadow-md text-left text-[10px] sm:text-[11px] font-medium leading-snug">
                     <span className="text-[#D9363E] font-bold">CURRENTLY BUILDING DIGITAL PRODUCTS</span>
                     <div className="text-[9px] text-[var(--text-sub)] mono mt-0.5">Pune, India.</div>
                   </div>
 
-                  {/* Cutout Photo */}
+                  {/* Clean Natural Photograph with Editorial Border & Soft Natural Shadow */}
                   <div className="relative w-full h-full rounded-3xl overflow-hidden bg-gradient-to-b from-[#F7EBEB] to-[#F1ECE8] border-2 border-white shadow-xl flex items-center justify-center">
                     <img
                       src={assetPath('/imageshardul.png')}
-                      alt="Shardul Parihar"
-                      className="w-full h-full object-cover object-top"
+                      alt="Shardul Parihar — Real Portrait"
+                      className="w-full h-full object-cover object-top filter brightness-[0.98] contrast-[1.03]"
                     />
-                    <div className="absolute inset-0 halftone-screen text-[#D9363E] opacity-25 mix-blend-multiply pointer-events-none" />
+                    <div className="absolute inset-0 halftone-screen text-[#D9363E] opacity-15 mix-blend-multiply pointer-events-none" />
+                  </div>
+
+                  {/* Bottom Editorial Pill */}
+                  <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 z-20 px-3 py-0.5 rounded-full bg-white border border-[var(--border)] shadow-sm mono text-[9px] text-[#171416] font-semibold whitespace-nowrap">
+                    PUNE, MAHARASHTRA · PCET NMIET
                   </div>
                 </div>
 
-                {/* Right Reality Column */}
+                {/* Right Reality Constellation / Highlights */}
                 <div className="hidden md:block md:w-[32%] max-w-[320px] z-10 text-right space-y-3">
                   <div className="space-y-1.5">
-                    <div className="mono text-[10px] uppercase font-bold text-[#D9363E] tracking-wider">
-                      FLOATING HIGHLIGHTS
+                    <div className="mono text-[10px] uppercase font-bold text-[#D9363E] tracking-wider flex items-center justify-end gap-1.5">
+                      <Sparkles size={11} />
+                      <span>FEATURED ECOSYSTEM</span>
                     </div>
                     <div className="flex flex-wrap justify-end gap-1.5">
-                      <span className="px-2.5 py-1 rounded-full bg-white border border-[var(--border)] text-[11px] font-semibold text-[#171416] shadow-sm">
-                        FULL-STACK DEVELOPMENT
-                      </span>
-                      <span className="px-2.5 py-1 rounded-full bg-white border border-[var(--border)] text-[11px] font-semibold text-[#171416] shadow-sm">
-                        AI EXPERIMENTS
-                      </span>
-                      <span className="px-2.5 py-1 rounded-full bg-white border border-[var(--border)] text-[11px] font-semibold text-[#171416] shadow-sm">
-                        OPEN-SOURCE CONTRIBUTOR
-                      </span>
+                      {CONSTELLATION_NODES.slice(0, 8).map(node => (
+                        <button
+                          key={node.id}
+                          type="button"
+                          onClick={() => handleNodeClick(node)}
+                          className="px-2.5 py-1 rounded-full bg-white border border-[var(--border)] text-[11px] font-semibold text-[#171416] shadow-xs hover:border-[#D9363E] hover:text-[#D9363E] transition-all cursor-pointer"
+                        >
+                          {node.label}
+                        </button>
+                      ))}
                     </div>
                   </div>
 
@@ -472,30 +564,57 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
           </div>
 
           {/* ══════════════════════════════════════════════════════════════
-              TACTILE TORN-PAPER WIPE DIVIDER & DRAG HANDLE
-              Organic Deckle Paper Rip Seam + Fine Fibers + Laser Thread
+              TACTILE WIPE DIVIDER & DRAG HANDLE (Red Engineering Accent)
+              Smooth cursor reveal between Reality and Systems
               ══════════════════════════════════════════════════════════════ */}
-          {/* Organic Torn Paper Edge Overlay */}
           <div
-            style={{ left: `calc(${sliderPos}% - 12px)` }}
-            className="absolute top-0 bottom-0 w-6 z-25 pointer-events-none overflow-visible"
-          >
-            <TornPaperEdge crimsonAccent={true} />
-          </div>
-
-          <div
-            style={{ left: `${sliderPos}%` }}
-            className="absolute top-0 bottom-0 w-[2px] bg-[#D9363E] z-30 pointer-events-none"
+            style={{ left: `${activeSplit}%` }}
+            className="absolute top-0 bottom-0 w-[2px] bg-[#D9363E] z-30 pointer-events-none hidden md:block"
           >
             <button
               type="button"
               onPointerDown={handlePointerDown}
-              aria-label="Drag to wipe between Reality and Code X-Ray"
+              aria-label="Drag to reveal Reality and Systems"
               className="absolute top-1/2 -translate-y-1/2 -left-6 w-12 h-12 rounded-full bg-white border-2 border-[#D9363E] text-[#D9363E] shadow-[0_8px_24px_rgba(217,54,62,0.35)] flex items-center justify-center mono text-[10px] font-bold cursor-ew-resize pointer-events-auto hover:scale-110 active:scale-95 transition-transform"
             >
               drag
             </button>
           </div>
+
+          {/* Active Constellation Node Inspector Modal / Toast */}
+          <AnimatePresence>
+            {activeNode && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                className="absolute bottom-16 left-6 sm:left-10 z-40 bg-white/95 backdrop-blur-md border border-[#D9363E]/40 rounded-2xl p-4 shadow-xl max-w-xs text-left select-text"
+              >
+                <div className="flex items-center justify-between gap-2 mb-1">
+                  <span className="mono text-[9px] uppercase font-bold text-[#D9363E] bg-[#FDF6F6] px-2 py-0.5 rounded border border-[#F2D2D4]">
+                    {activeNode.category} · {activeNode.tag}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setActiveNode(null)}
+                    className="w-5 h-5 rounded-full bg-black/5 hover:bg-black/10 flex items-center justify-center mono text-[10px]"
+                  >
+                    ✕
+                  </button>
+                </div>
+                <h4 className="text-sm font-bold text-[#171416]">{activeNode.label}</h4>
+                <p className="text-xs text-[var(--text-muted)] mt-1">{activeNode.detail}</p>
+                {activeNode.target && (
+                  <a
+                    href={activeNode.target}
+                    className="mono text-[10px] text-[#D9363E] font-bold flex items-center gap-1 mt-2 hover:underline"
+                  >
+                    Navigate to section <ArrowUpRight size={11} />
+                  </a>
+                )}
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Rotating Circular Stamp */}
           <div className="absolute bottom-16 right-6 sm:right-10 z-20 pointer-events-none hidden sm:block">

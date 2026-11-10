@@ -11,7 +11,6 @@ import Footer from '@/components/layout/Footer';
 
 // Sections
 import Hero from '@/components/sections/Hero';
-import TornCanvasTransition from '@/components/sections/TornCanvasTransition';
 import Receipts from '@/components/sections/Receipts';
 import ShortVersion from '@/components/sections/ShortVersion';
 import CommandCenter from '@/components/sections/CommandCenter';
@@ -106,9 +105,6 @@ export default function Home() {
           onOpenRecruiter={() => setIsRecruiterOpen(true)}
           onOpenCommand={() => setIsCommandOpen(true)}
         />
-
-        {/* Signature Torn-Photo Scroll Transformation Engine */}
-        <TornCanvasTransition />
 
         {/* Section 02.5: Receipts & Verified Counters */}
         <Receipts />
