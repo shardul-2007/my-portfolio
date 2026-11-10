@@ -5,8 +5,6 @@ import {
   Copy,
   Download,
   ChevronDown,
-  MapPin,
-  ExternalLink,
 } from 'lucide-react';
 import { PROFILE } from '@/data/profile';
 import { assetPath } from '@/lib/basePath';
@@ -83,84 +81,91 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
   return (
     <section
       id="hero"
-      className="relative min-h-[92vh] flex flex-col justify-center pt-20 pb-16 overflow-hidden select-none bg-[var(--paper)]"
+      className="relative min-h-[90vh] flex flex-col justify-center pt-16 sm:pt-20 pb-16 overflow-hidden select-none bg-[var(--paper)]"
     >
       <div className="section-container relative z-10 w-full flex-1">
         <div
           ref={containerRef}
           onPointerMove={handlePointerMove}
           onPointerLeave={handlePointerLeave}
-          className="relative w-full h-[760px] sm:h-[820px] rounded-3xl overflow-hidden border border-[var(--border)] shadow-[0_12px_45px_rgba(30,20,32,0.08)] bg-[var(--paper)]"
+          className="relative w-full min-h-[720px] sm:min-h-[780px] md:h-[820px] rounded-3xl overflow-hidden border border-[var(--border)] shadow-[0_12px_45px_rgba(30,20,32,0.08)] bg-[var(--paper)]"
         >
           {/* ══════════════════════════════════════════════════════════════
               LAYER B: X-RAY / CODE (Blueprint Technical View)
               Exact synchronized coordinates with Layer A
               ══════════════════════════════════════════════════════════════ */}
-          <div className="absolute inset-0 w-full h-full bg-[#fbf5f6] text-[#7c3aed] flex flex-col justify-between p-6 sm:p-10 overflow-hidden blueprint-grid">
+          <div className="absolute inset-0 w-full h-full bg-[#fbf5f6] text-[#7c3aed] flex flex-col justify-between p-4 sm:p-8 md:p-10 overflow-hidden blueprint-grid">
             {/* Top Bar (Code / Blueprint) */}
-            <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 text-xs mono">
+            <div className="relative z-10 flex flex-wrap items-center justify-between gap-2 sm:gap-3 text-xs mono">
               <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#ebe5ff] border border-[#d8ccff]">
                 <span>~/ portfolio git:(<b>main</b>) ✓</span>
-                <span className="text-[10px] text-[#7c3aed]/70">pushed on a friday</span>
+                <span className="text-[10px] text-[#7c3aed]/70 hidden sm:inline">pushed on a friday</span>
               </div>
 
               <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#ebe5ff] border border-[#d8ccff]">
                 <span className="w-2 h-2 rounded-full bg-[#7c3aed] animate-pulse" />
                 <span className="font-bold">open to internships</span>
-                <span className="text-[11px] opacity-80">python · web design · AI/ML</span>
+                <span className="text-[11px] opacity-80 hidden md:inline">python · web design · AI/ML</span>
               </div>
 
               <div className="flex items-center gap-2 text-xs">
                 <span>PUNE, IN {currentTime}</span>
-                <span className="text-[10px] opacity-70">Asia/Kolkata</span>
+                <span className="text-[10px] opacity-70 hidden sm:inline">Asia/Kolkata</span>
               </div>
             </div>
 
             {/* Synchronized Stage Canvas */}
-            <div className="relative flex-1 w-full my-auto flex flex-col justify-between">
+            <div className="relative flex-1 w-full my-auto flex flex-col justify-between py-4">
               {/* Fit-to-Width Hollow Outlined Headline with Measurement Calipers */}
-              <div className="relative text-center pt-2">
+              <div className="relative text-center pt-1 sm:pt-2">
                 <div className="inline-block relative">
-                  <div className="absolute -top-5 right-0 mono text-[9px] text-[#7c3aed]">
+                  <div className="absolute -top-4 sm:-top-5 right-0 mono text-[8px] sm:text-[9px] text-[#7c3aed] uppercase font-bold">
                     CAP HEIGHT 114PX · X-HEIGHT 86PX
                   </div>
 
                   <h1
-                    className="text-[clamp(36px,7.5vw,100px)] font-bold tracking-tight leading-none uppercase text-transparent whitespace-nowrap"
+                    className="text-[clamp(28px,7.2vw,96px)] font-bold tracking-tight leading-none uppercase text-transparent whitespace-nowrap"
                     style={{ WebkitTextStroke: '1.5px #7c3aed' }}
                   >
                     shardul parihar
                   </h1>
 
-                  <div className="absolute -bottom-5 left-0 mono text-[9px] text-[#7c3aed]">
+                  <div className="absolute -bottom-4 sm:-bottom-5 left-0 mono text-[8px] sm:text-[9px] text-[#7c3aed] uppercase font-bold">
                     BASELINE · DESCENDER 24PX
                   </div>
                 </div>
               </div>
 
               {/* Middle 3-Column Split Stage */}
-              <div className="relative flex-1 w-full flex items-center justify-between gap-4 mt-6">
+              <div className="relative flex-1 w-full flex items-center justify-between gap-3 sm:gap-6 mt-4 sm:mt-6">
                 {/* Left Wireframe Column */}
-                <div className="w-[30%] max-w-[280px] z-10 space-y-3">
-                  <div className="p-3 rounded-2xl border border-dashed border-[#7c3aed]/50 bg-[#ebe5ff]/40 space-y-1">
-                    <div className="mono text-[9px] text-[#7c3aed] uppercase font-bold">p · Geist 500 · 40/1.02</div>
-                    <div className="text-xl sm:text-2xl font-bold text-[#7c3aed]">
+                <div className="w-1/2 md:w-[30%] max-w-[280px] z-10 space-y-2 sm:space-y-3">
+                  <div className="p-2 sm:p-3 rounded-2xl border border-dashed border-[#7c3aed]/50 bg-[#ebe5ff]/40 space-y-1">
+                    <div className="mono text-[8px] sm:text-[9px] text-[#7c3aed] uppercase font-bold">p · Geist 500 · 40/1.02</div>
+                    <div className="text-base sm:text-xl md:text-2xl font-bold text-[#7c3aed] leading-snug">
                       CS (AIML) student <br />
                       who <span className="font-serif-italic font-normal text-[#ff4f9a]">performs</span>.
                     </div>
                   </div>
 
-                  <div className="p-2.5 rounded-xl border border-[#7c3aed]/30 mono text-[10px] text-[#7c3aed] space-y-1">
-                    <div className="text-[9px] opacity-70 uppercase">flex · gap 10px</div>
-                    <div className="flex items-center gap-2">
-                      <span className="px-2 py-1 rounded bg-[#ebe5ff] font-bold">btn: resume 1 page</span>
-                      <span className="px-2 py-1 rounded bg-[#ebe5ff]">btn: copy</span>
+                  <div className="p-2 sm:p-2.5 rounded-xl border border-[#7c3aed]/30 mono text-[9px] sm:text-[10px] text-[#7c3aed] space-y-1">
+                    <div className="text-[8px] sm:text-[9px] opacity-70 uppercase font-bold">flex · gap 10px</div>
+                    <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                      <span className="px-2 py-0.5 rounded bg-[#ebe5ff] font-bold">btn: resume 1 page ↓</span>
+                      <span className="px-2 py-0.5 rounded bg-[#ebe5ff]">btn: copy ❐</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Center Wireframe Silhouette (Aligned Perfectly with Center Photo!) */}
-                <div className="relative w-48 h-64 sm:w-60 sm:h-80 mx-auto flex items-center justify-center">
+                <div className="relative w-36 h-48 sm:w-56 sm:h-72 md:w-60 md:h-80 mx-auto flex items-center justify-center">
+                  {/* Wireframe Speech Bubble */}
+                  <div className="absolute -top-6 -left-2 sm:-left-6 z-20 max-w-[170px] sm:max-w-[200px] p-2 sm:p-2.5 rounded-2xl border border-dashed border-[#7c3aed] bg-[#ebe5ff] text-[#7c3aed] mono text-left text-[11px] sm:text-xs leading-snug shadow-sm">
+                    <div className="text-[8px] sm:text-[9px] opacity-70 uppercase font-bold">chat bubble · back.out(1.7)</div>
+                    <span className="font-sans">selfie taken mid-debug. the bug won.</span>
+                    <div className="text-[9px] sm:text-[10px] opacity-70 mt-0.5 sm:mt-1">9:41</div>
+                  </div>
+
                   <div className="relative w-full h-full rounded-3xl border-2 border-dashed border-[#7c3aed] bg-[#ebe5ff]/50 flex items-center justify-center p-3">
                     <svg viewBox="0 0 100 130" className="w-full h-full text-[#7c3aed] stroke-current fill-none stroke-1">
                       {/* Skull */}
@@ -200,11 +205,11 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
                 </div>
 
                 {/* Right Wireframe Column */}
-                <div className="w-[30%] max-w-[280px] z-10 text-right space-y-2">
+                <div className="hidden md:block md:w-[30%] max-w-[280px] z-10 text-right space-y-2">
                   <div className="p-3 rounded-2xl border border-dashed border-[#7c3aed]/50 bg-[#ebe5ff]/40 space-y-1">
                     <div className="mono text-[9px] text-[#7c3aed] uppercase font-bold">p · Geist 400 · 19/1.58</div>
                     <p className="text-xs text-[#7c3aed] leading-relaxed">
-                      i build autonomous AI agents, responsive web platforms, and things with code.
+                      i build autonomous AI agents, responsive web platforms, and things with code. lately: CivicOS and AssemblyOS.
                     </p>
                   </div>
 
@@ -216,13 +221,13 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
             </div>
 
             {/* Bottom Yellow Ticker Strip in X-Ray */}
-            <div className="relative z-10 w-full bg-[#FFE500] text-[#1e1420] py-2 px-4 rounded-xl mono text-xs font-bold flex flex-wrap items-center justify-between gap-3 shadow-sm border border-black/10">
-              <div className="flex items-center gap-3">
+            <div className="relative z-10 w-full bg-[#FFE500] text-[#1e1420] py-2 px-3 sm:px-4 rounded-xl mono text-[11px] sm:text-xs font-bold flex flex-wrap items-center justify-between gap-2 shadow-sm border border-black/10">
+              <div className="flex items-center gap-2 sm:gap-3">
                 <span>✈ BEEN AROUND</span>
                 <span className="opacity-40">|</span>
                 <span className="tracking-widest">P C E T &nbsp; N M I E T</span>
-                <span className="opacity-40">|</span>
-                <span>B.E. Computer Engineering, Pune</span>
+                <span className="opacity-40 hidden sm:inline">|</span>
+                <span className="hidden sm:inline">B.E. Computer Engineering, Pune</span>
               </div>
               <div className="flex items-center gap-2">
                 <span>2024–2028</span>
@@ -237,10 +242,10 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
               ══════════════════════════════════════════════════════════════ */}
           <div
             style={{ clipPath: `polygon(0% 0%, ${sliderPos}% 0%, ${sliderPos}% 100%, 0% 100%)` }}
-            className="absolute inset-0 w-full h-full bg-[#fbf5f6] text-[#1e1420] flex flex-col justify-between p-6 sm:p-10 overflow-hidden transition-none"
+            className="absolute inset-0 w-full h-full bg-[#fbf5f6] text-[#1e1420] flex flex-col justify-between p-4 sm:p-8 md:p-10 overflow-hidden transition-none"
           >
             {/* Top Bar (Reality / Design) */}
-            <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 text-xs mono">
+            <div className="relative z-10 flex flex-wrap items-center justify-between gap-2 sm:gap-3 text-xs mono">
               <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-[var(--border)] shadow-sm">
                 <span className="text-[var(--text-sub)]"># drafts /</span>
                 <button
@@ -259,7 +264,7 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
               <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[var(--border)] shadow-sm">
                 <span className="w-2 h-2 rounded-full bg-[#12a150] animate-pulse" />
                 <span className="font-bold text-[#1e1420]">open to internships</span>
-                <span className="text-[var(--text-sub)] hidden sm:inline">python · web design · AI/ML</span>
+                <span className="text-[var(--text-sub)] hidden md:inline">python · web design · AI/ML</span>
               </div>
 
               <div className="flex items-center gap-2 text-xs font-medium text-[var(--text-sub)]">
@@ -269,30 +274,38 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
             </div>
 
             {/* Synchronized Stage Canvas */}
-            <div className="relative flex-1 w-full my-auto flex flex-col justify-between">
+            <div className="relative flex-1 w-full my-auto flex flex-col justify-between py-4">
               {/* Fit-to-Width Solid Headline */}
-              <div className="relative text-center pt-2">
-                <h1 className="text-[clamp(36px,7.5vw,100px)] font-bold tracking-tight leading-none uppercase text-[#1e1420] whitespace-nowrap">
-                  shardul parihar
-                </h1>
+              <div className="relative text-center pt-1 sm:pt-2">
+                <div className="inline-block relative">
+                  {/* Playful client comment cursor badge from Rishika's Image 3 */}
+                  <div className="absolute -top-3 left-[28%] sm:left-[32%] z-20 hidden sm:flex items-center gap-1 bg-[#ff4f9a] text-white px-2 py-0.5 rounded-full text-[10px] font-bold shadow-md animate-bounce">
+                    <span className="text-[8px]">client:</span>
+                    <span>can you make the name bigger?</span>
+                  </div>
+
+                  <h1 className="text-[clamp(28px,7.2vw,96px)] font-bold tracking-tight leading-none uppercase text-[#1e1420] whitespace-nowrap">
+                    shardul parihar
+                  </h1>
+                </div>
               </div>
 
               {/* Middle 3-Column Split Stage */}
-              <div className="relative flex-1 w-full flex items-center justify-between gap-4 mt-6">
+              <div className="relative flex-1 w-full flex items-center justify-between gap-3 sm:gap-6 mt-4 sm:mt-6">
                 {/* Left Reality Column */}
-                <div className="w-[30%] max-w-[280px] z-10 space-y-3">
-                  <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[#1e1420]">
+                <div className="w-1/2 md:w-[30%] max-w-[280px] z-10 space-y-2 sm:space-y-3">
+                  <h2 className="text-base sm:text-xl md:text-2xl font-bold tracking-tight text-[#1e1420] leading-snug">
                     CS (AIML) student <br />
                     who <span className="font-serif-italic font-normal text-[#ff4f9a]">performs</span>.
                   </h2>
 
-                  <div className="flex flex-wrap items-center gap-2 pt-1">
+                  <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 pt-1">
                     <a
                       href={PROFILE.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => labAudio.playClick(1000)}
-                      className="flex items-center gap-1.5 mono text-xs px-3.5 py-1.5 rounded-full bg-[#1e1420] text-white hover:bg-black font-bold transition-all shadow-sm"
+                      className="flex items-center gap-1.5 mono text-[11px] sm:text-xs px-3 sm:px-3.5 py-1.5 rounded-full bg-[#1e1420] text-white hover:bg-black font-bold transition-all shadow-sm"
                     >
                       <span>resume 1 page</span>
                       <Download size={11} />
@@ -301,14 +314,14 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
                     <button
                       type="button"
                       onClick={handleCopyEmail}
-                      className="flex items-center gap-1.5 mono text-xs px-3.5 py-1.5 rounded-full bg-white border border-[var(--border)] text-[#1e1420] hover:bg-[#f4eff1] transition-all cursor-pointer font-medium shadow-sm"
+                      className="flex items-center gap-1.5 mono text-[11px] sm:text-xs px-3 sm:px-3.5 py-1.5 rounded-full bg-white border border-[var(--border)] text-[#1e1420] hover:bg-[#f4eff1] transition-all cursor-pointer font-medium shadow-sm"
                     >
                       <Copy size={11} />
                       <span>{copied ? 'copied!' : 'copy email'}</span>
                     </button>
                   </div>
 
-                  <p className="mono text-[11px] text-[var(--text-sub)]">
+                  <p className="mono text-[10px] sm:text-[11px] text-[var(--text-sub)]">
                     or say hi on{' '}
                     <a
                       href={PROFILE.linkedin}
@@ -323,11 +336,11 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
                 </div>
 
                 {/* Center Photo (Aligned Exactly at Same Coordinates as Skeleton Silhouette!) */}
-                <div className="relative w-48 h-64 sm:w-60 sm:h-80 mx-auto flex items-center justify-center">
+                <div className="relative w-36 h-48 sm:w-56 sm:h-72 md:w-60 md:h-80 mx-auto flex items-center justify-center">
                   {/* Speech Bubble */}
-                  <div className="absolute -top-6 -left-4 z-20 max-w-[190px] p-2.5 rounded-2xl bg-white border border-[var(--border)] shadow-md text-left text-xs font-medium leading-snug">
+                  <div className="absolute -top-6 -left-2 sm:-left-6 z-20 max-w-[170px] sm:max-w-[200px] p-2 sm:p-2.5 rounded-2xl bg-white border border-[var(--border)] shadow-md text-left text-[11px] sm:text-xs font-medium leading-snug">
                     <span>rehearsal at 6, hackathon at 9. i&apos;m fine. totally fine.</span>
-                    <div className="text-[10px] text-[var(--text-sub)] mono mt-1">9:41</div>
+                    <div className="text-[9px] sm:text-[10px] text-[var(--text-sub)] mono mt-0.5 sm:mt-1">9:41</div>
                   </div>
 
                   {/* Cutout Photo */}
@@ -342,7 +355,7 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
                 </div>
 
                 {/* Right Reality Column */}
-                <div className="w-[30%] max-w-[280px] z-10 text-right space-y-3">
+                <div className="hidden md:block md:w-[30%] max-w-[280px] z-10 text-right space-y-3">
                   <p className="text-xs text-[var(--text-muted)] font-normal leading-relaxed">
                     i build <b>autonomous AI agents</b>, responsive web platforms, and things with code. lately:
                     <b> CivicOS</b> and <b>AssemblyOS</b> that run, fast.
@@ -356,8 +369,8 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
             </div>
 
             {/* Bottom Yellow Bar in Reality */}
-            <div className="relative z-10 w-full bg-[#FFE500] text-[#1e1420] py-2 px-4 rounded-xl mono text-xs font-bold flex flex-wrap items-center justify-between gap-3 shadow-sm border border-black/10">
-              <div className="flex items-center gap-3">
+            <div className="relative z-10 w-full bg-[#FFE500] text-[#1e1420] py-2 px-3 sm:px-4 rounded-xl mono text-[11px] sm:text-xs font-bold flex flex-wrap items-center justify-between gap-2 shadow-sm border border-black/10">
+              <div className="flex items-center gap-2 sm:gap-3">
                 <span className="px-2 py-0.5 rounded bg-black text-white text-[10px]">072 DPI</span>
                 <span>that&apos;s an engineer. probably.</span>
               </div>
