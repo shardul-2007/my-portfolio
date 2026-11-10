@@ -8,18 +8,21 @@ import {
   ShieldCheck,
   CheckCircle2,
   X,
-  FileText,
+  Sparkles,
+  Maximize2,
+  Eye,
 } from 'lucide-react';
 import { ACHIEVEMENTS, AchievementItem } from '@/data/achievements';
 import { PROFILE } from '@/data/profile';
+import { assetPath } from '@/lib/basePath';
 import { labAudio } from '@/lib/audio';
 
 export default function AchievementsArchive() {
   const [activeCategory, setActiveCategory] = useState<string>('ALL');
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedProofModal, setSelectedProofModal] = useState<boolean>(false);
+  const [activeProofItem, setActiveProofItem] = useState<AchievementItem | null>(null);
 
-  const CATEGORIES = ['ALL', 'Open Source', 'Community', 'Recognition', 'Student Program', 'Campus Ambassador'];
+  const CATEGORIES = ['ALL', 'Open Source', 'Leadership / AI', 'Civic & Government', 'Community'];
 
   const filtered = ACHIEVEMENTS.filter(item => {
     const matchesCat =
@@ -33,40 +36,38 @@ export default function AchievementsArchive() {
   });
 
   return (
-    <section id="achievements" className="py-28 relative border-b border-[var(--border)] overflow-hidden">
+    <section id="achievements" className="py-24 relative border-b border-[var(--border)] overflow-hidden bg-[var(--paper)]">
       <div className="section-container">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        {/* Section Header (Image 6 Playful Visual Styling) */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div className="max-w-2xl">
-            <div className="flex items-center gap-2 mb-3">
-              <Award size={14} className="text-[var(--accent-orange)]" />
-              <span className="sys-label-orange">CREDENTIALS &amp; ARCHIVE // 16 DOCUMENTED RECORDS</span>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="eyebrow">verified proofs · 16 credentials</span>
             </div>
-            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-[var(--text)] font-editorial">
-              Achievements &amp; <br />
-              <span className="gradient-orange">Credentials.</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#1e1420]">
+              achievements &amp; <span className="font-serif-italic font-normal text-[#ff4f9a]">credentials</span>.
             </h2>
-            <p className="text-base text-[var(--text-muted)] font-light mt-3 leading-relaxed">
-              Selected student leadership programs, national recognitions, and open-source contributor credentials with verified documentation.
+            <p className="text-sm sm:text-base text-[var(--text-muted)] font-light mt-3 leading-relaxed">
+              genuine student ambassadorships, open-source contributor rosettes, government change-maker medallions, and official letters. click any card to inspect the real verified badge or document.
             </p>
           </div>
 
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => {
-                labAudio.playClick(1000);
-                setSelectedProofModal(true);
-              }}
-              className="glow-btn glow-btn-primary text-xs"
+          <div className="flex items-center gap-2">
+            <a
+              href={PROFILE.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 mono text-xs px-4 py-2 rounded-full bg-[#1e1420] text-white hover:bg-black font-bold transition-all shadow-sm"
             >
-              <ShieldCheck size={14} />
-              <span>VIEW ALL PROOFS &amp; CREDENTIALS</span>
-            </button>
+              <ShieldCheck size={13} className="text-[#ffb8dc]" />
+              <span>Verify on LinkedIn</span>
+              <ExternalLink size={11} />
+            </a>
           </div>
         </div>
 
         {/* Filter Bar & Search */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
           <div className="flex flex-wrap gap-1.5">
             {CATEGORIES.map(cat => {
               const count =
@@ -80,10 +81,10 @@ export default function AchievementsArchive() {
                     labAudio.playClick(900);
                     setActiveCategory(cat);
                   }}
-                  className={`mono text-xs px-3.5 py-1.5 rounded-full transition-all cursor-pointer font-medium ${
+                  className={`mono text-xs px-3.5 py-1.5 rounded-full transition-all cursor-pointer font-bold ${
                     activeCategory === cat
-                      ? 'bg-[var(--accent-orange)] text-white font-bold shadow-[0_0_12px_rgba(255,107,53,0.35)]'
-                      : 'bg-[var(--surface)] border border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--surface-2)]'
+                      ? 'bg-[#1e1420] text-white shadow-sm'
+                      : 'bg-white border border-[var(--border)] text-[var(--text-sub)] hover:text-[#1e1420]'
                   }`}
                 >
                   {cat} ({count})
@@ -99,138 +100,187 @@ export default function AchievementsArchive() {
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
               placeholder="Search 16 credentials..."
-              className="w-full pl-9 pr-4 py-2 rounded-full bg-[var(--surface)] border border-[var(--border)] text-xs mono text-[var(--text)] placeholder-[var(--text-sub)] outline-none focus:border-[var(--accent-orange)] transition-all"
+              className="w-full pl-9 pr-4 py-2 rounded-full bg-white border border-[var(--border)] text-xs mono text-[#1e1420] placeholder-[var(--text-sub)] outline-none focus:border-[#8b5cf6] transition-all shadow-sm"
             />
           </div>
         </div>
 
-        {/* 16 Achievement Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {filtered.map(item => (
-            <motion.div
-              key={item.id}
-              whileHover={{ y: -3 }}
-              className="p-5 rounded-2xl glass border border-[var(--border)] hover:border-[var(--border-strong)] transition-all flex flex-col justify-between"
-            >
-              <div className="space-y-3">
-                <div className="flex items-start justify-between gap-2">
-                  <span
-                    className="mono text-[9px] font-bold tracking-wider px-2 py-0.5 rounded-full"
-                    style={{
-                      background: `${item.accentColor}18`,
-                      color: item.accentColor,
-                      border: `1px solid ${item.accentColor}35`,
-                    }}
-                  >
-                    {item.category}
-                  </span>
-                  <span className="mono text-[10px] text-[var(--text-sub)]">{item.year}</span>
-                </div>
-
+        {/* ─── Living Cards Grid (Image 6 Style with Actual Badges & Certificates) ─── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filtered.map(item => {
+            return (
+              <motion.div
+                key={item.id}
+                layout
+                whileHover={{ y: -6 }}
+                transition={{ duration: 0.25 }}
+                onClick={() => {
+                  labAudio.playClick(950);
+                  if (item.imagePath) setActiveProofItem(item);
+                }}
+                style={{
+                  borderTop: `4px solid ${item.accentColor}`,
+                }}
+                className={`relative rounded-3xl p-6 bg-white border border-[var(--border)] shadow-md hover:shadow-2xl transition-all flex flex-col justify-between group overflow-hidden ${
+                  item.imagePath ? 'cursor-pointer' : ''
+                }`}
+              >
+                {/* Header Tag & Year */}
                 <div>
-                  <h3 className="font-bold text-sm text-[var(--text)] leading-snug">
+                  <div className="flex items-center justify-between pb-3 border-b border-[var(--border)]/60 text-xs mono">
+                    <span
+                      className="px-2 py-0.5 rounded-full font-bold text-[10px] uppercase"
+                      style={{
+                        background: `${item.accentColor}18`,
+                        color: item.accentColor,
+                      }}
+                    >
+                      {item.category}
+                    </span>
+                    <span className="font-bold text-[var(--text-sub)]">{item.year}</span>
+                  </div>
+
+                  {/* Real Badge / Certificate Preview Graphic (if available) */}
+                  {item.imagePath ? (
+                    <div className="my-4 relative h-48 w-full rounded-2xl overflow-hidden bg-gradient-to-b from-[#fbf5f6] to-[#f4eff1] border border-[var(--border)] flex items-center justify-center p-2 group-hover:scale-[1.02] transition-transform duration-300">
+                      <img
+                        src={assetPath(item.imagePath)}
+                        alt={item.title}
+                        className="max-h-full max-w-full object-contain drop-shadow-md rounded-xl"
+                      />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        <span className="mono text-xs px-3 py-1.5 rounded-full bg-black/85 text-white font-bold flex items-center gap-1.5 shadow-lg">
+                          <Eye size={12} />
+                          <span>INSPECT PROOF</span>
+                        </span>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="my-4 h-24 flex items-center justify-center rounded-2xl bg-[var(--surface-2)] border border-[var(--border)]">
+                      <Award size={36} style={{ color: item.accentColor }} />
+                    </div>
+                  )}
+
+                  {/* Title & Organization */}
+                  <h3 className="text-lg font-bold text-[#1e1420] tracking-tight group-hover:text-[#8b5cf6] transition-colors">
                     {item.title}
                   </h3>
-                  <div className="text-xs font-semibold mt-1" style={{ color: item.accentColor }}>
+
+                  <div className="mono text-xs font-semibold text-[var(--text-sub)] mt-1">
                     {item.org}
                   </div>
+
+                  <p className="text-xs text-[var(--text-muted)] font-light leading-relaxed mt-2.5">
+                    {item.description}
+                  </p>
                 </div>
 
-                <p className="text-xs text-[var(--text-muted)] font-light leading-relaxed line-clamp-3">
-                  {item.description}
-                </p>
-              </div>
+                {/* Bottom Proof Tag */}
+                <div className="mt-5 pt-3 border-t border-[var(--border)]/60 flex items-center justify-between text-xs mono">
+                  <div className="flex items-center gap-1.5 text-[var(--text-sub)]">
+                    <CheckCircle2 size={12} className="text-[#12a150]" />
+                    <span className="text-[10px] truncate max-w-[180px]">{item.proofType}</span>
+                  </div>
 
-              {/* Proof Tag & Link */}
-              <div className="mt-4 pt-3 border-t border-[var(--border)] flex items-center justify-between text-[10px] mono text-[var(--text-sub)]">
-                <span className="truncate pr-2">{item.proofType}</span>
-                <a
-                  href={PROFILE.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[var(--accent)] hover:underline flex items-center gap-1 flex-shrink-0"
-                  title="Verify on LinkedIn"
-                >
-                  <ExternalLink size={11} />
-                  <span>Verify</span>
-                </a>
-              </div>
-            </motion.div>
-          ))}
+                  {item.imagePath ? (
+                    <span className="text-[10px] font-bold text-[#8b5cf6] flex items-center gap-1">
+                      <span>VIEW</span>
+                      <Maximize2 size={10} />
+                    </span>
+                  ) : (
+                    <a
+                      href={PROFILE.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[10px] font-bold text-[var(--text-sub)] hover:text-[#8b5cf6] flex items-center gap-1"
+                    >
+                      <span>RECORD</span>
+                      <ExternalLink size={10} />
+                    </a>
+                  )}
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
 
-      {/* Proof & Credentials Modal */}
+      {/* ─── High-Resolution Proof Inspection Modal ─── */}
       <AnimatePresence>
-        {selectedProofModal && (
-          <div className="fixed inset-0 z-[99990] flex items-center justify-center p-4">
+        {activeProofItem && activeProofItem.imagePath && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-8"
+            onClick={() => setActiveProofItem(null)}
+          >
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedProofModal(false)}
-              className="fixed inset-0 bg-black/80 backdrop-blur-md"
-            />
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 16 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 16 }}
-              className="relative w-full max-w-xl bg-[var(--bg-elevated)] border border-[var(--border-strong)] rounded-3xl p-6 sm:p-8 shadow-[0_24px_80px_rgba(0,0,0,0.8)] z-10 max-h-[85vh] overflow-y-auto"
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              onClick={e => e.stopPropagation()}
+              className="relative max-w-3xl w-full max-h-[90vh] bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col border border-white/20"
             >
-              <button
-                onClick={() => setSelectedProofModal(false)}
-                className="absolute top-5 right-5 p-1.5 rounded-full bg-[var(--surface-2)] text-[var(--text-sub)] hover:text-[var(--text)] cursor-pointer"
-              >
-                <X size={16} />
-              </button>
+              {/* Modal Top Bar */}
+              <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--border)] bg-[#fbf5f6]">
+                <div className="flex items-center gap-2">
+                  <ShieldCheck size={16} className="text-[#12a150]" />
+                  <span className="mono text-xs font-bold uppercase tracking-wider text-[#1e1420]">
+                    AUTHENTIC CREDENTIAL VERIFICATION
+                  </span>
+                </div>
 
-              <div className="flex items-center gap-2 mb-2 text-xs mono text-[var(--accent)]">
-                <ShieldCheck size={16} />
-                <span>VERIFIED DOCUMENT REPOSITORY</span>
+                <button
+                  onClick={() => setActiveProofItem(null)}
+                  className="p-1.5 rounded-full hover:bg-black/10 text-[#1e1420] transition-colors cursor-pointer"
+                  title="Close modal"
+                >
+                  <X size={18} />
+                </button>
               </div>
 
-              <h3 className="text-xl sm:text-2xl font-bold text-[var(--text)] font-editorial tracking-tight mb-2">
-                Documented Proofs &amp; Credentials
-              </h3>
+              {/* High-Res Image View */}
+              <div className="p-6 overflow-y-auto flex-1 flex items-center justify-center bg-[#f7f5f6]">
+                <img
+                  src={assetPath(activeProofItem.imagePath)}
+                  alt={activeProofItem.title}
+                  className="max-h-[60vh] max-w-full object-contain rounded-2xl shadow-xl border border-[var(--border)]"
+                />
+              </div>
 
-              <p className="text-xs sm:text-sm text-[var(--text-muted)] font-light leading-relaxed mb-6">
-                All offer letters, program appointments, participant confirmations, and completion badges are permanently documented on my verified LinkedIn profile experience section.
-              </p>
-
-              {/* Proofs List */}
-              <div className="space-y-2 mb-6 max-h-[300px] overflow-y-auto pr-1">
-                {ACHIEVEMENTS.map(item => (
-                  <div
-                    key={item.id}
-                    className="p-3 rounded-xl bg-[var(--surface-2)] border border-[var(--border)] flex items-center justify-between text-xs"
-                  >
-                    <div>
-                      <div className="font-semibold text-[var(--text)]">{item.title}</div>
-                      <div className="mono text-[10px] text-[var(--text-sub)]">
-                        {item.org} · {item.proofType}
-                      </div>
+              {/* Modal Details Footer */}
+              <div className="p-6 border-t border-[var(--border)] bg-white space-y-2">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div>
+                    <h3 className="text-xl font-bold text-[#1e1420]">
+                      {activeProofItem.title}
+                    </h3>
+                    <div className="mono text-xs font-semibold text-[#8b5cf6]">
+                      {activeProofItem.org} · {activeProofItem.year}
                     </div>
-                    <CheckCircle2 size={14} className="text-[var(--accent-lime)] flex-shrink-0 ml-2" />
                   </div>
-                ))}
-              </div>
 
-              <a
-                href={PROFILE.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="glow-btn glow-btn-primary w-full justify-center py-2.5"
-              >
-                <ExternalLink size={14} />
-                <span>VIEW VERIFIED CREDENTIALS ON LINKEDIN</span>
-              </a>
+                  <a
+                    href={PROFILE.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 mono text-xs px-4 py-2 rounded-full bg-[#1e1420] text-white hover:bg-black font-bold transition-all shadow-sm"
+                  >
+                    <span>Verify on LinkedIn</span>
+                    <ExternalLink size={12} />
+                  </a>
+                </div>
 
-              <div className="text-center mono text-[10px] text-[var(--text-sub)] mt-3">
-                Thank you for reviewing the engineering credentials of Shardul Parihar.
+                <p className="text-xs text-[var(--text-muted)] font-light leading-relaxed">
+                  {activeProofItem.description}
+                </p>
+                <div className="mono text-[10px] text-[var(--text-sub)]">
+                  VERIFIED DOCUMENTATION: {activeProofItem.proofType}
+                </div>
               </div>
             </motion.div>
-          </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </section>
