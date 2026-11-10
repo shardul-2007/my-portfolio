@@ -339,6 +339,75 @@ html[data-theme="yellow"] .gradient-orange {
   background-size: 24px 24px;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   RISHIKA-INSPIRED SPLIT CANVAS & EDITORIAL CRAFT UTILITIES
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Outlined / Ghost Typography */
+.outline-text {
+  -webkit-text-stroke: 1.5px currentColor;
+  color: transparent !important;
+}
+
+.outline-text-thick {
+  -webkit-text-stroke: 2px currentColor;
+  color: transparent !important;
+}
+
+/* Playful Sticker Badges */
+.sticker-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 9999px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+.sticker-badge:hover {
+  transform: scale(1.06) rotate(-2deg);
+}
+
+/* Technical Caliper & Measurement Lines */
+.caliper-h {
+  position: relative;
+}
+.caliper-h::before,
+.caliper-h::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 1px;
+  height: 8px;
+  background: currentColor;
+  transform: translateY(-50%);
+  opacity: 0.6;
+}
+.caliper-h::before { left: 0; }
+.caliper-h::after { right: 0; }
+
+/* Blueprint Canvas Pattern */
+.blueprint-grid {
+  background-image:
+    linear-gradient(rgba(124, 58, 237, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 58, 237, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Tactile Toggle Pill */
+.tactile-toggle-pill {
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.15),
+    0 1px 3px rgba(0, 0, 0, 0.1),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
 /* Reduced Motion Safety */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

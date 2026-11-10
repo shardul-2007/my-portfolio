@@ -1,7 +1,10 @@
 'use client';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowDown,
+  Copy,
+  Check,
   ExternalLink,
   Github,
   Linkedin,
@@ -9,6 +12,14 @@ import {
   UserCheck,
   MapPin,
   Sparkles,
+  Layers,
+  Clock,
+  Compass,
+  Cpu,
+  Zap,
+  Sliders,
+  FileText,
+  Mail,
 } from 'lucide-react';
 import { PROFILE } from '@/data/profile';
 import { assetPath } from '@/lib/basePath';
@@ -20,233 +31,387 @@ interface HeroProps {
 }
 
 export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
-  return (
-    <section
-      id="hero"
-      className="relative min-h-[92vh] flex items-center pt-28 pb-16 overflow-hidden border-b border-[var(--border)]"
-    >
-      {/* Background Ambience & Engineering Coordinates */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-1/4 right-1/4 w-[480px] h-[480px] rounded-full bg-[radial-gradient(circle,rgba(0,245,200,0.07)_0%,transparent_70%)] blur-3xl" />
-        <div className="absolute bottom-1/3 left-10 w-[360px] h-[360px] rounded-full bg-[radial-gradient(circle,rgba(255,107,53,0.06)_0%,transparent_70%)] blur-2xl" />
+  const [mode, setMode] = useState<'split' | 'design' | 'code'>('split');
+  const [copied, setCopied] = useState(false);
+  const [currentTime, setCurrentTime] = useState<string>('');
 
-        {/* Technical Coordinate Annotations */}
-        <div className="hidden lg:block absolute top-28 right-12 mono text-[10px] text-[var(--text-sub)] tracking-widest text-right">
-          <div>LAT: 18.5204° N // LON: 73.8567° E</div>
-          <div>LOC: PUNE, MAHARASHTRA, IN</div>
-          <div>SYS_NODE: SHARDUL.LAB.PROD</div>
+  useEffect(() => {
+    function updateClock() {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('en-US', {
+        timeZone: 'Asia/Kolkata',
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+      });
+      setCurrentTime(`${timeStr} IST`);
+    }
+    updateClock();
+    const interval = setInterval(updateClock, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  function handleCopyEmail() {
+    navigator.clipboard.writeText(PROFILE.email);
+    setCopied(true);
+    labAudio.playChime();
+    setTimeout(() => setCopied(false), 2400);
+  }
+
+  function handleModeChange(newMode: 'split' | 'design' | 'code') {
+    labAudio.playClick(newMode === 'split' ? 950 : newMode === 'design' ? 1100 : 800);
+    setMode(newMode);
+  }
+
+  return (
+    <section id="hero" className="relative min-h-[95vh] flex flex-col justify-center pt-24 pb-12 overflow-hidden border-b border-[var(--border)]">
+      {/* ─── Mode Switcher Pill (Tactile Center Toggle) ─── */}
+      <div className="section-container relative z-30 mb-6 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-[var(--accent-lime)] animate-ping" />
+          <span className="mono text-[11px] font-bold tracking-widest uppercase text-[var(--text-sub)]">
+            SHARDUL.LAB // DUAL PERSPECTIVE ENGINE
+          </span>
+        </div>
+
+        {/* Tactile Toggle Button */}
+        <div className="inline-flex items-center p-1 rounded-full bg-[var(--surface-2)] border border-[var(--border-strong)] shadow-lg backdrop-blur-xl">
+          <button
+            onClick={() => handleModeChange('design')}
+            className={`px-3 sm:px-4 py-1.5 rounded-full text-xs mono font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+              mode === 'design'
+                ? 'bg-amber-400 text-black shadow-md'
+                : 'text-[var(--text-muted)] hover:text-[var(--text)]'
+            }`}
+          >
+            <span>✦</span>
+            <span>DESIGN</span>
+          </button>
+
+          <button
+            onClick={() => handleModeChange('split')}
+            className={`hidden md:flex px-3 sm:px-4 py-1.5 rounded-full text-xs mono font-bold transition-all cursor-pointer items-center gap-1.5 ${
+              mode === 'split'
+                ? 'bg-[var(--accent)] text-black shadow-md'
+                : 'text-[var(--text-muted)] hover:text-[var(--text)]'
+            }`}
+          >
+            <span>◈</span>
+            <span>50/50 SPLIT</span>
+          </button>
+
+          <button
+            onClick={() => handleModeChange('code')}
+            className={`px-3 sm:px-4 py-1.5 rounded-full text-xs mono font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+              mode === 'code'
+                ? 'bg-purple-500 text-white shadow-md'
+                : 'text-[var(--text-muted)] hover:text-[var(--text)]'
+            }`}
+          >
+            <span>⚙</span>
+            <span>CODE</span>
+          </button>
         </div>
       </div>
 
-      <div className="section-container relative z-10 w-full">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          {/* Left Column: Editorial Headline & Identity */}
-          <div className="lg:col-span-7 space-y-6">
-            {/* Status & Availability Tag */}
+      {/* ─── Dual World Canvas Container ─── */}
+      <div className="section-container relative z-10 w-full flex-1">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch min-h-[720px]">
+          {/* ══════════════════════════════════════════════════
+              LEFT SIDE: EDITORIAL DESIGN CANVAS (WARM IVORY)
+              ══════════════════════════════════════════════════ */}
+          {(mode === 'split' || mode === 'design') && (
             <motion.div
-              initial={{ opacity: 0, y: -12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="flex flex-wrap items-center gap-3"
+              layout
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className={`relative rounded-3xl p-6 sm:p-10 border transition-all flex flex-col justify-between overflow-hidden shadow-2xl ${
+                mode === 'design' ? 'md:col-span-12' : 'md:col-span-6'
+              } bg-[#FAF7F2] text-[#141519] border-[#E8E2D8] dark:bg-[#12141C] dark:text-[#F3F4F6] dark:border-[#262A3B]`}
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--surface-2)] border border-[var(--border-strong)]">
-                <span className="status-dot status-dot-pulse" />
-                <span className="mono text-xs font-semibold tracking-wider text-[var(--accent-lime)]">
-                  AVAILABLE FOR WORK
-                </span>
-              </div>
-              <div className="flex items-center gap-1.5 mono text-xs text-[var(--text-sub)]">
-                <MapPin size={12} className="text-[var(--accent)]" />
-                <span>Pune, India (UTC+5:30)</span>
-              </div>
-            </motion.div>
+              {/* Subtle Warm Paper Texture Accent */}
+              <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-amber-200/20 via-pink-200/10 to-transparent pointer-events-none rounded-full blur-2xl" />
 
-            {/* Giant Editorial Title */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="space-y-2"
-            >
-              <div className="mono text-xs uppercase tracking-[0.22em] text-[var(--accent-orange)] font-semibold flex items-center gap-2">
-                <span className="w-6 h-px bg-[var(--accent-orange)]" />
-                <span>PERSONAL ENGINEERING UNIVERSE</span>
-              </div>
-              <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-[var(--text)] font-editorial leading-[1.05]">
-                Shardul <br />
-                <span className="gradient-text">Parihar.</span>
-              </h1>
-              <div className="text-xl sm:text-2xl font-medium text-[var(--accent)] tracking-tight">
-                {PROFILE.role}
-              </div>
-            </motion.div>
-
-            {/* Bio Prose */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-base sm:text-lg leading-relaxed text-[var(--text-muted)] max-w-xl font-light"
-            >
-              {PROFILE.bio}
-            </motion.p>
-
-            {/* Verified Statistics Bar */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="grid grid-cols-2 sm:grid-cols-4 gap-3 py-4 border-y border-[var(--border)] max-w-xl"
-            >
-              {[
-                { val: '17+', label: 'Programs & Roles', sub: 'Campus & Open Source' },
-                { val: '16', label: 'Achievements', sub: 'Verified Credentials' },
-                { val: '23', label: 'Tech Stack Skills', sub: 'Daily & Proficient' },
-                { val: '04', label: 'Featured Systems', sub: 'Shipped to Prod' },
-              ].map(stat => (
-                <div key={stat.label} className="space-y-0.5">
-                  <div className="text-2xl sm:text-3xl font-bold mono text-[var(--accent)] tracking-tight">
-                    {stat.val}
-                  </div>
-                  <div className="mono text-[11px] font-semibold text-[var(--text)] leading-tight">
-                    {stat.label}
-                  </div>
-                  <div className="mono text-[9px] text-[var(--text-sub)]">
-                    {stat.sub}
-                  </div>
-                </div>
-              ))}
-            </motion.div>
-
-            {/* Action Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-wrap items-center gap-3 pt-2"
-            >
-              <a
-                href="#projects"
-                onClick={() => labAudio.playClick(1000)}
-                className="glow-btn glow-btn-primary"
-              >
-                <span>EXPLORE SHIPPED SYSTEMS</span>
-                <ArrowDown size={14} />
-              </a>
-
-              <button
-                onClick={() => {
-                  labAudio.playClick(1100);
-                  onOpenRecruiter();
-                }}
-                className="glow-btn glow-btn-orange"
-              >
-                <UserCheck size={14} />
-                <span>90s RECRUITER TOUR</span>
-              </button>
-
-              <button
-                onClick={() => {
-                  labAudio.playClick(900);
-                  onOpenCommand();
-                }}
-                className="glow-btn glow-btn-ghost hidden sm:inline-flex"
-                title="Command Palette"
-              >
-                <Terminal size={14} />
-                <span>CTRL+K</span>
-              </button>
-            </motion.div>
-
-            {/* Social / Evidence Quick Links */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex items-center gap-4 pt-2 text-xs mono text-[var(--text-sub)]"
-            >
-              <a
-                href={PROFILE.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 hover:text-[var(--accent)] transition-colors"
-              >
-                <Github size={14} />
-                <span>@shardul-2007</span>
-              </a>
-              <span>·</span>
-              <a
-                href={PROFILE.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 hover:text-[var(--accent)] transition-colors"
-              >
-                <Linkedin size={14} />
-                <span>/in/shardul-parihar</span>
-              </a>
-              <span>·</span>
-              <a
-                href={PROFILE.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1 hover:text-[var(--accent)] transition-colors"
-              >
-                <ExternalLink size={12} />
-                <span>Resume Credentials</span>
-              </a>
-            </motion.div>
-          </div>
-
-          {/* Right Column: Engineering Visual & Shardul Portrait Card */}
-          <div className="lg:col-span-5 relative">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="relative mx-auto max-w-md"
-            >
-              {/* Outer Technical Frame */}
-              <div className="relative rounded-3xl p-3 bg-gradient-to-b from-[rgba(255,255,255,0.12)] via-[rgba(255,255,255,0.03)] to-transparent border border-[var(--border-strong)] shadow-[0_20px_80px_rgba(0,0,0,0.6)] backdrop-blur-xl">
-                {/* Status Bar */}
-                <div className="flex items-center justify-between px-3 py-2 border-b border-[var(--border)] mb-3 text-[10px] mono text-[var(--text-sub)]">
+              {/* Top Subheader & Floating Stickers */}
+              <div className="relative z-10 space-y-4">
+                <div className="flex flex-wrap items-center justify-between gap-3 text-xs mono">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[var(--accent)]" />
-                    <span>ENGINEER_PORTRAIT.RAW</span>
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    <span className="font-bold tracking-wider text-emerald-700 dark:text-emerald-400">
+                      AVAILABLE FOR WORK
+                    </span>
                   </div>
-                  <span>PROD_IDENT: #007</span>
-                </div>
-
-                {/* Portrait Image with Vignette & Subtle Technical Mesh */}
-                <div className="relative aspect-[4/5] rounded-2xl overflow-hidden bg-[#0A0D14]">
-                  <img
-                    src={assetPath('/imageshardul.png')}
-                    alt="Shardul Parihar — Software Engineer"
-                    className="w-full h-full object-cover object-top filter brightness-[0.92] contrast-[1.08] hover:scale-105 transition-transform duration-700"
-                  />
-                  {/* Subtle Technical Scanline & Vignette */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#080A0F] via-transparent to-transparent opacity-80 pointer-events-none" />
-                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(8,10,15,0.7)_100%)] pointer-events-none" />
-
-                  {/* Floating Identity Overlay Badge */}
-                  <div className="absolute bottom-4 inset-x-4 p-3 rounded-xl bg-[rgba(8,10,15,0.85)] border border-[rgba(255,255,255,0.12)] backdrop-blur-md">
-                    <div className="flex items-center justify-between text-xs font-semibold text-[var(--text)]">
-                      <span>Shardul Parihar</span>
-                      <span className="mono text-[10px] text-[var(--accent)] font-bold">SHARDUL.LAB</span>
-                    </div>
-                    <div className="mono text-[10px] text-[var(--text-muted)] mt-0.5">
-                      PCET&apos;s NMIET · Pune, India
-                    </div>
+                  <div className="flex items-center gap-1 text-[#71717A] dark:text-[#94A3B8]">
+                    <MapPin size={12} className="text-amber-600 dark:text-amber-400" />
+                    <span>Pune, India</span>
                   </div>
                 </div>
 
-                {/* Technical Bottom Tickers */}
-                <div className="mt-3 px-2 py-1 flex items-center justify-between text-[9px] mono text-[var(--text-sub)]">
-                  <span>HASH: e7f8b92c4d</span>
-                  <span className="text-[var(--accent-lime)]">● 100% VERIFIED CLAIMS</span>
+                {/* Playful Floating Stickers */}
+                <div className="flex flex-wrap gap-2 pt-1">
+                  <span className="sticker-badge bg-white dark:bg-[#1E2235] text-[#18181B] dark:text-[#E2E8F0] border border-[#E4E4E7] dark:border-[#33384D] rotate-[-2deg]">
+                    ✦ CREATIVE ENGINEER
+                  </span>
+                  <span className="sticker-badge bg-amber-100 dark:bg-amber-950/60 text-amber-900 dark:text-amber-200 border border-amber-300 dark:border-amber-800 rotate-[1deg]">
+                    ★ 2026 COHORT
+                  </span>
+                  <span className="sticker-badge bg-sky-100 dark:bg-sky-950/60 text-sky-900 dark:text-sky-200 border border-sky-300 dark:border-sky-800 rotate-[-1deg]">
+                    ♥ OPEN SOURCE
+                  </span>
+                </div>
+              </div>
+
+              {/* Centerpiece: Giant Editorial Typography & Integrated Portrait */}
+              <div className="relative z-10 my-8">
+                <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center">
+                  {/* Big Name Typography */}
+                  <div className="sm:col-span-7 space-y-2">
+                    <div className="mono text-[11px] font-bold tracking-[0.25em] text-amber-600 dark:text-amber-400 uppercase">
+                      [01] // PORTFOLIO ARCHIVE
+                    </div>
+                    <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[0.95] font-editorial">
+                      SHARDUL <br />
+                      <span className="italic font-serif font-normal text-amber-600 dark:text-amber-400">Parihar</span>.
+                    </h1>
+                    <div className="text-base sm:text-lg font-medium text-[#52525B] dark:text-[#94A3B8] pt-1">
+                      Software Engineer · Builder · AI Enthusiast
+                    </div>
+                  </div>
+
+                  {/* Cutout / Integrated Portrait with Floating Message */}
+                  <div className="sm:col-span-5 relative flex justify-center">
+                    <div className="relative w-44 sm:w-48 aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl border-2 border-white dark:border-[#2D3349] group">
+                      <img
+                        src={assetPath('/imageshardul.png')}
+                        alt="Shardul Parihar"
+                        className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+                      <div className="absolute bottom-2 left-2 right-2 text-center mono text-[10px] text-white/90 bg-black/60 backdrop-blur-md py-1 px-2 rounded-lg">
+                        SHARDUL RAJENDRA PARIHAR
+                      </div>
+                    </div>
+
+                    {/* Speech Bubble Floating Note */}
+                    <motion.div
+                      initial={{ scale: 0.9, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ delay: 0.3 }}
+                      className="absolute -top-4 -right-2 sm:-right-4 bg-white dark:bg-[#1E2235] text-[#18181B] dark:text-[#E2E8F0] text-[11px] font-medium py-1.5 px-3 rounded-2xl shadow-lg border border-[#E4E4E7] dark:border-[#33384D] max-w-[150px] leading-tight"
+                    >
+                      <span>Hi, I&apos;m Shardul! 👋 Let&apos;s build the future.</span>
+                      {/* Bubble Arrow */}
+                      <span className="absolute -bottom-1.5 left-4 w-3 h-3 bg-white dark:bg-[#1E2235] border-r border-b border-[#E4E4E7] dark:border-[#33384D] rotate-45" />
+                    </motion.div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Lower Section: Personal Introduction & Direct Action Buttons */}
+              <div className="relative z-10 pt-4 border-t border-[#E8E2D8] dark:border-[#262A3B] space-y-4">
+                <p className="text-sm sm:text-base leading-relaxed text-[#52525B] dark:text-[#94A3B8] font-light max-w-lg">
+                  Software engineering student building full-stack products, exploring AI, cybersecurity, web technologies, and open-source development.
+                </p>
+
+                {/* CTAs */}
+                <div className="flex flex-wrap items-center gap-2.5 pt-1">
+                  <a
+                    href="#projects"
+                    onClick={() => labAudio.playClick(1000)}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs mono font-bold bg-[#141519] text-white dark:bg-amber-400 dark:text-black shadow-md hover:scale-105 transition-transform"
+                  >
+                    <span>VIEW MY WORK</span>
+                    <ArrowDown size={14} />
+                  </a>
+
+                  <button
+                    onClick={() => {
+                      labAudio.playClick(1100);
+                      onOpenRecruiter();
+                    }}
+                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full text-xs mono font-bold bg-white dark:bg-[#1E2235] text-[#18181B] dark:text-[#E2E8F0] border border-[#D4D4D8] dark:border-[#33384D] shadow-sm hover:border-amber-500 transition-colors"
+                  >
+                    <FileText size={13} className="text-amber-500" />
+                    <span>RESUME / 90s</span>
+                  </button>
+
+                  <button
+                    onClick={handleCopyEmail}
+                    className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-full text-xs mono font-semibold bg-white dark:bg-[#1E2235] text-[#18181B] dark:text-[#E2E8F0] border border-[#D4D4D8] dark:border-[#33384D] shadow-sm hover:border-amber-500 transition-colors"
+                    title="Copy Email Address"
+                  >
+                    {copied ? (
+                      <>
+                        <Check size={13} className="text-emerald-500" />
+                        <span className="text-emerald-600 dark:text-emerald-400 font-bold">COPIED!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy size={13} />
+                        <span>EMAIL</span>
+                      </>
+                    )}
+                  </button>
+
+                  <a
+                    href={PROFILE.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2.5 rounded-full bg-white dark:bg-[#1E2235] text-[#18181B] dark:text-[#E2E8F0] border border-[#D4D4D8] dark:border-[#33384D] hover:text-amber-500 transition-colors"
+                    title="GitHub @shardul-2007"
+                  >
+                    <Github size={15} />
+                  </a>
+
+                  <a
+                    href={PROFILE.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2.5 rounded-full bg-white dark:bg-[#1E2235] text-[#18181B] dark:text-[#E2E8F0] border border-[#D4D4D8] dark:border-[#33384D] hover:text-amber-500 transition-colors"
+                    title="LinkedIn /in/shardul-parihar"
+                  >
+                    <Linkedin size={15} />
+                  </a>
                 </div>
               </div>
             </motion.div>
-          </div>
+          )}
+
+          {/* ══════════════════════════════════════════════════
+              RIGHT SIDE: TECHNICAL CODE CANVAS (BLUEPRINT / PURPLE)
+              ══════════════════════════════════════════════════ */}
+          {(mode === 'split' || mode === 'code') && (
+            <motion.div
+              layout
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className={`relative rounded-3xl p-6 sm:p-10 border transition-all flex flex-col justify-between overflow-hidden shadow-2xl blueprint-grid ${
+                mode === 'code' ? 'md:col-span-12' : 'md:col-span-6'
+              } bg-[#F4F1FA] text-[#1A102F] border-[#DFD7EB] dark:bg-[#0B0C16] dark:text-[#E0E7FF] dark:border-[#22253E]`}
+            >
+              {/* Technical Ruler & Coordinate Crosshairs */}
+              <div className="absolute top-4 right-4 mono text-[10px] text-purple-700 dark:text-purple-400 space-y-0.5 text-right opacity-80">
+                <div>+ COORD: 18.5204° N // 73.8567° E</div>
+                <div>+ NODE: SHARDUL.LAB.PROD</div>
+                <div>+ CLK: {currentTime || 'SYNCING...'}</div>
+              </div>
+
+              {/* Top Telemetry Header */}
+              <div className="relative z-10 space-y-3">
+                <div className="flex items-center gap-2">
+                  <span className="mono text-[10px] font-bold px-2 py-0.5 rounded bg-purple-200 dark:bg-purple-950/80 text-purple-900 dark:text-purple-300 border border-purple-300 dark:border-purple-700">
+                    SYS_SPEC // TECHNICAL DESIGN SYSTEM
+                  </span>
+                  <span className="mono text-[10px] text-[#6B7280] dark:text-[#9CA3AF]">
+                    ver: 5.2.0-prod
+                  </span>
+                </div>
+
+                {/* Typography Measurement Caliper Bar */}
+                <div className="flex flex-wrap items-center gap-3 text-[10px] mono text-purple-800 dark:text-purple-300 pt-1">
+                  <span className="px-2 py-0.5 rounded bg-white/70 dark:bg-black/40 border border-purple-200 dark:border-purple-800">
+                    cap-height: 84px
+                  </span>
+                  <span className="px-2 py-0.5 rounded bg-white/70 dark:bg-black/40 border border-purple-200 dark:border-purple-800">
+                    baseline: 18px
+                  </span>
+                  <span className="px-2 py-0.5 rounded bg-white/70 dark:bg-black/40 border border-purple-200 dark:border-purple-800">
+                    tracking: -0.04em
+                  </span>
+                  <span className="px-2 py-0.5 rounded bg-white/70 dark:bg-black/40 border border-purple-200 dark:border-purple-800">
+                    weight: 800
+                  </span>
+                </div>
+              </div>
+
+              {/* Centerpiece: Oversized Outlined Typography & Architecture Specs */}
+              <div className="relative z-10 my-8 space-y-4">
+                <div className="mono text-xs font-bold text-purple-600 dark:text-purple-400 tracking-[0.2em]">
+                  {"// ARCHITECTURE & DEPLOYMENT UNIVERSE"}
+                </div>
+
+                <div className="space-y-1">
+                  <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[0.95] outline-text text-purple-900 dark:text-purple-200">
+                    SHARDUL.LAB
+                  </h2>
+                  <div className="text-2xl sm:text-3xl font-extrabold tracking-tight text-purple-950 dark:text-purple-100">
+                    BUILDING DIGITAL EXPERIENCES
+                  </div>
+                  <div className="mono text-xs tracking-wider font-semibold text-purple-700 dark:text-purple-300">
+                    FULL STACK / AI / CYBERSECURITY / 3D WEBGL
+                  </div>
+                </div>
+
+                {/* Developer Inline Comments */}
+                <div className="p-4 rounded-xl bg-white/80 dark:bg-black/50 border border-purple-200 dark:border-purple-900/60 font-mono text-xs space-y-1 text-purple-900 dark:text-purple-200">
+                  <div className="text-[#6B7280] dark:text-[#9CA3AF]">{'// System Telemetry & Shipped Metrics:'}</div>
+                  <div className="flex items-center justify-between">
+                    <span>const FEATURED_SYSTEMS = 4;</span>
+                    <span className="text-[10px] text-emerald-600 dark:text-emerald-400">{'/* CivicOS, AssemblyOS, SkillCert, Lab */'}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span>const PROGRAMS_ROLES = 17;</span>
+                    <span className="text-[10px] text-sky-600 dark:text-sky-400">{'/* 6 Active, 11 Completed */'}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span>const CREDENTIALS = 16;</span>
+                    <span className="text-[10px] text-amber-600 dark:text-amber-400">{'/* Verified Proofs */'}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span>const SKILLS_INVENTORY = 23;</span>
+                    <span className="text-[10px] text-purple-600 dark:text-purple-400">{'/* 7 Categories */'}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Lower Section: Technical Quick Triggers */}
+              <div className="relative z-10 pt-4 border-t border-[#DFD7EB] dark:border-[#22253E] space-y-4">
+                <div className="mono text-[11px] text-purple-800 dark:text-purple-300 flex items-center justify-between">
+                  <span>{'INTERACTIVE LAUNCHPAD // TERMINAL + LABS'}</span>
+                  <span>STATUS: READY</span>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2.5">
+                  <a
+                    href="#terminal"
+                    onClick={() => labAudio.playClick(1200)}
+                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full text-xs mono font-bold bg-purple-700 text-white hover:bg-purple-800 transition-colors shadow-sm"
+                  >
+                    <Terminal size={14} />
+                    <span>LAUNCH CLI TERMINAL</span>
+                  </a>
+
+                  <a
+                    href="#architecture"
+                    onClick={() => labAudio.playClick(900)}
+                    className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-full text-xs mono font-semibold bg-white/80 dark:bg-[#1E2235] text-purple-950 dark:text-purple-200 border border-purple-200 dark:border-purple-800 hover:border-purple-500 transition-colors"
+                  >
+                    <Layers size={13} />
+                    <span>ARCHITECTURE</span>
+                  </a>
+
+                  <a
+                    href="#arcade"
+                    onClick={() => labAudio.playClick(1050)}
+                    className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-full text-xs mono font-semibold bg-white/80 dark:bg-[#1E2235] text-purple-950 dark:text-purple-200 border border-purple-200 dark:border-purple-800 hover:border-purple-500 transition-colors"
+                  >
+                    <Zap size={13} className="text-amber-500" />
+                    <span>ARCADE</span>
+                  </a>
+
+                  <button
+                    onClick={() => {
+                      labAudio.playClick(900);
+                      onOpenCommand();
+                    }}
+                    className="inline-flex items-center gap-1 px-3 py-2.5 rounded-full text-xs mono font-semibold bg-white/80 dark:bg-[#1E2235] text-purple-950 dark:text-purple-200 border border-purple-200 dark:border-purple-800 hover:border-purple-500 transition-colors"
+                    title="Command Palette"
+                  >
+                    <span>⌘K</span>
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          )}
         </div>
       </div>
     </section>

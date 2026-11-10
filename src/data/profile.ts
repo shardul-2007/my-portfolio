@@ -58,7 +58,7 @@ export const PROFILE: Profile = {
   github: 'https://github.com/shardul-2007',
   githubUser: 'shardul-2007',
   linkedin: 'https://www.linkedin.com/in/shardul-parihar/',
-  portfolio: 'https://shardul-2007.github.io/my-portfolio/',
+  portfolio: 'https://shardul-parihar.vercel.app/',
   status: 'AVAILABLE FOR WORK',
   availabilityNote: 'Open to software engineering internships, freelance projects, technical collaborations, and full-stack/AI roles.',
   focus: [
