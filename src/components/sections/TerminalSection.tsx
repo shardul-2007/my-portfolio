@@ -93,7 +93,12 @@ export default function TerminalSection({ onToggleTheme }: { onToggleTheme?: () 
       case 'whoami':
         newLines.push({
           type: 'output',
-          text: `USER: shardul_parihar | ROLE: Software Engineer & Builder | COLLEGE: PCET's NMIET, Pune | STATUS: AVAILABLE FOR WORK`,
+          text: `Shardul Parihar
+Information Technology Student
+Software Developer
+Full-Stack Builder
+AI Enthusiast
+Pune, India`,
         });
         break;
 

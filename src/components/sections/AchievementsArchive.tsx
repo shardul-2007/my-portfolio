@@ -38,17 +38,21 @@ export default function AchievementsArchive() {
   return (
     <section id="achievements" className="py-24 relative border-b border-[var(--border)] overflow-hidden bg-[var(--paper)]">
       <div className="section-container">
-        {/* Section Header (Image 6 Playful Visual Styling) */}
+        {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 mb-2">
-              <span className="eyebrow">verified proofs · 16 credentials</span>
+              <span className="w-2.5 h-2.5 rounded-sm bg-[#D9363E]" />
+              <span className="mono text-xs font-bold uppercase tracking-[0.16em] text-[var(--text-sub)]">
+                PROOF OF PROGRESS
+              </span>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#1e1420]">
-              achievements &amp; <span className="font-serif-italic font-normal text-[#ff4f9a]">credentials</span>.
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#171416]">
+              Every milestone <br />
+              <span className="font-serif-italic font-normal text-[#D9363E]">has a story.</span>
             </h2>
-            <p className="text-sm sm:text-base text-[var(--text-muted)] font-light mt-3 leading-relaxed">
-              genuine student ambassadorships, open-source contributor rosettes, government change-maker medallions, and official letters. click any card to inspect the real verified badge or document.
+            <p className="text-sm sm:text-base text-[var(--text-muted)] font-normal mt-3 leading-relaxed">
+              A growing collection of programs, contributions, certificates, recognitions and experiences from my learning journey.
             </p>
           </div>
 
@@ -57,9 +61,9 @@ export default function AchievementsArchive() {
               href={PROFILE.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 mono text-xs px-4 py-2 rounded-full bg-[#1e1420] text-white hover:bg-black font-bold transition-all shadow-sm"
+              className="inline-flex items-center gap-1.5 mono text-xs px-4 py-2 rounded-full bg-[#171416] text-white hover:bg-[#D9363E] font-bold transition-all shadow-sm"
             >
-              <ShieldCheck size={13} className="text-[#ffb8dc]" />
+              <ShieldCheck size={13} className="text-[#D9363E]" />
               <span>Verify on LinkedIn</span>
               <ExternalLink size={11} />
             </a>
@@ -100,7 +104,7 @@ export default function AchievementsArchive() {
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
               placeholder="Search 16 credentials..."
-              className="w-full pl-9 pr-4 py-2 rounded-full bg-white border border-[var(--border)] text-xs mono text-[#1e1420] placeholder-[var(--text-sub)] outline-none focus:border-[#8b5cf6] transition-all shadow-sm"
+              className="w-full pl-9 pr-4 py-2 rounded-full bg-white border border-[var(--border)] text-xs mono text-[#171416] placeholder-[var(--text-sub)] outline-none focus:border-[#D9363E] transition-all shadow-sm"
             />
           </div>
         </div>
@@ -162,7 +166,7 @@ export default function AchievementsArchive() {
                   )}
 
                   {/* Title & Organization */}
-                  <h3 className="text-lg font-bold text-[#1e1420] tracking-tight group-hover:text-[#8b5cf6] transition-colors">
+                  <h3 className="text-lg font-bold text-[#171416] tracking-tight group-hover:text-[#D9363E] transition-colors">
                     {item.title}
                   </h3>
 
@@ -170,7 +174,7 @@ export default function AchievementsArchive() {
                     {item.org}
                   </div>
 
-                  <p className="text-xs text-[var(--text-muted)] font-light leading-relaxed mt-2.5">
+                  <p className="text-xs text-[var(--text-muted)] font-normal leading-relaxed mt-2.5">
                     {item.description}
                   </p>
                 </div>
@@ -183,7 +187,7 @@ export default function AchievementsArchive() {
                   </div>
 
                   {item.imagePath ? (
-                    <span className="text-[10px] font-bold text-[#8b5cf6] flex items-center gap-1">
+                    <span className="text-[10px] font-bold text-[#D9363E] flex items-center gap-1">
                       <span>VIEW</span>
                       <Maximize2 size={10} />
                     </span>
@@ -192,7 +196,7 @@ export default function AchievementsArchive() {
                       href={PROFILE.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[10px] font-bold text-[var(--text-sub)] hover:text-[#8b5cf6] flex items-center gap-1"
+                      className="text-[10px] font-bold text-[var(--text-sub)] hover:text-[#D9363E] flex items-center gap-1"
                     >
                       <span>RECORD</span>
                       <ExternalLink size={10} />
@@ -253,10 +257,10 @@ export default function AchievementsArchive() {
               <div className="p-6 border-t border-[var(--border)] bg-white space-y-2">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <div>
-                    <h3 className="text-xl font-bold text-[#1e1420]">
+                    <h3 className="text-xl font-bold text-[#171416]">
                       {activeProofItem.title}
                     </h3>
-                    <div className="mono text-xs font-semibold text-[#8b5cf6]">
+                    <div className="mono text-xs font-semibold text-[#D9363E]">
                       {activeProofItem.org} · {activeProofItem.year}
                     </div>
                   </div>
@@ -265,7 +269,7 @@ export default function AchievementsArchive() {
                     href={PROFILE.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 mono text-xs px-4 py-2 rounded-full bg-[#1e1420] text-white hover:bg-black font-bold transition-all shadow-sm"
+                    className="inline-flex items-center gap-1.5 mono text-xs px-4 py-2 rounded-full bg-[#171416] text-white hover:bg-[#D9363E] font-bold transition-all shadow-sm"
                   >
                     <span>Verify on LinkedIn</span>
                     <ExternalLink size={12} />

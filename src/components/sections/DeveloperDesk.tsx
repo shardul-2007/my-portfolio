@@ -62,7 +62,7 @@ export default function DeveloperDesk({ onOpenRecruiter }: DeveloperDeskProps) {
       setTypedOutput(prev => [
         ...prev.slice(-5),
         'shardul@pune:~$ whoami',
-        'Shardul Parihar · Computer Science (AIML) Engineer & Autonomous Systems Builder',
+        'Shardul Parihar · Information Technology Student · Full-Stack Builder & Software Developer · Pune, India',
       ]);
     } else if (cmd === 'projects') {
       setTypedOutput(prev => [
@@ -98,8 +98,8 @@ export default function DeveloperDesk({ onOpenRecruiter }: DeveloperDeskProps) {
               <span className="eyebrow">interactive workbench</span>
               <span className="mono text-[10px] text-[var(--text-sub)]">· draggable physical items</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#1e1420]">
-              developer <span className="font-serif-italic font-normal text-[#ff4f9a]">desk</span>.
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#171416]">
+              developer <span className="font-serif-italic font-normal text-[#D9363E]">desk</span>.
             </h2>
           </div>
 
@@ -179,7 +179,7 @@ export default function DeveloperDesk({ onOpenRecruiter }: DeveloperDeskProps) {
                     <button
                       key={cmd}
                       onClick={() => handleCommand(cmd)}
-                      className="mono text-[9px] px-2 py-0.5 rounded bg-white/10 hover:bg-[#8b5cf6] text-white transition-colors cursor-pointer"
+                      className="mono text-[9px] px-2 py-0.5 rounded bg-white/10 hover:bg-[#D9363E] text-white transition-colors cursor-pointer"
                     >
                       {cmd}
                     </button>
@@ -208,7 +208,7 @@ export default function DeveloperDesk({ onOpenRecruiter }: DeveloperDeskProps) {
                       onClick={() => handleKeyPress(k)}
                       className={`h-8 rounded-md border font-bold transition-all cursor-pointer flex items-center justify-center ${
                         activeKey === k
-                          ? 'bg-[#ff4f9a] text-white border-[#ff4f9a] translate-y-1'
+                          ? 'bg-[#D9363E] text-white border-[#D9363E] translate-y-1'
                           : 'bg-[#25232d] text-white/90 border-white/15 hover:bg-white/20'
                       }`}
                     >
@@ -224,7 +224,7 @@ export default function DeveloperDesk({ onOpenRecruiter }: DeveloperDeskProps) {
                       onClick={() => handleKeyPress(k)}
                       className={`h-8 rounded-md border font-bold transition-all cursor-pointer flex items-center justify-center ${
                         activeKey === k
-                          ? 'bg-[#ff4f9a] text-white border-[#ff4f9a] translate-y-1'
+                          ? 'bg-[#D9363E] text-white border-[#D9363E] translate-y-1'
                           : 'bg-[#25232d] text-white/90 border-white/15 hover:bg-white/20'
                       }`}
                     >
@@ -242,7 +242,7 @@ export default function DeveloperDesk({ onOpenRecruiter }: DeveloperDeskProps) {
                   </button>
                   <button
                     onClick={() => handleCommand('clear')}
-                    className="px-3 h-8 rounded-md bg-[#ff4f9a] hover:bg-[#ff3377] text-white font-bold transition-all cursor-pointer flex items-center justify-center text-[10px]"
+                    className="px-3 h-8 rounded-md bg-[#D9363E] hover:bg-[#A91F2C] text-white font-bold transition-all cursor-pointer flex items-center justify-center text-[10px]"
                   >
                     RETURN
                   </button>
@@ -315,22 +315,22 @@ export default function DeveloperDesk({ onOpenRecruiter }: DeveloperDeskProps) {
                   </div>
 
                   <div className="p-2 rounded-xl bg-white/10 backdrop-blur-md text-[10px]">
-                    <div className="font-bold text-pink-300">🐍 Python</div>
+                    <div className="font-bold text-red-400">🐍 Python</div>
                     <div className="text-white/80">IndentationError: expected indented block</div>
                   </div>
                 </div>
               </motion.div>
 
-              {/* Draggable Polaroid Photo (Image 8 Parity) */}
+              {/* Draggable Polaroid Photo */}
               <motion.div
                 drag
                 dragConstraints={{ left: -20, right: 20, top: -20, bottom: 20 }}
-                className="bg-white text-[#1e1420] p-3 pb-5 rounded-xl shadow-2xl rotate-3 cursor-grab active:cursor-grabbing border border-black/10"
+                className="bg-white text-[#171416] p-3 pb-5 rounded-xl shadow-2xl rotate-3 cursor-grab active:cursor-grabbing border border-black/10"
               >
                 {/* Tape strip */}
                 <div className="w-14 h-4 bg-amber-100/80 -top-2 left-1/2 -translate-x-1/2 absolute border border-amber-200/50" />
 
-                <div className="w-full h-32 rounded-lg overflow-hidden bg-gradient-to-b from-purple-200 to-pink-200">
+                <div className="w-full h-32 rounded-lg overflow-hidden bg-gradient-to-b from-[#F7EBEB] to-[#E8E2DD]">
                   <img
                     src={assetPath('/imageshardul.png')}
                     alt="Shardul Parihar"

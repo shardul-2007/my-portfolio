@@ -120,13 +120,13 @@ export default function FloatingDock() {
 
         <span className="w-px h-4 bg-[var(--border)] mx-1" />
 
-        {/* Signature Pink Resume Action */}
+        {/* Signature Red Resume Action */}
         <a
           href={PROFILE.linkedin}
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => labAudio.playClick(1100)}
-          className="flex items-center gap-1.5 mono text-xs px-3.5 py-1.5 rounded-full bg-[#ffb8dc] text-[#1e1420] hover:bg-[#ffa3d0] font-bold transition-all shadow-sm select-none"
+          className="flex items-center gap-1.5 mono text-xs px-3.5 py-1.5 rounded-full bg-[#D9363E] text-white hover:bg-[#A91F2C] font-bold transition-all shadow-sm select-none"
         >
           <span>resume</span>
           <Download size={11} />
@@ -137,7 +137,7 @@ export default function FloatingDock() {
           onClick={handleCopyEmail}
           className="flex items-center gap-1.5 mono text-xs px-3 py-1.5 rounded-full text-[var(--text)] hover:bg-[var(--surface-2)] transition-all cursor-pointer select-none"
         >
-          <Mail size={12} className="text-[#ff4f9a]" />
+          <Mail size={12} className="text-[#D9363E]" />
           <span>{copied ? 'copied!' : 'say hi'}</span>
         </button>
       </motion.div>

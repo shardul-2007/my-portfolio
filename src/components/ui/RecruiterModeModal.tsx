@@ -122,8 +122,8 @@ export default function RecruiterModeModal({ isOpen, onClose }: RecruiterModeMod
             </div>
 
             {/* Candidate Summary */}
-            <p className="text-xs sm:text-sm text-[var(--text-muted)] font-light leading-relaxed mt-4 pt-4 border-t border-[var(--border)]">
-              Software engineering student with deep competence across full-stack TypeScript/Next.js architectures, 3D WebGL rendering, applied AI integrations, and algorithms. Demonstrates a strong track record of shipping complex systems (CivicOS, AssemblyOS, SkillCert) and holding technical leadership roles as a <strong>Google Student Ambassador</strong> and <strong>HackerRank Campus Crew</strong> lead.
+            <p className="text-xs sm:text-sm text-[var(--text-muted)] font-normal leading-relaxed mt-4 pt-4 border-t border-[var(--border)]">
+              Information Technology student and software developer with deep competence across full-stack TypeScript/Next.js architectures, 3D WebGL rendering, applied AI integrations, cybersecurity, and algorithms. Demonstrates a strong track record of shipping complex systems (CivicOS, AssemblyOS, SkillCert) and holding technical leadership roles as a <strong>Google Student Ambassador</strong> and <strong>HackerRank Campus Crew</strong> lead.
             </p>
 
             {/* Metric Snapshot */}

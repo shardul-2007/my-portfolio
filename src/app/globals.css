@@ -8,96 +8,98 @@
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
-  /* Editorial Paper Design System (Reference Parity) */
-  --bg: #fbf5f6;
-  --bg-deep: #f5eff0;
-  --bg-elevated: #ffffff;
-  --paper: #fbf5f6;
-  --paper-2: #efede6;
-  --card: #ffffff;
-  --surface: rgba(255, 255, 255, 0.85);
-  --surface-2: rgba(30, 20, 32, 0.04);
-  --surface-3: rgba(30, 20, 32, 0.08);
-  --surface-ivory: #ffffff;
+  /* Red Engineering Identity System (Warm Editorial & Crimson) */
+  --bg: #F1ECE8;
+  --bg-deep: #E8E2DD;
+  --bg-elevated: #F8F5F1;
+  --paper: #F1ECE8;
+  --paper-2: #E8E2DD;
+  --card: #F8F5F1;
+  --surface: rgba(248, 245, 241, 0.90);
+  --surface-2: rgba(23, 20, 22, 0.04);
+  --surface-3: rgba(23, 20, 22, 0.08);
+  --surface-ivory: #F8F5F1;
 
   /* Borders & Dividers */
-  --border: rgba(30, 20, 32, 0.12);
-  --border-strong: rgba(30, 20, 32, 0.22);
-  --border-glow: rgba(139, 92, 246, 0.35);
-  --border-orange: rgba(255, 107, 26, 0.35);
-  --line: #e4e2da;
-  --line-2: #d6d3c9;
+  --border: rgba(23, 20, 22, 0.12);
+  --border-strong: rgba(23, 20, 22, 0.22);
+  --border-glow: rgba(217, 54, 62, 0.35);
+  --border-red: rgba(217, 54, 62, 0.35);
+  --line: #E5D9D7;
+  --line-2: #D8CAC7;
 
-  /* Brand Accents */
-  --accent: #8b5cf6; /* Royal Purple / Blue */
-  --accent-purple: #8b5cf6;
-  --accent-pink: #ff4f9a; /* Editorial Pink */
-  --accent-orange: #ff6b1a; /* Warm Orange */
-  --accent-yellow: #ffe45c; /* Primary Accent Yellow */
-  --accent-lime: #12a150;
-  --accent-dim: rgba(139, 92, 246, 0.12);
-  --accent-orange-dim: rgba(255, 107, 26, 0.14);
-  --accent-glow: rgba(139, 92, 246, 0.25);
+  /* Brand Accents — Red Engineering Identity */
+  --accent: #D9363E; /* Primary Red */
+  --accent-red: #D9363E;
+  --accent-crimson: #A91F2C; /* Deep Crimson */
+  --accent-vermilion: #EF493F; /* Vermilion */
+  --accent-darkred: #711C27; /* Dark Red */
+  --accent-yellow: #FFE500; /* Ticker Yellow */
+  --accent-lime: #12A150;
+  --accent-dim: rgba(217, 54, 62, 0.10);
+  --accent-red-dim: rgba(217, 54, 62, 0.12);
+  --accent-glow: rgba(217, 54, 62, 0.25);
 
   /* Typography Colors */
-  --text: #1e1420;
-  --ink: #1e1420;
-  --ink-2: #55534e;
-  --ink-3: #9e9c95;
-  --ink-4: #c9c7bf;
-  --text-muted: #55534e;
-  --text-sub: #8b8882;
-  --text-dark: #1e1420;
+  --text: #171416;
+  --ink: #171416;
+  --ink-2: #4A4346;
+  --ink-3: #81777A;
+  --ink-4: #B5ABAE;
+  --text-muted: #81777A;
+  --text-sub: #81777A;
+  --text-dark: #171416;
 
   /* Elevation */
   --r: 18px;
   --r-lg: 26px;
-  --shadow-glass: 0 4px 20px rgba(30, 20, 32, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  --shadow-glass-hover: 0 12px 35px rgba(30, 20, 32, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  --grid-line: rgba(139, 92, 246, 0.08);
+  --shadow-glass: 0 4px 20px rgba(23, 20, 22, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  --shadow-glass-hover: 0 12px 35px rgba(23, 20, 22, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  --grid-line: #E5D9D7;
 }
 
 html[data-theme="dark"] {
-  --bg: #0e0d11;
-  --bg-deep: #08070a;
-  --bg-elevated: #16151c;
-  --paper: #0e0d11;
-  --paper-2: #16151c;
-  --card: #181720;
-  --surface: rgba(255, 255, 255, 0.04);
-  --surface-2: rgba(255, 255, 255, 0.08);
-  --surface-3: rgba(255, 255, 255, 0.14);
-  --surface-ivory: #16151c;
+  --bg: #171416;
+  --bg-deep: #0F0D0E;
+  --bg-elevated: #201C1E;
+  --paper: #171416;
+  --paper-2: #201C1E;
+  --card: #201C1E;
+  --surface: rgba(32, 28, 30, 0.85);
+  --surface-2: rgba(255, 255, 255, 0.06);
+  --surface-3: rgba(255, 255, 255, 0.12);
+  --surface-ivory: #201C1E;
 
   --border: rgba(255, 255, 255, 0.10);
   --border-strong: rgba(255, 255, 255, 0.20);
-  --border-glow: rgba(139, 92, 246, 0.4);
-  --border-orange: rgba(255, 107, 26, 0.4);
+  --border-glow: rgba(217, 54, 62, 0.4);
+  --border-red: rgba(239, 73, 63, 0.4);
   --line: rgba(255, 255, 255, 0.10);
   --line-2: rgba(255, 255, 255, 0.15);
 
-  --accent: #a78bfa;
-  --accent-purple: #a78bfa;
-  --accent-pink: #f472b6;
-  --accent-orange: #fb923c;
-  --accent-yellow: #fde047;
-  --accent-lime: #34d399;
-  --accent-dim: rgba(167, 139, 250, 0.15);
-  --accent-orange-dim: rgba(251, 146, 60, 0.15);
-  --accent-glow: rgba(167, 139, 250, 0.3);
+  --accent: #EF493F;
+  --accent-red: #EF493F;
+  --accent-crimson: #D9363E;
+  --accent-vermilion: #EF493F;
+  --accent-darkred: #A91F2C;
+  --accent-yellow: #FFE500;
+  --accent-lime: #34D399;
+  --accent-dim: rgba(239, 73, 63, 0.15);
+  --accent-red-dim: rgba(239, 73, 63, 0.15);
+  --accent-glow: rgba(239, 73, 63, 0.3);
 
-  --text: #fdfcfd;
-  --ink: #fdfcfd;
-  --ink-2: #d4d0dc;
-  --ink-3: #9e9ba7;
-  --ink-4: #6b6873;
-  --text-muted: #c4c0cc;
-  --text-sub: #9e9ba7;
-  --text-dark: #0e0d11;
+  --text: #F8F5F1;
+  --ink: #F8F5F1;
+  --ink-2: #D8CAC7;
+  --ink-3: #81777A;
+  --ink-4: #5A5154;
+  --text-muted: #B5ABAE;
+  --text-sub: #81777A;
+  --text-dark: #171416;
 
   --shadow-glass: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
   --shadow-glass-hover: 0 18px 50px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  --grid-line: rgba(167, 139, 250, 0.06);
+  --grid-line: rgba(217, 54, 62, 0.08);
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -462,11 +464,11 @@ html[data-theme="yellow"] .gradient-orange {
 .caliper-h::before { left: 0; }
 .caliper-h::after { right: 0; }
 
-/* Blueprint Canvas Pattern */
+/* Blueprint Canvas Pattern (Red Engineering Grid) */
 .blueprint-grid {
   background-image:
-    linear-gradient(rgba(124, 58, 237, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(124, 58, 237, 0.08) 1px, transparent 1px);
+    linear-gradient(rgba(217, 54, 62, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(217, 54, 62, 0.12) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
@@ -484,14 +486,15 @@ html[data-theme="yellow"] .gradient-orange {
   background-size: 8px 8px;
 }
 
-/* Editorial Pink & Yellow Highlighter Marker (Image 4 Parity) */
+/* Editorial Red & Yellow Highlighter Marker */
+.marker-red,
 .marker-pink {
-  background: #ffb8dc;
-  color: #1e1420;
+  background: #ffd9dc;
+  color: #711C27;
   padding: 0.1em 0.35em;
   border-radius: 6px;
   display: inline-block;
-  box-shadow: 0 2px 8px rgba(255, 79, 154, 0.2);
+  box-shadow: 0 2px 8px rgba(217, 54, 62, 0.2);
 }
 
 .marker-yellow {

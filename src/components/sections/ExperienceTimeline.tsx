@@ -85,30 +85,33 @@ export default function ExperienceTimeline() {
       className="py-24 relative border-b border-[var(--border)] overflow-hidden bg-[var(--paper)]"
     >
       <div className="section-container">
-        {/* Editorial Section Header (Image 7 Parity) */}
+        {/* Editorial Section Header */}
         <div className="max-w-3xl mb-10">
           <div className="flex items-center gap-2 mb-2">
-            <GitBranch size={14} className="text-[#8b5cf6]" />
-            <span className="eyebrow">the journey · git log --graph</span>
+            <span className="w-2.5 h-2.5 rounded-sm bg-[#D9363E]" />
+            <span className="mono text-xs font-bold uppercase tracking-[0.16em] text-[var(--text-sub)]">
+              BEYOND THE CODE
+            </span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#1e1420]">
-            release notes <span className="font-serif-italic font-normal text-[#ff4f9a]">for</span> shardul.
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#171416]">
+            Communities. <br />
+            <span className="font-serif-italic font-normal text-[#D9363E]">Contributions. Connections.</span>
           </h2>
 
-          <p className="text-sm sm:text-base text-[var(--text-muted)] font-light mt-3 leading-relaxed">
-            every career commit so far, tracked on a git branch graph. breaking changes documented, verified credentials linked, and zero versions skipped.
+          <p className="text-sm sm:text-base text-[var(--text-muted)] font-normal mt-3 leading-relaxed">
+            My journey also extends beyond building software. Through campus ambassador programs, student initiatives and open-source communities, I have explored leadership, collaboration, communication and community engagement.
           </p>
 
-          {/* Git Branch HUD Banner (Exact Parity with Image 7) */}
+          {/* Git Branch HUD Banner */}
           <div className="flex flex-wrap items-center justify-between gap-4 mt-6 p-4 rounded-2xl bg-white border border-[var(--border)] shadow-sm mono text-xs">
             <div className="flex items-center gap-3">
-              <span className="px-2.5 py-1 rounded-md bg-[#1e1420] text-white font-bold text-[11px]">
+              <span className="px-2.5 py-1 rounded-md bg-[#171416] text-white font-bold text-[11px]">
                 HEAD →
               </span>
-              <span className="text-xl font-black text-[#1e1420]">v1.0</span>
+              <span className="text-xl font-black text-[#171416]">v1.0</span>
               <span className="text-[var(--text-sub)]">2026</span>
-              <span className="px-2 py-0.5 rounded-full bg-[#ffb8dc] text-[#1e1420] font-bold text-[10px]">
+              <span className="px-2 py-0.5 rounded-full bg-[#ffd9dc] text-[#711C27] font-bold text-[10px]">
                 MAJOR
               </span>
             </div>
@@ -116,22 +119,22 @@ export default function ExperienceTimeline() {
             {/* Branch Legend & Progress */}
             <div className="flex items-center gap-5 text-xs text-[var(--text-sub)]">
               <span className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#1e1420]" /> — main
+                <span className="w-2.5 h-2.5 rounded-full bg-[#171416]" /> — main
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#ff4f9a]" /> — work
+                <span className="w-2.5 h-2.5 rounded-full bg-[#D9363E]" /> — community
               </span>
               <span className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#8b5cf6]" /> — community
+                <span className="w-2.5 h-2.5 rounded-full bg-[#A91F2C]" /> — open-source
               </span>
               <div className="flex items-center gap-2">
-                <span className="font-bold text-[#1e1420]">
+                <span className="font-bold text-[#171416]">
                   commit {String(activeCommitIndex + 1).padStart(2, '0')}/{EXPERIENCES.length}
                 </span>
-                <div className="w-20 h-2 bg-[#f4eff1] rounded-full overflow-hidden border border-[var(--border)]">
+                <div className="w-20 h-2 bg-[#F1ECE8] rounded-full overflow-hidden border border-[var(--border)]">
                   <div
                     style={{ width: `${((activeCommitIndex + 1) / EXPERIENCES.length) * 100}%` }}
-                    className="h-full bg-[#ff4f9a] transition-all duration-300"
+                    className="h-full bg-[#D9363E] transition-all duration-300"
                   />
                 </div>
               </div>
@@ -164,10 +167,10 @@ export default function ExperienceTimeline() {
           ))}
         </div>
 
-        {/* ─── Git Branch Graph & Highlight-On-Scroll Cards (Image 7 Parity) ─── */}
+        {/* ─── Git Branch Graph & Highlight-On-Scroll Cards ─── */}
         <div className="relative pl-8 sm:pl-12 space-y-8">
           {/* Main Stem Line */}
-          <div className="absolute left-[15px] sm:left-[23px] top-6 bottom-6 w-[2px] bg-gradient-to-b from-[#1e1420] via-[#ff4f9a] to-[#8b5cf6]" />
+          <div className="absolute left-[15px] sm:left-[23px] top-6 bottom-6 w-[2px] bg-gradient-to-b from-[#171416] via-[#D9363E] to-[#A91F2C]" />
 
           {filtered.map((item, idx) => {
             const isHighlighted = idx <= activeCommitIndex;
@@ -188,28 +191,28 @@ export default function ExperienceTimeline() {
                 <div
                   className={`absolute -left-[27px] sm:-left-[35px] top-6 w-6 h-6 rounded-full flex items-center justify-center border-2 transition-all duration-300 z-10 ${
                     isHighlighted
-                      ? 'bg-[#ff4f9a] border-white text-white shadow-[0_0_12px_rgba(255,79,154,0.6)] scale-110'
+                      ? 'bg-[#D9363E] border-white text-white shadow-[0_0_12px_rgba(217,54,62,0.6)] scale-110'
                       : 'bg-white border-[var(--border)] text-[var(--text-sub)]'
                   }`}
                 >
                   <GitCommit size={13} />
                 </div>
 
-                {/* Release Note Commit Card (Image 7 Parity) */}
+                {/* Release Note Commit Card */}
                 <div
                   className={`rounded-2xl p-6 transition-all duration-300 border ${
                     isHighlighted
-                      ? 'bg-white border-[#ff4f9a] shadow-[0_12px_36px_rgba(255,79,154,0.12)]'
-                      : 'bg-white/80 border-[var(--border)] hover:border-[#1e1420]'
+                      ? 'bg-white border-[#D9363E] shadow-[0_12px_36px_rgba(217,54,62,0.12)]'
+                      : 'bg-white/80 border-[var(--border)] hover:border-[#171416]'
                   }`}
                 >
                   {/* Card Header Spec */}
                   <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-[var(--border)]/60">
                     <div className="flex items-center gap-2">
-                      <span className="mono text-[10px] font-bold px-2 py-0.5 rounded bg-[#f4eff1] text-[#1e1420]">
+                      <span className="mono text-[10px] font-bold px-2 py-0.5 rounded bg-[#F1ECE8] text-[#171416]">
                         v0.{idx + 1}
                       </span>
-                      <span className="mono text-[10px] uppercase font-bold text-[#ff4f9a]">
+                      <span className="mono text-[10px] uppercase font-bold text-[#D9363E]">
                         {item.status === 'active' ? 'ACTIVE COMMIT' : 'MERGED RELEASE'}
                       </span>
                       <span className="mono text-[10px] text-[var(--text-sub)]">
@@ -225,10 +228,10 @@ export default function ExperienceTimeline() {
 
                   {/* Title & Role */}
                   <div className="mt-3">
-                    <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-[#1e1420]">
+                    <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-[#171416]">
                       {item.role}
                     </h3>
-                    <div className="mono text-xs font-bold text-[#8b5cf6] mt-0.5">
+                    <div className="mono text-xs font-bold text-[#A91F2C] mt-0.5">
                       {item.org} · {item.category}
                     </div>
                   </div>
@@ -243,7 +246,7 @@ export default function ExperienceTimeline() {
                               ? 'text-[#12a150] bg-emerald-50'
                               : b.type === '-'
                               ? 'text-[#ff3b30] bg-red-50'
-                              : 'text-[#ff6b1a] bg-orange-50'
+                              : 'text-[#D9363E] bg-red-50'
                           }`}
                         >
                           {b.type}
@@ -266,7 +269,7 @@ export default function ExperienceTimeline() {
                       href={PROFILE.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-[#8b5cf6] hover:underline font-bold"
+                      className="inline-flex items-center gap-1 text-[#D9363E] hover:underline font-bold"
                     >
                       <span>verify evidence</span>
                       <ExternalLink size={11} />

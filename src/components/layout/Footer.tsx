@@ -17,7 +17,7 @@ export default function Footer() {
   const [squashedCount, setSquashedCount] = useState(0);
   const [duckWaddling, setDuckWaddling] = useState(false);
 
-  // 6 interactive crawling ladybugs (Image 9 Parity)
+  // 6 interactive crawling ladybugs
   const [bugs, setBugs] = useState<Bug[]>([
     { id: 1, x: 20, y: 35, angle: 45, isSquashed: false },
     { id: 2, x: 62, y: 48, angle: -30, isSquashed: false },
@@ -72,8 +72,8 @@ export default function Footer() {
   }
 
   return (
-    <footer className="relative border-t border-[var(--border)] bg-[#fbf5f6] text-[#1e1420] pt-24 pb-20 overflow-hidden blueprint-grid select-none">
-      {/* ─── Crawling / Squashable Ladybugs (Exact Parity with Image 9) ─── */}
+    <footer className="relative border-t border-[var(--border)] bg-[#F1ECE8] text-[#171416] pt-24 pb-20 overflow-hidden blueprint-grid select-none">
+      {/* ─── Crawling / Squashable Ladybugs ─── */}
       <div className="absolute inset-0 pointer-events-none z-20">
         {bugs.map(bug => (
           <button
@@ -92,49 +92,56 @@ export default function Footer() {
           >
             <svg viewBox="0 0 32 32" className="w-6 h-6">
               {/* Legs */}
-              <line x1="16" y1="12" x2="6" y2="8" stroke="#1e1420" strokeWidth="2" strokeLinecap="round" />
-              <line x1="16" y1="16" x2="4" y2="16" stroke="#1e1420" strokeWidth="2" strokeLinecap="round" />
-              <line x1="16" y1="20" x2="6" y2="24" stroke="#1e1420" strokeWidth="2" strokeLinecap="round" />
-              <line x1="16" y1="12" x2="26" y2="8" stroke="#1e1420" strokeWidth="2" strokeLinecap="round" />
-              <line x1="16" y1="16" x2="28" y2="16" stroke="#1e1420" strokeWidth="2" strokeLinecap="round" />
-              <line x1="16" y1="20" x2="26" y2="24" stroke="#1e1420" strokeWidth="2" strokeLinecap="round" />
-              {/* Body */}
-              <ellipse cx="16" cy="16" rx="9" ry="11" fill="#ff3b30" stroke="#1e1420" strokeWidth="1.5" />
+              <line x1="16" y1="12" x2="6" y2="8" stroke="#171416" strokeWidth="2" strokeLinecap="round" />
+              <line x1="16" y1="16" x2="4" y2="16" stroke="#171416" strokeWidth="2" strokeLinecap="round" />
+              <line x1="16" y1="20" x2="6" y2="24" stroke="#171416" strokeWidth="2" strokeLinecap="round" />
+              <line x1="16" y1="12" x2="26" y2="8" stroke="#171416" strokeWidth="2" strokeLinecap="round" />
+              <line x1="16" y1="16" x2="28" y2="16" stroke="#171416" strokeWidth="2" strokeLinecap="round" />
+              <line x1="16" y1="20" x2="26" y2="24" stroke="#171416" strokeWidth="2" strokeLinecap="round" />
+              {/* Body in Brand Red */}
+              <ellipse cx="16" cy="16" rx="9" ry="11" fill="#D9363E" stroke="#171416" strokeWidth="1.5" />
               {/* Head */}
-              <circle cx="16" cy="6" r="4" fill="#1e1420" />
+              <circle cx="16" cy="6" r="4" fill="#171416" />
               {/* Spots */}
-              <circle cx="12" cy="13" r="2" fill="#1e1420" />
-              <circle cx="20" cy="13" r="2" fill="#1e1420" />
-              <circle cx="12" cy="19" r="2" fill="#1e1420" />
-              <circle cx="20" cy="19" r="2" fill="#1e1420" />
-              <line x1="16" y1="6" x2="16" y2="27" stroke="#1e1420" strokeWidth="1.5" />
+              <circle cx="12" cy="13" r="2" fill="#171416" />
+              <circle cx="20" cy="13" r="2" fill="#171416" />
+              <circle cx="12" cy="19" r="2" fill="#171416" />
+              <circle cx="20" cy="19" r="2" fill="#171416" />
+              <line x1="16" y1="6" x2="16" y2="27" stroke="#171416" strokeWidth="1.5" />
             </svg>
           </button>
         ))}
       </div>
 
       <div className="section-container relative z-10 max-w-5xl">
-        {/* Top Header & Sticky Sticker (Image 9 Parity) */}
+        {/* Top Header & Sticky Sticker */}
         <div className="relative mb-12">
           {/* Sticky Note Badge */}
           <div className="absolute -top-12 right-4 sm:right-16 z-10 rotate-3">
-            <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-2xl bg-[#ffb8dc] text-[#1e1420] font-bold text-xs shadow-md border border-pink-300">
-              <span>HIRE SHARDUL, MAYBE?</span>
-              <span className="text-base">👀</span>
+            <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-2xl bg-[#ffd9dc] text-[#711C27] font-bold text-xs shadow-md border border-[#F2D2D4]">
+              <span>SHARDUL.LAB // ONLINE</span>
+              <span className="text-base">✦</span>
             </span>
           </div>
 
-          <h2 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-[#1e1420] leading-[1.08]">
+          <div className="mono text-xs font-bold text-[#D9363E] uppercase tracking-wider mb-2">
+            SHARDUL.LAB
+          </div>
+          <h2 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-[#171416] leading-[1.08]">
             let&apos;s make it work <br />
-            on <span className="font-serif-italic font-normal text-[#ff4f9a]">everyone&apos;s</span> machine.
+            on <span className="font-serif-italic font-normal text-[#D9363E]">everyone&apos;s</span> machine.
           </h2>
 
-          {/* Giant Clickable Email (Image 9 Parity) */}
+          <p className="text-base sm:text-lg text-[var(--text-muted)] font-normal mt-3">
+            Built with curiosity. Driven by code. Always evolving.
+          </p>
+
+          {/* Giant Clickable Email */}
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <button
               type="button"
               onClick={handleCopyEmail}
-              className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#ff4f9a] hover:underline cursor-pointer flex items-center gap-3"
+              className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#D9363E] hover:underline cursor-pointer flex items-center gap-3"
             >
               <span>{PROFILE.email}</span>
             </button>
@@ -144,12 +151,103 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* 4-Column Directory Table (Image 9 Parity) */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 pt-10 border-t border-[#e4e2da] text-xs font-mono">
-          {/* Column 1: PEOPLE */}
+        {/* 4-Column Directory Table */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 pt-10 border-t border-[#E5D9D7] text-xs font-mono">
+          {/* Column 1: NAVIGATION */}
           <div className="space-y-3">
             <h3 className="text-[10px] uppercase font-bold text-[var(--text-sub)] tracking-widest">
-              PEOPLE
+              NAVIGATION
+            </h3>
+            <ul className="space-y-2">
+              <li>
+                <a href="#hero" className="font-bold text-[#171416] hover:text-[#D9363E] flex items-center justify-between">
+                  <span>HOME</span>
+                  <span>↑</span>
+                </a>
+              </li>
+              <li>
+                <a href="#about" className="font-bold text-[#171416] hover:text-[#D9363E] flex items-center justify-between">
+                  <span>ABOUT</span>
+                  <span>↓</span>
+                </a>
+              </li>
+              <li>
+                <a href="#projects" className="font-bold text-[#171416] hover:text-[#D9363E] flex items-center justify-between">
+                  <span>PROJECTS</span>
+                  <span>↓</span>
+                </a>
+              </li>
+              <li>
+                <a href="#experience" className="font-bold text-[#171416] hover:text-[#D9363E] flex items-center justify-between">
+                  <span>EXPERIENCE</span>
+                  <span>↓</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 2: EXPLORE */}
+          <div className="space-y-3">
+            <h3 className="text-[10px] uppercase font-bold text-[var(--text-sub)] tracking-widest">
+              EXPLORE
+            </h3>
+            <ul className="space-y-2">
+              <li>
+                <a href="#skills" className="font-bold text-[#171416] hover:text-[#D9363E] flex items-center justify-between">
+                  <span>SKILLS</span>
+                  <span>↓</span>
+                </a>
+              </li>
+              <li>
+                <a href="#achievements" className="font-bold text-[#171416] hover:text-[#D9363E] flex items-center justify-between">
+                  <span>ACHIEVEMENTS</span>
+                  <span>↓</span>
+                </a>
+              </li>
+              <li>
+                <a href="#arcade" className="font-bold text-[#171416] hover:text-[#D9363E] flex items-center justify-between">
+                  <span>PLAYGROUND</span>
+                  <span>↓</span>
+                </a>
+              </li>
+              <li>
+                <a href="#contact" className="font-bold text-[#171416] hover:text-[#D9363E] flex items-center justify-between">
+                  <span>CONTACT</span>
+                  <span>↓</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 3: SYSTEM METRICS */}
+          <div className="space-y-3">
+            <h3 className="text-[10px] uppercase font-bold text-[var(--text-sub)] tracking-widest">
+              SYSTEM
+            </h3>
+            <ul className="space-y-2 text-[#171416]">
+              <li className="flex items-center justify-between">
+                <span className="text-[var(--text-sub)]">STATUS:</span>
+                <span className="font-bold text-[#12a150]">ONLINE</span>
+              </li>
+              <li className="flex items-center justify-between">
+                <span className="text-[var(--text-sub)]">LOCATION:</span>
+                <span className="font-bold">PUNE, INDIA</span>
+              </li>
+              <li className="flex items-center justify-between">
+                <span className="text-[var(--text-sub)]">IDENTITY:</span>
+                <span className="font-bold text-[#D9363E]">INFO TECH</span>
+              </li>
+              <li className="flex items-center justify-between">
+                <span className="text-[var(--text-sub)]">BUILD:</span>
+                <span className="font-bold">SHARDUL.LAB</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 4: SOCIAL & BACK TO TOP + DUCK */}
+          <div className="space-y-3 relative">
+            <h3 className="text-[10px] uppercase font-bold text-[var(--text-sub)] tracking-widest">
+              CONNECT
             </h3>
             <ul className="space-y-2">
               <li>
@@ -157,7 +255,7 @@ export default function Footer() {
                   href={PROFILE.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-bold text-[#1e1420] hover:text-[#8b5cf6] flex items-center justify-between"
+                  className="font-bold text-[#171416] hover:text-[#D9363E] flex items-center justify-between"
                 >
                   <span>LinkedIn</span>
                   <span>↗</span>
@@ -165,94 +263,20 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href={`mailto:${PROFILE.email}`}
-                  className="font-bold text-[#1e1420] hover:text-[#8b5cf6] flex items-center justify-between"
-                >
-                  <span>Email</span>
-                  <span>↗</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 2: WORK */}
-          <div className="space-y-3">
-            <h3 className="text-[10px] uppercase font-bold text-[var(--text-sub)] tracking-widest">
-              WORK
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="#projects"
-                  className="font-bold text-[#1e1420] hover:text-[#8b5cf6] flex items-center justify-between"
-                >
-                  <span>the projects</span>
-                  <span>↑</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#experience"
-                  className="font-bold text-[#1e1420] hover:text-[#8b5cf6] flex items-center justify-between"
-                >
-                  <span>the journey</span>
-                  <span>↑</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 3: VOICE */}
-          <div className="space-y-3">
-            <h3 className="text-[10px] uppercase font-bold text-[var(--text-sub)] tracking-widest">
-              VOICE
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <a
                   href={PROFILE.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-bold text-[#1e1420] hover:text-[#8b5cf6] flex items-center justify-between"
+                  className="font-bold text-[#171416] hover:text-[#D9363E] flex items-center justify-between"
                 >
-                  <span>github</span>
+                  <span>GitHub</span>
                   <span>↗</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#desk"
-                  className="font-bold text-[#1e1420] hover:text-[#8b5cf6] flex items-center justify-between"
-                >
-                  <span>the desk</span>
-                  <span>↑</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Column 4: PAPERWORK + SQUEAKY DUCK */}
-          <div className="space-y-3 relative">
-            <h3 className="text-[10px] uppercase font-bold text-[var(--text-sub)] tracking-widest">
-              PAPERWORK
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href={PROFILE.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-bold text-[#1e1420] hover:text-[#8b5cf6] flex items-center justify-between"
-                >
-                  <span>resume.pdf</span>
-                  <span>↓</span>
                 </a>
               </li>
               <li>
                 <button
                   type="button"
                   onClick={scrollToTop}
-                  className="font-bold text-[#1e1420] hover:text-[#8b5cf6] flex items-center justify-between w-full cursor-pointer"
+                  className="font-bold text-[#171416] hover:text-[#D9363E] flex items-center justify-between w-full cursor-pointer"
                 >
                   <span>back to top</span>
                   <span>↑</span>
@@ -260,7 +284,7 @@ export default function Footer() {
               </li>
             </ul>
 
-            {/* Squeaky Yellow Rubber Duck (Image 9 Parity) */}
+            {/* Squeaky Yellow Rubber Duck */}
             <div className="absolute right-0 bottom-0 pointer-events-auto">
               <button
                 type="button"
@@ -278,13 +302,20 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Footer Bottom Bar with Squash Counter (Image 9 Parity) */}
-        <div className="mt-14 pt-6 border-t border-[#e4e2da] flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs mono text-[var(--text-sub)]">
-          <p>© 2026 shardul parihar · built from a blank file, mostly</p>
+        {/* Footer Bottom Bar with Squash Counter & Final Signature */}
+        <div className="mt-14 pt-6 border-t border-[#E5D9D7] flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs mono text-[var(--text-sub)]">
+          <div>
+            <p className="font-bold text-[#171416]">
+              NOT JUST A PORTFOLIO. A WORK IN PROGRESS, BUILT WITH PURPOSE.
+            </p>
+            <p className="text-[10px] mt-0.5">
+              © 2026 Shardul Parihar · SHARDUL.LAB · Pune, India
+            </p>
+          </div>
 
           <div className="flex items-center gap-3">
-            <span>a few bugs got into the footer. click them.</span>
-            <span className="px-3 py-1 rounded-full bg-[#1e1420] text-white font-bold text-[11px]">
+            <span>footer bug count:</span>
+            <span className="px-3 py-1 rounded-full bg-[#171416] text-white font-bold text-[11px]">
               squashed {squashedCount}
             </span>
           </div>

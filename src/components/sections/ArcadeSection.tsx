@@ -65,21 +65,21 @@ export default function ArcadeSection() {
   return (
     <section id="arcade" className="py-24 relative border-b border-[var(--border)] overflow-hidden bg-[var(--paper)]">
       <div className="section-container">
-        {/* Continuous Marquee Ticker (Image 6 Parity) */}
+        {/* Continuous Marquee Ticker */}
         <div className="overflow-hidden py-3 mb-10 border-y border-[var(--border)] relative bg-[var(--surface-2)]">
-          <div className="marquee-track flex gap-8 items-center text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-[#1e1420] select-none">
+          <div className="marquee-track flex gap-8 items-center text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-[#171416] select-none">
             {[...Array(4)].map((_, i) => (
               <div key={i} className="flex gap-8 items-center">
-                <span>hack</span>
-                <span className="text-[#ff4f9a] text-2xl font-serif">✦</span>
-                <span className="font-serif-italic font-normal text-amber-500 lowercase">repeat</span>
-                <span className="text-[#8b5cf6] text-2xl font-serif">✦</span>
-                <span className="font-serif-italic font-normal text-[#ff4f9a] lowercase">perform</span>
+                <span>build</span>
+                <span className="text-[#D9363E] text-2xl font-serif">✦</span>
+                <span className="font-serif-italic font-normal text-[#EF493F] lowercase">engineer</span>
+                <span className="text-[#A91F2C] text-2xl font-serif">✦</span>
+                <span className="font-serif-italic font-normal text-[#D9363E] lowercase">iterate</span>
                 <span className="text-[#12a150] text-2xl font-serif">✦</span>
                 <span>ship</span>
-                <span className="text-amber-500 text-2xl font-serif">✦</span>
+                <span className="text-[#D9363E] text-2xl font-serif">✦</span>
                 <span>solve</span>
-                <span className="text-[#8b5cf6] text-2xl font-serif">✦</span>
+                <span className="text-[#A91F2C] text-2xl font-serif">✦</span>
               </div>
             ))}
           </div>
@@ -89,24 +89,26 @@ export default function ArcadeSection() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="eyebrow">some play · off screen</span>
+              <span className="w-2.5 h-2.5 rounded-sm bg-[#D9363E]" />
+              <span className="mono text-xs font-bold uppercase tracking-[0.16em] text-[var(--text-sub)]">
+                ENGINEERING PLAYGROUND
+              </span>
             </div>
             <div className="flex items-baseline gap-2">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#1e1420]">
-                i also have <span className="font-serif-italic font-normal text-[#ff4f9a]">range</span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#171416]">
+                engineering in <span className="font-serif-italic font-normal text-[#D9363E]">motion</span>
               </h2>
-              <span className="text-2xl text-[#ff4f9a] font-serif">*</span>
             </div>
-            <p className="text-xs text-[#ff4f9a] mono mt-0.5">*allegedly</p>
+            <p className="text-xs text-[#81777A] mono mt-1">curious experiments, interactive builds &amp; micro-demos</p>
           </div>
 
-          {/* Filter Pills (Image 6 Parity) */}
+          {/* Filter Pills */}
           <div className="flex flex-wrap gap-2">
             {[
-              { id: 'all', label: 'all 6' },
-              { id: 'stage', label: 'stage 2' },
-              { id: 'builds', label: 'builds 2' },
-              { id: 'hackathons', label: 'hackathons 2' },
+              { id: 'all', label: 'ALL 6 EXPERIMENTS' },
+              { id: 'stage', label: 'INTERACTION' },
+              { id: 'builds', label: 'HARDWARE & LAB' },
+              { id: 'hackathons', label: 'HACKATHONS' },
             ].map(tab => (
               <button
                 key={tab.id}
@@ -116,8 +118,8 @@ export default function ArcadeSection() {
                 }}
                 className={`mono text-xs px-3.5 py-1.5 rounded-full transition-all cursor-pointer font-bold ${
                   filter === tab.id
-                    ? 'bg-[#1e1420] text-white shadow-sm'
-                    : 'bg-white border border-[var(--border)] text-[var(--text-sub)] hover:text-[#1e1420]'
+                    ? 'bg-[#171416] text-white shadow-sm'
+                    : 'bg-white border border-[var(--border)] text-[var(--text-sub)] hover:text-[#171416]'
                 }`}
               >
                 {tab.label}
@@ -175,13 +177,13 @@ export default function ArcadeSection() {
           {(filter === 'all' || filter === 'hackathons') && (
             <motion.div
               layout
-              className="relative h-80 rounded-3xl p-6 bg-[#8b5cf6] text-white overflow-hidden shadow-lg flex flex-col justify-between group"
+              className="relative h-80 rounded-3xl p-6 bg-[#A91F2C] text-white overflow-hidden shadow-lg flex flex-col justify-between group"
             >
-              {/* Blueprint Grid on Purple */}
+              {/* Blueprint Grid on Crimson */}
               <div className="absolute inset-0 blueprint-grid opacity-20 pointer-events-none" />
 
               <div className="relative z-10">
-                <span className="mono text-[10px] tracking-widest uppercase text-purple-200">
+                <span className="mono text-[10px] tracking-widest uppercase text-red-200">
                   SPRINTS
                 </span>
                 <h3 className="text-xl font-bold mt-1">hackathon finals</h3>
@@ -192,18 +194,18 @@ export default function ArcadeSection() {
                 <motion.div
                   animate={{ scale: [1, 1.05, 1] }}
                   transition={{ duration: 2.2, repeat: Infinity }}
-                  className="text-7xl font-black tracking-tighter text-[#ffb8dc]"
+                  className="text-7xl font-black tracking-tighter text-[#FFE500]"
                 >
                   23
                 </motion.div>
-                <div className="mono text-xs font-semibold text-purple-100 mt-1">
+                <div className="mono text-xs font-semibold text-red-100 mt-1">
                   finalist podiums &amp; overnight builds
                 </div>
               </div>
 
               {/* Animated Commit Ticker */}
-              <div className="relative z-10 mono text-[10px] bg-black/25 px-3 py-1.5 rounded-lg flex items-center justify-between text-purple-200">
-                <span className="truncate">git commit -m &quot;one more fix&quot;</span>
+              <div className="relative z-10 mono text-[10px] bg-black/25 px-3 py-1.5 rounded-lg flex items-center justify-between text-red-200">
+                <span className="truncate">git commit -m &quot;ship product&quot;</span>
                 <span className="text-emerald-300 font-bold ml-2">✓</span>
               </div>
             </motion.div>
@@ -257,26 +259,26 @@ export default function ArcadeSection() {
             </motion.div>
           )}
 
-          {/* Card 4: Dance / Focus Mode (Animated Equalizer Bars) */}
+          {/* Card 4: Audio Synth / Deep Focus Mode (Animated Equalizer Bars) */}
           {(filter === 'all' || filter === 'stage') && (
             <motion.div
               layout
               onClick={handleBeatToggle}
-              className="relative h-80 rounded-3xl p-6 bg-[#ff4f9a] text-white overflow-hidden shadow-lg flex flex-col justify-between cursor-pointer group"
+              className="relative h-80 rounded-3xl p-6 bg-[#D9363E] text-white overflow-hidden shadow-lg flex flex-col justify-between cursor-pointer group"
             >
               <div className="relative z-10 flex items-center justify-between">
                 <div>
-                  <span className="mono text-[10px] tracking-widest uppercase text-pink-200">
+                  <span className="mono text-[10px] tracking-widest uppercase text-red-100">
                     FLOW STATE
                   </span>
-                  <h3 className="text-xl font-bold mt-1">dance mode</h3>
+                  <h3 className="text-xl font-bold mt-1">code rhythm synth</h3>
                 </div>
                 <div className="p-2 rounded-full bg-white/20">
                   {isPlayingBeat ? <Volume2 size={16} /> : <VolumeX size={16} />}
                 </div>
               </div>
 
-              {/* Real-time Bouncing Equalizer Bars (Image 6 Parity) */}
+              {/* Real-time Bouncing Equalizer Bars */}
               <div className="relative z-10 my-auto flex items-end justify-center gap-2 h-24">
                 {[12, 28, 42, 60, 85, 48, 70, 95, 55, 34, 68, 20].map((h, i) => (
                   <motion.div
@@ -296,8 +298,8 @@ export default function ArcadeSection() {
                 ))}
               </div>
 
-              <div className="relative z-10 mono text-[10px] text-pink-100 flex items-center justify-between">
-                <span>BEAT EQUALIZER</span>
+              <div className="relative z-10 mono text-[10px] text-red-100 flex items-center justify-between">
+                <span>AUDIO FREQUENCY SYNTH</span>
                 <span className="font-bold">{isPlayingBeat ? 'SYNTHESIZING' : 'PAUSED'}</span>
               </div>
             </motion.div>
@@ -308,7 +310,7 @@ export default function ArcadeSection() {
             <motion.div
               layout
               onClick={handlePlaneClick}
-              className="relative h-80 rounded-3xl p-6 bg-white border border-[var(--border)] text-[#1e1420] overflow-hidden shadow-lg flex flex-col justify-between cursor-pointer group"
+              className="relative h-80 rounded-3xl p-6 bg-white border border-[var(--border)] text-[#171416] overflow-hidden shadow-lg flex flex-col justify-between cursor-pointer group"
             >
               <div className="relative z-10">
                 <span className="mono text-[10px] tracking-widest uppercase text-[var(--text-sub)]">
@@ -327,7 +329,7 @@ export default function ArcadeSection() {
                     rotate: [-10, 20, 5],
                   }}
                   transition={{ duration: 2.2, ease: 'easeInOut' }}
-                  className="w-20 h-20 text-[#8b5cf6]"
+                  className="w-20 h-20 text-[#D9363E]"
                 >
                   <svg viewBox="0 0 100 100" className="w-full h-full fill-current">
                     <polygon points="10,50 90,15 50,85 45,55" />
@@ -337,7 +339,7 @@ export default function ArcadeSection() {
 
               <div className="relative z-10 mono text-[10px] text-[var(--text-sub)] flex items-center justify-between">
                 <span>CLICK TO LAUNCH</span>
-                <span className="font-bold text-[#8b5cf6]">it&apos;ll fly. probably.</span>
+                <span className="font-bold text-[#D9363E]">it&apos;ll fly. probably.</span>
               </div>
             </motion.div>
           )}

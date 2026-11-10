@@ -27,7 +27,7 @@ export const ACHIEVEMENTS: AchievementItem[] = [
     description: 'Officially selected into the nationwide community of student leaders and changemakers representing Google Gemini on campus. Portal access granted.',
     proofType: 'Official Selection Mail & GID Portal Access',
     featured: true,
-    accentColor: '#8b5cf6',
+    accentColor: '#D9363E',
     imagePath: '/images/achievements/google-student-ambassador-gemini.jpg',
   },
   {

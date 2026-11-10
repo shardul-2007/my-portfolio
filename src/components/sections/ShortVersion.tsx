@@ -9,16 +9,16 @@ export default function ShortVersion() {
     offset: ['start 85%', 'end 40%'],
   });
 
-  // Words breakdown for progressive scroll highlighting
+  // Words breakdown for progressive scroll highlighting (Shardul Identity)
   const words = [
     { text: 'they', type: 'normal' },
     { text: 'said', type: 'normal' },
     { text: 'pick', type: 'normal' },
     { text: 'one:', type: 'normal' },
-    { text: 'the', type: 'normal' },
-    { text: 'spotlight', type: 'italic-pink' },
+    { text: 'creative', type: 'normal' },
+    { text: 'vision', type: 'italic-red' },
     { text: 'or', type: 'normal' },
-    { text: 'deep systems engineering', type: 'pink-box' },
+    { text: 'deep engineering fundamentals', type: 'red-box' },
     { text: '.', type: 'normal' },
     { text: 'i', type: 'normal' },
     { text: 'kept', type: 'normal' },
@@ -29,11 +29,9 @@ export default function ShortVersion() {
     { text: 'zero', type: 'normal' },
     { text: 'conflicts,', type: 'normal' },
     { text: 'and', type: 'normal' },
-    { text: 'the', type: 'normal' },
-    { text: 'demo', type: 'normal' },
-    { text: 'got', type: 'normal' },
-    { text: 'a', type: 'normal' },
-    { text: 'standing ovation.', type: 'italic-pink' },
+    { text: 'shipped', type: 'normal' },
+    { text: 'with', type: 'normal' },
+    { text: 'purpose.', type: 'italic-red' },
   ];
 
   return (
@@ -44,7 +42,7 @@ export default function ShortVersion() {
       <div className="section-container max-w-5xl">
         {/* Section Tag */}
         <div className="flex items-center gap-2 mb-8">
-          <span className="w-2.5 h-2.5 rounded-sm bg-[#ff4f9a]" />
+          <span className="w-2.5 h-2.5 rounded-sm bg-[#D9363E]" />
           <span className="mono text-xs font-bold uppercase tracking-[0.16em] text-[var(--text-sub)]">
             THE SHORT VERSION
           </span>
@@ -76,8 +74,8 @@ export default function ShortVersion() {
             className="inline-flex items-center gap-1.5 mono text-xs px-2.5 py-1 rounded-md border border-[var(--border)] bg-[var(--surface)] text-[var(--text-sub)] shadow-sm mt-8"
           >
             <span className="text-[#12a150] font-bold">+2</span>
-            <span className="text-[#ff3b30] font-bold">-0</span>
-            <span className="text-[10px] ml-1 opacity-70">git merge clean</span>
+            <span className="text-[#D9363E] font-bold">-0</span>
+            <span className="text-[10px] ml-1 opacity-70">git merge clean · Shardul.Lab</span>
           </motion.div>
         </div>
       </div>
@@ -95,26 +93,26 @@ function WordSpan({
   range: [number, number];
 }) {
   const opacity = useTransform(progress, range, [0.22, 1]);
-  const color = useTransform(progress, range, ['#9e9c95', '#1e1420']);
+  const color = useTransform(progress, range, ['#81777A', '#171416']);
 
-  if (word.type === 'italic-pink') {
+  if (word.type === 'italic-red') {
     return (
       <motion.span
         style={{ opacity }}
-        className="font-serif-italic text-[#ff4f9a] font-normal inline-block mx-1.5 transition-colors"
+        className="font-serif-italic text-[#D9363E] font-normal inline-block mx-1.5 transition-colors"
       >
         {word.text}{' '}
       </motion.span>
     );
   }
 
-  if (word.type === 'pink-box') {
+  if (word.type === 'red-box') {
     return (
       <motion.span
         style={{ opacity }}
         className="inline-block mx-1.5"
       >
-        <span className="marker-pink font-bold">
+        <span className="marker-red font-bold">
           {word.text}
         </span>{' '}
       </motion.span>

@@ -36,15 +36,21 @@ export default function Projects() {
   return (
     <section id="projects" className="py-28 relative border-b border-[var(--border)]">
       <div className="section-container">
-        {/* Section Header matching Rishika Reference */}
+        {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div className="max-w-2xl">
-            <span className="eyebrow">selected work · 2026</span>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[var(--text)] font-editorial mt-1">
-              things i&rsquo;ve <span className="font-serif-italic font-normal text-amber-500">built</span>.
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-2.5 h-2.5 rounded-sm bg-[#D9363E]" />
+              <span className="mono text-xs font-bold uppercase tracking-[0.16em] text-[var(--text-sub)]">
+                SELECTED ENGINEERING
+              </span>
+            </div>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[#171416] font-editorial mt-1">
+              Ideas built. <br />
+              <span className="font-serif-italic font-normal text-[#D9363E]">Products shipped.</span>
             </h2>
-            <p className="text-sm sm:text-base text-[var(--text-muted)] font-light mt-3 leading-relaxed">
-              projects i designed, built and shipped, from full-stack platforms and 3D WebGL applications to AI municipal operating systems. each card is a <b>live interactive mock</b> of the real thing, built in plain HTML/WebGL, because screenshots are boring.
+            <p className="text-sm sm:text-base text-[var(--text-muted)] font-normal mt-3 leading-relaxed">
+              A collection of projects where I explore software engineering, solve practical problems and experiment with modern technologies. Each card features an interactive live preview.
             </p>
           </div>
 
@@ -53,14 +59,14 @@ export default function Projects() {
             <a
               href="#projects"
               onClick={() => labAudio.playClick(900)}
-              className="px-4 py-1.5 rounded-full text-xs mono font-bold bg-[var(--accent)] text-black shadow-sm"
+              className="px-4 py-1.5 rounded-full text-xs mono font-bold bg-[#D9363E] text-white shadow-sm"
             >
               all work
             </a>
             <a
               href="#arcade"
               onClick={() => labAudio.playClick(1050)}
-              className="px-4 py-1.5 rounded-full text-xs mono font-semibold text-[var(--text-muted)] hover:text-[var(--text)]"
+              className="px-4 py-1.5 rounded-full text-xs mono font-semibold text-[var(--text-muted)] hover:text-[#D9363E]"
             >
               some play →
             </a>

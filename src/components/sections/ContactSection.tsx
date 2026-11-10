@@ -57,14 +57,17 @@ export default function ContactSection() {
         {/* Header */}
         <div className="max-w-3xl mb-16">
           <div className="flex items-center gap-2 mb-3">
-            <Mail size={14} className="text-[var(--accent)]" />
-            <span className="sys-label-accent">COMMUNICATION MATRIX // DISPATCH PROTOCOL</span>
+            <span className="w-2.5 h-2.5 rounded-sm bg-[#D9363E]" />
+            <span className="mono text-xs font-bold uppercase tracking-[0.16em] text-[var(--text-sub)]">
+              LET&apos;S CONNECT
+            </span>
           </div>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[var(--text)] font-editorial">
-            Open <span className="gradient-text">Connection.</span>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[#171416] font-editorial">
+            Have an idea? <br />
+            <span className="font-serif-italic font-normal text-[#D9363E]">Let&apos;s build something.</span>
           </h2>
-          <p className="text-base sm:text-lg text-[var(--text-muted)] font-light mt-3 leading-relaxed">
-            Interested in hiring, technical collaborations, open-source projects, or engineering discussions? Send a direct dispatch below.
+          <p className="text-base sm:text-lg text-[var(--text-muted)] font-normal mt-3 leading-relaxed">
+            I&apos;m open to software development opportunities, internships, collaborative projects, hackathons and conversations about technology.
           </p>
         </div>
 
@@ -84,13 +87,13 @@ export default function ContactSection() {
                 </div>
               </div>
 
-              {/* One-Click Copy Email Button */}
+              {/* Action Buttons */}
               <button
                 onClick={handleCopyEmail}
-                className="glow-btn glow-btn-primary w-full justify-center text-xs"
+                className="inline-flex items-center justify-center gap-2 mono text-xs px-5 py-3 rounded-full bg-[#D9363E] text-white hover:bg-[#A91F2C] font-bold transition-all shadow-md w-full cursor-pointer"
               >
-                {copied ? <Check size={14} /> : <Copy size={14} />}
-                <span>{copied ? 'EMAIL COPIED TO CLIPBOARD' : 'COPY DIRECT EMAIL ADDRESS'}</span>
+                {copied ? <Check size={14} /> : <Mail size={14} />}
+                <span>{copied ? 'EMAIL COPIED TO CLIPBOARD' : 'SAY HELLO (COPY EMAIL)'}</span>
               </button>
 
               <div className="pt-4 border-t border-[var(--border)] space-y-3">
@@ -99,13 +102,13 @@ export default function ContactSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => labAudio.playClick(900)}
-                  className="p-3.5 rounded-xl bg-[var(--surface-2)] border border-[var(--border)] hover:border-[var(--accent)] transition-all flex items-center justify-between text-xs mono text-[var(--text)] group"
+                  className="p-3.5 rounded-xl bg-white border border-[var(--border)] hover:border-[#D9363E] hover:text-[#D9363E] transition-all flex items-center justify-between text-xs mono text-[#171416] group"
                 >
                   <div className="flex items-center gap-2.5">
-                    <Linkedin size={16} className="text-[var(--accent)]" />
-                    <span>LinkedIn Profile</span>
+                    <Linkedin size={16} className="text-[#D9363E]" />
+                    <span>CONNECT ON LINKEDIN</span>
                   </div>
-                  <ExternalLink size={13} className="text-[var(--text-sub)] group-hover:text-[var(--accent)]" />
+                  <ExternalLink size={13} className="text-[var(--text-sub)] group-hover:text-[#D9363E]" />
                 </a>
 
                 <a
@@ -113,13 +116,13 @@ export default function ContactSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => labAudio.playClick(900)}
-                  className="p-3.5 rounded-xl bg-[var(--surface-2)] border border-[var(--border)] hover:border-[var(--accent)] transition-all flex items-center justify-between text-xs mono text-[var(--text)] group"
+                  className="p-3.5 rounded-xl bg-white border border-[var(--border)] hover:border-[#D9363E] hover:text-[#D9363E] transition-all flex items-center justify-between text-xs mono text-[#171416] group"
                 >
                   <div className="flex items-center gap-2.5">
-                    <Github size={16} className="text-[var(--accent-orange)]" />
-                    <span>GitHub Repositories</span>
+                    <Github size={16} className="text-[#171416]" />
+                    <span>EXPLORE GITHUB</span>
                   </div>
-                  <ExternalLink size={13} className="text-[var(--text-sub)] group-hover:text-[var(--accent-orange)]" />
+                  <ExternalLink size={13} className="text-[var(--text-sub)] group-hover:text-[#D9363E]" />
                 </a>
               </div>
             </div>

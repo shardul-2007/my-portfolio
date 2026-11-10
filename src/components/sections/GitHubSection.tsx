@@ -137,14 +137,17 @@ export default function GitHubSection() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 mb-3">
-              <Github size={14} className="text-[var(--accent)]" />
-              <span className="sys-label-accent">GITHUB TELEMETRY // REAL-TIME CODE FEED</span>
+              <span className="w-2.5 h-2.5 rounded-sm bg-[#D9363E]" />
+              <span className="mono text-xs font-bold uppercase tracking-[0.16em] text-[var(--text-sub)]">
+                BUILD IN PUBLIC
+              </span>
             </div>
-            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-[var(--text)] font-editorial">
-              Live GitHub <span className="gradient-text">Activity.</span>
+            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-[#171416] font-editorial">
+              Code, commits <br />
+              <span className="font-serif-italic font-normal text-[#D9363E]">and curiosity.</span>
             </h2>
-            <p className="text-base text-[var(--text-muted)] font-light mt-3 leading-relaxed">
-              Open source commits, production repositories, and developer activity synchronized with @shardul-2007.
+            <p className="text-base text-[var(--text-muted)] font-normal mt-3 leading-relaxed">
+              My GitHub is where experiments, projects and learning come together.
             </p>
           </div>
 
@@ -154,10 +157,10 @@ export default function GitHubSection() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => labAudio.playClick(900)}
-              className="glow-btn glow-btn-ghost text-xs"
+              className="inline-flex items-center gap-1.5 mono text-xs px-4 py-2 rounded-full bg-[#171416] text-white hover:bg-[#D9363E] font-bold transition-all shadow-sm"
             >
               <Github size={14} />
-              <span>FOLLOW @SHARDUL-2007</span>
+              <span>EXPLORE @SHARDUL-2007</span>
               <ExternalLink size={12} />
             </a>
           </div>

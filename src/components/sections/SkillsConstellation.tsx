@@ -34,8 +34,8 @@ export default function SkillsConstellation() {
       skills: SKILLS.filter(s => s.category === 'BACKEND' || s.category === 'SECURITY'),
     },
     {
-      key: 'aiml',
-      categoryTitle: 'ai / ml systems',
+      key: 'ai-experiments',
+      categoryTitle: 'ai experiments',
       skills: SKILLS.filter(s => s.category === 'AI / ML'),
     },
     {
@@ -54,20 +54,22 @@ export default function SkillsConstellation() {
         {/* Editorial Section Header */}
         <div className="max-w-3xl mb-14">
           <div className="flex items-center gap-2 mb-3">
-            <span className="eyebrow">the stack</span>
+            <span className="w-2.5 h-2.5 rounded-sm bg-[#D9363E]" />
+            <span className="mono text-xs font-bold uppercase tracking-[0.16em] text-[var(--text-sub)]">
+              WHAT I WORK WITH
+            </span>
             <span className="mono text-[10px] text-[var(--text-sub)]">· 23 validated capabilities</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-light text-[var(--text)] tracking-tight leading-[1.15]">
-            things i&apos;ll happily talk about{' '}
-            <span className="font-serif-italic text-[var(--accent)] font-normal">
-              until you politely leave.
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#171416] tracking-tight leading-[1.15]">
+            Tools I use. <br />
+            <span className="font-serif-italic text-[#D9363E] font-normal">
+              Skills I keep sharpening.
             </span>
           </h2>
 
-          <p className="text-sm sm:text-base text-[var(--text-muted)] font-light mt-4 leading-relaxed max-w-2xl">
-            Verified across production platforms, algorithmic challenges, and open-source software repositories.
-            No superficial buzzwords—only tools with commits to back them up.
+          <p className="text-sm sm:text-base text-[var(--text-muted)] font-normal mt-4 leading-relaxed max-w-2xl">
+            A growing toolkit built through projects, experimentation, problem-solving and continuous learning.
           </p>
         </div>
 
