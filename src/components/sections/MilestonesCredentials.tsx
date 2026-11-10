@@ -186,13 +186,13 @@ export default function MilestonesCredentials() {
   }, [fullscreenModal, handleNext, handlePrev]);
 
   return (
-    <section id="credentials" className="relative py-28 bg-[#121013] text-[#F1ECE8] overflow-hidden select-none">
+    <section id="credentials" className="relative py-28 bg-[#F8F5F1] text-[#171416] overflow-hidden select-none border-t border-[#E5DDDA] tech-grid">
       {/* Ambient Crimson Spotlight Glows */}
-      <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-[#D9363E]/15 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 -right-32 w-96 h-96 rounded-full bg-[#A91F2C]/15 blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full bg-[#D9363E]/5 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-32 w-96 h-96 rounded-full bg-[#A91F2C]/5 blur-3xl pointer-events-none" />
 
       {/* Connected Storytelling Energy Line Top */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[2px] h-16 bg-gradient-to-b from-[#711C27] to-[#D9363E] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[2px] h-16 bg-gradient-to-b from-[#E5DDDA] to-[#D9363E] pointer-events-none" />
 
       <div className="section-container relative z-10">
         {/* Section Flagship Header */}
@@ -202,13 +202,13 @@ export default function MilestonesCredentials() {
               <Sparkles size={14} className="text-[#D9363E] animate-pulse" />
               <span>03 · RECOGNITION</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#171416]">
               MILESTONES &amp; CREDENTIALS
             </h2>
             <p className="text-sm sm:text-base font-serif italic text-[#D9363E]">
               &ldquo;Progress worth keeping.&rdquo;
             </p>
-            <p className="text-sm sm:text-base text-white/60 max-w-xl">
+            <p className="text-sm sm:text-base text-[#81777A] max-w-xl">
               Progress worth keeping: 7 authentic, high-resolution credentials, badges, and certificates from Google, MyGov, GSSoC, and NexFellow.
             </p>
           </div>
@@ -219,18 +219,18 @@ export default function MilestonesCredentials() {
               type="button"
               onClick={handlePrev}
               aria-label="Previous credential"
-              className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#D9363E] text-white flex items-center justify-center transition-colors cursor-pointer border border-white/15"
+              className="w-10 h-10 rounded-full bg-white hover:bg-[#D9363E] text-[#171416] hover:text-white flex items-center justify-center transition-colors cursor-pointer border border-[#E5DDDA] shadow-sm"
             >
               <ChevronLeft size={18} />
             </button>
-            <span className="mono text-xs text-white/60 px-2">
+            <span className="mono text-xs text-[#81777A] px-2">
               {selectedIndex + 1} / {filteredItems.length}
             </span>
             <button
               type="button"
               onClick={handleNext}
               aria-label="Next credential"
-              className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#D9363E] text-white flex items-center justify-center transition-colors cursor-pointer border border-white/15"
+              className="w-10 h-10 rounded-full bg-white hover:bg-[#D9363E] text-[#171416] hover:text-white flex items-center justify-center transition-colors cursor-pointer border border-[#E5DDDA] shadow-sm"
             >
               <ChevronRight size={18} />
             </button>
@@ -238,7 +238,7 @@ export default function MilestonesCredentials() {
         </div>
 
         {/* Filter Pills */}
-        <div className="flex flex-wrap items-center gap-2 mb-10 pb-4 border-b border-white/10">
+        <div className="flex flex-wrap items-center gap-2 mb-10 pb-4 border-b border-[#E5DDDA]">
           {FILTER_CATEGORIES.map(filter => (
             <button
               key={filter}
@@ -250,8 +250,8 @@ export default function MilestonesCredentials() {
               }}
               className={`mono text-xs px-3.5 py-1.5 rounded-full font-bold uppercase transition-all cursor-pointer ${
                 activeFilter === filter
-                  ? 'bg-[#D9363E] text-white shadow-[0_4px_16px_rgba(217,54,62,0.4)]'
-                  : 'bg-white/5 text-white/70 hover:bg-white/15 hover:text-white border border-white/10'
+                  ? 'bg-[#D9363E] text-white shadow-[0_4px_16px_rgba(217,54,62,0.3)]'
+                  : 'bg-white text-[#81777A] hover:bg-[#F1ECE8] hover:text-[#171416] border border-[#E5DDDA]'
               }`}
             >
               {filter}
@@ -260,9 +260,9 @@ export default function MilestonesCredentials() {
         </div>
 
         {/* Main Stage: Large Featured Spotlight (2-Column Hero Card) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white/[0.03] border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden backdrop-blur-sm">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white border border-[#E5DDDA] rounded-3xl p-6 sm:p-10 shadow-[0_8px_30px_rgba(23,20,22,0.04)] relative overflow-hidden">
           {/* Subtle Background Badge Number Watermark */}
-          <div className="absolute right-6 bottom-4 mono text-[64px] font-bold text-white/[0.02] pointer-events-none select-none">
+          <div className="absolute right-6 bottom-4 mono text-[64px] font-bold text-[#171416]/[0.03] pointer-events-none select-none">
             {activeItem.badgeNumber}
           </div>
 
@@ -274,15 +274,15 @@ export default function MilestonesCredentials() {
                 setFullscreenModal(activeItem);
                 setZoomLevel(1);
               }}
-              className="relative w-full max-w-[380px] aspect-square rounded-2xl bg-black/40 border border-white/15 p-6 flex items-center justify-center cursor-pointer group shadow-[0_12px_40px_rgba(0,0,0,0.6)] hover:border-[#D9363E]/60 transition-all"
+              className="relative w-full max-w-[380px] aspect-square rounded-2xl bg-[#F8F5F1] border border-[#E5DDDA] p-6 flex items-center justify-center cursor-pointer group shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:border-[#D9363E] transition-all"
             >
               <img
                 src={assetPath(activeItem.imagePath)}
                 alt={activeItem.title}
-                className="w-full h-full object-contain drop-shadow-[0_8px_24px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-300"
+                className="w-full h-full object-contain drop-shadow-[0_4px_16px_rgba(0,0,0,0.15)] group-hover:scale-105 transition-transform duration-300"
               />
 
-              <div className="absolute bottom-3 right-3 flex items-center gap-1.5 mono text-[10px] bg-black/80 text-white/90 px-3 py-1.5 rounded-full border border-white/20 group-hover:bg-[#D9363E] transition-colors">
+              <div className="absolute bottom-3 right-3 flex items-center gap-1.5 mono text-[10px] bg-[#171416] text-white px-3 py-1.5 rounded-full border border-black/10 group-hover:bg-[#D9363E] transition-colors shadow-sm">
                 <Maximize2 size={11} />
                 <span>INSPECT PROOF</span>
               </div>
@@ -296,32 +296,32 @@ export default function MilestonesCredentials() {
                 <ShieldCheck size={14} className="text-[#D9363E]" />
                 <span>{activeItem.category} · {activeItem.year}</span>
               </div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-white leading-tight">
+              <h3 className="text-2xl sm:text-3xl font-bold text-[#171416] leading-tight">
                 {activeItem.title}
               </h3>
-              <div className="text-base font-semibold text-white/80">
-                {activeItem.role} · <span className="text-white/60">{activeItem.org}</span>
+              <div className="text-base font-semibold text-[#171416]">
+                {activeItem.role} · <span className="text-[#81777A]">{activeItem.org}</span>
               </div>
             </div>
 
-            <p className="text-sm sm:text-base text-white/70 leading-relaxed font-normal">
+            <p className="text-sm sm:text-base text-[#81777A] leading-relaxed font-normal">
               {activeItem.description}
             </p>
 
             {/* Credential Authority Box */}
-            <div className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 space-y-2 mono text-xs">
-              <div className="flex items-center justify-between border-b border-white/10 pb-2">
-                <span className="text-white/50">Verification Mechanism:</span>
+            <div className="p-4 rounded-2xl bg-[#F8F5F1] border border-[#E5DDDA] space-y-2 mono text-xs">
+              <div className="flex items-center justify-between border-b border-[#E5DDDA] pb-2">
+                <span className="text-[#81777A]">Verification Mechanism:</span>
                 <span className="font-bold text-[#10B981] flex items-center gap-1">
                   <CheckCircle2 size={12} /> {activeItem.proofType}
                 </span>
               </div>
-              <div className="flex items-center justify-between border-b border-white/10 pb-2">
-                <span className="text-white/50">Credential Identifier:</span>
-                <span className="text-white/90 font-bold">{activeItem.badgeNumber}</span>
+              <div className="flex items-center justify-between border-b border-[#E5DDDA] pb-2">
+                <span className="text-[#81777A]">Credential Identifier:</span>
+                <span className="text-[#171416] font-bold">{activeItem.badgeNumber}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-white/50">Physical Asset Status:</span>
+                <span className="text-[#81777A]">Physical Asset Status:</span>
                 <span className="text-[#D9363E] font-bold">Verified Production Archive</span>
               </div>
             </div>
@@ -333,7 +333,7 @@ export default function MilestonesCredentials() {
                 setFullscreenModal(activeItem);
                 setZoomLevel(1);
               }}
-              className="w-full sm:w-auto px-6 py-3 rounded-full bg-[#D9363E] hover:bg-[#A91F2C] text-white font-bold mono text-xs flex items-center justify-center gap-2 transition-all shadow-[0_8px_24px_rgba(217,54,62,0.35)] cursor-pointer"
+              className="w-full sm:w-auto px-6 py-3 rounded-full bg-[#D9363E] hover:bg-[#A91F2C] text-white font-bold mono text-xs flex items-center justify-center gap-2 transition-all shadow-[0_8px_24px_rgba(217,54,62,0.3)] cursor-pointer"
             >
               <Maximize2 size={14} />
               <span>FULL-SCREEN HIGH RESOLUTION VIEW</span>
@@ -343,7 +343,7 @@ export default function MilestonesCredentials() {
 
         {/* Horizontal Carousel Thumbnails */}
         <div className="mt-8">
-          <div className="mono text-xs text-white/50 mb-3 flex items-center justify-between">
+          <div className="mono text-xs text-[#81777A] mb-3 flex items-center justify-between">
             <span>VAULT REPOSITORY · SWIPE OR CLICK TO INSPECT</span>
             <span className="text-[#D9363E] font-bold">7 VERIFIED CERTIFICATIONS</span>
           </div>
@@ -360,11 +360,11 @@ export default function MilestonesCredentials() {
                   onClick={() => handleSelect(idx)}
                   className={`snap-center shrink-0 w-64 p-4 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
                     isSelected
-                      ? 'bg-white/10 border-[#D9363E] shadow-[0_8px_24px_rgba(217,54,62,0.3)] scale-102'
-                      : 'bg-white/[0.02] border-white/10 hover:border-white/30 hover:bg-white/[0.05]'
+                      ? 'bg-white border-[#D9363E] shadow-[0_8px_24px_rgba(217,54,62,0.2)] scale-102 ring-2 ring-[#D9363E]/20'
+                      : 'bg-white border-[#E5DDDA] hover:border-[#D9363E]/40 hover:bg-[#FDF6F6]'
                   }`}
                 >
-                  <div className="w-full h-32 rounded-xl bg-black/40 flex items-center justify-center p-3 mb-3 border border-white/10">
+                  <div className="w-full h-32 rounded-xl bg-[#F8F5F1] flex items-center justify-center p-3 mb-3 border border-[#E5DDDA]">
                     <img
                       src={assetPath(item.imagePath)}
                       alt={item.title}
@@ -373,8 +373,8 @@ export default function MilestonesCredentials() {
                   </div>
                   <div>
                     <div className="mono text-[10px] text-[#D9363E] uppercase font-bold">{item.category}</div>
-                    <div className="text-xs font-bold text-white line-clamp-1 mt-0.5">{item.title}</div>
-                    <div className="text-[11px] text-white/60 line-clamp-1">{item.org}</div>
+                    <div className="text-xs font-bold text-[#171416] line-clamp-1 mt-0.5">{item.title}</div>
+                    <div className="text-[11px] text-[#81777A] line-clamp-1">{item.org}</div>
                   </div>
                 </div>
               );
@@ -383,16 +383,16 @@ export default function MilestonesCredentials() {
         </div>
 
         {/* Special Feature: My Milestone Journey */}
-        <div className="mt-20 p-8 sm:p-10 rounded-3xl bg-white/[0.02] border border-white/10 relative overflow-hidden">
+        <div className="mt-20 p-8 sm:p-10 rounded-3xl bg-white border border-[#E5DDDA] relative overflow-hidden shadow-[0_4px_20px_rgba(23,20,22,0.03)]">
           <div className="space-y-2 mb-8">
             <div className="mono text-xs font-bold text-[#D9363E] uppercase tracking-wider flex items-center gap-2">
               <Flame size={14} />
               <span>Chronological Continuum</span>
             </div>
-            <h3 className="text-2xl sm:text-3xl font-bold text-white">
+            <h3 className="text-2xl sm:text-3xl font-bold text-[#171416]">
               My Milestone Journey (2024 – 2026)
             </h3>
-            <p className="text-xs sm:text-sm text-white/60">
+            <p className="text-xs sm:text-sm text-[#81777A]">
               Tracing the continuous trajectory of open-source contributions, competitive selections, and community leadership.
             </p>
           </div>
@@ -403,11 +403,11 @@ export default function MilestonesCredentials() {
               { year: '2025', title: 'Campus Leadership', desc: 'Selected as GUESSS India Ambassador (CA-419) and promoted pan-India entrepreneurial surveys with certificates of appreciation.' },
               { year: '2026 H1', title: 'Nationwide Programs', desc: 'Selected into Google Student Ambassador (Gemini), HackerRank Campus Crew Lead, and Level 5 Change Maker with 102,020 points.' },
               { year: '2026 H2', title: 'Global Open Source', desc: 'Active contributor in OSC India, GSSoC 2026, Nexus Spring of Code, and OSC Global across production repositories.' },
-            ].map((node, i) => (
-              <div key={node.year} className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 space-y-2 relative">
+            ].map((node) => (
+              <div key={node.year} className="p-4 rounded-2xl bg-[#F8F5F1] border border-[#E5DDDA] space-y-2 relative">
                 <div className="mono text-lg font-bold text-[#D9363E]">{node.year}</div>
-                <div className="text-sm font-bold text-white">{node.title}</div>
-                <p className="text-xs text-white/60 leading-relaxed">{node.desc}</p>
+                <div className="text-sm font-bold text-[#171416]">{node.title}</div>
+                <p className="text-xs text-[#81777A] leading-relaxed">{node.desc}</p>
               </div>
             ))}
           </div>

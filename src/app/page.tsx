@@ -5,8 +5,6 @@ import SystemBoot from '@/components/ui/SystemBoot';
 import CommandPalette from '@/components/ui/CommandPalette';
 import RecruiterModeModal from '@/components/ui/RecruiterModeModal';
 import Navbar from '@/components/layout/Navbar';
-import FloatingDock from '@/components/layout/FloatingDock';
-import ThreeStageJourneyNav from '@/components/ui/ThreeStageJourneyNav';
 import Footer from '@/components/layout/Footer';
 
 // Sections
@@ -19,7 +17,6 @@ import About from '@/components/sections/About';
 import SkillsConstellation from '@/components/sections/SkillsConstellation';
 import Projects from '@/components/sections/Projects';
 import ArchitectureExplorer from '@/components/sections/ArchitectureExplorer';
-import CaseStudies from '@/components/sections/CaseStudies';
 import OpenSourceContributions from '@/components/sections/OpenSourceContributions';
 import CommunityEngagements from '@/components/sections/CommunityEngagements';
 import MilestonesCredentials from '@/components/sections/MilestonesCredentials';
@@ -92,12 +89,6 @@ export default function Home() {
         theme={theme === 'paper' ? 'dark' : 'yellow'}
       />
 
-      {/* Floating Bottom Navigation Dock (Images 3, 4, 5, 6, 7, 8 Parity) */}
-      <FloatingDock />
-
-      {/* 3-Stage Living Canvas Journey Indicator (Contributions → Engagements → Recognition) */}
-      <ThreeStageJourneyNav />
-
       {/* Main Connected Engineering Universe */}
       <main className="relative">
         {/* Section 02: Cinematic Hero with REALITY / X-RAY Split (Images 1, 2, 3) */}
@@ -127,14 +118,11 @@ export default function Home() {
         {/* Section 06: The Stack (5-Column Editorial Capabilities) */}
         <SkillsConstellation />
 
-        {/* Section 07: Featured Engineering Projects (Image 5 Stacked Cards) */}
+        {/* Section 07: Featured Engineering Projects */}
         <Projects />
 
         {/* Section 08: Project Architecture Explorer */}
         <ArchitectureExplorer />
-
-        {/* Section 09: Engineering Case Studies */}
-        <CaseStudies />
 
         {/* ══════════════════════════════════════════════════════════════
             THE 3 SIGNATURE MAIN ATTRACTION SECTIONS IN EXACT ORDER

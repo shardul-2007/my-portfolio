@@ -4,7 +4,7 @@ const isProd = process.env.NODE_ENV === 'production';
 const basePath = isVercel || process.env.NO_BASE_PATH === 'true' ? '' : (isProd ? '/my-portfolio' : '');
 
 const nextConfig = {
-  output: 'export',
+  ...(isVercel ? {} : { output: 'export' }),
   basePath,
   images: { unoptimized: true },
   trailingSlash: true,

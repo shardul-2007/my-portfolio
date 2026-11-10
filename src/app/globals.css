@@ -8,34 +8,35 @@
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
-  /* Red Engineering Identity System (Warm Editorial & Crimson) */
-  --bg: #F1ECE8;
-  --bg-deep: #E8E2DD;
-  --bg-elevated: #F8F5F1;
-  --paper: #F1ECE8;
-  --paper-2: #E8E2DD;
-  --card: #F8F5F1;
-  --surface: rgba(248, 245, 241, 0.90);
-  --surface-2: rgba(23, 20, 22, 0.04);
-  --surface-3: rgba(23, 20, 22, 0.08);
+  /* Editorial Engineering Interface System (V8 Unified Master Tokens) */
+  --bg: #F8F5F1;
+  --bg-deep: #F1ECE8;
+  --bg-elevated: #FFFFFF;
+  --paper: #F8F5F1;
+  --paper-2: #F1ECE8;
+  --card: #FFFFFF;
+  --surface: #FFFFFF;
+  --surface-2: #F1ECE8;
+  --surface-3: #E8E2DD;
   --surface-ivory: #F8F5F1;
 
   /* Borders & Dividers */
-  --border: rgba(23, 20, 22, 0.12);
-  --border-strong: rgba(23, 20, 22, 0.22);
+  --border: #E5DDDA;
+  --border-strong: #D8CAC7;
   --border-glow: rgba(217, 54, 62, 0.35);
-  --border-red: rgba(217, 54, 62, 0.35);
-  --line: #E5D9D7;
-  --line-2: #D8CAC7;
+  --border-red: #D9363E;
+  --line: #E5DDDA;
+  --line-2: #E7DEDA;
 
   /* Brand Accents — Red Engineering Identity */
   --accent: #D9363E; /* Primary Red */
   --accent-red: #D9363E;
   --accent-crimson: #A91F2C; /* Deep Crimson */
-  --accent-vermilion: #EF493F; /* Vermilion */
-  --accent-darkred: #711C27; /* Dark Red */
-  --accent-yellow: #FFE500; /* Ticker Yellow */
+  --accent-vermilion: #EF493F;
+  --accent-darkred: #711C27;
+  --accent-yellow: #FFE500;
   --accent-lime: #12A150;
+  --accent-orange: #D9363E;
   --accent-dim: rgba(217, 54, 62, 0.10);
   --accent-red-dim: rgba(217, 54, 62, 0.12);
   --accent-glow: rgba(217, 54, 62, 0.25);
@@ -50,12 +51,12 @@
   --text-sub: #81777A;
   --text-dark: #171416;
 
-  /* Elevation */
+  /* Elevation & Grid */
   --r: 18px;
   --r-lg: 26px;
-  --shadow-glass: 0 4px 20px rgba(23, 20, 22, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  --shadow-glass-hover: 0 12px 35px rgba(23, 20, 22, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  --grid-line: #E5D9D7;
+  --shadow-glass: 0 4px 20px rgba(23, 20, 22, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  --shadow-glass-hover: 0 12px 35px rgba(23, 20, 22, 0.09), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  --grid-line: #E7DEDA;
 }
 
 html[data-theme="dark"] {
@@ -231,22 +232,28 @@ body {
   transform: translateY(-2px);
 }
 
-/* Editorial Gradient Text */
+/* Editorial Gradient Text — Crimson Engineering Identity */
 .gradient-text {
-  background: linear-gradient(135deg, #FFFFFF 0%, #00F5C8 55%, #FF6B35 100%);
+  background: linear-gradient(135deg, #171416 0%, #D9363E 60%, #A91F2C 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+html[data-theme="dark"] .gradient-text {
+  background: linear-gradient(135deg, #FFFFFF 0%, #EF493F 65%, #D9363E 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 html[data-theme="yellow"] .gradient-text {
-  background: linear-gradient(135deg, #000000 0%, #1A1A1A 100%);
+  background: linear-gradient(135deg, #000000 0%, #171416 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .gradient-orange {
-  background: linear-gradient(135deg, #FFFFFF 0%, #FF6B35 100%);
+  background: linear-gradient(135deg, #D9363E 0%, #A91F2C 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -467,9 +474,17 @@ html[data-theme="yellow"] .gradient-orange {
 /* Blueprint Canvas Pattern (Red Engineering Grid) */
 .blueprint-grid {
   background-image:
-    linear-gradient(rgba(217, 54, 62, 0.12) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(217, 54, 62, 0.12) 1px, transparent 1px);
+    linear-gradient(rgba(217, 54, 62, 0.10) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(217, 54, 62, 0.10) 1px, transparent 1px);
   background-size: 32px 32px;
+}
+
+/* Editorial Engineering Technical Grid Pattern */
+.tech-grid {
+  background-image:
+    linear-gradient(#E7DEDA 1px, transparent 1px),
+    linear-gradient(90deg, #E7DEDA 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
 /* Tactile Toggle Pill */

@@ -131,23 +131,25 @@ export default function GitHubSection() {
   }, []);
 
   return (
-    <section id="github" className="py-28 relative border-b border-[var(--border)] overflow-hidden">
-      <div className="section-container">
+    <section id="github" className="py-28 relative bg-[#F8F5F1] text-[#171416] border-b border-[#E5DDDA] tech-grid overflow-hidden">
+      <div className="section-container relative z-10">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-          <div className="max-w-2xl">
-            <div className="flex items-center gap-2 mb-3">
+          <div className="max-w-2xl space-y-2">
+            <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-sm bg-[#D9363E]" />
-              <span className="mono text-xs font-bold uppercase tracking-[0.16em] text-[var(--text-sub)]">
+              <span className="mono text-xs font-bold uppercase tracking-[0.16em] text-[#D9363E]">
                 BUILD IN PUBLIC
               </span>
             </div>
-            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-[#171416] font-editorial">
-              Code, commits <br />
-              <span className="font-serif-italic font-normal text-[#D9363E]">and curiosity.</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#171416]">
+              CODE COMMITS
             </h2>
-            <p className="text-base text-[var(--text-muted)] font-normal mt-3 leading-relaxed">
-              My GitHub is where experiments, projects and learning come together.
+            <p className="text-sm sm:text-base font-serif italic text-[#D9363E]">
+              &ldquo;Every commit is another step forward.&rdquo;
+            </p>
+            <p className="text-sm sm:text-base text-[#81777A] font-normal leading-relaxed">
+              Real-time engineering activity synced directly with GitHub for <span className="font-bold text-[#171416]">@shardul-2007</span>. All repositories, commit counts, and stargazers are verified via the public GitHub API.
             </p>
           </div>
 
@@ -157,83 +159,89 @@ export default function GitHubSection() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => labAudio.playClick(900)}
-              className="inline-flex items-center gap-1.5 mono text-xs px-4 py-2 rounded-full bg-[#171416] text-white hover:bg-[#D9363E] font-bold transition-all shadow-sm"
+              className="inline-flex items-center gap-2 mono text-xs px-5 py-2.5 rounded-full bg-[#171416] text-white hover:bg-[#D9363E] font-bold transition-all shadow-sm cursor-pointer"
             >
-              <Github size={14} />
+              <Github size={15} />
               <span>EXPLORE @SHARDUL-2007</span>
-              <ExternalLink size={12} />
+              <ExternalLink size={13} />
             </a>
           </div>
         </div>
 
         {/* User Stats Card */}
         {user && (
-          <div className="p-6 rounded-2xl glass border border-[var(--border-strong)] mb-8 flex flex-wrap items-center justify-between gap-6">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#E5DDDA] shadow-[0_4px_20px_rgba(23,20,22,0.03)] mb-8 flex flex-wrap items-center justify-between gap-6">
             <div className="flex items-center gap-4">
               <img
                 src={user.avatar_url}
                 alt={user.name}
-                className="w-14 h-14 rounded-2xl border border-[var(--border)] object-cover"
+                className="w-16 h-16 rounded-2xl border border-[#E5DDDA] object-cover shadow-sm"
               />
               <div>
                 <div className="flex items-center gap-2">
-                  <h3 className="font-bold text-lg text-[var(--text)]">{user.name}</h3>
-                  <span className="mono text-xs text-[var(--text-sub)]">@{user.login}</span>
+                  <h3 className="font-bold text-lg text-[#171416]">{user.name}</h3>
+                  <span className="mono text-xs px-2 py-0.5 rounded-full bg-[#F1ECE8] text-[#81777A]">@{user.login}</span>
+                  {isLive && (
+                    <span className="mono text-[10px] px-2 py-0.5 rounded-full bg-[#EDF9F0] text-[#10B981] font-bold border border-[#C5ECD0] flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
+                      LIVE API
+                    </span>
+                  )}
                 </div>
-                <div className="text-xs text-[var(--text-muted)] mt-0.5 line-clamp-1 max-w-md font-light">
+                <div className="text-xs text-[#81777A] mt-1 max-w-md">
                   {user.bio}
                 </div>
               </div>
             </div>
 
-            <div className="flex items-center gap-6 mono text-xs text-[var(--text-sub)]">
+            <div className="flex items-center gap-8 mono text-xs">
               <div className="text-center">
-                <div className="text-lg font-bold text-[var(--accent)]">{user.public_repos}</div>
-                <div className="text-[10px]">REPOSITORIES</div>
+                <div className="text-xl font-bold text-[#D9363E]">{user.public_repos}</div>
+                <div className="text-[10px] text-[#81777A]">PUBLIC REPOS</div>
               </div>
               <div className="text-center">
-                <div className="text-lg font-bold text-[var(--text)]">{user.followers}</div>
-                <div className="text-[10px]">FOLLOWERS</div>
+                <div className="text-xl font-bold text-[#171416]">{user.followers}</div>
+                <div className="text-[10px] text-[#81777A]">FOLLOWERS</div>
               </div>
               <div className="text-center">
-                <div className="text-lg font-bold text-[var(--text)]">{user.following}</div>
-                <div className="text-[10px]">FOLLOWING</div>
+                <div className="text-xl font-bold text-[#171416]">{user.following}</div>
+                <div className="text-[10px] text-[#81777A]">FOLLOWING</div>
               </div>
             </div>
           </div>
         )}
 
         {/* Repositories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {repos.map(repo => (
             <motion.div
               key={repo.id}
               whileHover={{ y: -3 }}
-              className="p-5 rounded-2xl glass border border-[var(--border)] hover:border-[var(--border-strong)] transition-all flex flex-col justify-between"
+              className="p-6 rounded-3xl bg-white border border-[#E5DDDA] hover:border-[#D9363E]/40 hover:shadow-[0_8px_30px_rgba(23,20,22,0.06)] transition-all flex flex-col justify-between"
             >
               <div className="space-y-3">
                 <div className="flex items-start justify-between gap-2">
-                  <div className="flex items-center gap-2 font-bold text-sm text-[var(--text)] truncate">
-                    <BookOpen size={14} className="text-[var(--accent)] flex-shrink-0" />
+                  <div className="flex items-center gap-2 font-bold text-sm text-[#171416] truncate">
+                    <BookOpen size={15} className="text-[#D9363E] flex-shrink-0" />
                     <span className="truncate">{repo.name}</span>
                   </div>
                   {repo.language && (
-                    <span className="mono text-[9px] px-2 py-0.5 rounded-full bg-[var(--surface-2)] text-[var(--accent-orange)] font-semibold flex-shrink-0">
+                    <span className="mono text-[9px] px-2.5 py-0.5 rounded-full bg-[#F1ECE8] text-[#D9363E] font-bold flex-shrink-0 border border-[#E5DDDA]">
                       {repo.language}
                     </span>
                   )}
                 </div>
 
-                <p className="text-xs text-[var(--text-muted)] font-light leading-relaxed line-clamp-2">
+                <p className="text-xs text-[#81777A] leading-relaxed line-clamp-2">
                   {repo.description || 'Public engineering repository.'}
                 </p>
               </div>
 
               {/* Repo Stats & Actions */}
-              <div className="mt-4 pt-3 border-t border-[var(--border)] flex items-center justify-between text-xs mono text-[var(--text-sub)]">
+              <div className="mt-5 pt-4 border-t border-[#E5DDDA] flex items-center justify-between text-xs mono text-[#81777A]">
                 <div className="flex items-center gap-4">
                   <span className="flex items-center gap-1">
-                    <Star size={12} className="text-[#FFE500]" />
+                    <Star size={12} className="text-[#F59E0B]" />
                     <span>{repo.stargazers_count}</span>
                   </span>
                   <span className="flex items-center gap-1">
@@ -242,25 +250,25 @@ export default function GitHubSection() {
                   </span>
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                   {repo.homepage && (
                     <a
                       href={repo.homepage}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[var(--accent)] hover:underline text-[10px]"
+                      className="text-[#D9363E] font-bold hover:underline text-[11px]"
                     >
-                      Demo
+                      Demo ↗
                     </a>
                   )}
                   <a
                     href={repo.html_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[var(--text)] hover:text-[var(--accent)]"
+                    className="text-[#171416] hover:text-[#D9363E]"
                     title="View on GitHub"
                   >
-                    <ExternalLink size={13} />
+                    <ExternalLink size={14} />
                   </a>
                 </div>
               </div>

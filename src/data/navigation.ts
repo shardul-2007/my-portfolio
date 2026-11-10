@@ -11,19 +11,16 @@ export interface NavLink {
 
 export const NAV_LINKS: NavLink[] = [
   { id: 'hero',          label: 'LAB.01',          href: '#hero' },
-  { id: 'command',       label: 'COMMAND',         href: '#command-center' },
+  { id: 'command-center',label: 'COMMAND',         href: '#command-center' },
   { id: 'about',         label: 'ABOUT',           href: '#about' },
   { id: 'skills',        label: 'STACK',           href: '#skills' },
-  { id: 'projects',      label: 'PROJECTS',        href: '#projects', badge: '4' },
+  { id: 'projects',      label: 'PROJECTS',        href: '#projects' },
   { id: 'architecture',  label: 'ARCHITECTURE',    href: '#architecture' },
-  { id: 'contributions', label: 'OPEN SOURCE',     href: '#contributions', badge: '4' },
-  { id: 'engagements',   label: 'COMMUNITY',       href: '#engagements', badge: '17' },
-  { id: 'credentials',   label: 'CREDENTIALS',     href: '#credentials', badge: '7' },
-  { id: 'desk',          label: 'DESK',            href: '#desk' },
-  { id: 'terminal',      label: 'CLI',             href: '#terminal' },
+  { id: 'contributions', label: 'OPEN SOURCE',     href: '#contributions' },
+  { id: 'engagements',   label: 'ENGAGEMENTS',     href: '#engagements' },
+  { id: 'credentials',   label: 'RECOGNITION',     href: '#credentials' },
   { id: 'playground',    label: 'PLAYGROUND',      href: '#playground' },
-  { id: 'github',        label: 'FEED',            href: '#github' },
-  { id: 'contact',       label: 'CONNECT',         href: '#contact' },
+  { id: 'contact',       label: 'CONTACT',         href: '#contact' },
 ];
 
 export interface PaletteCommand {
