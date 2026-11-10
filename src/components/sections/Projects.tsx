@@ -11,6 +11,7 @@ import {
   Eye,
   Radio,
   BookOpen,
+  Scan,
 } from 'lucide-react';
 import { PROJECTS, ProjectItem } from '@/data/projects';
 import CivicOSDemo from '@/components/ui/demos/CivicOSDemo';
@@ -20,10 +21,16 @@ import { labAudio } from '@/lib/audio';
 
 export default function Projects() {
   const [activeSimulator, setActiveSimulator] = useState<string | null>('civicos');
+  const [xrayView, setXrayView] = useState<Record<string, boolean>>({});
 
   function toggleSimulator(id: string) {
     labAudio.playClick(900);
     setActiveSimulator(prev => (prev === id ? null : id));
+  }
+
+  function toggleXray(id: string) {
+    labAudio.playClick(1050);
+    setXrayView(prev => ({ ...prev, [id]: !prev[id] }));
   }
 
   return (
@@ -167,6 +174,19 @@ export default function Projects() {
                       </button>
                     )}
 
+                    {/* X-Ray Architecture Inspection Button */}
+                    <button
+                      onClick={() => toggleXray(project.id)}
+                      className={`glow-btn ${
+                        xrayView[project.id]
+                          ? 'bg-purple-600 text-white border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.4)]'
+                          : 'glow-btn-ghost text-purple-400 hover:text-purple-300'
+                      }`}
+                    >
+                      <Scan size={14} />
+                      <span>{xrayView[project.id] ? 'CLOSE X-RAY' : 'X-RAY ARCHITECTURE'}</span>
+                    </button>
+
                     {/* Jump to Architecture & Case Study */}
                     <a
                       href="#architecture"
@@ -176,6 +196,55 @@ export default function Projects() {
                       <span>Architecture Spec →</span>
                     </a>
                   </div>
+
+                  {/* X-Ray Architecture Breakdown Drawer */}
+                  <AnimatePresence>
+                    {xrayView[project.id] && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                        className="overflow-hidden pt-4"
+                      >
+                        <div className="p-6 rounded-2xl bg-[#080914] border border-purple-500/50 blueprint-grid text-purple-200 mono text-xs space-y-4">
+                          <div className="flex items-center justify-between pb-3 border-b border-purple-500/30">
+                            <div className="flex items-center gap-2">
+                              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+                              <span className="font-bold text-white tracking-widest uppercase">
+                                X-RAY SYSTEM INSPECTOR // {project.name}
+                              </span>
+                            </div>
+                            <span className="text-[10px] text-cyan-400 font-semibold">
+                              {project.architecture.length} ACTIVE ARCHITECTURAL LAYERS
+                            </span>
+                          </div>
+
+                          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                            {project.architecture.map((layer, lIdx) => (
+                              <div
+                                key={layer.layer}
+                                className="p-3.5 rounded-xl bg-purple-950/40 border border-purple-800 space-y-1.5"
+                              >
+                                <div className="flex items-center justify-between text-[10px]">
+                                  <span className="text-cyan-400 font-bold">LAYER 0{lIdx + 1}</span>
+                                  <span className="text-purple-400">{layer.tech}</span>
+                                </div>
+                                <div className="font-bold text-white text-sm">{layer.layer}</div>
+                                <p className="text-[11px] text-purple-300 font-light leading-relaxed">
+                                  {layer.purpose}
+                                </p>
+                                <div className="pt-2 border-t border-purple-900/60 text-[10px] text-purple-400">
+                                  <span className="font-semibold text-cyan-300">DATA FLOW: </span>
+                                  <span>{layer.dataFlow}</span>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
 
                   {/* Embedded Interactive Simulator Drawer */}
                   <AnimatePresence>
