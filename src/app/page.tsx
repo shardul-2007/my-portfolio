@@ -6,10 +6,12 @@ import CommandPalette from '@/components/ui/CommandPalette';
 import RecruiterModeModal from '@/components/ui/RecruiterModeModal';
 import Navbar from '@/components/layout/Navbar';
 import FloatingDock from '@/components/layout/FloatingDock';
+import ThreeStageJourneyNav from '@/components/ui/ThreeStageJourneyNav';
 import Footer from '@/components/layout/Footer';
 
 // Sections
 import Hero from '@/components/sections/Hero';
+import TornCanvasTransition from '@/components/sections/TornCanvasTransition';
 import Receipts from '@/components/sections/Receipts';
 import ShortVersion from '@/components/sections/ShortVersion';
 import CommandCenter from '@/components/sections/CommandCenter';
@@ -94,6 +96,9 @@ export default function Home() {
       {/* Floating Bottom Navigation Dock (Images 3, 4, 5, 6, 7, 8 Parity) */}
       <FloatingDock />
 
+      {/* 3-Stage Living Canvas Journey Indicator (Contributions → Engagements → Recognition) */}
+      <ThreeStageJourneyNav />
+
       {/* Main Connected Engineering Universe */}
       <main className="relative">
         {/* Section 02: Cinematic Hero with REALITY / X-RAY Split (Images 1, 2, 3) */}
@@ -101,6 +106,9 @@ export default function Home() {
           onOpenRecruiter={() => setIsRecruiterOpen(true)}
           onOpenCommand={() => setIsCommandOpen(true)}
         />
+
+        {/* Signature Torn-Photo Scroll Transformation Engine */}
+        <TornCanvasTransition />
 
         {/* Section 02.5: Receipts & Verified Counters */}
         <Receipts />

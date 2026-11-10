@@ -130,12 +130,15 @@ export default function OpenSourceContributions() {
           <div className="space-y-2">
             <div className="flex items-center gap-2 mono text-xs font-bold text-[#D9363E] uppercase tracking-widest">
               <span className="w-2.5 h-2.5 rounded-full bg-[#D9363E] animate-pulse" />
-              <span>Section 01 · Open Source Contributions</span>
+              <span>01 · OPEN SOURCE</span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#171416]">
-              Every contribution moves <span className="font-serif italic font-normal text-[#D9363E]">something forward.</span>
+              CONTRIBUTIONS
             </h2>
-            <p className="text-sm sm:text-base text-[var(--text-muted)] max-w-xl">
+            <p className="text-sm sm:text-base font-serif italic text-[#D9363E]">
+              &ldquo;Every contribution moves something forward.&rdquo;
+            </p>
+            <p className="text-xs sm:text-sm text-[var(--text-muted)] max-w-xl">
               From nationwide student sprints to international open-source repositories: verified code commits, merged PRs, and community badges.
             </p>
           </div>

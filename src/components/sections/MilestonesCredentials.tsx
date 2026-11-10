@@ -200,11 +200,14 @@ export default function MilestonesCredentials() {
           <div className="space-y-2">
             <div className="flex items-center gap-2 mono text-xs font-bold text-[#D9363E] uppercase tracking-widest">
               <Sparkles size={14} className="text-[#D9363E] animate-pulse" />
-              <span>Section 03 · Recognition &amp; Milestones</span>
+              <span>03 · RECOGNITION</span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white">
-              The Luminous <span className="font-serif italic font-normal text-[#D9363E]">Credential Vault.</span>
+              MILESTONES &amp; CREDENTIALS
             </h2>
+            <p className="text-sm sm:text-base font-serif italic text-[#D9363E]">
+              &ldquo;Progress worth keeping.&rdquo;
+            </p>
             <p className="text-sm sm:text-base text-white/60 max-w-xl">
               Progress worth keeping: 7 authentic, high-resolution credentials, badges, and certificates from Google, MyGov, GSSoC, and NexFellow.
             </p>

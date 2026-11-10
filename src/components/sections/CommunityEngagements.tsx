@@ -59,11 +59,14 @@ export default function CommunityEngagements() {
           <div className="space-y-2">
             <div className="flex items-center gap-2 mono text-xs font-bold text-[#D9363E] uppercase tracking-widest">
               <span className="w-2.5 h-2.5 rounded-full bg-[#D9363E] animate-pulse" />
-              <span>Section 02 · Community Engagements</span>
+              <span>02 · COMMUNITY</span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#171416]">
-              Building connections <span className="font-serif italic font-normal text-[#D9363E]">beyond the code.</span>
+              ENGAGEMENTS
             </h2>
+            <p className="text-sm sm:text-base font-serif italic text-[#D9363E]">
+              &ldquo;Building connections beyond the code.&rdquo;
+            </p>
             <p className="text-sm sm:text-base text-[var(--text-muted)] max-w-xl">
               17 verified programs spanning nationwide student networks, tech communities, and campus leadership roles across India.
             </p>

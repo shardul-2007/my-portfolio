@@ -14,6 +14,7 @@ import {
 import { PROFILE } from '@/data/profile';
 import { assetPath } from '@/lib/basePath';
 import { labAudio } from '@/lib/audio';
+import TornPaperEdge from '@/components/ui/TornPaperEdge';
 
 interface HeroProps {
   onOpenRecruiter: () => void;
@@ -471,8 +472,17 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
           </div>
 
           {/* ══════════════════════════════════════════════════════════════
-              TACTILE WIPE DIVIDER & DRAG HANDLE (Red Engineering Accent)
+              TACTILE TORN-PAPER WIPE DIVIDER & DRAG HANDLE
+              Organic Deckle Paper Rip Seam + Fine Fibers + Laser Thread
               ══════════════════════════════════════════════════════════════ */}
+          {/* Organic Torn Paper Edge Overlay */}
+          <div
+            style={{ left: `calc(${sliderPos}% - 12px)` }}
+            className="absolute top-0 bottom-0 w-6 z-25 pointer-events-none overflow-visible"
+          >
+            <TornPaperEdge crimsonAccent={true} />
+          </div>
+
           <div
             style={{ left: `${sliderPos}%` }}
             className="absolute top-0 bottom-0 w-[2px] bg-[#D9363E] z-30 pointer-events-none"
