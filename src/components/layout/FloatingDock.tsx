@@ -19,7 +19,7 @@ export default function FloatingDock() {
       const scrollPos = scrollY + 350;
       const workEl = document.getElementById('projects');
       const playEl = document.getElementById('play') || document.getElementById('arcade');
-      const journeyEl = document.getElementById('experience');
+      const journeyEl = document.getElementById('contributions') || document.getElementById('engagements') || document.getElementById('experience');
       const aboutEl = document.getElementById('about') || document.getElementById('desk');
 
       if (aboutEl && scrollPos >= aboutEl.offsetTop) {
@@ -88,7 +88,7 @@ export default function FloatingDock() {
           </a>
 
           <a
-            href="#experience"
+            href="#contributions"
             onClick={() => {
               labAudio.playClick(920);
               setActiveTab('journey');

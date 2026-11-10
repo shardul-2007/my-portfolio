@@ -19,8 +19,9 @@ import SkillsConstellation from '@/components/sections/SkillsConstellation';
 import Projects from '@/components/sections/Projects';
 import ArchitectureExplorer from '@/components/sections/ArchitectureExplorer';
 import CaseStudies from '@/components/sections/CaseStudies';
-import ExperienceTimeline from '@/components/sections/ExperienceTimeline';
-import AchievementsArchive from '@/components/sections/AchievementsArchive';
+import OpenSourceContributions from '@/components/sections/OpenSourceContributions';
+import CommunityEngagements from '@/components/sections/CommunityEngagements';
+import MilestonesCredentials from '@/components/sections/MilestonesCredentials';
 import DeveloperDesk from '@/components/sections/DeveloperDesk';
 import TerminalSection from '@/components/sections/TerminalSection';
 import Playground from '@/components/sections/Playground';
@@ -131,11 +132,19 @@ export default function Home() {
         {/* Section 09: Engineering Case Studies */}
         <CaseStudies />
 
-        {/* Section 10: Experience and Contributions (Image 7 Git Graph Timeline) */}
-        <ExperienceTimeline />
+        {/* ══════════════════════════════════════════════════════════════
+            THE 3 SIGNATURE MAIN ATTRACTION SECTIONS IN EXACT ORDER
+            Connected by visual storytelling energy lines
+            ══════════════════════════════════════════════════════════════ */}
 
-        {/* Section 11: Achievement Archive */}
-        <AchievementsArchive />
+        {/* Section 01: Open Source Contributions ("Every contribution moves something forward.") */}
+        <OpenSourceContributions />
+
+        {/* Section 02: Community Engagements ("Building connections beyond the code.") */}
+        <CommunityEngagements />
+
+        {/* Section 03: Recognition — Milestones & Credentials (The Luminous Credential Vault) */}
+        <MilestonesCredentials />
 
         {/* Section 12: Developer Desk (Image 8 Draggable Physical Mat) */}
         <DeveloperDesk

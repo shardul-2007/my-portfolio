@@ -6,6 +6,10 @@ import {
   Download,
   Mail,
   ChevronDown,
+  Code2,
+  Terminal,
+  Cpu,
+  Layers,
 } from 'lucide-react';
 import { PROFILE } from '@/data/profile';
 import { assetPath } from '@/lib/basePath';
@@ -43,33 +47,48 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
     return () => clearInterval(interval);
   }, []);
 
-  // Pointer & Drag Tracking Engine
-  const handlePointerMove = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+  // Pointer & Drag Tracking Engine with smooth bounds
+  const updatePosition = useCallback((clientX: number) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
-    const rawPos = ((e.clientX - rect.left) / rect.width) * 100;
-    const clamped = Math.max(10, Math.min(90, rawPos));
-
-    if (resetTimerRef.current) {
-      clearTimeout(resetTimerRef.current);
-    }
+    const rawPos = ((clientX - rect.left) / rect.width) * 100;
+    const clamped = Math.max(8, Math.min(92, rawPos));
     setSliderPos(clamped);
   }, []);
 
-  const handlePointerDown = () => {
+  const handlePointerMove = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
+    if (resetTimerRef.current) {
+      clearTimeout(resetTimerRef.current);
+    }
+    updatePosition(e.clientX);
+  }, [updatePosition]);
+
+  const handlePointerDown = (e: React.PointerEvent) => {
+    e.stopPropagation();
     setIsDragging(true);
     labAudio.playClick(900);
   };
 
-  const handlePointerUp = () => {
-    setIsDragging(false);
-  };
+  useEffect(() => {
+    const handleGlobalPointerUp = () => setIsDragging(false);
+    const handleGlobalPointerMove = (e: PointerEvent) => {
+      if (isDragging) {
+        updatePosition(e.clientX);
+      }
+    };
+    window.addEventListener('pointerup', handleGlobalPointerUp);
+    window.addEventListener('pointermove', handleGlobalPointerMove);
+    return () => {
+      window.removeEventListener('pointerup', handleGlobalPointerUp);
+      window.removeEventListener('pointermove', handleGlobalPointerMove);
+    };
+  }, [isDragging, updatePosition]);
 
   const handlePointerLeave = () => {
-    setIsDragging(false);
+    if (isDragging) return;
     resetTimerRef.current = setTimeout(() => {
       setSliderPos(50);
-    }, 2400);
+    }, 2800);
   };
 
   function handleCopyEmail() {
@@ -82,22 +101,25 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
   return (
     <section
       id="hero"
-      className="relative min-h-[90vh] flex flex-col justify-center pt-16 sm:pt-20 pb-16 overflow-hidden select-none bg-[var(--paper)]"
+      className="relative min-h-[92vh] flex flex-col justify-center pt-16 sm:pt-20 pb-16 overflow-hidden select-none bg-[var(--paper)]"
     >
       <div className="section-container relative z-10 w-full flex-1">
         <div
           ref={containerRef}
           onPointerMove={handlePointerMove}
           onPointerLeave={handlePointerLeave}
-          className="relative w-full min-h-[720px] sm:min-h-[780px] md:h-[820px] rounded-3xl overflow-hidden border border-[var(--border)] shadow-[0_12px_45px_rgba(23,20,22,0.08)] bg-[var(--paper)]"
+          className="relative w-full min-h-[720px] sm:min-h-[780px] md:h-[820px] rounded-3xl overflow-hidden border border-[var(--border)] shadow-[0_16px_50px_rgba(23,20,22,0.08)] bg-[var(--paper)]"
         >
           {/* ══════════════════════════════════════════════════════════════
               LAYER B: X-RAY / CODE (Engineering Inspection View)
-              Red Engineering Identity & Technical Measurements
+              Clean reciprocal clip-path so it never overlaps or leaks
               ══════════════════════════════════════════════════════════════ */}
-          <div className="absolute inset-0 w-full h-full bg-[#F1ECE8] text-[#D9363E] flex flex-col justify-between p-4 sm:p-8 md:p-10 overflow-hidden blueprint-grid">
+          <div
+            style={{ clipPath: `polygon(${sliderPos}% 0%, 100% 0%, 100% 100%, ${sliderPos}% 100%)` }}
+            className="absolute inset-0 w-full h-full bg-[#F1ECE8] text-[#D9363E] flex flex-col justify-between p-4 sm:p-8 md:p-10 overflow-hidden blueprint-grid transition-none pointer-events-none"
+          >
             {/* Top Bar (Code / Blueprint) */}
-            <div className="relative z-10 flex flex-wrap items-center justify-between gap-2 sm:gap-3 text-xs mono">
+            <div className="relative z-10 flex flex-wrap items-center justify-between gap-2 sm:gap-3 text-xs mono pointer-events-auto">
               <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#FDF6F6] border border-[#F2D2D4]">
                 <span>SHARDUL.LAB · ~/ git:(<b>main</b>) ✓</span>
                 <span className="text-[10px] text-[#A91F2C] hidden sm:inline">BUILDING IN PUBLIC</span>
@@ -116,66 +138,79 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
             </div>
 
             {/* Synchronized Stage Canvas */}
-            <div className="relative flex-1 w-full my-auto flex flex-col justify-between py-4">
+            <div className="relative flex-1 w-full my-auto flex flex-col justify-between py-2 sm:py-4">
               {/* Fit-to-Width Hollow Outlined Headline with Measurement Calipers */}
-              <div className="relative text-center pt-1 sm:pt-2">
+              <div className="relative text-center pt-2 sm:pt-4">
                 <div className="inline-block relative">
-                  <div className="absolute -top-4 sm:-top-5 right-0 mono text-[8px] sm:text-[9px] text-[#D9363E] uppercase font-bold">
-                    COMPONENT: HERO_SECTION · X-HEIGHT 86PX
+                  <div className="absolute -top-4 sm:-top-5 right-0 mono text-[8px] sm:text-[9px] text-[#D9363E] uppercase font-bold tracking-wider">
+                    COMPONENT: HERO_SECTION · X-HEIGHT 86PX · CAP_HEIGHT 114PX
                   </div>
 
                   <h1
                     className="text-[clamp(28px,7.2vw,96px)] font-bold tracking-tight leading-none uppercase text-transparent whitespace-nowrap"
                     style={{ WebkitTextStroke: '1.5px #D9363E' }}
                   >
-                    shardul parihar
+                    shardul parihar.
                   </h1>
 
-                  <div className="absolute -bottom-4 sm:-bottom-5 left-0 mono text-[8px] sm:text-[9px] text-[#D9363E] uppercase font-bold">
-                    FULL-STACK ENGINEERING · SYSTEM ARCHITECTURE
+                  <div className="absolute -bottom-4 sm:-bottom-5 left-0 mono text-[8px] sm:text-[9px] text-[#D9363E] uppercase font-bold tracking-wider">
+                    FULL-STACK ARCHITECTURE · RED ENGINEERING GRID
                   </div>
                 </div>
               </div>
 
               {/* Middle 3-Column Split Stage */}
               <div className="relative flex-1 w-full flex items-center justify-between gap-3 sm:gap-6 mt-4 sm:mt-6">
-                {/* Left Wireframe Column */}
+                {/* Left Wireframe Column — Blueprint Calipers (No Duplicate English Text!) */}
                 <div className="w-1/2 md:w-[32%] max-w-[320px] z-10 space-y-2 sm:space-y-3">
-                  <div className="p-2 sm:p-3 rounded-2xl border border-dashed border-[#D9363E]/50 bg-[#FDF6F6]/70 space-y-1">
-                    <div className="mono text-[8px] sm:text-[9px] text-[#D9363E] uppercase font-bold">
-                      INFO TECH STUDENT · BUILDER
+                  <div className="p-3 sm:p-3.5 rounded-2xl border border-dashed border-[#D9363E]/60 bg-[#FDF6F6]/90 space-y-2">
+                    <div className="flex items-center justify-between text-[9px] mono uppercase font-bold text-[#D9363E]">
+                      <span>&lt;HeroIntro /&gt;</span>
+                      <span className="text-[8px] bg-[#D9363E]/10 px-1.5 py-0.5 rounded">HYDRATED</span>
                     </div>
-                    <div className="text-sm sm:text-lg md:text-xl font-bold text-[#A91F2C] leading-snug">
-                      Information Technology Student <br />
-                      <span className="text-xs sm:text-sm font-medium text-[#711C27]">
-                        Software Developer · Builder · AI Enthusiast
-                      </span>
+
+                    <div className="mono text-[10px] sm:text-[11px] text-[#A91F2C] space-y-1">
+                      <div className="flex justify-between border-b border-[#D9363E]/20 pb-0.5">
+                        <span className="text-[#81777A]">spec.role:</span>
+                        <span className="font-bold">Info Tech Student</span>
+                      </div>
+                      <div className="flex justify-between border-b border-[#D9363E]/20 pb-0.5">
+                        <span className="text-[#81777A]">spec.focus:</span>
+                        <span className="font-bold">Full-Stack / AI</span>
+                      </div>
+                      <div className="flex justify-between border-b border-[#D9363E]/20 pb-0.5">
+                        <span className="text-[#81777A]">spec.campus:</span>
+                        <span className="font-bold">PCET NMIET Pune</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-[#81777A]">spec.render:</span>
+                        <span className="font-bold">60 FPS · React 18</span>
+                      </div>
                     </div>
-                    <p className="text-[11px] text-[#81777A] mono leading-relaxed pt-1">
-                      I build digital products through full-stack engineering, explore emerging technologies and turn creative ideas into practical solutions.
-                    </p>
                   </div>
 
-                  <div className="p-2 sm:p-2.5 rounded-xl border border-[#D9363E]/30 mono text-[9px] sm:text-[10px] text-[#D9363E] space-y-1">
-                    <div className="text-[8px] sm:text-[9px] opacity-70 uppercase font-bold">ACTION HOOKS · CTAS</div>
+                  <div className="p-2 sm:p-2.5 rounded-xl border border-[#D9363E]/40 bg-[#FDF6F6]/80 mono text-[9px] sm:text-[10px] text-[#D9363E] space-y-1">
+                    <div className="text-[8px] sm:text-[9px] opacity-70 uppercase font-bold">WIREFRAME NODES</div>
                     <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
-                      <span className="px-2 py-0.5 rounded bg-[#FDF6F6] font-bold">#projects</span>
-                      <span className="px-2 py-0.5 rounded bg-[#FDF6F6]">#contact</span>
-                      <span className="px-2 py-0.5 rounded bg-[#FDF6F6]">resume.pdf</span>
+                      <span className="px-2 py-0.5 rounded bg-white font-bold border border-[#F2D2D4]">flex.gap: 12px</span>
+                      <span className="px-2 py-0.5 rounded bg-white border border-[#F2D2D4]">box-model: 320x160</span>
+                      <span className="px-2 py-0.5 rounded bg-white border border-[#F2D2D4]">DOM: 48 nodes</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Center Wireframe Silhouette (Aligned Perfectly with Center Photo!) */}
                 <div className="relative w-36 h-48 sm:w-56 sm:h-72 md:w-60 md:h-80 mx-auto flex items-center justify-center">
-                  {/* Wireframe Technical Spec Bubble */}
-                  <div className="absolute -top-6 -left-2 sm:-left-6 z-20 max-w-[170px] sm:max-w-[210px] p-2 sm:p-2.5 rounded-2xl border border-dashed border-[#D9363E] bg-[#FDF6F6] text-[#D9363E] mono text-left text-[10px] sm:text-xs leading-snug shadow-sm">
-                    <div className="text-[8px] sm:text-[9px] opacity-70 uppercase font-bold">COMPONENT INSPECTION</div>
-                    <span className="font-sans font-medium text-[#711C27]">CURRENTLY BUILDING DIGITAL PRODUCTS</span>
-                    <div className="text-[9px] sm:text-[10px] opacity-70 mt-0.5 sm:mt-1">PUNE, INDIA · 2026</div>
+                  {/* Wireframe Technical Spec Bubble (Positioned top-right to avoid left column) */}
+                  <div className="absolute -top-8 -right-2 sm:-right-4 z-20 max-w-[170px] sm:max-w-[200px] p-2 rounded-2xl border border-dashed border-[#D9363E] bg-[#FDF6F6] text-[#D9363E] mono text-left text-[9px] sm:text-[10px] leading-snug shadow-sm">
+                    <div className="text-[8px] opacity-70 uppercase font-bold flex items-center gap-1">
+                      <Cpu size={10} /> X-RAY SCANNER
+                    </div>
+                    <span className="font-mono font-bold text-[#711C27]">BIOMETRIC WIREFRAME</span>
+                    <div className="text-[8px] opacity-70 mt-0.5">CPU: ACTIVE · PUNE, IN</div>
                   </div>
 
-                  <div className="relative w-full h-full rounded-3xl border-2 border-dashed border-[#D9363E] bg-[#FDF6F6]/60 flex items-center justify-center p-3">
+                  <div className="relative w-full h-full rounded-3xl border-2 border-dashed border-[#D9363E] bg-[#FDF6F6]/80 flex items-center justify-center p-3">
                     <svg viewBox="0 0 100 130" className="w-full h-full text-[#D9363E] stroke-current fill-none stroke-1">
                       {/* Skull */}
                       <circle cx="50" cy="22" r="14" strokeWidth="1.5" />
@@ -215,8 +250,8 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
 
                 {/* Right Wireframe Column */}
                 <div className="hidden md:block md:w-[32%] max-w-[320px] z-10 text-right space-y-2">
-                  <div className="p-3 rounded-2xl border border-dashed border-[#D9363E]/50 bg-[#FDF6F6]/70 space-y-1">
-                    <div className="mono text-[9px] text-[#D9363E] uppercase font-bold">AREAS OF EXPLORATION</div>
+                  <div className="p-3 rounded-2xl border border-dashed border-[#D9363E]/50 bg-[#FDF6F6]/80 space-y-1">
+                    <div className="mono text-[9px] text-[#D9363E] uppercase font-bold">SYSTEM METRICS</div>
                     <div className="flex flex-wrap justify-end gap-1.5 pt-1">
                       <span className="px-2 py-0.5 rounded bg-white text-[10px] font-bold mono border border-[#F2D2D4]">FULL-STACK</span>
                       <span className="px-2 py-0.5 rounded bg-white text-[10px] font-bold mono border border-[#F2D2D4]">AI APIS</span>
@@ -225,7 +260,7 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
                   </div>
 
                   <div className="mono text-[9px] bg-[#FDF6F6] p-2.5 rounded-xl text-[#711C27] font-bold uppercase text-right border border-[#F2D2D4]">
-                    ALWAYS LEARNING · PUNE, MAHARASHTRA
+                    INFORMATION TECHNOLOGY · 2024–2028
                   </div>
                 </div>
               </div>
@@ -249,7 +284,7 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
 
           {/* ══════════════════════════════════════════════════════════════
               LAYER A: REALITY / EDITORIAL (Finished Master Layer)
-              Warm Editorial Aesthetic · Red Brand Accents
+              Clean reciprocal clip-path from 0% to sliderPos%
               ══════════════════════════════════════════════════════════════ */}
           <div
             style={{ clipPath: `polygon(0% 0%, ${sliderPos}% 0%, ${sliderPos}% 100%, 0% 100%)` }}
@@ -285,9 +320,9 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
             </div>
 
             {/* Synchronized Stage Canvas */}
-            <div className="relative flex-1 w-full my-auto flex flex-col justify-between py-4">
+            <div className="relative flex-1 w-full my-auto flex flex-col justify-between py-2 sm:py-4">
               {/* Fit-to-Width Solid Headline */}
-              <div className="relative text-center pt-1 sm:pt-2">
+              <div className="relative text-center pt-2 sm:pt-4">
                 <div className="inline-block relative">
                   {/* Floating Identity Annotation */}
                   <div className="absolute -top-3 left-[26%] sm:left-[30%] z-20 hidden sm:flex items-center gap-1 bg-[#D9363E] text-white px-2.5 py-0.5 rounded-full text-[10px] font-bold shadow-md">
@@ -376,12 +411,12 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
                   </div>
                 </div>
 
-                {/* Center Photo (Aligned Exactly at Same Coordinates as Skeleton Silhouette!) */}
+                {/* Center Photo (Positioned safely with speech bubble top-right) */}
                 <div className="relative w-36 h-48 sm:w-56 sm:h-72 md:w-60 md:h-80 mx-auto flex items-center justify-center">
-                  {/* Floating Annotation Pill */}
-                  <div className="absolute -top-6 -left-2 sm:-left-6 z-20 max-w-[170px] sm:max-w-[210px] p-2 sm:p-2.5 rounded-2xl bg-white border border-[var(--border)] shadow-md text-left text-[11px] sm:text-xs font-medium leading-snug">
+                  {/* Floating Annotation Pill — Top Right, avoids colliding with left headline or column */}
+                  <div className="absolute -top-8 -right-2 sm:-right-4 z-20 max-w-[170px] sm:max-w-[200px] p-2 rounded-2xl bg-white border border-[var(--border)] shadow-md text-left text-[10px] sm:text-[11px] font-medium leading-snug">
                     <span className="text-[#D9363E] font-bold">CURRENTLY BUILDING DIGITAL PRODUCTS</span>
-                    <div className="text-[9px] sm:text-[10px] text-[var(--text-sub)] mono mt-0.5 sm:mt-1">Pune, India.</div>
+                    <div className="text-[9px] text-[var(--text-sub)] mono mt-0.5">Pune, India.</div>
                   </div>
 
                   {/* Cutout Photo */}
@@ -445,7 +480,6 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
             <button
               type="button"
               onPointerDown={handlePointerDown}
-              onPointerUp={handlePointerUp}
               aria-label="Drag to wipe between Reality and Code X-Ray"
               className="absolute top-1/2 -translate-y-1/2 -left-6 w-12 h-12 rounded-full bg-white border-2 border-[#D9363E] text-[#D9363E] shadow-[0_8px_24px_rgba(217,54,62,0.35)] flex items-center justify-center mono text-[10px] font-bold cursor-ew-resize pointer-events-auto hover:scale-110 active:scale-95 transition-transform"
             >
