@@ -1,18 +1,11 @@
 'use client';
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowDown,
   Copy,
-  Check,
-  MapPin,
-  Sparkles,
-  Layers,
-  Terminal,
   Download,
-  FileText,
-  Mail,
   ChevronDown,
+  MapPin,
   ExternalLink,
 } from 'lucide-react';
 import { PROFILE } from '@/data/profile';
@@ -77,7 +70,7 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
     setIsDragging(false);
     resetTimerRef.current = setTimeout(() => {
       setSliderPos(50);
-    }, 2200);
+    }, 2400);
   };
 
   function handleCopyEmail() {
@@ -90,23 +83,22 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
   return (
     <section
       id="hero"
-      className="relative min-h-[96vh] flex flex-col justify-center pt-20 pb-8 overflow-hidden select-none bg-[var(--paper)]"
+      className="relative min-h-[92vh] flex flex-col justify-center pt-20 pb-16 overflow-hidden select-none bg-[var(--paper)]"
     >
-      {/* ─── Dual-Layer Comparison Canvas ─── */}
       <div className="section-container relative z-10 w-full flex-1">
         <div
           ref={containerRef}
           onPointerMove={handlePointerMove}
           onPointerLeave={handlePointerLeave}
-          className="relative w-full min-h-[740px] sm:min-h-[800px] rounded-3xl overflow-hidden border border-[var(--border)] shadow-[0_12px_45px_rgba(30,20,32,0.08)] bg-[var(--paper)]"
+          className="relative w-full h-[760px] sm:h-[820px] rounded-3xl overflow-hidden border border-[var(--border)] shadow-[0_12px_45px_rgba(30,20,32,0.08)] bg-[var(--paper)]"
         >
-          {/* ══════════════════════════════════════════════════
-              LAYER B: X-RAY / CODE (Underlying Blueprint Layer)
-              Exact Parity with Image 2
-              ══════════════════════════════════════════════════ */}
-          <div className="absolute inset-0 w-full h-full bg-[#fbf5f6] text-[#1e1420] p-6 sm:p-10 flex flex-col justify-between overflow-hidden blueprint-grid">
-            {/* Top Telemetry in Code/Blueprint */}
-            <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 text-xs mono text-[#7c3aed]">
+          {/* ══════════════════════════════════════════════════════════════
+              LAYER B: X-RAY / CODE (Blueprint Technical View)
+              Exact synchronized coordinates with Layer A
+              ══════════════════════════════════════════════════════════════ */}
+          <div className="absolute inset-0 w-full h-full bg-[#fbf5f6] text-[#7c3aed] flex flex-col justify-between p-6 sm:p-10 overflow-hidden blueprint-grid">
+            {/* Top Bar (Code / Blueprint) */}
+            <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 text-xs mono">
               <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#ebe5ff] border border-[#d8ccff]">
                 <span>~/ portfolio git:(<b>main</b>) ✓</span>
                 <span className="text-[10px] text-[#7c3aed]/70">pushed on a friday</span>
@@ -124,30 +116,53 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
               </div>
             </div>
 
-            {/* Wireframe Outline Hero Title with Calipers (Image 2) */}
-            <div className="relative z-10 my-auto text-center py-4">
-              <div className="relative inline-block max-w-full">
-                {/* Measurement specs */}
-                <div className="absolute -top-6 right-0 mono text-[10px] text-[#7c3aed]">
-                  CAP HEIGHT 114PX · X-HEIGHT 86PX
-                </div>
+            {/* Synchronized Stage Canvas */}
+            <div className="relative flex-1 w-full my-auto flex flex-col justify-between">
+              {/* Fit-to-Width Hollow Outlined Headline with Measurement Calipers */}
+              <div className="relative text-center pt-2">
+                <div className="inline-block relative">
+                  <div className="absolute -top-5 right-0 mono text-[9px] text-[#7c3aed]">
+                    CAP HEIGHT 114PX · X-HEIGHT 86PX
+                  </div>
 
-                <h1 className="text-[11vw] sm:text-[9vw] font-bold tracking-tight leading-none text-transparent border-t border-b border-[#7c3aed]/30 py-2"
-                    style={{ WebkitTextStroke: '1.5px #7c3aed' }}>
-                  shardul parihar
-                </h1>
+                  <h1
+                    className="text-[clamp(36px,7.5vw,100px)] font-bold tracking-tight leading-none uppercase text-transparent whitespace-nowrap"
+                    style={{ WebkitTextStroke: '1.5px #7c3aed' }}
+                  >
+                    shardul parihar
+                  </h1>
 
-                <div className="absolute -bottom-6 left-0 mono text-[10px] text-[#7c3aed]">
-                  BASELINE · DESCENDER 24PX
+                  <div className="absolute -bottom-5 left-0 mono text-[9px] text-[#7c3aed]">
+                    BASELINE · DESCENDER 24PX
+                  </div>
                 </div>
               </div>
 
-              {/* Anatomical Skeleton Schematic Graphic with Glowing Heart */}
-              <div className="relative max-w-md mx-auto my-6 p-4 border border-dashed border-[#7c3aed]/40 rounded-2xl bg-[#ebe5ff]/40">
-                <div className="flex items-center justify-center gap-6">
-                  {/* Anatomical Schematic SVG */}
-                  <div className="relative w-36 h-48 flex items-center justify-center">
-                    <svg viewBox="0 0 100 140" className="w-full h-full text-[#7c3aed] stroke-current fill-none stroke-1">
+              {/* Middle 3-Column Split Stage */}
+              <div className="relative flex-1 w-full flex items-center justify-between gap-4 mt-6">
+                {/* Left Wireframe Column */}
+                <div className="w-[30%] max-w-[280px] z-10 space-y-3">
+                  <div className="p-3 rounded-2xl border border-dashed border-[#7c3aed]/50 bg-[#ebe5ff]/40 space-y-1">
+                    <div className="mono text-[9px] text-[#7c3aed] uppercase font-bold">p · Geist 500 · 40/1.02</div>
+                    <div className="text-xl sm:text-2xl font-bold text-[#7c3aed]">
+                      CS (AIML) student <br />
+                      who <span className="font-serif-italic font-normal text-[#ff4f9a]">performs</span>.
+                    </div>
+                  </div>
+
+                  <div className="p-2.5 rounded-xl border border-[#7c3aed]/30 mono text-[10px] text-[#7c3aed] space-y-1">
+                    <div className="text-[9px] opacity-70 uppercase">flex · gap 10px</div>
+                    <div className="flex items-center gap-2">
+                      <span className="px-2 py-1 rounded bg-[#ebe5ff] font-bold">btn: resume 1 page</span>
+                      <span className="px-2 py-1 rounded bg-[#ebe5ff]">btn: copy</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Center Wireframe Silhouette (Aligned Perfectly with Center Photo!) */}
+                <div className="relative w-48 h-64 sm:w-60 sm:h-80 mx-auto flex items-center justify-center">
+                  <div className="relative w-full h-full rounded-3xl border-2 border-dashed border-[#7c3aed] bg-[#ebe5ff]/50 flex items-center justify-center p-3">
+                    <svg viewBox="0 0 100 130" className="w-full h-full text-[#7c3aed] stroke-current fill-none stroke-1">
                       {/* Skull */}
                       <circle cx="50" cy="22" r="14" strokeWidth="1.5" />
                       <circle cx="45" cy="20" r="2" fill="currentColor" />
@@ -155,57 +170,52 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
                       <path d="M44 28 Q50 32 56 28" strokeWidth="1.2" />
 
                       {/* Spine & Ribs */}
-                      <line x1="50" y1="36" x2="50" y2="90" strokeWidth="2" strokeDasharray="2 2" />
+                      <line x1="50" y1="36" x2="50" y2="85" strokeWidth="2" strokeDasharray="2 2" />
                       <path d="M36 48 Q50 42 64 48" strokeWidth="1.2" />
                       <path d="M34 58 Q50 52 66 58" strokeWidth="1.2" />
                       <path d="M36 68 Q50 62 64 68" strokeWidth="1.2" />
-                      <path d="M40 78 Q50 74 60 78" strokeWidth="1.2" />
 
                       {/* Arms */}
-                      <path d="M36 48 L20 75 L30 100" strokeWidth="1.5" />
-                      <path d="M64 48 L80 75 L70 100" strokeWidth="1.5" />
+                      <path d="M36 48 L22 75 L30 95" strokeWidth="1.5" />
+                      <path d="M64 48 L78 75 L70 95" strokeWidth="1.5" />
 
                       {/* Pelvis & Legs */}
-                      <path d="M42 90 Q50 96 58 90" strokeWidth="1.8" />
-                      <path d="M44 92 L38 135" strokeWidth="1.5" />
-                      <path d="M56 92 L62 135" strokeWidth="1.5" />
+                      <path d="M42 85 Q50 92 58 85" strokeWidth="1.8" />
+                      <path d="M44 88 L38 125" strokeWidth="1.5" />
+                      <path d="M56 88 L62 125" strokeWidth="1.5" />
 
                       {/* Pulsating Heart */}
                       <circle cx="47" cy="54" r="5" fill="#ff4f9a" className="animate-ping opacity-75" />
                       <circle cx="47" cy="54" r="4" fill="#ff4f9a" />
                     </svg>
-                  </div>
 
-                  {/* Anatomical Callouts (Image 2 Parity) */}
-                  <div className="text-left mono text-[10px] space-y-2 text-[#7c3aed]">
-                    <div>
-                      <span className="font-bold uppercase text-[#ff4f9a]">FRONTAL LOBE:</span>
-                      <p className="opacity-80">one more hackathon, at 2 a.m.</p>
+                    {/* Spec tags over skeleton */}
+                    <div className="absolute top-2 right-2 mono text-[8px] bg-white/90 px-1.5 py-0.5 rounded text-[#7c3aed] font-bold">
+                      FRONTAL LOBE
                     </div>
-                    <div>
-                      <span className="font-bold uppercase text-[#7c3aed]">OCCIPITAL LOBE:</span>
-                      <p className="opacity-80">spots 2px gaps from orbit</p>
-                    </div>
-                    <div>
-                      <span className="font-bold uppercase text-[#7c3aed]">CEREBELLUM:</span>
-                      <p className="opacity-80">muscle memory: git commit, ctrl+z</p>
-                    </div>
-                    <div>
-                      <span className="font-bold uppercase text-[#ff4f9a]">HEART:</span>
-                      <p className="opacity-80">runs on filter coffee, hackathons &amp; 2 a.m. ideas</p>
+                    <div className="absolute bottom-2 left-2 mono text-[8px] bg-white/90 px-1.5 py-0.5 rounded text-[#ff4f9a] font-bold">
+                      HEART: 2 AM
                     </div>
                   </div>
                 </div>
 
-                {/* Technical Calipers Spec Chips */}
-                <div className="flex items-center justify-between mt-3 pt-2 border-t border-[#7c3aed]/20 mono text-[9px] text-[#7c3aed]/70">
-                  <span>p · Geist 500 · 40/1.02 · -0.045em</span>
-                  <span>flex · gap 10px · h 80</span>
+                {/* Right Wireframe Column */}
+                <div className="w-[30%] max-w-[280px] z-10 text-right space-y-2">
+                  <div className="p-3 rounded-2xl border border-dashed border-[#7c3aed]/50 bg-[#ebe5ff]/40 space-y-1">
+                    <div className="mono text-[9px] text-[#7c3aed] uppercase font-bold">p · Geist 400 · 19/1.58</div>
+                    <p className="text-xs text-[#7c3aed] leading-relaxed">
+                      i build autonomous AI agents, responsive web platforms, and things with code.
+                    </p>
+                  </div>
+
+                  <div className="mono text-[9px] bg-[#ebe5ff] p-2 rounded-xl text-[#7c3aed] font-bold uppercase text-right">
+                    I DEBUG WITH PRINT(). AND I&apos;M NOT ASHAMED OF IT.
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Bottom Yellow Ticker Strip in X-Ray (Image 2) */}
+            {/* Bottom Yellow Ticker Strip in X-Ray */}
             <div className="relative z-10 w-full bg-[#FFE500] text-[#1e1420] py-2 px-4 rounded-xl mono text-xs font-bold flex flex-wrap items-center justify-between gap-3 shadow-sm border border-black/10">
               <div className="flex items-center gap-3">
                 <span>✈ BEEN AROUND</span>
@@ -221,17 +231,16 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
             </div>
           </div>
 
-          {/* ══════════════════════════════════════════════════
+          {/* ══════════════════════════════════════════════════════════════
               LAYER A: REALITY / DESIGN (Finished Master Layer)
-              Exact Parity with Image 3 (and Image 1 Halftone effect)
-              ══════════════════════════════════════════════════ */}
+              Clipped dynamically by the draggable divider line
+              ══════════════════════════════════════════════════════════════ */}
           <div
             style={{ clipPath: `polygon(0% 0%, ${sliderPos}% 0%, ${sliderPos}% 100%, 0% 100%)` }}
-            className="absolute inset-0 w-full h-full bg-[#fbf5f6] text-[#1e1420] p-6 sm:p-10 flex flex-col justify-between overflow-hidden transition-none"
+            className="absolute inset-0 w-full h-full bg-[#fbf5f6] text-[#1e1420] flex flex-col justify-between p-6 sm:p-10 overflow-hidden transition-none"
           >
-            {/* Top Bar in Reality (Image 3) */}
+            {/* Top Bar (Reality / Design) */}
             <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 text-xs mono">
-              {/* Draft file indicator */}
               <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-[var(--border)] shadow-sm">
                 <span className="text-[var(--text-sub)]"># drafts /</span>
                 <button
@@ -247,82 +256,54 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
                 <ChevronDown size={11} className="text-[var(--text-sub)]" />
               </div>
 
-              {/* Status pill */}
               <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[var(--border)] shadow-sm">
                 <span className="w-2 h-2 rounded-full bg-[#12a150] animate-pulse" />
                 <span className="font-bold text-[#1e1420]">open to internships</span>
                 <span className="text-[var(--text-sub)] hidden sm:inline">python · web design · AI/ML</span>
               </div>
 
-              {/* Location & Time */}
               <div className="flex items-center gap-2 text-xs font-medium text-[var(--text-sub)]">
                 <span>PUNE, IN</span>
                 <span className="font-bold text-[#1e1420]">{currentTime}</span>
               </div>
             </div>
 
-            {/* Main Center Composition (Image 3 & Image 1) */}
-            <div className="relative z-10 my-auto text-center py-2">
-              {/* Giant Fit-to-Width Headline */}
-              <h1 className="text-[11vw] sm:text-[9.2vw] font-bold tracking-tight leading-none text-[#1e1420] select-none">
-                shardul parihar
-              </h1>
-
-              {/* Center Halftone / Real Photo with Sticky Notes & Speech Bubble */}
-              <div className="relative max-w-lg mx-auto mt-4 sm:mt-6 mb-4 flex items-center justify-center">
-                {/* Speech Bubble (Image 3) */}
-                <div className="absolute -top-6 left-0 sm:-left-4 z-20 max-w-[200px] p-3 rounded-2xl bg-white border border-[var(--border)] shadow-md text-left text-xs font-medium leading-snug">
-                  <span>rehearsal at 6, hackathon at 9. i&apos;m fine. totally fine.</span>
-                  <div className="text-[10px] text-[var(--text-sub)] mono mt-1">9:41</div>
-                </div>
-
-                {/* Client Sticky Note (Image 3) */}
-                <div className="absolute top-4 right-0 sm:right-2 z-20 p-2.5 rounded-xl bg-[#ff4f9a] text-white shadow-md text-left text-xs font-bold leading-tight rotate-3">
-                  <div className="text-[9px] opacity-80 uppercase mono">client</div>
-                  <span>can you make the name bigger?</span>
-                </div>
-
-                {/* Central Avatar with Halftone Texture (Image 1 & 3 Parity) */}
-                <div className="relative w-48 h-60 sm:w-56 sm:h-72 rounded-3xl overflow-hidden bg-gradient-to-b from-[#ffe1ef] to-[#ebe5ff] border-2 border-white shadow-xl flex items-center justify-center group">
-                  <img
-                    src={assetPath('/imageshardul.png')}
-                    alt="Shardul Parihar"
-                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                  />
-
-                  {/* Halftone Screen Overlay Layer */}
-                  <div className="absolute inset-0 halftone-screen text-[#8b5cf6] opacity-35 mix-blend-multiply pointer-events-none" />
-                </div>
+            {/* Synchronized Stage Canvas */}
+            <div className="relative flex-1 w-full my-auto flex flex-col justify-between">
+              {/* Fit-to-Width Solid Headline */}
+              <div className="relative text-center pt-2">
+                <h1 className="text-[clamp(36px,7.5vw,100px)] font-bold tracking-tight leading-none uppercase text-[#1e1420] whitespace-nowrap">
+                  shardul parihar
+                </h1>
               </div>
 
-              {/* Subheading & Witty Copy (Image 3) */}
-              <div className="max-w-2xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 px-4">
-                {/* Left Side: CS Student Who Performs */}
-                <div className="text-left space-y-3">
-                  <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1e1420]">
+              {/* Middle 3-Column Split Stage */}
+              <div className="relative flex-1 w-full flex items-center justify-between gap-4 mt-6">
+                {/* Left Reality Column */}
+                <div className="w-[30%] max-w-[280px] z-10 space-y-3">
+                  <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-[#1e1420]">
                     CS (AIML) student <br />
                     who <span className="font-serif-italic font-normal text-[#ff4f9a]">performs</span>.
                   </h2>
 
-                  {/* Actions */}
                   <div className="flex flex-wrap items-center gap-2 pt-1">
                     <a
                       href={PROFILE.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => labAudio.playClick(1000)}
-                      className="flex items-center gap-2 mono text-xs px-4 py-2 rounded-full bg-[#1e1420] text-white hover:bg-black font-bold transition-all shadow-sm"
+                      className="flex items-center gap-1.5 mono text-xs px-3.5 py-1.5 rounded-full bg-[#1e1420] text-white hover:bg-black font-bold transition-all shadow-sm"
                     >
                       <span>resume 1 page</span>
-                      <Download size={12} />
+                      <Download size={11} />
                     </a>
 
                     <button
                       type="button"
                       onClick={handleCopyEmail}
-                      className="flex items-center gap-1.5 mono text-xs px-4 py-2 rounded-full bg-white border border-[var(--border)] text-[#1e1420] hover:bg-[#f4eff1] transition-all cursor-pointer font-medium shadow-sm"
+                      className="flex items-center gap-1.5 mono text-xs px-3.5 py-1.5 rounded-full bg-white border border-[var(--border)] text-[#1e1420] hover:bg-[#f4eff1] transition-all cursor-pointer font-medium shadow-sm"
                     >
-                      <Copy size={12} />
+                      <Copy size={11} />
                       <span>{copied ? 'copied!' : 'copy email'}</span>
                     </button>
                   </div>
@@ -341,20 +322,40 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
                   </p>
                 </div>
 
-                {/* Right Side: Witty Engineering Statement (Image 3) */}
-                <div className="text-left md:text-right max-w-xs space-y-2 text-xs text-[var(--text-muted)] font-normal leading-relaxed">
-                  <p>
+                {/* Center Photo (Aligned Exactly at Same Coordinates as Skeleton Silhouette!) */}
+                <div className="relative w-48 h-64 sm:w-60 sm:h-80 mx-auto flex items-center justify-center">
+                  {/* Speech Bubble */}
+                  <div className="absolute -top-6 -left-4 z-20 max-w-[190px] p-2.5 rounded-2xl bg-white border border-[var(--border)] shadow-md text-left text-xs font-medium leading-snug">
+                    <span>rehearsal at 6, hackathon at 9. i&apos;m fine. totally fine.</span>
+                    <div className="text-[10px] text-[var(--text-sub)] mono mt-1">9:41</div>
+                  </div>
+
+                  {/* Cutout Photo */}
+                  <div className="relative w-full h-full rounded-3xl overflow-hidden bg-gradient-to-b from-[#ffe1ef] to-[#ebe5ff] border-2 border-white shadow-xl flex items-center justify-center">
+                    <img
+                      src={assetPath('/imageshardul.png')}
+                      alt="Shardul Parihar"
+                      className="w-full h-full object-cover object-top"
+                    />
+                    <div className="absolute inset-0 halftone-screen text-[#8b5cf6] opacity-35 mix-blend-multiply pointer-events-none" />
+                  </div>
+                </div>
+
+                {/* Right Reality Column */}
+                <div className="w-[30%] max-w-[280px] z-10 text-right space-y-3">
+                  <p className="text-xs text-[var(--text-muted)] font-normal leading-relaxed">
                     i build <b>autonomous AI agents</b>, responsive web platforms, and things with code. lately:
                     <b> CivicOS</b> and <b>AssemblyOS</b> that run, fast.
                   </p>
-                  <p className="mono text-[10px] uppercase tracking-wider text-[#1e1420] font-bold pt-2">
+
+                  <p className="mono text-[10px] uppercase tracking-wider text-[#1e1420] font-bold">
                     I DEBUG WITH PRINT(). AND I&apos;M NOT ASHAMED OF IT.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Bottom Yellow Bar in Reality (Image 1 Parity) */}
+            {/* Bottom Yellow Bar in Reality */}
             <div className="relative z-10 w-full bg-[#FFE500] text-[#1e1420] py-2 px-4 rounded-xl mono text-xs font-bold flex flex-wrap items-center justify-between gap-3 shadow-sm border border-black/10">
               <div className="flex items-center gap-3">
                 <span className="px-2 py-0.5 rounded bg-black text-white text-[10px]">072 DPI</span>
@@ -366,42 +367,41 @@ export default function Hero({ onOpenRecruiter, onOpenCommand }: HeroProps) {
             </div>
           </div>
 
-          {/* ══════════════════════════════════════════════════
+          {/* ══════════════════════════════════════════════════════════════
               TACTILE WIPE DIVIDER & DRAG HANDLE
-              ══════════════════════════════════════════════════ */}
+              ══════════════════════════════════════════════════════════════ */}
           <div
             style={{ left: `${sliderPos}%` }}
             className="absolute top-0 bottom-0 w-[2px] bg-[#8b5cf6] z-30 pointer-events-none"
           >
-            {/* Grab Handle (Image 2 Parity) */}
             <button
               type="button"
               onPointerDown={handlePointerDown}
               onPointerUp={handlePointerUp}
               aria-label="Drag to wipe between Design Reality and Code X-Ray"
-              className="absolute top-1/2 -translate-y-1/2 -left-6 w-12 h-12 rounded-full bg-white dark:bg-[#1e1420] border-2 border-[#8b5cf6] text-[#8b5cf6] shadow-[0_8px_24px_rgba(139,92,246,0.35)] flex items-center justify-center mono text-[10px] font-bold cursor-ew-resize pointer-events-auto hover:scale-110 active:scale-95 transition-transform"
+              className="absolute top-1/2 -translate-y-1/2 -left-6 w-12 h-12 rounded-full bg-white border-2 border-[#8b5cf6] text-[#8b5cf6] shadow-[0_8px_24px_rgba(139,92,246,0.35)] flex items-center justify-center mono text-[10px] font-bold cursor-ew-resize pointer-events-auto hover:scale-110 active:scale-95 transition-transform"
             >
               drag
             </button>
           </div>
 
-          {/* Rotating Circular Stamp: Scroll for receipts (Images 2 & 3 Parity) */}
+          {/* Rotating Circular Stamp */}
           <div className="absolute bottom-16 right-6 sm:right-10 z-20 pointer-events-none hidden sm:block">
-            <div className="relative w-20 h-20 flex items-center justify-center animate-[spin_12s_linear_infinite]">
+            <div className="relative w-16 h-16 flex items-center justify-center animate-[spin_12s_linear_infinite]">
               <svg viewBox="0 0 100 100" className="w-full h-full text-[#1e1420] fill-current">
                 <path
-                  id="circlePath"
+                  id="heroCirclePath"
                   d="M 50, 50 m -36, 0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0"
                   fill="none"
                 />
-                <text className="mono text-[8.5px] uppercase tracking-[0.18em]">
-                  <textPath href="#circlePath" startOffset="0%">
-                    * SCROLL FOR RECEIPTS * IT GETS BETTER, PROBABLY.
+                <text className="mono text-[8px] uppercase tracking-[0.16em]">
+                  <textPath href="#heroCirclePath" startOffset="0%">
+                    * SCROLL FOR RECEIPTS * IT GETS BETTER *
                   </textPath>
                 </text>
               </svg>
             </div>
-            <ArrowDown size={14} className="absolute inset-0 m-auto text-[#1e1420] animate-bounce" />
+            <ArrowDown size={13} className="absolute inset-0 m-auto text-[#1e1420] animate-bounce" />
           </div>
         </div>
       </div>
