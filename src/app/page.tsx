@@ -5,11 +5,13 @@ import SystemBoot from '@/components/ui/SystemBoot';
 import CommandPalette from '@/components/ui/CommandPalette';
 import RecruiterModeModal from '@/components/ui/RecruiterModeModal';
 import Navbar from '@/components/layout/Navbar';
+import FloatingDock from '@/components/layout/FloatingDock';
 import Footer from '@/components/layout/Footer';
 
 // Sections
 import Hero from '@/components/sections/Hero';
 import Receipts from '@/components/sections/Receipts';
+import ShortVersion from '@/components/sections/ShortVersion';
 import CommandCenter from '@/components/sections/CommandCenter';
 import InsideMind from '@/components/sections/InsideMind';
 import About from '@/components/sections/About';
@@ -27,14 +29,14 @@ import GitHubSection from '@/components/sections/GitHubSection';
 import ContactSection from '@/components/sections/ContactSection';
 
 export default function Home() {
-  const [theme, setTheme] = useState<'dark' | 'yellow'>('dark');
+  const [theme, setTheme] = useState<'paper' | 'dark' | 'yellow'>('paper');
   const [isCommandOpen, setIsCommandOpen] = useState(false);
   const [isRecruiterOpen, setIsRecruiterOpen] = useState(false);
 
   useEffect(() => {
-    // Theme initialization
-    const savedTheme = localStorage.getItem('shardul_lab_theme') as 'dark' | 'yellow' | null;
-    const initialTheme = savedTheme === 'yellow' ? 'yellow' : 'dark';
+    // Theme initialization matching Image 1 Paper Palette
+    const savedTheme = localStorage.getItem('shardul_lab_theme') as 'paper' | 'dark' | 'yellow' | null;
+    const initialTheme = savedTheme || 'paper';
     setTheme(initialTheme);
     document.documentElement.setAttribute('data-theme', initialTheme);
 
@@ -50,7 +52,7 @@ export default function Home() {
   }, []);
 
   function toggleTheme() {
-    const nextTheme = theme === 'dark' ? 'yellow' : 'dark';
+    const nextTheme = theme === 'paper' ? 'dark' : theme === 'dark' ? 'yellow' : 'paper';
     setTheme(nextTheme);
     document.documentElement.setAttribute('data-theme', nextTheme);
     localStorage.setItem('shardul_lab_theme', nextTheme);
@@ -85,12 +87,15 @@ export default function Home() {
         onOpenCommand={() => setIsCommandOpen(true)}
         onOpenRecruiter={() => setIsRecruiterOpen(true)}
         onToggleTheme={toggleTheme}
-        theme={theme}
+        theme={theme === 'paper' ? 'dark' : 'yellow'}
       />
+
+      {/* Floating Bottom Navigation Dock (Images 3, 4, 5, 6, 7, 8 Parity) */}
+      <FloatingDock />
 
       {/* Main Connected Engineering Universe */}
       <main className="relative">
-        {/* Section 02: Cinematic Hero with REALITY / X-RAY Split */}
+        {/* Section 02: Cinematic Hero with REALITY / X-RAY Split (Images 1, 2, 3) */}
         <Hero
           onOpenRecruiter={() => setIsRecruiterOpen(true)}
           onOpenCommand={() => setIsCommandOpen(true)}
@@ -98,6 +103,9 @@ export default function Home() {
 
         {/* Section 02.5: Receipts & Verified Counters */}
         <Receipts />
+
+        {/* Section 02.7: The Short Version — Scroll-Driven Highlighting (Image 4) */}
+        <ShortVersion />
 
         {/* Section 03: Engineering Command Center */}
         <CommandCenter
@@ -111,10 +119,10 @@ export default function Home() {
         {/* Section 05: About Me */}
         <About />
 
-        {/* Section 06: Technology Constellation */}
+        {/* Section 06: The Stack (5-Column Editorial Capabilities) */}
         <SkillsConstellation />
 
-        {/* Section 07: Featured Engineering Projects */}
+        {/* Section 07: Featured Engineering Projects (Image 5 Stacked Cards) */}
         <Projects />
 
         {/* Section 08: Project Architecture Explorer */}
@@ -123,13 +131,13 @@ export default function Home() {
         {/* Section 09: Engineering Case Studies */}
         <CaseStudies />
 
-        {/* Section 10: Experience and Contributions (Git Timeline) */}
+        {/* Section 10: Experience and Contributions (Image 7 Git Graph Timeline) */}
         <ExperienceTimeline />
 
         {/* Section 11: Achievement Archive */}
         <AchievementsArchive />
 
-        {/* Section 12: Developer Desk */}
+        {/* Section 12: Developer Desk (Image 8 Draggable Physical Mat) */}
         <DeveloperDesk
           onOpenRecruiter={() => setIsRecruiterOpen(true)}
         />
@@ -140,7 +148,7 @@ export default function Home() {
         {/* Section 14: Engineering Playground */}
         <Playground />
 
-        {/* Section 15: Arcade & Mini Experiences */}
+        {/* Section 15: Arcade & Living Moving Experiences (Image 6) */}
         <ArcadeSection />
 
         {/* Section 16: Live GitHub Feed */}
@@ -150,7 +158,7 @@ export default function Home() {
         <ContactSection />
       </main>
 
-      {/* Footer */}
+      {/* Unique Footer Transmission with Squashable Bugs & Duck (Image 9) */}
       <Footer />
     </>
   );

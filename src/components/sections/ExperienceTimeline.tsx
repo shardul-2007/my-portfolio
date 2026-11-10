@@ -1,6 +1,6 @@
 'use client';
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useRef, useEffect } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import {
   GitCommit,
   GitBranch,
@@ -9,85 +9,143 @@ import {
   ExternalLink,
   ChevronDown,
   CheckCircle2,
-  Clock,
   Sparkles,
 } from 'lucide-react';
 import { EXPERIENCES, ExperienceItem } from '@/data/experience';
+import { ACHIEVEMENTS } from '@/data/achievements';
 import { PROFILE } from '@/data/profile';
 import { labAudio } from '@/lib/audio';
 
 export default function ExperienceTimeline() {
-  const [filter, setFilter] = useState<'all' | 'active' | 'completed' | 'opensource' | 'campus'>('all');
-  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [filter, setFilter] = useState<'all' | 'active' | 'opensource' | 'campus'>('all');
+  const [activeCommitIndex, setActiveCommitIndex] = useState(3);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start 80%', 'end 20%'],
+  });
+
+  // Map scroll progress to active commit index (0 to 16)
+  useEffect(() => {
+    return scrollYProgress.onChange(v => {
+      const idx = Math.min(EXPERIENCES.length - 1, Math.floor(v * EXPERIENCES.length));
+      setActiveCommitIndex(idx);
+    });
+  }, [scrollYProgress]);
 
   const filtered = EXPERIENCES.filter(exp => {
     if (filter === 'active') return exp.status === 'active';
-    if (filter === 'completed') return exp.status === 'completed';
     if (filter === 'opensource') return exp.category.toLowerCase().includes('open source');
     if (filter === 'campus') return exp.category.toLowerCase().includes('ambassador') || exp.category.toLowerCase().includes('campus');
     return true;
   });
 
-  const activeCount = EXPERIENCES.filter(e => e.status === 'active').length;
-  const completedCount = EXPERIENCES.filter(e => e.status === 'completed').length;
+  // Witty git commit release note points generator
+  function getReleaseNoteBullets(item: ExperienceItem) {
+    if (item.org.includes('RemoteRecruit')) {
+      return [
+        { type: '+', text: 'outreach engine: connected 100+ students to global internship pipelines' },
+        { type: '-', text: 'deprecated: campus awareness bottlenecks' },
+        { type: '!', text: 'breaking change: 0 to 1 community ambassador deployment' },
+      ];
+    }
+    if (item.org.includes('Open Source Connect')) {
+      return [
+        { type: '+', text: 'full-stack: contributions across MERN repositories & documentation' },
+        { type: '+', text: 'collaborative pull requests merged with verified contributor badge' },
+        { type: '!', text: 'survived: merge conflicts on upstream production branches' },
+      ];
+    }
+    if (item.org.includes('HackerRank')) {
+      return [
+        { type: '+', text: 'campus crew lead: representing HackerRank across PCET NMIET' },
+        { type: '+', text: 'facilitated developer coding contests & algorithmic workshops' },
+        { type: '!', text: 'competitive selection interview: passed' },
+      ];
+    }
+    if (item.org.includes('GirlScript')) {
+      return [
+        { type: '+', text: 'open-source contributor: merged high-impact features in web repositories' },
+        { type: '+', text: 'git workflow: branch hygiene, peer code review, issue triage' },
+        { type: '-', text: 'fixed: responsive CSS overflows across mobile viewports' },
+      ];
+    }
+    return [
+      { type: '+', text: `${item.role} verified across production repositories` },
+      { type: '+', text: `hands-on implementation of ${(item.skills || []).slice(0, 3).join(', ')}` },
+      { type: '!', text: `milestone: verified credentials on official records` },
+    ];
+  }
 
   return (
-    <section id="experience" className="py-28 relative border-b border-[var(--border)] overflow-hidden">
+    <section
+      id="experience"
+      ref={containerRef}
+      className="py-24 relative border-b border-[var(--border)] overflow-hidden bg-[var(--paper)]"
+    >
       <div className="section-container">
-        {/* Header */}
-        <div className="max-w-3xl mb-12">
-          <div className="flex items-center gap-2 mb-3">
-            <GitBranch size={14} className="text-[var(--accent)]" />
+        {/* Editorial Section Header (Image 7 Parity) */}
+        <div className="max-w-3xl mb-10">
+          <div className="flex items-center gap-2 mb-2">
+            <GitBranch size={14} className="text-[#8b5cf6]" />
             <span className="eyebrow">the journey · git log --graph</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-[var(--text)] font-editorial">
-            release notes <span className="font-serif-italic font-normal text-amber-500">for</span> shardul.
+
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#1e1420]">
+            release notes <span className="font-serif-italic font-normal text-[#ff4f9a]">for</span> shardul.
           </h2>
+
           <p className="text-sm sm:text-base text-[var(--text-muted)] font-light mt-3 leading-relaxed">
-            every version so far, on one branch graph. breaking changes documented, known issues disclosed, and no version was skipped. unlike windows 9.
+            every career commit so far, tracked on a git branch graph. breaking changes documented, verified credentials linked, and zero versions skipped.
           </p>
 
-          {/* Git HUD Banner matching Rishika Reference */}
-          <div className="flex flex-wrap items-center justify-between gap-4 mt-6 p-4 rounded-2xl bg-[var(--surface-2)] border border-[var(--border)] mono text-xs">
+          {/* Git Branch HUD Banner (Exact Parity with Image 7) */}
+          <div className="flex flex-wrap items-center justify-between gap-4 mt-6 p-4 rounded-2xl bg-white border border-[var(--border)] shadow-sm mono text-xs">
             <div className="flex items-center gap-3">
-              <span className="text-amber-500 font-bold">HEAD →</span>
-              <span className="px-2 py-0.5 rounded bg-[var(--accent)] text-black font-bold">v0.6-prod</span>
+              <span className="px-2.5 py-1 rounded-md bg-[#1e1420] text-white font-bold text-[11px]">
+                HEAD →
+              </span>
+              <span className="text-xl font-black text-[#1e1420]">v1.0</span>
               <span className="text-[var(--text-sub)]">2026</span>
-              <span className="px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 text-[10px]">main-release</span>
+              <span className="px-2 py-0.5 rounded-full bg-[#ffb8dc] text-[#1e1420] font-bold text-[10px]">
+                MAJOR
+              </span>
             </div>
 
-            <div className="flex items-center gap-4 text-[11px] text-[var(--text-muted)]">
-              <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-[var(--accent)]" /> main</span>
-              <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-amber-500" /> work</span>
-              <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-purple-500" /> side-quests</span>
-              <span className="text-[var(--text)] font-bold">commit 01/17</span>
-            </div>
-          </div>
-
-          {/* Counts Bar */}
-          <div className="flex flex-wrap items-center gap-6 mt-6 pt-4 border-t border-[var(--border)] text-xs mono">
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-[var(--accent-lime)] animate-pulse" />
-              <span className="text-[var(--text)] font-bold">{activeCount} ACTIVE ROLES</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-[var(--text-sub)]" />
-              <span className="text-[var(--text-muted)]">{completedCount} COMPLETED ROLES</span>
-            </div>
-            <div className="text-[var(--accent)] font-semibold">
-              TOTAL: {EXPERIENCES.length} VERIFIED NODES
+            {/* Branch Legend & Progress */}
+            <div className="flex items-center gap-5 text-xs text-[var(--text-sub)]">
+              <span className="flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#1e1420]" /> — main
+              </span>
+              <span className="flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#ff4f9a]" /> — work
+              </span>
+              <span className="flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#8b5cf6]" /> — community
+              </span>
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-[#1e1420]">
+                  commit {String(activeCommitIndex + 1).padStart(2, '0')}/{EXPERIENCES.length}
+                </span>
+                <div className="w-20 h-2 bg-[#f4eff1] rounded-full overflow-hidden border border-[var(--border)]">
+                  <div
+                    style={{ width: `${((activeCommitIndex + 1) / EXPERIENCES.length) * 100}%` }}
+                    className="h-full bg-[#ff4f9a] transition-all duration-300"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Filter Pills */}
-        <div className="flex flex-wrap gap-2 mb-12">
+        <div className="flex flex-wrap gap-2 mb-10">
           {[
-            { id: 'all', label: `ALL NODES (${EXPERIENCES.length})` },
-            { id: 'active', label: `ACTIVE (${activeCount})` },
-            { id: 'completed', label: `COMPLETED (${completedCount})` },
+            { id: 'all', label: `ALL 17 COMMITS` },
+            { id: 'active', label: 'ACTIVE' },
             { id: 'opensource', label: 'OPEN SOURCE' },
-            { id: 'campus', label: 'CAMPUS & AMBASSADOR' },
+            { id: 'campus', label: 'AMBASSADOR & LEADERSHIP' },
           ].map(tab => (
             <button
               key={tab.id}
@@ -95,10 +153,10 @@ export default function ExperienceTimeline() {
                 labAudio.playClick(900);
                 setFilter(tab.id as typeof filter);
               }}
-              className={`mono text-xs px-3.5 py-1.5 rounded-full transition-all cursor-pointer font-medium ${
+              className={`mono text-xs px-3.5 py-1.5 rounded-full transition-all cursor-pointer font-bold ${
                 filter === tab.id
-                  ? 'bg-[var(--accent)] text-black font-bold shadow-[0_0_12px_var(--accent-glow)]'
-                  : 'bg-[var(--surface)] border border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--surface-2)]'
+                  ? 'bg-[#1e1420] text-white shadow-sm'
+                  : 'bg-white border border-[var(--border)] text-[var(--text-sub)] hover:text-[#1e1420]'
               }`}
             >
               {tab.label}
@@ -106,168 +164,113 @@ export default function ExperienceTimeline() {
           ))}
         </div>
 
-        {/* Git Tree Timeline */}
-        <div className="relative pl-6 sm:pl-10 space-y-6">
-          {/* Vertical Branch Stem Line */}
-          <div className="absolute left-[11px] sm:left-[19px] top-4 bottom-4 w-[2px] bg-gradient-to-b from-[var(--accent-lime)] via-[var(--accent)] to-[var(--border)]" />
+        {/* ─── Git Branch Graph & Highlight-On-Scroll Cards (Image 7 Parity) ─── */}
+        <div className="relative pl-8 sm:pl-12 space-y-8">
+          {/* Main Stem Line */}
+          <div className="absolute left-[15px] sm:left-[23px] top-6 bottom-6 w-[2px] bg-gradient-to-b from-[#1e1420] via-[#ff4f9a] to-[#8b5cf6]" />
 
           {filtered.map((item, idx) => {
-            const isExpanded = expandedId === item.id;
-            const isActive = item.status === 'active';
+            const isHighlighted = idx <= activeCommitIndex;
+            const bullets = getReleaseNoteBullets(item);
+            const commitHash = (Math.abs(item.id.split('').reduce((a, b) => (a << 5) - a + b.charCodeAt(0), 0)) % 10000000)
+              .toString(16)
+              .padStart(7, '0');
 
             return (
               <motion.div
                 key={item.id}
-                initial={{ opacity: 0, x: -16 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.35, delay: idx * 0.04 }}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
                 className="relative group"
               >
-                {/* Commit Dot Node */}
+                {/* Commit Dot Node with Pulse */}
                 <div
-                  className={`absolute -left-[23px] sm:-left-[31px] top-5 w-6 h-6 rounded-full flex items-center justify-center border transition-all ${
-                    isActive
-                      ? 'bg-[#080B12] border-[var(--accent-lime)] shadow-[0_0_10px_var(--accent-lime)] text-[var(--accent-lime)]'
-                      : 'bg-[#080B12] border-[var(--border-strong)] text-[var(--text-sub)]'
+                  className={`absolute -left-[27px] sm:-left-[35px] top-6 w-6 h-6 rounded-full flex items-center justify-center border-2 transition-all duration-300 z-10 ${
+                    isHighlighted
+                      ? 'bg-[#ff4f9a] border-white text-white shadow-[0_0_12px_rgba(255,79,154,0.6)] scale-110'
+                      : 'bg-white border-[var(--border)] text-[var(--text-sub)]'
                   }`}
                 >
                   <GitCommit size={13} />
                 </div>
 
-                {/* Timeline Card */}
+                {/* Release Note Commit Card (Image 7 Parity) */}
                 <div
-                  className={`rounded-2xl glass transition-all border ${
-                    isExpanded
-                      ? 'border-[var(--border-glow)] bg-[var(--surface-2)] shadow-[0_8px_30px_rgba(0,0,0,0.3)]'
-                      : 'border-[var(--border)] hover:border-[var(--border-strong)] hover:bg-[var(--surface-2)]'
+                  className={`rounded-2xl p-6 transition-all duration-300 border ${
+                    isHighlighted
+                      ? 'bg-white border-[#ff4f9a] shadow-[0_12px_36px_rgba(255,79,154,0.12)]'
+                      : 'bg-white/80 border-[var(--border)] hover:border-[#1e1420]'
                   }`}
                 >
-                  <div className="p-5 sm:p-6">
-                    <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
-                      <div className="space-y-1">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <span
-                            className="mono text-[10px] font-bold tracking-wider px-2 py-0.5 rounded-full"
-                            style={{
-                              background: `${item.accentColor}18`,
-                              color: item.accentColor,
-                              border: `1px solid ${item.accentColor}35`,
-                            }}
-                          >
-                            {item.category}
-                          </span>
-                          {isActive && (
-                            <span className="mono text-[9px] px-2 py-0.5 rounded-full bg-[rgba(16,185,129,0.15)] text-[var(--accent-lime)] font-bold border border-[rgba(16,185,129,0.3)] flex items-center gap-1">
-                              <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-lime)] animate-pulse" />
-                              PRESENT ACTIVE
-                            </span>
-                          )}
-                        </div>
-
-                        <h3 className="text-lg sm:text-xl font-bold text-[var(--text)] font-editorial">
-                          {item.role}
-                        </h3>
-
-                        <div className="text-sm font-semibold text-[var(--accent)]">
-                          {item.org}
-                        </div>
-                      </div>
-
-                      {/* Timeline & Location */}
-                      <div className="sm:text-right space-y-1 flex-shrink-0">
-                        <div className="flex items-center sm:justify-end gap-1.5 mono text-xs text-[var(--text)] font-semibold">
-                          <Calendar size={12} className="text-[var(--text-sub)]" />
-                          <span>{item.startDate} — {item.endDate}</span>
-                        </div>
-                        {item.location && (
-                          <div className="flex items-center sm:justify-end gap-1.5 mono text-[10px] text-[var(--text-sub)]">
-                            <MapPin size={11} />
-                            <span>{item.location}</span>
-                          </div>
-                        )}
-                        {item.type && (
-                          <div className="mono text-[9px] text-[var(--text-sub)]">
-                            TYPE: {item.type.toUpperCase()}
-                          </div>
-                        )}
-                      </div>
+                  {/* Card Header Spec */}
+                  <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-[var(--border)]/60">
+                    <div className="flex items-center gap-2">
+                      <span className="mono text-[10px] font-bold px-2 py-0.5 rounded bg-[#f4eff1] text-[#1e1420]">
+                        v0.{idx + 1}
+                      </span>
+                      <span className="mono text-[10px] uppercase font-bold text-[#ff4f9a]">
+                        {item.status === 'active' ? 'ACTIVE COMMIT' : 'MERGED RELEASE'}
+                      </span>
+                      <span className="mono text-[10px] text-[var(--text-sub)]">
+                        {commitHash}
+                      </span>
                     </div>
 
-                    {/* Short Description */}
-                    <p className="text-xs sm:text-sm text-[var(--text-muted)] font-light leading-relaxed mt-3 pt-3 border-t border-[var(--border)]">
-                      {item.description}
-                    </p>
-
-                    {/* Expand Toggle */}
-                    <div className="mt-4 flex flex-wrap items-center justify-between gap-3 pt-2">
-                      <button
-                        onClick={() => {
-                          labAudio.playClick(900);
-                          setExpandedId(isExpanded ? null : item.id);
-                        }}
-                        className="mono text-xs text-[var(--text-sub)] hover:text-[var(--text)] flex items-center gap-1 cursor-pointer"
-                      >
-                        <span>{isExpanded ? 'LESS DETAILS' : 'VIEW VERIFIED DETAILS & SKILLS'}</span>
-                        <ChevronDown
-                          size={13}
-                          className={`transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`}
-                        />
-                      </button>
-
-                      {/* Direct LinkedIn Proof Link */}
-                      <a
-                        href={PROFILE.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mono text-[11px] text-[var(--accent)] hover:underline flex items-center gap-1 font-semibold"
-                      >
-                        <span>Verify on LinkedIn</span>
-                        <ExternalLink size={11} />
-                      </a>
+                    <div className="flex items-center gap-1.5 mono text-xs text-[var(--text-sub)]">
+                      <Calendar size={12} />
+                      <span>{item.startDate} — {item.endDate}</span>
                     </div>
+                  </div>
 
-                    {/* Expanded Drawer */}
-                    <AnimatePresence>
-                      {isExpanded && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.25 }}
-                          className="mt-4 pt-4 border-t border-[var(--border)] space-y-3 overflow-hidden text-xs"
+                  {/* Title & Role */}
+                  <div className="mt-3">
+                    <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-[#1e1420]">
+                      {item.role}
+                    </h3>
+                    <div className="mono text-xs font-bold text-[#8b5cf6] mt-0.5">
+                      {item.org} · {item.category}
+                    </div>
+                  </div>
+
+                  {/* Witty Git Diff Bullets (+ / - / !) */}
+                  <div className="mt-4 space-y-1.5 font-mono text-xs">
+                    {bullets.map((b, bIdx) => (
+                      <div key={bIdx} className="flex items-start gap-2">
+                        <span
+                          className={`font-bold px-1 rounded ${
+                            b.type === '+'
+                              ? 'text-[#12a150] bg-emerald-50'
+                              : b.type === '-'
+                              ? 'text-[#ff3b30] bg-red-50'
+                              : 'text-[#ff6b1a] bg-orange-50'
+                          }`}
                         >
-                          {item.skills && item.skills.length > 0 && (
-                            <div>
-                              <div className="mono text-[10px] text-[var(--text-sub)] uppercase mb-1.5">
-                                ASSOCIATED CAPABILITIES &amp; SKILLS:
-                              </div>
-                              <div className="flex flex-wrap gap-1.5">
-                                {item.skills.map(sk => (
-                                  <span key={sk} className="tech-pill text-[10px] py-1">
-                                    {sk}
-                                  </span>
-                                ))}
-                              </div>
-                            </div>
-                          )}
+                          {b.type}
+                        </span>
+                        <span className="text-[var(--text-muted)] leading-relaxed">
+                          {b.text}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
 
-                          {item.recognition && (
-                            <div className="p-3 rounded-xl bg-[var(--surface-2)] border border-[var(--border)] text-[var(--accent)] mono text-[11px] font-semibold flex items-center gap-2">
-                              <Sparkles size={13} />
-                              <span>{item.recognition}</span>
-                            </div>
-                          )}
+                  {/* Bottom Verification & Location */}
+                  <div className="mt-4 pt-3 border-t border-[var(--border)]/60 flex flex-wrap items-center justify-between gap-3 text-xs mono">
+                    <div className="flex items-center gap-1.5 text-[var(--text-sub)]">
+                      <MapPin size={11} />
+                      <span>{item.location || 'Pune, India'}</span>
+                    </div>
 
-                          {item.proofType && (
-                            <div className="flex items-center gap-2 text-[11px] mono text-[var(--text-sub)] pt-1">
-                              <CheckCircle2 size={13} className="text-[var(--accent-lime)]" />
-                              <span>Documented Verification: {item.proofType}</span>
-                            </div>
-                          )}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                    <a
+                      href={PROFILE.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-[#8b5cf6] hover:underline font-bold"
+                    >
+                      <span>verify evidence</span>
+                      <ExternalLink size={11} />
+                    </a>
                   </div>
                 </div>
               </motion.div>

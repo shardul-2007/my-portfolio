@@ -1,304 +1,394 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Gamepad2, RotateCcw, Zap, Trophy, Timer, CheckCircle2 } from 'lucide-react';
+import {
+  Gamepad2,
+  Volume2,
+  VolumeX,
+  Play,
+  RotateCcw,
+  Sparkles,
+  Zap,
+  Flame,
+  Award,
+} from 'lucide-react';
 import { labAudio } from '@/lib/audio';
 
 export default function ArcadeSection() {
-  const [activeGame, setActiveGame] = useState<'typing' | 'memory'>('typing');
+  const [filter, setFilter] = useState<'all' | 'stage' | 'builds' | 'hackathons'>('all');
 
-  // ── 1. Typing Challenge State ──────────────────────────────────
-  const SNIPPET = 'const civicOS = new MunicipalPlatform({ aiAssisted: true, liveTelemetry: true });';
-  const [typed, setTyped] = useState('');
-  const [typingStartTime, setTypingStartTime] = useState<number | null>(null);
-  const [wpm, setWpm] = useState(0);
-  const [accuracy, setAccuracy] = useState(100);
-  const [isCompleted, setIsCompleted] = useState(false);
+  // Interactive Card States
+  // 1. Spotlight mask tracking
+  const [spotlightPos, setSpotlightPos] = useState({ x: 50, y: 50 });
 
-  function handleTypingInput(val: string) {
-    if (!typingStartTime) setTypingStartTime(Date.now());
-    setTyped(val);
-    labAudio.playKey();
+  // 2. RC Car Driving state
+  const [carDriving, setCarDriving] = useState(false);
 
-    // Check accuracy
-    let errors = 0;
-    for (let i = 0; i < val.length; i++) {
-      if (val[i] !== SNIPPET[i]) errors++;
-    }
-    const acc = val.length === 0 ? 100 : Math.max(0, Math.round(((val.length - errors) / val.length) * 100));
-    setAccuracy(acc);
+  // 3. Audio Equalizer beat state
+  const [isPlayingBeat, setIsPlayingBeat] = useState(true);
 
-    // Calculate WPM
-    if (typingStartTime) {
-      const minutes = (Date.now() - typingStartTime) / 60000;
-      if (minutes > 0.01) {
-        const words = val.length / 5;
-        setWpm(Math.round(words / minutes));
-      }
-    }
+  // 4. Paper plane swoop
+  const [planeLoop, setPlaneLoop] = useState(0);
 
-    if (val === SNIPPET) {
-      setIsCompleted(true);
-      labAudio.playChime();
-    }
+  // 5. Bug hunt score
+  const [bugScore, setBugScore] = useState(0);
+
+  function handleSpotlightMove(e: React.MouseEvent<HTMLDivElement>) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setSpotlightPos({ x, y });
   }
 
-  function resetTyping() {
+  function handleCarClick() {
+    labAudio.playClick(1200);
+    setCarDriving(true);
+    setTimeout(() => setCarDriving(false), 2400);
+  }
+
+  function handleBeatToggle() {
+    const next = !isPlayingBeat;
+    setIsPlayingBeat(next);
+    if (next) labAudio.playChime();
+  }
+
+  function handlePlaneClick() {
     labAudio.playClick(900);
-    setTyped('');
-    setTypingStartTime(null);
-    setWpm(0);
-    setAccuracy(100);
-    setIsCompleted(false);
+    setPlaneLoop(p => p + 1);
   }
 
-  // ── 2. Memory Matrix State ─────────────────────────────────────
-  const [pattern, setPattern] = useState<number[]>([0, 4, 8, 2]);
-  const [activeCell, setActiveCell] = useState<number | null>(null);
-  const [userStep, setUserStep] = useState(0);
-  const [score, setScore] = useState(0);
-  const [highScore, setHighScore] = useState(0);
-  const [isPlayingPattern, setIsPlayingPattern] = useState(false);
-
-  function startMemoryRound() {
-    labAudio.playClick(1000);
-    setUserStep(0);
-    const newLength = 3 + score;
-    const newPattern = Array.from({ length: newLength }, () => Math.floor(Math.random() * 9));
-    setPattern(newPattern);
-    playSequence(newPattern);
-  }
-
-  async function playSequence(seq: number[]) {
-    setIsPlayingPattern(true);
-    for (const cell of seq) {
-      await new Promise(r => setTimeout(r, 450));
-      setActiveCell(cell);
-      labAudio.playClick(600 + cell * 50);
-      await new Promise(r => setTimeout(r, 400));
-      setActiveCell(null);
-    }
-    setIsPlayingPattern(false);
-  }
-
-  function handleCellClick(index: number) {
-    if (isPlayingPattern) return;
-    labAudio.playClick(600 + index * 50);
-
-    if (pattern[userStep] === index) {
-      const next = userStep + 1;
-      setUserStep(next);
-
-      if (next === pattern.length) {
-        const nextScore = score + 1;
-        setScore(nextScore);
-        if (nextScore > highScore) setHighScore(nextScore);
-        labAudio.playChime();
-        setTimeout(() => startMemoryRound(), 800);
-      }
-    } else {
-      // Failed pattern
-      setScore(0);
-      setUserStep(0);
-      alert('Pattern mismatch! Restarting matrix test.');
-    }
+  function handleWhackBug() {
+    labAudio.playSquish();
+    setBugScore(s => s + 1);
   }
 
   return (
-    <section id="arcade" className="py-28 relative border-b border-[var(--border)] overflow-hidden">
+    <section id="arcade" className="py-24 relative border-b border-[var(--border)] overflow-hidden bg-[var(--paper)]">
       <div className="section-container">
-        {/* Header matching Rishika Reference */}
-        <div className="max-w-3xl mb-12">
-          <div className="flex items-center gap-2 mb-3">
-            <Gamepad2 size={14} className="text-[var(--accent-orange)]" />
-            <span className="eyebrow">some play · off screen</span>
-          </div>
-          <div className="flex items-baseline gap-2">
-            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-[var(--text)] font-editorial">
-              i also have <span className="font-serif-italic font-normal text-amber-500">range</span>
-            </h2>
-            <span className="text-2xl text-amber-500 font-serif">*</span>
-          </div>
-          <p className="text-xs text-amber-500 mono mt-0.5">*allegedly</p>
-
-          <p className="text-sm sm:text-base text-[var(--text-muted)] font-light mt-3 leading-relaxed">
-            hackathons, campus leadership, open-source sprints, and algorithmic mini-games. this is what happens while the code compiles.
-          </p>
-
-          {/* Marquee Ticker */}
-          <div className="overflow-hidden py-3 my-6 border-y border-[var(--border)] relative bg-[var(--surface-2)]">
-            <motion.div
-              animate={{ x: ['0%', '-50%'] }}
-              transition={{ duration: 18, ease: 'linear', repeat: Infinity }}
-              className="flex whitespace-nowrap gap-6 mono text-xs font-bold tracking-widest text-[var(--accent)]"
-            >
-              {[...Array(2)].map((_, i) => (
-                <div key={i} className="flex gap-6 items-center">
-                  <span>BUILD <span className="text-amber-500">✦</span></span>
-                  <span>HACK <span className="text-amber-500">✦</span></span>
-                  <span>LEAD <span className="text-amber-500">✦</span></span>
-                  <span>CODE <span className="text-amber-500">✦</span></span>
-                  <span>SOLVE <span className="text-amber-500">✦</span></span>
-                  <span>DESIGN <span className="text-amber-500">✦</span></span>
-                  <span>SHIP <span className="text-amber-500">✦</span></span>
-                </div>
-              ))}
-            </motion.div>
+        {/* Continuous Marquee Ticker (Image 6 Parity) */}
+        <div className="overflow-hidden py-3 mb-10 border-y border-[var(--border)] relative bg-[var(--surface-2)]">
+          <div className="marquee-track flex gap-8 items-center text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-[#1e1420] select-none">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="flex gap-8 items-center">
+                <span>hack</span>
+                <span className="text-[#ff4f9a] text-2xl font-serif">✦</span>
+                <span className="font-serif-italic font-normal text-amber-500 lowercase">repeat</span>
+                <span className="text-[#8b5cf6] text-2xl font-serif">✦</span>
+                <span className="font-serif-italic font-normal text-[#ff4f9a] lowercase">perform</span>
+                <span className="text-[#12a150] text-2xl font-serif">✦</span>
+                <span>ship</span>
+                <span className="text-amber-500 text-2xl font-serif">✦</span>
+                <span>solve</span>
+                <span className="text-[#8b5cf6] text-2xl font-serif">✦</span>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Game Switcher Tabs */}
-        <div className="flex flex-wrap gap-2 pb-6 border-b border-[var(--border)] mb-8">
-          {[
-            { id: 'typing', label: '01. SPEED CODE TYPING CHALLENGE' },
-            { id: 'memory', label: '02. MATRIX RECALL PUZZLE' },
-          ].map(tab => (
-            <button
-              key={tab.id}
-              onClick={() => {
-                labAudio.playClick(900);
-                setActiveGame(tab.id as typeof activeGame);
-              }}
-              className={`mono text-xs px-4 py-2 rounded-xl transition-all cursor-pointer font-semibold ${
-                activeGame === tab.id
-                  ? 'bg-[var(--accent-orange)] text-white shadow-[0_0_15px_rgba(255,107,53,0.35)]'
-                  : 'bg-[var(--surface)] border border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--surface-2)]'
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Game 1: Speed Typing Challenge */}
-        {activeGame === 'typing' && (
-          <div className="p-6 sm:p-8 rounded-3xl glass border border-[var(--border-strong)] space-y-6">
-            <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-[var(--border)]">
-              <div>
-                <h3 className="font-bold text-lg text-[var(--text)]">TypeScript Speed Typing Test</h3>
-                <div className="mono text-xs text-[var(--text-sub)]">
-                  Snippet from CivicOS Municipal Platform
-                </div>
-              </div>
-
-              <div className="flex items-center gap-6 mono text-xs">
-                <div>
-                  <span className="text-[var(--text-sub)]">SPEED:</span>
-                  <span className="text-[var(--accent)] font-bold ml-1.5">{wpm} WPM</span>
-                </div>
-                <div>
-                  <span className="text-[var(--text-sub)]">ACCURACY:</span>
-                  <span className="text-[#10B981] font-bold ml-1.5">{accuracy}%</span>
-                </div>
-                <button
-                  onClick={resetTyping}
-                  className="p-1.5 rounded-lg bg-[var(--surface-2)] text-[var(--text-sub)] hover:text-white cursor-pointer"
-                  title="Reset typing test"
-                >
-                  <RotateCcw size={14} />
-                </button>
-              </div>
+        {/* Section Heading & Filter Pills */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10">
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="eyebrow">some play · off screen</span>
             </div>
-
-            {/* Target Snippet */}
-            <div className="p-5 rounded-2xl bg-[#07090F] border border-[var(--border)] font-mono text-xs sm:text-sm text-[var(--text-sub)] leading-relaxed select-none">
-              {SNIPPET.split('').map((char, i) => {
-                const typedChar = typed[i];
-                let color = 'text-[var(--text-sub)]';
-                if (typedChar !== undefined) {
-                  color = typedChar === char ? 'text-[#00F5C8] font-bold' : 'text-[#EF4444] bg-[#EF4444]/20';
-                }
-                return (
-                  <span key={i} className={color}>
-                    {char}
-                  </span>
-                );
-              })}
+            <div className="flex items-baseline gap-2">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#1e1420]">
+                i also have <span className="font-serif-italic font-normal text-[#ff4f9a]">range</span>
+              </h2>
+              <span className="text-2xl text-[#ff4f9a] font-serif">*</span>
             </div>
+            <p className="text-xs text-[#ff4f9a] mono mt-0.5">*allegedly</p>
+          </div>
 
-            {/* Typing Input */}
-            <input
-              type="text"
-              value={typed}
-              onChange={e => handleTypingInput(e.target.value)}
-              placeholder="Start typing the snippet above..."
-              className="w-full px-4 py-3 rounded-xl bg-[var(--surface)] border border-[var(--border)] text-xs sm:text-sm mono text-[var(--text)] placeholder-[var(--text-sub)] outline-none focus:border-[var(--accent-orange)]"
-              disabled={isCompleted}
-            />
-
-            {isCompleted && (
-              <motion.div
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="p-4 rounded-xl bg-[rgba(16,185,129,0.1)] border border-[rgba(16,185,129,0.3)] text-xs mono text-[#10B981] flex items-center justify-between"
+          {/* Filter Pills (Image 6 Parity) */}
+          <div className="flex flex-wrap gap-2">
+            {[
+              { id: 'all', label: 'all 6' },
+              { id: 'stage', label: 'stage 2' },
+              { id: 'builds', label: 'builds 2' },
+              { id: 'hackathons', label: 'hackathons 2' },
+            ].map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => {
+                  labAudio.playClick(900);
+                  setFilter(tab.id as typeof filter);
+                }}
+                className={`mono text-xs px-3.5 py-1.5 rounded-full transition-all cursor-pointer font-bold ${
+                  filter === tab.id
+                    ? 'bg-[#1e1420] text-white shadow-sm'
+                    : 'bg-white border border-[var(--border)] text-[var(--text-sub)] hover:text-[#1e1420]'
+                }`}
               >
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 size={16} />
-                  <span>Challenge Complete! Result: {wpm} WPM with {accuracy}% accuracy.</span>
-                </div>
-                <button
-                  onClick={resetTyping}
-                  className="underline font-bold hover:text-white cursor-pointer"
-                >
-                  Try Again
-                </button>
-              </motion.div>
-            )}
+                {tab.label}
+              </button>
+            ))}
           </div>
-        )}
+        </div>
 
-        {/* Game 2: Memory Matrix Recall Puzzle */}
-        {activeGame === 'memory' && (
-          <div className="p-6 sm:p-8 rounded-3xl glass border border-[var(--border-strong)] space-y-6">
-            <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-[var(--border)]">
-              <div>
-                <h3 className="font-bold text-lg text-[var(--text)]">Memory Matrix Pattern Recall</h3>
-                <div className="mono text-xs text-[var(--text-sub)]">
-                  Watch the light sequence and replicate the pattern exactly.
-                </div>
+        {/* ─── All Moving / Responsive Interactive Cards Grid (Image 6 Parity) ─── */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Card 1: ACT I (Spotlight Mask) */}
+          {(filter === 'all' || filter === 'stage') && (
+            <motion.div
+              layout
+              onMouseMove={handleSpotlightMove}
+              className="relative h-80 rounded-3xl p-6 bg-[#1e1420] text-white overflow-hidden shadow-lg flex flex-col justify-between group cursor-pointer"
+            >
+              {/* Dynamic Interactive Spotlight */}
+              <div
+                style={{
+                  background: `radial-gradient(circle at ${spotlightPos.x}% ${spotlightPos.y}%, rgba(255, 228, 92, 0.45) 0%, rgba(255, 228, 92, 0.08) 45%, transparent 70%)`,
+                }}
+                className="absolute inset-0 pointer-events-none transition-all duration-75"
+              />
+
+              <div className="relative z-10">
+                <span className="mono text-[10px] tracking-widest uppercase text-amber-300">
+                  ACT I
+                </span>
+                <h3 className="text-xl font-bold mt-1">national stage, take one</h3>
               </div>
 
-              <div className="flex items-center gap-6 mono text-xs">
-                <div>
-                  <span className="text-[var(--text-sub)]">SCORE:</span>
-                  <span className="text-[var(--accent-orange)] font-bold ml-1.5">{score}</span>
-                </div>
-                <div>
-                  <span className="text-[var(--text-sub)]">HIGH SCORE:</span>
-                  <span className="text-[var(--accent)] font-bold ml-1.5">{highScore}</span>
-                </div>
-                <button
-                  onClick={startMemoryRound}
-                  className="glow-btn glow-btn-orange text-xs py-1.5 px-3"
+              {/* Animated Mask Face */}
+              <div className="relative z-10 my-auto flex justify-center">
+                <motion.div
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                  className="w-24 h-24 rounded-full bg-[#ffe45c] flex items-center justify-center text-black shadow-xl"
                 >
-                  <span>{isPlayingPattern ? 'WATCHING...' : 'PLAY SEQUENCE'}</span>
-                </button>
+                  <svg viewBox="0 0 100 100" className="w-16 h-16 fill-current">
+                    <circle cx="35" cy="40" r="5" />
+                    <circle cx="65" cy="40" r="5" />
+                    <path d="M30 60 Q50 82 70 60" stroke="currentColor" strokeWidth="6" strokeLinecap="round" fill="none" />
+                  </svg>
+                </motion.div>
               </div>
-            </div>
 
-            {/* 3x3 Grid Matrix */}
-            <div className="max-w-[280px] mx-auto grid grid-cols-3 gap-3 p-4 bg-[#0A0D18] rounded-2xl border border-[var(--border)]">
-              {Array.from({ length: 9 }).map((_, i) => {
-                const isActive = activeCell === i;
-                return (
-                  <button
-                    key={i}
-                    onClick={() => handleCellClick(i)}
-                    className={`aspect-square rounded-xl transition-all cursor-pointer border ${
-                      isActive
-                        ? 'bg-[#FF6B35] border-[#FF6B35] shadow-[0_0_20px_#FF6B35] scale-105'
-                        : 'bg-[var(--surface-2)] border-[var(--border)] hover:border-[var(--border-strong)]'
-                    }`}
+              <div className="relative z-10 mono text-[10px] text-[#9e9c95] uppercase">
+                TWO-TIME NATIONAL LEVEL · ACTING &amp; PITCH
+              </div>
+            </motion.div>
+          )}
+
+          {/* Card 2: 23 Hackathon Finals (Animated Stream) */}
+          {(filter === 'all' || filter === 'hackathons') && (
+            <motion.div
+              layout
+              className="relative h-80 rounded-3xl p-6 bg-[#8b5cf6] text-white overflow-hidden shadow-lg flex flex-col justify-between group"
+            >
+              {/* Blueprint Grid on Purple */}
+              <div className="absolute inset-0 blueprint-grid opacity-20 pointer-events-none" />
+
+              <div className="relative z-10">
+                <span className="mono text-[10px] tracking-widest uppercase text-purple-200">
+                  SPRINTS
+                </span>
+                <h3 className="text-xl font-bold mt-1">hackathon finals</h3>
+              </div>
+
+              {/* Big Animated 23 Counter */}
+              <div className="relative z-10 my-auto text-center">
+                <motion.div
+                  animate={{ scale: [1, 1.05, 1] }}
+                  transition={{ duration: 2.2, repeat: Infinity }}
+                  className="text-7xl font-black tracking-tighter text-[#ffb8dc]"
+                >
+                  23
+                </motion.div>
+                <div className="mono text-xs font-semibold text-purple-100 mt-1">
+                  finalist podiums &amp; overnight builds
+                </div>
+              </div>
+
+              {/* Animated Commit Ticker */}
+              <div className="relative z-10 mono text-[10px] bg-black/25 px-3 py-1.5 rounded-lg flex items-center justify-between text-purple-200">
+                <span className="truncate">git commit -m &quot;one more fix&quot;</span>
+                <span className="text-emerald-300 font-bold ml-2">✓</span>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Card 3: VROOM RC Car (Driving Animation) */}
+          {(filter === 'all' || filter === 'builds') && (
+            <motion.div
+              layout
+              onClick={handleCarClick}
+              className="relative h-80 rounded-3xl p-6 bg-[#ff6b1a] text-white overflow-hidden shadow-lg flex flex-col justify-between cursor-pointer group"
+            >
+              <div className="relative z-10">
+                <span className="mono text-[10px] tracking-widest uppercase text-orange-200">
+                  FIRST SEMESTER PROJECT
+                </span>
+                <h3 className="text-4xl font-black tracking-tight mt-0.5">VROOM</h3>
+              </div>
+
+              {/* Animated Driving Car */}
+              <div className="relative z-10 my-auto w-full overflow-hidden py-4">
+                <motion.div
+                  animate={carDriving ? { x: ['-20%', '120%'] } : { x: ['0%', '8%', '0%'] }}
+                  transition={carDriving ? { duration: 1.8, ease: 'easeInOut' } : { duration: 2.5, repeat: Infinity }}
+                  className="w-36 h-20 relative mx-auto"
+                >
+                  {/* Car Body */}
+                  <div className="w-28 h-12 rounded-2xl bg-black relative mx-auto shadow-md">
+                    <div className="absolute top-1 left-2 w-8 h-5 rounded-lg bg-yellow-300" />
+                    {/* Headlight beam */}
+                    <div className="absolute top-3 right-0 w-8 h-3 bg-yellow-200/50 blur-[2px] rounded-r-full" />
+                  </div>
+                  {/* Spinning Wheels */}
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 0.6, repeat: Infinity, ease: 'linear' }}
+                    className="absolute -bottom-2 left-6 w-6 h-6 rounded-full bg-white border-4 border-black"
                   />
-                );
-              })}
-            </div>
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 0.6, repeat: Infinity, ease: 'linear' }}
+                    className="absolute -bottom-2 right-6 w-6 h-6 rounded-full bg-white border-4 border-black"
+                  />
+                </motion.div>
+              </div>
 
-            <div className="text-center mono text-xs text-[var(--text-sub)]">
-              {isPlayingPattern ? 'Memorizing sequence...' : `Step ${userStep + 1} of ${pattern.length}`}
-            </div>
-          </div>
-        )}
+              <div className="relative z-10 flex items-center justify-between mono text-[10px] text-orange-100">
+                <span>CLICK TO ACCELERATE</span>
+                <span className="px-2 py-0.5 rounded-full bg-black text-white font-bold">● IT DRIVES</span>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Card 4: Dance / Focus Mode (Animated Equalizer Bars) */}
+          {(filter === 'all' || filter === 'stage') && (
+            <motion.div
+              layout
+              onClick={handleBeatToggle}
+              className="relative h-80 rounded-3xl p-6 bg-[#ff4f9a] text-white overflow-hidden shadow-lg flex flex-col justify-between cursor-pointer group"
+            >
+              <div className="relative z-10 flex items-center justify-between">
+                <div>
+                  <span className="mono text-[10px] tracking-widest uppercase text-pink-200">
+                    FLOW STATE
+                  </span>
+                  <h3 className="text-xl font-bold mt-1">dance mode</h3>
+                </div>
+                <div className="p-2 rounded-full bg-white/20">
+                  {isPlayingBeat ? <Volume2 size={16} /> : <VolumeX size={16} />}
+                </div>
+              </div>
+
+              {/* Real-time Bouncing Equalizer Bars (Image 6 Parity) */}
+              <div className="relative z-10 my-auto flex items-end justify-center gap-2 h-24">
+                {[12, 28, 42, 60, 85, 48, 70, 95, 55, 34, 68, 20].map((h, i) => (
+                  <motion.div
+                    key={i}
+                    animate={
+                      isPlayingBeat
+                        ? { height: [`${h * 0.3}px`, `${h}px`, `${h * 0.4}px`] }
+                        : { height: '8px' }
+                    }
+                    transition={{
+                      duration: 0.4 + (i % 4) * 0.15,
+                      repeat: Infinity,
+                      repeatType: 'reverse',
+                    }}
+                    className="w-2.5 rounded-full bg-white shadow-sm"
+                  />
+                ))}
+              </div>
+
+              <div className="relative z-10 mono text-[10px] text-pink-100 flex items-center justify-between">
+                <span>BEAT EQUALIZER</span>
+                <span className="font-bold">{isPlayingBeat ? 'SYNTHESIZING' : 'PAUSED'}</span>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Card 5: Aerodynamics / Model Plane */}
+          {(filter === 'all' || filter === 'builds') && (
+            <motion.div
+              layout
+              onClick={handlePlaneClick}
+              className="relative h-80 rounded-3xl p-6 bg-white border border-[var(--border)] text-[#1e1420] overflow-hidden shadow-lg flex flex-col justify-between cursor-pointer group"
+            >
+              <div className="relative z-10">
+                <span className="mono text-[10px] tracking-widest uppercase text-[var(--text-sub)]">
+                  PHYSICAL LAB
+                </span>
+                <h3 className="text-xl font-bold mt-1">aerodynamics plane</h3>
+              </div>
+
+              {/* Animated Swooping Paper Plane */}
+              <div className="relative z-10 my-auto h-32 flex items-center justify-center">
+                <motion.div
+                  key={planeLoop}
+                  animate={{
+                    x: [-40, 40, -10],
+                    y: [10, -25, 0],
+                    rotate: [-10, 20, 5],
+                  }}
+                  transition={{ duration: 2.2, ease: 'easeInOut' }}
+                  className="w-20 h-20 text-[#8b5cf6]"
+                >
+                  <svg viewBox="0 0 100 100" className="w-full h-full fill-current">
+                    <polygon points="10,50 90,15 50,85 45,55" />
+                  </svg>
+                </motion.div>
+              </div>
+
+              <div className="relative z-10 mono text-[10px] text-[var(--text-sub)] flex items-center justify-between">
+                <span>CLICK TO LAUNCH</span>
+                <span className="font-bold text-[#8b5cf6]">it&apos;ll fly. probably.</span>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Card 6: Playable Bug Hunt Game */}
+          {(filter === 'all' || filter === 'hackathons') && (
+            <motion.div
+              layout
+              onClick={handleWhackBug}
+              className="relative h-80 rounded-3xl p-6 bg-[#ffe45c] text-[#1e1420] overflow-hidden shadow-lg flex flex-col justify-between cursor-pointer group"
+            >
+              <div className="relative z-10 flex items-center justify-between">
+                <div>
+                  <span className="mono text-[10px] tracking-widest uppercase text-black/60">
+                    DEBUGGER MINI-GAME
+                  </span>
+                  <h3 className="text-xl font-bold mt-1">whack-a-bug</h3>
+                </div>
+                <div className="mono text-xs font-bold px-2.5 py-1 rounded-full bg-black text-white">
+                  SQUASHED: {bugScore}
+                </div>
+              </div>
+
+              {/* Playable Bug Target */}
+              <div className="relative z-10 my-auto flex justify-center">
+                <motion.div
+                  whileTap={{ scale: 0.8 }}
+                  animate={{
+                    rotate: [0, 10, -10, 0],
+                    x: [0, 15, -15, 0],
+                  }}
+                  transition={{ duration: 1.6, repeat: Infinity }}
+                  className="w-20 h-20 rounded-full bg-black text-white flex items-center justify-center shadow-xl"
+                >
+                  <svg viewBox="0 0 32 32" className="w-12 h-12 fill-red-500">
+                    <circle cx="16" cy="18" r="8" />
+                    <circle cx="16" cy="10" r="4" fill="white" />
+                    <circle cx="13" cy="16" r="1.5" fill="black" />
+                    <circle cx="19" cy="16" r="1.5" fill="black" />
+                    <circle cx="16" cy="21" r="1.5" fill="black" />
+                  </svg>
+                </motion.div>
+              </div>
+
+              <div className="relative z-10 mono text-[10px] text-black/70 flex items-center justify-between font-bold">
+                <span>CLICK TO SQUASH BUG</span>
+                <span>+10 PTS</span>
+              </div>
+            </motion.div>
+          )}
+        </div>
       </div>
     </section>
   );

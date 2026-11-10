@@ -7,43 +7,97 @@
    Deep Charcoal Editorial & Cyber Engineering Universe
    ═══════════════════════════════════════════════════════════════ */
 
-:root,
-html[data-theme="dark"] {
-  /* Surface Tokens */
-  --bg: #080A0F;
-  --bg-deep: #05060A;
-  --bg-elevated: #0E121A;
-  --surface: rgba(255, 255, 255, 0.035);
-  --surface-2: rgba(255, 255, 255, 0.07);
-  --surface-3: rgba(255, 255, 255, 0.12);
-  --surface-ivory: #F8F6F0;
+:root {
+  /* Editorial Paper Design System (Reference Parity) */
+  --bg: #fbf5f6;
+  --bg-deep: #f5eff0;
+  --bg-elevated: #ffffff;
+  --paper: #fbf5f6;
+  --paper-2: #efede6;
+  --card: #ffffff;
+  --surface: rgba(255, 255, 255, 0.85);
+  --surface-2: rgba(30, 20, 32, 0.04);
+  --surface-3: rgba(30, 20, 32, 0.08);
+  --surface-ivory: #ffffff;
 
   /* Borders & Dividers */
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.16);
-  --border-glow: rgba(0, 245, 200, 0.3);
-  --border-orange: rgba(255, 107, 53, 0.35);
+  --border: rgba(30, 20, 32, 0.12);
+  --border-strong: rgba(30, 20, 32, 0.22);
+  --border-glow: rgba(139, 92, 246, 0.35);
+  --border-orange: rgba(255, 107, 26, 0.35);
+  --line: #e4e2da;
+  --line-2: #d6d3c9;
 
   /* Brand Accents */
-  --accent: #00F5C8; /* Electric Cyan */
-  --accent-orange: #FF6B35; /* Editorial Orange */
-  --accent-lime: #10B981; /* Status Green / Lime */
-  --accent-dim: rgba(0, 245, 200, 0.12);
-  --accent-orange-dim: rgba(255, 107, 53, 0.14);
-  --accent-glow: rgba(0, 245, 200, 0.25);
+  --accent: #8b5cf6; /* Royal Purple / Blue */
+  --accent-purple: #8b5cf6;
+  --accent-pink: #ff4f9a; /* Editorial Pink */
+  --accent-orange: #ff6b1a; /* Warm Orange */
+  --accent-yellow: #ffe45c; /* Primary Accent Yellow */
+  --accent-lime: #12a150;
+  --accent-dim: rgba(139, 92, 246, 0.12);
+  --accent-orange-dim: rgba(255, 107, 26, 0.14);
+  --accent-glow: rgba(139, 92, 246, 0.25);
 
   /* Typography Colors */
-  --text: #F8FAFC;
-  --text-muted: #94A3B8;
-  --text-sub: #64748B;
-  --text-dark: #0A0D14;
+  --text: #1e1420;
+  --ink: #1e1420;
+  --ink-2: #55534e;
+  --ink-3: #9e9c95;
+  --ink-4: #c9c7bf;
+  --text-muted: #55534e;
+  --text-sub: #8b8882;
+  --text-dark: #1e1420;
 
-  /* Glassmorphism & Elevation */
-  --r: 16px;
-  --r-lg: 24px;
+  /* Elevation */
+  --r: 18px;
+  --r-lg: 26px;
+  --shadow-glass: 0 4px 20px rgba(30, 20, 32, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  --shadow-glass-hover: 0 12px 35px rgba(30, 20, 32, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  --grid-line: rgba(139, 92, 246, 0.08);
+}
+
+html[data-theme="dark"] {
+  --bg: #0e0d11;
+  --bg-deep: #08070a;
+  --bg-elevated: #16151c;
+  --paper: #0e0d11;
+  --paper-2: #16151c;
+  --card: #181720;
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-2: rgba(255, 255, 255, 0.08);
+  --surface-3: rgba(255, 255, 255, 0.14);
+  --surface-ivory: #16151c;
+
+  --border: rgba(255, 255, 255, 0.10);
+  --border-strong: rgba(255, 255, 255, 0.20);
+  --border-glow: rgba(139, 92, 246, 0.4);
+  --border-orange: rgba(255, 107, 26, 0.4);
+  --line: rgba(255, 255, 255, 0.10);
+  --line-2: rgba(255, 255, 255, 0.15);
+
+  --accent: #a78bfa;
+  --accent-purple: #a78bfa;
+  --accent-pink: #f472b6;
+  --accent-orange: #fb923c;
+  --accent-yellow: #fde047;
+  --accent-lime: #34d399;
+  --accent-dim: rgba(167, 139, 250, 0.15);
+  --accent-orange-dim: rgba(251, 146, 60, 0.15);
+  --accent-glow: rgba(167, 139, 250, 0.3);
+
+  --text: #fdfcfd;
+  --ink: #fdfcfd;
+  --ink-2: #d4d0dc;
+  --ink-3: #9e9ba7;
+  --ink-4: #6b6873;
+  --text-muted: #c4c0cc;
+  --text-sub: #9e9ba7;
+  --text-dark: #0e0d11;
+
   --shadow-glass: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
   --shadow-glass-hover: 0 18px 50px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  --grid-line: rgba(255, 255, 255, 0.03);
+  --grid-line: rgba(167, 139, 250, 0.06);
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -422,6 +476,79 @@ html[data-theme="yellow"] .gradient-orange {
     0 10px 30px rgba(0, 0, 0, 0.15),
     0 1px 3px rgba(0, 0, 0, 0.1),
     inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+/* Halftone Screen Pattern (Image 1 Parity) */
+.halftone-screen {
+  background-image: radial-gradient(circle, currentColor 1.2px, transparent 1.2px);
+  background-size: 8px 8px;
+}
+
+/* Editorial Pink & Yellow Highlighter Marker (Image 4 Parity) */
+.marker-pink {
+  background: #ffb8dc;
+  color: #1e1420;
+  padding: 0.1em 0.35em;
+  border-radius: 6px;
+  display: inline-block;
+  box-shadow: 0 2px 8px rgba(255, 79, 154, 0.2);
+}
+
+.marker-yellow {
+  background: #ffe45c;
+  color: #1e1420;
+  padding: 0.1em 0.35em;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+/* Floating Bottom Dock (Images 3, 4, 5, 6, 7, 8 Parity) */
+.floating-bottom-dock {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 45;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(30, 20, 32, 0.14);
+  box-shadow: 0 16px 40px rgba(30, 20, 32, 0.14), 0 2px 6px rgba(30, 20, 32, 0.06);
+  backdrop-filter: blur(16px);
+  border-radius: 9999px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html[data-theme="dark"] .floating-bottom-dock {
+  background: rgba(22, 21, 28, 0.92);
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Marquee Infinite Track (Image 6 Parity) */
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 24s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Ladybug Squash Animations (Image 9 Parity) */
+.bug-squashed {
+  transform: scale(1.3, 0.3) rotate(15deg) !important;
+  opacity: 0.6 !important;
+  filter: grayscale(0.5);
+  pointer-events: none;
 }
 
 /* Reduced Motion Safety */
