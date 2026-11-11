@@ -23,6 +23,8 @@ export default function TerminalSection({ onToggleTheme }: { onToggleTheme?: () 
   const [historyIndex, setHistoryIndex] = useState(-1);
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const isInitialMount = useRef(true);
 
   const VALID_COMMANDS = [
     'help',
@@ -45,7 +47,14 @@ export default function TerminalSection({ onToggleTheme }: { onToggleTheme?: () 
   ];
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    // Internal terminal scroll only — never scrolls window
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = scrollContainerRef.current.scrollHeight;
+    }
   }, [lines]);
 
   function handleCommand(cmdRaw: string) {
@@ -333,7 +342,7 @@ Pune, India`,
           </div>
 
           {/* Terminal Output Stream */}
-          <div className="p-5 sm:p-7 max-h-[440px] overflow-y-auto space-y-2 mono text-xs sm:text-sm">
+          <div ref={scrollContainerRef} className="p-5 sm:p-7 max-h-[440px] overflow-y-auto space-y-2 mono text-xs sm:text-sm">
             {lines.map((line, i) => (
               <div
                 key={i}

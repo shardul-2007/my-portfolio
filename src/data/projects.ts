@@ -1,5 +1,6 @@
 // ═══════════════════════════════════════════════════════════════
 // SHARDUL.LAB — Featured Engineering Projects & Architecture Data
+// Verified Production Deployments for Shardul Parihar
 // ═══════════════════════════════════════════════════════════════
 
 export interface ArchitectureLayer {
@@ -40,54 +41,54 @@ export interface ProjectItem {
   accentColor: string;
   description: string;
   stack: string[];
-  liveUrl?: string;
-  githubUrl?: string;
+  liveUrl: string;
+  githubUrl: string;
   featured: boolean;
   architecture: ArchitectureLayer[];
   caseStudy: ProjectCaseStudy;
 }
 
 export const PROJECTS: ProjectItem[] = [
-  // ── 001: CivicOS ─────────────────────────────────────────────
+  // ── 001: Interoperable Civic Infrastructure OS ─────────────────
   {
     id: 'civicos',
     num: '001',
-    name: 'CivicOS',
-    category: 'FULL STACK / AI',
-    tagline: 'AI-Powered Civic Intelligence Platform',
+    name: 'Interoperable Civic Infrastructure OS',
+    category: 'FULL STACK / AI / GEOSPATIAL',
+    tagline: 'Decentralized & AI-Assisted Civic Intelligence Infrastructure',
     year: '2025',
     status: 'LIVE',
-    badge: 'MUNICIPAL INTELLIGENCE',
+    badge: 'CIVIC INFRASTRUCTURE',
     accentColor: '#D9363E',
-    description: 'A full-stack civic platform designed to bring municipal information, interactive mapping, analytics and intelligent assistance into one accessible experience. It explores how technology can help citizens understand civic information and interact with urban services.',
-    stack: ['React', 'Vite', 'Leaflet', 'Recharts', 'AI APIs', 'REST APIs', 'JavaScript'],
-    liveUrl: 'https://civicos-beta.vercel.app',
+    description: 'An interoperable, full-stack municipal operating platform bringing spatial infrastructure mapping, public telemetry analytics, and AI-assisted civic incident classification into a single unified dashboard.',
+    stack: ['React', 'Vite', 'Leaflet', 'Recharts', 'AI APIs', 'REST APIs', 'TypeScript', 'Tailwind CSS'],
+    liveUrl: 'https://civicos-beta.vercel.app/',
     githubUrl: 'https://github.com/shardul-2007/civicos',
     featured: true,
     architecture: [
       {
-        layer: 'Frontend & UI',
+        layer: 'Frontend & UI Engine',
         tech: 'React 18 + Vite',
-        purpose: 'High-performance interactive user interface',
-        responsibilities: 'Reusable modular component panels (maps, stats, issue reporting, query chat), optimized production bundling, fast HMR.',
-        dataFlow: 'Receives user interactions, updates local UI state, dispatches async queries to API layer.',
+        purpose: 'High-performance interactive municipal user interface',
+        responsibilities: 'Reusable modular component panels (maps, statistics, issue reporting, query chat), optimized production bundling, fast HMR.',
+        dataFlow: 'Receives citizen and operator interactions, updates local UI state, dispatches async queries to API layer.',
       },
       {
-        layer: 'Geospatial Mapping',
+        layer: 'Geospatial Mapping Matrix',
         tech: 'Leaflet 1.9.4',
         purpose: 'Lightweight client-side interactive map visualization',
         responsibilities: 'Renders municipal boundaries, coordinates, custom pins, status heatmaps without heavyweight vendor map SDK overhead.',
         dataFlow: 'Consumes geoJSON coordinate feeds; outputs interactive marker popups with live issue metadata.',
       },
       {
-        layer: 'Analytics Engine',
+        layer: 'Analytics & Telemetry Engine',
         tech: 'Recharts',
         purpose: 'Dynamic visual metric telemetry',
         responsibilities: 'Composable SVG dashboards displaying resolution times, regional ticket volume, citizen satisfaction metrics.',
         dataFlow: 'Transforms raw municipal event arrays into formatted time-series and categorical datasets.',
       },
       {
-        layer: 'AI Intelligence',
+        layer: 'AI Incident Intelligence',
         tech: 'AI APIs',
         purpose: 'Natural language query resolution and automated issue classification',
         responsibilities: 'Categorizes citizen reports, drafts routing suggestions for public works departments, generates natural language summaries.',
@@ -129,20 +130,101 @@ export const PROJECTS: ProjectItem[] = [
     },
   },
 
-  // ── 002: AssemblyOS ──────────────────────────────────────────
+  // ── 002: Sentinelmesh ─────────────────────────────────────────
+  {
+    id: 'sentinelmesh',
+    num: '002',
+    name: 'Sentinelmesh',
+    category: 'AI GOVERNANCE / CYBERSECURITY / WEB3',
+    tagline: 'Trust, Without Blind Faith — Enterprise AI Agent Governance',
+    year: '2026',
+    status: 'LIVE',
+    badge: 'ENTERPRISE AI GOVERNANCE',
+    accentColor: '#D9363E',
+    description: 'Enterprise AI agent governance platform delivering deterministic policy enforcement, cryptographic canonical audit evidence, role-based access control (RBAC), and MST blockchain anchoring for autonomous AI systems.',
+    stack: ['Next.js 14', 'TypeScript', 'Tailwind CSS', 'Web3 / Blockchain', 'RBAC Security', 'Lucide React', 'Zustand'],
+    liveUrl: 'https://sentinelmesh-five.vercel.app/',
+    githubUrl: 'https://github.com/shardul-2007/SentinelMesh',
+    featured: true,
+    architecture: [
+      {
+        layer: 'Deterministic Policy Engine',
+        tech: 'Pre-Execution Rules Compiler',
+        purpose: 'Deterministic agent boundary and parameter validation',
+        responsibilities: 'Evaluates autonomous AI agent actions against corporate security policies before external API calls are dispatched.',
+        dataFlow: 'Agent action intent -> Policy engine evaluates allow/deny rules -> Decision emitted with cryptographic signature.',
+      },
+      {
+        layer: 'Audit & Canonical Evidence',
+        tech: 'Canonical JSON + SHA-256 Hashing',
+        purpose: 'Tamper-evident agent execution records',
+        responsibilities: 'Generates immutable audit trails of all tool calls, user queries, and policy decisions with deterministic timestamps.',
+        dataFlow: 'Execution event -> Canonical JSON hashing -> Appended to local and distributed audit ledger.',
+      },
+      {
+        layer: 'Blockchain Anchoring Matrix',
+        tech: 'MST Blockchain Testnet',
+        purpose: 'Decentralized verification and anchoring',
+        responsibilities: 'Periodically anchors batch root hashes of agent logs to the MST blockchain for zero-knowledge external auditability.',
+        dataFlow: 'Batch hashes -> Merkle tree root -> Anchor transaction broadcast to blockchain node.',
+      },
+      {
+        layer: 'RBAC Security Cockpit',
+        tech: 'Next.js App Shell + Web3 Wallet',
+        purpose: 'Multi-role administrative governance console',
+        responsibilities: 'Allows Chief Security Officers (CSO) and compliance auditors to inspect agent violations, adjust policy thresholds, and revoke credentials.',
+        dataFlow: 'Admin session -> RBAC Provider verifies authorization -> Live audit stream updates in real-time.',
+      },
+    ],
+    caseStudy: {
+      productView: {
+        whatItDoes: 'SentinelMesh establishes zero-trust governance for enterprise AI agents, preventing prompt injection, unauthorized data exfiltration, and out-of-policy tool invocations with cryptographic proofs.',
+        whoItHelps: 'Chief Security Officers, enterprise AI engineers, compliance auditors, and organizations deploying autonomous AI workflows.',
+        problem: 'Autonomous agents can hallucinate, be hijacked via prompt injections, or execute unauthorized external actions with zero accountability or audit trail.',
+        solution: 'Deterministic policy proxy that intercepts every agent step, validates permissions, logs canonical hashes, and anchors proofs onto distributed ledgers.',
+        keyFeatures: [
+          'Deterministic policy enforcement intercepting agent actions',
+          'Cryptographic audit trail with canonical event hashing',
+          'MST blockchain anchoring for immutable proof of integrity',
+          'Comprehensive RBAC session management (CSO, Auditor, Operator)',
+          'Live agent event telemetry stream with decision rationales',
+        ],
+      },
+      engineeringView: {
+        technicalDecisions: [
+          'Built zero-dependency client-side deterministic policy verification to prevent security check latency bottlenecks.',
+          'Designed modular provider architecture separating Web3 wallet connection, RBAC role state, and telemetry feed.',
+          'Adopted strict dark high-contrast cybersecurity aesthetics for critical security operations visibility.',
+        ],
+        architectureSummary: 'Next.js App Router governance cockpit with client-side state providers, cryptographic hashing utilities, and real-time audit visualization.',
+        dataFlow: 'Agent initiates action -> SentinelMesh intercepts payload -> Policy rules evaluate against active RBAC policy -> Result logged to audit table -> Merkle proof calculated.',
+        stateManagement: 'React Context & custom hooks for RBAC session and audit event pipelines.',
+        challengesAndTradeoffs: [
+          'Challenge: Microsecond latency overhead during policy interception. Solved by compiling rules into in-memory lookup trees.',
+          'Challenge: Preventing state tampering in client browser. Solved by validating digital signatures against public key registry.',
+        ],
+        futureRoadmap: [
+          'Hardware Security Module (HSM) key signing integration.',
+          'Real-time automated killswitch integration for LLM agents.',
+        ],
+      },
+    },
+  },
+
+  // ── 003: AssemblyOS ──────────────────────────────────────────
   {
     id: 'assemblyos',
-    num: '002',
+    num: '003',
     name: 'AssemblyOS',
-    category: '3D GRAPHICS / AI',
-    tagline: 'Interactive 3D Assembly & Guidance Platform',
+    category: '3D GRAPHICS / SPATIAL AI',
+    tagline: 'Interactive 3D Assembly & Spatial Guidance Platform',
     year: '2026',
     status: 'LIVE',
     badge: 'SPATIAL 3D & GUIDANCE',
-    accentColor: '#EF493F',
-    description: 'An interactive 3D assembly experience that combines spatial visualization, step-based guidance and AI-assisted interaction. Explore 3D models, assembly workflows and visual guidance through an interactive interface.',
+    accentColor: '#D9363E',
+    description: 'An interactive 3D assembly and spatial engineering platform combining WebGL 3D exploded views, sequential step-by-step guidance, and AI-assisted hardware assembly workflows.',
     stack: ['Next.js 16', 'React Three Fiber', 'Three.js', 'TypeScript', 'Tailwind CSS', 'Zustand', 'AI Copilot'],
-    liveUrl: 'https://assemblyos-sigma.vercel.app',
+    liveUrl: 'https://assemblyos-sigma.vercel.app/',
     githubUrl: 'https://github.com/shardul-2007/assemblyos',
     featured: true,
     architecture: [
@@ -154,7 +236,7 @@ export const PROJECTS: ProjectItem[] = [
         dataFlow: 'Reads component coordinates and rotation matrices from state; renders GPU-accelerated 60fps view.',
       },
       {
-        layer: 'Physics & Motion',
+        layer: 'Physics & Motion Engine',
         tech: 'Zustand + Spring Physics',
         purpose: 'Component separation and sequential step animation',
         responsibilities: 'Calculates exploded-view directional vectors, smooth interpolation between assembly stages, and focus transitions.',
@@ -168,7 +250,7 @@ export const PROJECTS: ProjectItem[] = [
         dataFlow: 'User query -> LLM intent parsing -> Structured JSON actions ({ focusComponent, highlightComponent }) -> Scene camera shift.',
       },
       {
-        layer: 'CAD Asset Ingestion',
+        layer: 'CAD Asset Ingestion Pipeline',
         tech: 'Three.js Loader Pipeline',
         purpose: 'Multi-format 3D geometry parser',
         responsibilities: 'Drag-and-drop parsing for GLB, GLTF, and OBJ formats, generating bounding-box scale normalization.',
@@ -211,20 +293,20 @@ export const PROJECTS: ProjectItem[] = [
     },
   },
 
-  // ── 003: SkillCert ───────────────────────────────────────────
+  // ── 004: SkillCert ───────────────────────────────────────────
   {
     id: 'skillcert',
-    num: '003',
+    num: '004',
     name: 'SkillCert',
-    category: 'FULL STACK / SAAS',
+    category: 'FULL STACK / CREDENTIAL AUTOMATION',
     tagline: 'Online Assessment & Verifiable Certificate Platform',
     year: '2026',
     status: 'LIVE',
     badge: 'CREDENTIAL AUTOMATION',
-    accentColor: '#A91F2C',
-    description: 'A digital assessment and credential platform that explores secure examinations, automated evaluation and verifiable certificate generation.',
+    accentColor: '#D9363E',
+    description: 'A secure digital examination and credential platform featuring anti-cheat proctored testing, server-side grading, vector PDF certificate generation via pdf-lib, and instant public QR verification.',
     stack: ['Next.js 14', 'TypeScript', 'PostgreSQL', 'Prisma ORM', 'pdf-lib', 'QR Code', 'Resend API', 'Tailwind CSS'],
-    liveUrl: 'https://certify-testfdp.vercel.app',
+    liveUrl: 'https://certify-testfdp.vercel.app/',
     githubUrl: 'https://github.com/shardul-2007/Online-Test-And-Certification-Platform',
     featured: true,
     architecture: [
@@ -289,90 +371,6 @@ export const PROJECTS: ProjectItem[] = [
         futureRoadmap: [
           'Blockchain timestamping of certificate hashes for permanent decentralized audit trails.',
           'Automated coding challenge execution sandbox for real-time code evaluation.',
-        ],
-      },
-    },
-  },
-
-  // ── 004: SHARDUL.OS / SHARDUL.LAB ────────────────────────────
-  {
-    id: 'shardul-os',
-    num: '004',
-    name: 'SHARDUL.OS',
-    category: 'FRONTEND / DESIGN',
-    tagline: 'An Interactive Developer Portfolio',
-    year: '2026',
-    status: 'LIVE',
-    badge: 'CREATIVE TECH & ARCHITECTURE',
-    accentColor: '#711C27',
-    description: 'A personal developer environment designed to bring my projects, skills, experience and experiments together through an interactive software-inspired interface.',
-    stack: ['Next.js 14', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'GitHub API'],
-    liveUrl: 'https://shardul-2007.github.io/my-portfolio/',
-    githubUrl: 'https://github.com/shardul-2007/my-portfolio',
-    featured: true,
-    architecture: [
-      {
-        layer: 'Interactive Core & Shell',
-        tech: 'Next.js 14 + Framer Motion',
-        purpose: 'Fluid cinematic storytelling and section transitions',
-        responsibilities: 'Controls boot sequence, custom cursor magnetics, command palette, audio synthesis bleeps, and editorial scroll reveals.',
-        dataFlow: 'Scroll coordinates and user keyboard inputs trigger motion variants, camera lerps, and dynamic active section tracking.',
-      },
-      {
-        layer: 'Design System & Theme Engine',
-        tech: 'Tailwind CSS + CSS Custom Properties',
-        purpose: 'Instant zero-flash dual theme switching',
-        responsibilities: 'Manages deep charcoal Dark Lab environment vs high-contrast Cyber Yellow & Black environment with full accessibility contrast.',
-        dataFlow: 'Navbar toggle updates data-theme attribute on root html; propagates token values to all glass panels.',
-      },
-      {
-        layer: 'Interactive Labs & Simulators',
-        tech: 'Custom React Engines',
-        purpose: 'Real working client-side engineering demonstrations',
-        responsibilities: 'Drives Bubble/Quick sort visualizer, binary search pointer stepping, interactive developer desk, and CLI terminal emulation.',
-        dataFlow: 'User initiates interactive algorithm -> Engine executes step by step on timed loop -> Visual bar arrays update dynamically.',
-      },
-      {
-        layer: 'Data & Telemetry Aggregation',
-        tech: 'Public GitHub API + Centralized Data Schema',
-        purpose: 'Real-time telemetry and strictly verified content single source of truth',
-        responsibilities: 'Fetches live public repo statistics, follower counts, and commits with cached fallbacks; centralizes 17 experiences & 16 achievements.',
-        dataFlow: 'Client async fetch -> GitHub REST API -> Validates payload -> Updates repository cards with fallback protection.',
-      },
-    ],
-    caseStudy: {
-      productView: {
-        whatItDoes: 'SHARDUL.LAB is an interactive developer portfolio engineered as a digital laboratory where technical recruiters, engineers, and visitors explore projects through working simulations, live demos, and interactive tools.',
-        whoItHelps: 'Hiring managers, engineering recruiters, developers, and collaborators seeking to evaluate technical depth, design craft, and product mindset.',
-        problem: 'Most developer portfolios are generic, repetitive static resume templates filled with non-functional buttons, fake progress bars, and passive text that fails to show true engineering capability.',
-        solution: 'An immersive engineering universe featuring live interactive demos of every project, working algorithm visualizers, a functioning developer terminal, and verifiable evidence.',
-        keyFeatures: [
-          'System boot sequence with terminal log and instant skip control',
-          'Command Palette (Ctrl+K) for rapid keyboard-driven navigation',
-          'Live interactive previews for CivicOS, AssemblyOS, and SkillCert',
-          'Interactive Developer Desk with physics-inspired draggable stations',
-          'Functioning CLI terminal with 15+ interactive commands and Easter eggs',
-          'Algorithm Visualizers (Sorting & Binary Search) with step-by-step telemetry',
-          'Dedicated 90-second Recruiter Mode with skill-to-project evidence matrix',
-          'Dual theme engine (Deep Charcoal Dark Lab and Cyber Yellow & Black)',
-        ],
-      },
-      engineeringView: {
-        technicalDecisions: [
-          'Engineered audio feedback using browser-native Web Audio API frequency synthesis (sine/triangle bleeps), avoiding any external MP3 asset downloads.',
-          'Consolidated portfolio content into typed single-source-of-truth data models to guarantee consistency across numbers (17 programs, 16 achievements, 23 skills, 4 projects).',
-          'Maintained 100% static export readiness (`output: export`) for multi-platform deployment on both Vercel and GitHub Pages.',
-        ],
-        architectureSummary: 'Modular Next.js App Router structure with distinct components for sections, interactive playground widgets, navigation, and stateful overlays.',
-        dataFlow: 'Global state handles command palette, recruiter modal, theme, and sound settings -> Section components render lazily on viewport intersection.',
-        stateManagement: 'Lightweight React state + localStorage persistence for theme preferences and audio toggles.',
-        challengesAndTradeoffs: [
-          'Challenge: Delivering high interaction density without degrading mobile scrolling performance. Solved by replacing complex drag physics with responsive grid cards on small touchscreens.',
-          'Challenge: Keeping zero bundle overhead for custom animations by using Framer Motion primitives and GPU-accelerated CSS transforms.',
-        ],
-        futureRoadmap: [
-          'WebGL particle fluid background option for high-end desktop graphics cards.',
-          'Interactive WebAssembly C++ execution runner in the engineering playground.',
         ],
       },
     },

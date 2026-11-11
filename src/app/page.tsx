@@ -39,6 +39,24 @@ export default function Home() {
     setTheme(initialTheme);
     document.documentElement.setAttribute('data-theme', initialTheme);
 
+    // Root-Page Initial Scroll Anchor Management
+    if (typeof window !== 'undefined') {
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      const hash = window.location.hash;
+      if (!hash || hash === '#' || hash === '#hero') {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      } else {
+        setTimeout(() => {
+          const target = document.querySelector(hash);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 150);
+      }
+    }
+
     // Global Command Palette Key Listener
     const onKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
