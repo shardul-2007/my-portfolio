@@ -52,12 +52,12 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="py-28 relative border-b border-[var(--border)] bg-[var(--bg)]">
-      <div className="section-container">
+    <section id="about" className="py-28 relative bg-[#F8F5F1] text-[#171416] border-b border-[#E5DDDA] tech-grid overflow-hidden">
+      <div className="section-container relative z-10">
         {/* Section Header */}
         <div className="flex items-center gap-2 mb-4">
           <span className="w-2.5 h-2.5 rounded-sm bg-[#D9363E]" />
-          <span className="mono text-xs font-bold uppercase tracking-[0.16em] text-[var(--text-sub)]">
+          <span className="mono text-xs font-bold uppercase tracking-[0.16em] text-[#D9363E]">
             A BIT ABOUT ME
           </span>
         </div>
@@ -65,12 +65,12 @@ export default function About() {
         <div className="grid lg:grid-cols-12 gap-12 items-start">
           {/* Left Narrative */}
           <div className="lg:col-span-6 space-y-6">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#171416] font-editorial leading-[1.1]">
-              Not just learning. <br />
-              <span className="text-[#D9363E]">Building along the way.</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#171416] leading-[1.1]">
+              NOT JUST LEARNING. <br />
+              <span className="text-[#D9363E]">BUILDING ALONG THE WAY.</span>
             </h2>
 
-            <div className="space-y-4 text-base sm:text-lg text-[var(--text-muted)] font-normal leading-relaxed">
+            <div className="space-y-4 text-base sm:text-lg text-[#81777A] font-normal leading-relaxed">
               <p>
                 I&apos;m an <strong className="text-[#171416] font-semibold">Information Technology student</strong> passionate about software development, emerging technologies and solving problems through code.
               </p>
@@ -83,26 +83,26 @@ export default function About() {
             </div>
 
             {/* Quick Profile Summary Badge */}
-            <div className="p-5 rounded-2xl border border-[var(--border)] bg-[var(--card)] shadow-sm space-y-3">
-              <div className="flex items-center justify-between text-xs mono text-[var(--text-sub)] pb-2 border-b border-[var(--border)]">
+            <div className="p-6 rounded-3xl border border-[#E5DDDA] bg-white shadow-[0_4px_20px_rgba(23,20,22,0.03)] space-y-3">
+              <div className="flex items-center justify-between text-xs mono text-[#81777A] pb-2 border-b border-[#E5DDDA]">
                 <span className="text-[#D9363E] font-bold">SHARDUL PARIHAR · WORKING PROFILE</span>
                 <span>PUNE, MAHARASHTRA</span>
               </div>
               <div className="grid sm:grid-cols-2 gap-3 text-xs mono">
                 <div>
-                  <span className="text-[var(--text-sub)] block">ACADEMIC DEGREE:</span>
+                  <span className="text-[#81777A] block">ACADEMIC DEGREE:</span>
                   <span className="font-bold text-[#171416]">Information Technology</span>
                 </div>
                 <div>
-                  <span className="text-[var(--text-sub)] block">COLLEGE / CAMPUS:</span>
+                  <span className="text-[#81777A] block">COLLEGE / CAMPUS:</span>
                   <span className="font-bold text-[#171416]">PCET&apos;s NMIET, Pune</span>
                 </div>
                 <div>
-                  <span className="text-[var(--text-sub)] block">OPEN SOURCE:</span>
+                  <span className="text-[#81777A] block">OPEN SOURCE:</span>
                   <span className="font-bold text-[#171416]">GSSoC · NSoC · OSC India</span>
                 </div>
                 <div>
-                  <span className="text-[var(--text-sub)] block">CAMPUS AMBASSADOR:</span>
+                  <span className="text-[#81777A] block">CAMPUS AMBASSADOR:</span>
                   <span className="font-bold text-[#171416]">Google · HackerRank · PW</span>
                 </div>
               </div>
@@ -124,8 +124,8 @@ export default function About() {
                   }}
                   className={`p-6 rounded-3xl border transition-all duration-300 cursor-pointer flex flex-col justify-between ${
                     isSelected
-                      ? 'bg-white border-[#D9363E] shadow-[0_12px_30px_rgba(217,54,62,0.12)] -translate-y-1'
-                      : 'bg-[var(--card)] border-[var(--border)] hover:border-[#D9363E]/50 hover:bg-white shadow-sm'
+                      ? 'bg-white border-[#D9363E] shadow-[0_12px_30px_rgba(217,54,62,0.12)] -translate-y-1 ring-2 ring-[#D9363E]/20'
+                      : 'bg-white border-[#E5DDDA] hover:border-[#D9363E]/50 hover:bg-[#FDF6F6] shadow-[0_4px_20px_rgba(23,20,22,0.02)]'
                   }`}
                 >
                   <div className="space-y-3">
@@ -136,7 +136,7 @@ export default function About() {
                       >
                         <Icon size={18} />
                       </div>
-                      <span className="mono text-xs font-bold text-[var(--text-sub)]">
+                      <span className="mono text-xs font-bold text-[#81777A]">
                         {card.num}
                       </span>
                     </div>
@@ -150,16 +150,16 @@ export default function About() {
                       </h3>
                     </div>
 
-                    <p className="text-xs text-[var(--text-muted)] leading-relaxed">
+                    <p className="text-xs text-[#81777A] leading-relaxed">
                       {card.desc}
                     </p>
                   </div>
 
-                  <div className="flex flex-wrap gap-1.5 pt-4 border-t border-[var(--border)] mt-4">
+                  <div className="flex flex-wrap gap-1.5 pt-4 border-t border-[#E5DDDA] mt-4">
                     {card.tags.map(tag => (
                       <span
                         key={tag}
-                        className="mono text-[10px] px-2 py-0.5 rounded-full bg-[var(--surface-2)] text-[#171416] font-medium"
+                        className="mono text-[10px] px-2.5 py-1 rounded-full bg-[#F8F5F1] border border-[#E5DDDA] text-[#171416] font-semibold"
                       >
                         {tag}
                       </span>

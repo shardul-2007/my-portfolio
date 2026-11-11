@@ -296,19 +296,21 @@ Pune, India`,
   }
 
   return (
-    <section id="terminal" className="py-28 relative border-b border-[var(--border)] overflow-hidden">
-      <div className="section-container">
+    <section id="terminal" className="py-28 relative bg-[#F8F5F1] text-[#171416] border-b border-[#E5DDDA] tech-grid overflow-hidden">
+      <div className="section-container relative z-10">
         {/* Header */}
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-2 mb-3">
-            <TerminalIcon size={14} className="text-[var(--accent)]" />
-            <span className="sys-label-accent">INTERACTIVE CLI SHELL // POSIX TERMINAL</span>
+            <span className="w-2.5 h-2.5 rounded-sm bg-[#D9363E]" />
+            <span className="mono text-xs font-bold uppercase tracking-[0.16em] text-[#D9363E]">
+              INTERACTIVE CLI SHELL // POSIX TERMINAL
+            </span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-[var(--text)] font-editorial">
-            Developer <span className="gradient-text">Terminal.</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#171416]">
+            DEVELOPER <span className="text-[#D9363E]">TERMINAL</span>.
           </h2>
-          <p className="text-base text-[var(--text-muted)] font-light mt-3 leading-relaxed">
-            A functioning portfolio command-line interface. Type <code className="mono text-[var(--accent)]">help</code>, explore project data, or execute commands.
+          <p className="text-sm sm:text-base text-[#81777A] font-normal mt-3 leading-relaxed">
+            A functioning portfolio command-line interface. Type <code className="mono font-bold text-[#D9363E] bg-white px-2 py-0.5 rounded border border-[#E5DDDA]">help</code>, explore project data, or execute commands.
           </p>
         </div>
 

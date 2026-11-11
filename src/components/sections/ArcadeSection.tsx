@@ -63,10 +63,10 @@ export default function ArcadeSection() {
   }
 
   return (
-    <section id="arcade" className="py-24 relative border-b border-[var(--border)] overflow-hidden bg-[var(--paper)]">
-      <div className="section-container">
+    <section id="arcade" className="py-24 relative bg-[#F8F5F1] text-[#171416] border-b border-[#E5DDDA] tech-grid overflow-hidden">
+      <div className="section-container relative z-10">
         {/* Continuous Marquee Ticker */}
-        <div className="overflow-hidden py-3 mb-10 border-y border-[var(--border)] relative bg-[var(--surface-2)]">
+        <div className="overflow-hidden py-3 mb-10 border-y border-[#E5DDDA] relative bg-[#F1ECE8]">
           <div className="marquee-track flex gap-8 items-center text-4xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-[#171416] select-none">
             {[...Array(4)].map((_, i) => (
               <div key={i} className="flex gap-8 items-center">
@@ -90,13 +90,13 @@ export default function ArcadeSection() {
           <div>
             <div className="flex items-center gap-2 mb-2">
               <span className="w-2.5 h-2.5 rounded-sm bg-[#D9363E]" />
-              <span className="mono text-xs font-bold uppercase tracking-[0.16em] text-[var(--text-sub)]">
-                ENGINEERING PLAYGROUND
+              <span className="mono text-xs font-bold uppercase tracking-[0.16em] text-[#D9363E]">
+                ENGINEERING IN MOTION
               </span>
             </div>
             <div className="flex items-baseline gap-2">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#171416]">
-                engineering in <span className="font-serif-italic font-normal text-[#D9363E]">motion</span>
+                ENGINEERING IN <span className="font-serif italic font-normal text-[#D9363E]">MOTION</span>
               </h2>
             </div>
             <p className="text-xs text-[#81777A] mono mt-1">curious experiments, interactive builds &amp; micro-demos</p>
@@ -118,8 +118,8 @@ export default function ArcadeSection() {
                 }}
                 className={`mono text-xs px-3.5 py-1.5 rounded-full transition-all cursor-pointer font-bold ${
                   filter === tab.id
-                    ? 'bg-[#171416] text-white shadow-sm'
-                    : 'bg-white border border-[var(--border)] text-[var(--text-sub)] hover:text-[#171416]'
+                    ? 'bg-[#D9363E] text-white shadow-sm'
+                    : 'bg-white border border-[#E5DDDA] text-[#81777A] hover:text-[#171416]'
                 }`}
               >
                 {tab.label}

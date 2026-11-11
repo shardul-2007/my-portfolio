@@ -89,22 +89,25 @@ export default function DeveloperDesk({ onOpenRecruiter }: DeveloperDeskProps) {
   }
 
   return (
-    <section id="desk" className="py-24 relative border-b border-[var(--border)] overflow-hidden bg-[var(--paper)]">
-      <div className="section-container">
+    <section id="desk" className="py-24 relative bg-[#F8F5F1] text-[#171416] border-b border-[#E5DDDA] tech-grid overflow-hidden">
+      <div className="section-container relative z-10">
         {/* Header Controls (Image 8 Parity) */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div>
-            <div className="flex items-center gap-2 mb-1">
-              <span className="eyebrow">interactive workbench</span>
-              <span className="mono text-[10px] text-[var(--text-sub)]">· draggable physical items</span>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-2.5 h-2.5 rounded-sm bg-[#D9363E]" />
+              <span className="mono text-xs font-bold uppercase tracking-[0.16em] text-[#D9363E]">
+                INTERACTIVE WORKBENCH
+              </span>
+              <span className="mono text-[10px] text-[#81777A]">· draggable physical items</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#171416]">
-              developer <span className="font-serif-italic font-normal text-[#D9363E]">desk</span>.
+              DEVELOPER <span className="font-serif italic font-normal text-[#D9363E]">DESK</span>.
             </h2>
           </div>
 
           {/* Mode Switcher: Designer Mode vs Developer Mode (Image 8 Parity) */}
-          <div className="inline-flex items-center gap-1.5 p-1 rounded-full bg-white border border-[var(--border)] shadow-sm self-start sm:self-auto">
+          <div className="inline-flex items-center gap-1.5 p-1 rounded-full bg-white border border-[#E5DDDA] shadow-sm self-start sm:self-auto">
             <button
               type="button"
               onClick={() => {
@@ -113,12 +116,12 @@ export default function DeveloperDesk({ onOpenRecruiter }: DeveloperDeskProps) {
               }}
               className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full mono text-xs font-bold transition-all cursor-pointer ${
                 deskMode === 'designer'
-                  ? 'bg-[#1e1420] text-white shadow-sm'
-                  : 'text-[var(--text-sub)] hover:text-[#1e1420]'
+                  ? 'bg-[#171416] text-white shadow-sm'
+                  : 'text-[#81777A] hover:text-[#171416]'
               }`}
             >
               <Sun size={12} />
-              <span>designer mode</span>
+              <span>DESIGNER MODE</span>
             </button>
 
             <button
@@ -129,12 +132,12 @@ export default function DeveloperDesk({ onOpenRecruiter }: DeveloperDeskProps) {
               }}
               className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full mono text-xs font-bold transition-all cursor-pointer ${
                 deskMode === 'developer'
-                  ? 'bg-[#1e1420] text-white shadow-sm'
-                  : 'text-[var(--text-sub)] hover:text-[#1e1420]'
+                  ? 'bg-[#D9363E] text-white shadow-sm'
+                  : 'text-[#81777A] hover:text-[#171416]'
               }`}
             >
               <Moon size={12} />
-              <span>developer mode</span>
+              <span>DEVELOPER MODE</span>
             </button>
           </div>
         </div>

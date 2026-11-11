@@ -46,42 +46,39 @@ export default function SkillsConstellation() {
   ];
 
   return (
-    <section id="skills" className="py-24 relative border-b border-[var(--border)] overflow-hidden">
-      {/* Background blueprint subtle texture */}
-      <div className="absolute inset-0 blueprint-grid opacity-20 pointer-events-none" />
-
+    <section id="skills" className="py-24 relative bg-[#F8F5F1] text-[#171416] border-b border-[#E5DDDA] tech-grid overflow-hidden">
       <div className="section-container relative z-10">
         {/* Editorial Section Header */}
         <div className="max-w-3xl mb-14">
           <div className="flex items-center gap-2 mb-3">
             <span className="w-2.5 h-2.5 rounded-sm bg-[#D9363E]" />
-            <span className="mono text-xs font-bold uppercase tracking-[0.16em] text-[var(--text-sub)]">
+            <span className="mono text-xs font-bold uppercase tracking-[0.16em] text-[#D9363E]">
               WHAT I WORK WITH
             </span>
-            <span className="mono text-[10px] text-[var(--text-sub)]">· 23 validated capabilities</span>
+            <span className="mono text-[10px] text-[#81777A]">· 23 validated capabilities</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#171416] tracking-tight leading-[1.15]">
-            Tools I use. <br />
-            <span className="font-serif-italic text-[#D9363E] font-normal">
+            TOOLS I USE. <br />
+            <span className="font-serif italic text-[#D9363E] font-normal">
               Skills I keep sharpening.
             </span>
           </h2>
 
-          <p className="text-sm sm:text-base text-[var(--text-muted)] font-normal mt-4 leading-relaxed max-w-2xl">
+          <p className="text-sm sm:text-base text-[#81777A] font-normal mt-4 leading-relaxed max-w-2xl">
             A growing toolkit built through projects, experimentation, problem-solving and continuous learning.
           </p>
         </div>
 
         {/* 5-Column Editorial Stack Layout (Parity with Rishika's .skills grid) */}
-        <div className="border-t border-[var(--border)] pt-8 pb-10">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-0 lg:divide-x lg:divide-[var(--border)]">
+        <div className="border-t border-[#E5DDDA] pt-8 pb-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-0 lg:divide-x lg:divide-[#E5DDDA]">
             {columns.map(col => (
               <div key={col.key} className="lg:px-6 first:pl-0 last:pr-0">
                 {/* Column Eyebrow Header */}
-                <div className="mono text-xs uppercase tracking-[0.08em] text-[var(--text-sub)] pb-4 border-b border-[var(--border)]/50 flex items-center justify-between">
+                <div className="mono text-xs uppercase tracking-[0.08em] text-[#81777A] font-bold pb-4 border-b border-[#E5DDDA] flex items-center justify-between">
                   <span>{col.categoryTitle}</span>
-                  <span className="text-[10px] opacity-60">[{col.skills.length}]</span>
+                  <span className="text-[10px] text-[#D9363E]">[{col.skills.length}]</span>
                 </div>
 
                 {/* Skill List Items */}
@@ -103,33 +100,33 @@ export default function SkillsConstellation() {
                             labAudio.playHover();
                           }}
                           onMouseLeave={() => setHoveredSkillId(null)}
-                          className={`group w-full text-left py-1.5 px-2 rounded-lg transition-all duration-300 flex items-center justify-between cursor-pointer ${
+                          className={`group w-full text-left py-1.5 px-2.5 rounded-xl transition-all duration-300 flex items-center justify-between cursor-pointer ${
                             isSelected
-                              ? 'bg-[var(--accent)] text-black font-semibold translate-x-2'
-                              : 'text-[var(--text)] hover:text-[var(--accent)] hover:translate-x-2'
+                              ? 'bg-[#D9363E] text-white font-bold translate-x-1.5 shadow-[0_4px_16px_rgba(217,54,62,0.25)]'
+                              : 'text-[#171416] hover:text-[#D9363E] hover:bg-[#FDF6F6] hover:translate-x-1'
                           }`}
                         >
                           <div className="flex items-center gap-2">
                             <span
                               className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
                                 isSelected
-                                  ? 'bg-black'
+                                  ? 'bg-white'
                                   : isHovered
-                                  ? 'bg-[var(--accent)] scale-125'
-                                  : 'bg-[var(--text-sub)]/40 group-hover:bg-[var(--accent)]'
+                                  ? 'bg-[#D9363E] scale-125'
+                                  : 'bg-[#81777A]/40 group-hover:bg-[#D9363E]'
                               }`}
                             />
-                            <span className="text-[16px] sm:text-[17px] tracking-tight font-medium">
+                            <span className="text-[15px] sm:text-[16px] tracking-tight font-medium">
                               {skill.name}
                             </span>
                           </div>
 
                           {skill.level === 'Daily' && (
                             <span
-                              className={`mono text-[9px] px-1.5 py-0.5 rounded ${
+                              className={`mono text-[9px] px-1.5 py-0.5 rounded uppercase font-bold ${
                                 isSelected
-                                  ? 'bg-black/20 text-black'
-                                  : 'bg-[var(--surface-2)] text-[var(--text-sub)] opacity-0 group-hover:opacity-100 transition-opacity'
+                                  ? 'bg-white/20 text-white'
+                                  : 'bg-[#F1ECE8] text-[#81777A] group-hover:text-[#D9363E] transition-colors'
                               }`}
                             >
                               core
@@ -153,24 +150,24 @@ export default function SkillsConstellation() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 12 }}
               transition={{ duration: 0.25 }}
-              className="mt-6 p-6 rounded-2xl border border-[var(--border)] bg-[var(--surface)] backdrop-blur-md"
+              className="mt-6 p-6 sm:p-8 rounded-3xl border border-[#E5DDDA] bg-white shadow-[0_8px_30px_rgba(23,20,22,0.06)]"
             >
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-[var(--border)]">
-                <div className="flex items-center gap-3">
-                  <span className="font-serif-italic text-2xl text-[var(--text)]">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-[#E5DDDA]">
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className="font-serif italic text-2xl font-bold text-[#171416]">
                     {selectedSkill.name}
                   </span>
-                  <span className="mono text-[11px] px-2.5 py-0.5 rounded-full bg-[var(--accent-dim)] text-[var(--accent)] font-semibold uppercase">
+                  <span className="mono text-[11px] px-3 py-1 rounded-full bg-[#FDF6F6] border border-[#F2D2D4] text-[#D9363E] font-bold uppercase">
                     {selectedSkill.category}
                   </span>
-                  <span className="mono text-[11px] px-2.5 py-0.5 rounded-full bg-[var(--surface-2)] text-[var(--text-sub)]">
+                  <span className="mono text-[11px] px-3 py-1 rounded-full bg-[#F8F5F1] border border-[#E5DDDA] text-[#81777A] font-semibold">
                     Proficiency: {selectedSkill.level}
                   </span>
                 </div>
 
                 <button
                   onClick={() => setSelectedSkill(null)}
-                  className="mono text-xs text-[var(--text-sub)] hover:text-[var(--text)] transition-colors self-start md:self-auto cursor-pointer"
+                  className="mono text-xs text-[#81777A] hover:text-[#D9363E] font-bold transition-colors self-start md:self-auto cursor-pointer"
                 >
                   [DISMISS ESC]
                 </button>
@@ -178,17 +175,17 @@ export default function SkillsConstellation() {
 
               <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
                 <div className="md:col-span-2">
-                  <p className="text-sm text-[var(--text-muted)] font-light leading-relaxed">
+                  <p className="text-sm text-[#81777A] font-normal leading-relaxed">
                     {selectedSkill.description}
                   </p>
                 </div>
 
-                <div className="border-t md:border-t-0 md:border-l border-[var(--border)] pt-4 md:pt-0 md:pl-6">
-                  <div className="mono text-[10px] text-[var(--text-sub)] uppercase tracking-wider mb-2">
+                <div className="border-t md:border-t-0 md:border-l border-[#E5DDDA] pt-4 md:pt-0 md:pl-6">
+                  <div className="mono text-[10px] text-[#81777A] uppercase font-bold tracking-wider mb-2">
                     Production Systems:
                   </div>
                   {selectedSkill.associatedProjects.length === 0 ? (
-                    <span className="text-xs text-[var(--text-sub)] italic">
+                    <span className="text-xs text-[#81777A] italic">
                       Algorithmic rigor & foundational CS problem solving.
                     </span>
                   ) : (
@@ -200,7 +197,7 @@ export default function SkillsConstellation() {
                           <a
                             key={proj.id}
                             href="#projects"
-                            className="inline-flex items-center gap-1 mono text-xs px-2.5 py-1 rounded-md bg-[var(--surface-2)] border border-[var(--border)] hover:border-[var(--accent)] text-[var(--text)] hover:text-[var(--accent)] transition-all"
+                            className="inline-flex items-center gap-1 mono text-xs px-3 py-1 rounded-full bg-[#F8F5F1] border border-[#E5DDDA] hover:border-[#D9363E] text-[#171416] hover:text-[#D9363E] transition-all"
                           >
                             <span>{proj.name}</span>
                             <ArrowUpRight size={11} />

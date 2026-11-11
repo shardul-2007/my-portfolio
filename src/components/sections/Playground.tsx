@@ -180,24 +180,26 @@ export default function Playground() {
   }
 
   return (
-    <section id="playground" className="py-28 relative border-b border-[var(--border)] overflow-hidden">
-      <div className="section-container">
+    <section id="playground" className="py-28 relative bg-[#F8F5F1] text-[#171416] border-b border-[#E5DDDA] tech-grid overflow-hidden">
+      <div className="section-container relative z-10">
         {/* Header */}
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-2 mb-3">
-            <Code size={14} className="text-[var(--accent)]" />
-            <span className="sys-label-accent">ALGORITHMIC WORKBENCH // INTERACTIVE LAB</span>
+            <span className="w-2.5 h-2.5 rounded-sm bg-[#D9363E]" />
+            <span className="mono text-xs font-bold uppercase tracking-[0.16em] text-[#D9363E]">
+              ALGORITHMIC WORKBENCH // INTERACTIVE LAB
+            </span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-[var(--text)] font-editorial">
-            Engineering <span className="gradient-text">Playground.</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#171416]">
+            ENGINEERING <span className="text-[#D9363E]">PLAYGROUND</span>.
           </h2>
-          <p className="text-base text-[var(--text-muted)] font-light mt-3 leading-relaxed">
+          <p className="text-sm sm:text-base text-[#81777A] font-normal mt-3 leading-relaxed">
             Real, functioning algorithmic visualizers and network response simulators. Watch algorithms execute step by step.
           </p>
         </div>
 
         {/* Tab Switcher */}
-        <div className="flex flex-wrap gap-2 pb-6 border-b border-[var(--border)] mb-8">
+        <div className="flex flex-wrap gap-2 pb-6 border-b border-[#E5DDDA] mb-8">
           {[
             { id: 'sorting', label: '01. SORTING ALGORITHM VISUALIZER' },
             { id: 'binarySearch', label: '02. BINARY SEARCH STEPPER' },
@@ -209,10 +211,10 @@ export default function Playground() {
                 labAudio.playClick(900);
                 setActiveTab(tab.id as typeof activeTab);
               }}
-              className={`mono text-xs px-4 py-2 rounded-xl transition-all cursor-pointer font-semibold ${
+              className={`mono text-xs px-4 py-2.5 rounded-full transition-all cursor-pointer font-bold ${
                 activeTab === tab.id
-                  ? 'bg-[var(--accent)] text-black font-bold shadow-[0_0_15px_var(--accent-glow)]'
-                  : 'bg-[var(--surface)] border border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--surface-2)]'
+                  ? 'bg-[#D9363E] text-white shadow-[0_4px_16px_rgba(217,54,62,0.3)]'
+                  : 'bg-white border border-[#E5DDDA] text-[#81777A] hover:text-[#171416] hover:bg-[#FDF6F6]'
               }`}
             >
               {tab.label}
@@ -222,12 +224,12 @@ export default function Playground() {
 
         {/* Tab 1: Sorting Visualizer */}
         {activeTab === 'sorting' && (
-          <div className="p-6 sm:p-8 rounded-3xl glass border border-[var(--border-strong)] space-y-6">
-            <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-[var(--border)]">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white border border-[#E5DDDA] shadow-[0_4px_20px_rgba(23,20,22,0.03)] space-y-6">
+            <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-[#E5DDDA]">
               <div>
-                <h3 className="font-bold text-lg text-[var(--text)]">Bubble Sort Visualizer</h3>
-                <div className="mono text-xs text-[var(--text-sub)]">
-                  Comparisons: <span className="text-[var(--accent)] font-bold">{comparisons}</span> · Time Complexity: O(n²)
+                <h3 className="font-bold text-lg text-[#171416]">Bubble Sort Visualizer</h3>
+                <div className="mono text-xs text-[#81777A]">
+                  Comparisons: <span className="text-[#D9363E] font-bold">{comparisons}</span> · Time Complexity: O(n²)
                 </div>
               </div>
 
@@ -236,7 +238,7 @@ export default function Playground() {
                 <button
                   disabled={sorting}
                   onClick={runBubbleSort}
-                  className="glow-btn glow-btn-primary text-xs py-1.5 px-3 disabled:opacity-40"
+                  className="mono text-xs font-bold px-4 py-2 rounded-full bg-[#D9363E] hover:bg-[#A91F2C] text-white transition-all shadow-xs disabled:opacity-40 cursor-pointer"
                 >
                   <Play size={12} />
                   <span>START SORT</span>
@@ -380,10 +382,10 @@ export default function Playground() {
                   <button
                     key={ep.path}
                     onClick={() => executeApiTest(ep.path)}
-                    className={`mono text-xs px-3 py-1 rounded-lg border transition-all cursor-pointer ${
+                    className={`mono text-xs px-3.5 py-1.5 rounded-full border transition-all cursor-pointer font-bold ${
                       apiEndpoint === ep.path
-                        ? 'bg-[var(--accent)] text-black font-bold'
-                        : 'bg-[var(--surface-2)] border-[var(--border)] text-[var(--text-muted)] hover:text-white'
+                        ? 'bg-[#D9363E] text-white border-[#D9363E]'
+                        : 'bg-white border-[#E5DDDA] text-[#81777A] hover:text-[#171416]'
                     }`}
                   >
                     {ep.name}
@@ -393,7 +395,7 @@ export default function Playground() {
             </div>
 
             {/* JSON Viewer */}
-            <div className="p-5 rounded-2xl bg-[#07090F] border border-[var(--border)] font-mono text-xs text-[#00F5C8] overflow-x-auto max-h-[300px]">
+            <div className="p-6 rounded-2xl bg-[#0F0D0E] border border-[#E5DDDA] font-mono text-xs text-[#10B981] overflow-x-auto max-h-[300px] shadow-inner">
               <pre>{apiResponse}</pre>
             </div>
           </div>

@@ -42,7 +42,7 @@ export default function CommandPalette({
     {
       id: 'home',
       name: '/home',
-      label: 'Home & Cinematic Hero',
+      label: 'Home & LAB.01 Hero Canvas',
       category: 'Navigation',
       icon: Terminal,
       action: () => {
@@ -60,9 +60,29 @@ export default function CommandPalette({
       },
     },
     {
+      id: 'about',
+      name: '/about',
+      label: 'About Shardul Parihar (Information Technology)',
+      category: 'Navigation',
+      icon: Sparkles,
+      action: () => {
+        window.location.hash = '#about';
+      },
+    },
+    {
+      id: 'skills',
+      name: '/stack',
+      label: 'Technology Stack & Capabilities (23 Skills)',
+      category: 'Navigation',
+      icon: Sparkles,
+      action: () => {
+        window.location.hash = '#skills';
+      },
+    },
+    {
       id: 'projects',
       name: '/projects',
-      label: 'Featured Projects (CivicOS, AssemblyOS, SkillCert)',
+      label: 'Featured Projects (CivicOS, AssemblyOS, SkillCert, SHARDUL.OS)',
       category: 'Navigation',
       icon: Code,
       action: () => {
@@ -72,7 +92,7 @@ export default function CommandPalette({
     {
       id: 'architecture',
       name: '/architecture',
-      label: 'Project Architecture Explorer',
+      label: 'Project Architecture Explorer (System Visualizer)',
       category: 'Explore',
       icon: Layers,
       action: () => {
@@ -80,49 +100,49 @@ export default function CommandPalette({
       },
     },
     {
-      id: 'casestudies',
-      name: '/case-studies',
-      label: 'Engineering Case Studies (Product & Engineering Views)',
-      category: 'Explore',
-      icon: FileText,
-      action: () => {
-        window.location.hash = '#case-studies';
-      },
-    },
-    {
-      id: 'experience',
-      name: '/experience',
-      label: 'Git Journey & Experience (17 Programs)',
+      id: 'contributions',
+      name: '/opensource',
+      label: 'Open Source Contributions (OSCI, GSSoC, NSoC, OSCG)',
       category: 'Navigation',
       icon: FolderGit2,
       action: () => {
-        window.location.hash = '#experience';
+        window.location.hash = '#contributions';
       },
     },
     {
-      id: 'achievements',
-      name: '/achievements',
-      label: 'Credentials & Achievements Archive (16 Records)',
+      id: 'engagements',
+      name: '/engagements',
+      label: 'Community Engagements (Google SA, HackerRank, MyGov, GUESSS)',
+      category: 'Navigation',
+      icon: Briefcase,
+      action: () => {
+        window.location.hash = '#engagements';
+      },
+    },
+    {
+      id: 'credentials',
+      name: '/recognition',
+      label: 'Milestones & Credentials (7 Authentic Proofs)',
       category: 'Navigation',
       icon: Award,
       action: () => {
-        window.location.hash = '#achievements';
+        window.location.hash = '#credentials';
       },
     },
     {
-      id: 'skills',
-      name: '/skills',
-      label: 'Technology Constellation (23 Skills)',
-      category: 'Navigation',
-      icon: Sparkles,
+      id: 'playground',
+      name: '/playground',
+      label: 'Engineering Playground (Algorithm Steppers & API Sim)',
+      category: 'Explore',
+      icon: Code,
       action: () => {
-        window.location.hash = '#skills';
+        window.location.hash = '#playground';
       },
     },
     {
       id: 'desk',
       name: '/desk',
-      label: 'Interactive Developer Desk',
+      label: 'Interactive Developer Desk Mat',
       category: 'Explore',
       icon: Laptop,
       action: () => {
@@ -140,19 +160,9 @@ export default function CommandPalette({
       },
     },
     {
-      id: 'playground',
-      name: '/playground',
-      label: 'Algorithm Visualizers (Sorting & Binary Search)',
-      category: 'Explore',
-      icon: Code,
-      action: () => {
-        window.location.hash = '#playground';
-      },
-    },
-    {
       id: 'arcade',
       name: '/arcade',
-      label: 'Speed Typing & Memory Games',
+      label: 'Engineering in Motion (Micro-Interactions)',
       category: 'Explore',
       icon: Gamepad2,
       action: () => {
@@ -162,7 +172,7 @@ export default function CommandPalette({
     {
       id: 'github',
       name: '/github',
-      label: 'Live GitHub Activity Feed',
+      label: 'Live GitHub Activity Feed (@shardul-2007)',
       category: 'Navigation',
       icon: FolderGit2,
       action: () => {
@@ -180,16 +190,6 @@ export default function CommandPalette({
       },
     },
     {
-      id: 'theme',
-      name: '/theme',
-      label: 'Toggle Theme (Dark Lab ↔ Cyber Yellow)',
-      category: 'Actions',
-      icon: Sun,
-      action: () => {
-        onToggleTheme();
-      },
-    },
-    {
       id: 'resume',
       name: '/resume',
       label: 'Open LinkedIn Profile & Credentials',
@@ -202,7 +202,7 @@ export default function CommandPalette({
     {
       id: 'contact',
       name: '/contact',
-      label: 'Get in Touch / Contact Interface',
+      label: 'Secure Transmission / Contact Interface',
       category: 'Navigation',
       icon: Mail,
       action: () => {
@@ -282,11 +282,11 @@ export default function CommandPalette({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: -16 }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full max-w-2xl bg-[var(--bg-elevated)] border border-[var(--border-strong)] rounded-2xl shadow-[0_24px_80px_rgba(0,0,0,0.8)] overflow-hidden z-10"
+            className="relative w-full max-w-2xl bg-white text-[#171416] border border-[#E5DDDA] rounded-2xl shadow-[0_24px_80px_rgba(0,0,0,0.5)] overflow-hidden z-10"
           >
             {/* Search Input Bar */}
-            <div className="flex items-center gap-3 px-5 py-4 border-b border-[var(--border)] bg-[var(--surface)]">
-              <Search size={18} className="text-[var(--accent)] flex-shrink-0" />
+            <div className="flex items-center gap-3 px-5 py-4 border-b border-[#E5DDDA] bg-[#F8F5F1]">
+              <Search size={18} className="text-[#D9363E] flex-shrink-0" />
               <input
                 ref={inputRef}
                 value={query}
@@ -295,9 +295,9 @@ export default function CommandPalette({
                   setSelectedIndex(0);
                 }}
                 placeholder="Type a command or search section (e.g. /projects, /recruiter)..."
-                className="w-full bg-transparent border-none outline-none text-sm text-[var(--text)] placeholder-[var(--text-sub)] mono"
+                className="w-full bg-transparent border-none outline-none text-sm text-[#171416] placeholder-[#81777A] mono"
               />
-              <span className="mono text-[10px] px-2 py-1 rounded bg-[var(--surface-2)] border border-[var(--border)] text-[var(--text-sub)]">
+              <span className="mono text-[10px] px-2 py-1 rounded-md bg-white border border-[#E5DDDA] text-[#81777A] font-bold">
                 ESC
               </span>
             </div>
@@ -305,7 +305,7 @@ export default function CommandPalette({
             {/* Results List */}
             <div className="max-h-[380px] overflow-y-auto p-2 space-y-1">
               {filtered.length === 0 ? (
-                <div className="py-12 text-center text-[var(--text-sub)] mono text-xs">
+                <div className="py-12 text-center text-[#81777A] mono text-xs">
                   No matching commands found for &quot;{query}&quot;.
                 </div>
               ) : (
@@ -323,23 +323,23 @@ export default function CommandPalette({
                       onMouseEnter={() => setSelectedIndex(i)}
                       className={`w-full text-left flex items-center justify-between px-4 py-3 rounded-xl transition-all mono text-xs cursor-pointer ${
                         isSelected
-                          ? 'bg-[var(--accent-dim)] text-[var(--text)] border border-[var(--border-glow)]'
-                          : 'text-[var(--text-muted)] hover:bg-[var(--surface)] border border-transparent'
+                          ? 'bg-[#FDF6F6] text-[#171416] border border-[#D9363E]/40 font-bold'
+                          : 'text-[#81777A] hover:bg-[#F8F5F1] hover:text-[#171416] border border-transparent'
                       }`}
                     >
                       <div className="flex items-center gap-3 min-w-0">
                         <Icon
                           size={16}
-                          className={isSelected ? 'text-[var(--accent)]' : 'text-[var(--text-sub)]'}
+                          className={isSelected ? 'text-[#D9363E]' : 'text-[#81777A]'}
                         />
-                        <span className="font-bold text-[var(--accent)] flex-shrink-0">
+                        <span className="font-bold text-[#D9363E] flex-shrink-0">
                           {cmd.name}
                         </span>
-                        <span className="truncate text-[var(--text)]">
+                        <span className="truncate text-[#171416]">
                           {cmd.label}
                         </span>
                       </div>
-                      <span className="text-[9px] px-2 py-0.5 rounded-full bg-[var(--surface-2)] text-[var(--text-sub)] uppercase tracking-wider flex-shrink-0">
+                      <span className="text-[9px] px-2.5 py-0.5 rounded-full bg-[#F1ECE8] text-[#81777A] uppercase tracking-wider flex-shrink-0 font-bold">
                         {cmd.category}
                       </span>
                     </button>
@@ -349,13 +349,13 @@ export default function CommandPalette({
             </div>
 
             {/* Keyboard Shortcuts Footer */}
-            <div className="flex items-center justify-between px-5 py-2.5 border-t border-[var(--border)] bg-[var(--surface-2)] text-[10px] mono text-[var(--text-sub)]">
+            <div className="flex items-center justify-between px-5 py-2.5 border-t border-[#E5DDDA] bg-[#F8F5F1] text-[10px] mono text-[#81777A]">
               <div className="flex items-center gap-4">
                 <span>↑↓ Navigate</span>
                 <span>↵ Select</span>
                 <span>ESC Close</span>
               </div>
-              <span className="text-[var(--accent)] font-semibold">SHARDUL.LAB COMMAND PALETTE</span>
+              <span className="text-[#D9363E] font-bold">SHARDUL.LAB COMMAND PALETTE</span>
             </div>
           </motion.div>
         </div>

@@ -50,25 +50,25 @@ export default function Receipts() {
       num: `${counts.programs}+`,
       label: 'programs & campus roles',
       footnote: 'Google Student Ambassador, HackerRank Campus Crew, and open source',
-      accent: 'var(--accent)',
+      accent: '#D9363E',
     },
     {
       num: `${counts.credentials}`,
       label: 'documented credentials',
       footnote: 'verified proofs, certificate IDs, and zero fabricated claims',
-      accent: '#FF6B35',
+      accent: '#EF493F',
     },
     {
       num: `0${counts.systems}`,
       label: 'production systems shipped',
       footnote: 'CivicOS, AssemblyOS, SkillCert, and SHARDUL.LAB live in production',
-      accent: '#38BDF8',
+      accent: '#A91F2C',
     },
     {
       num: `${counts.skills}`,
       label: 'validated tech stack capabilities',
       footnote: 'React, TypeScript, Three.js, Python, C++, AI APIs, and PostgreSQL',
-      accent: '#A78BFA',
+      accent: '#711C27',
     },
     {
       num: `${counts.metrics}%`,
@@ -79,17 +79,22 @@ export default function Receipts() {
   ];
 
   return (
-    <section id="receipts" className="py-20 relative border-b border-[var(--border)] overflow-hidden">
-      <div className="section-container">
+    <section id="receipts" className="py-20 relative bg-[#F8F5F1] text-[#171416] border-b border-[#E5DDDA] tech-grid overflow-hidden">
+      <div className="section-container relative z-10">
         {/* Head */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
           <div>
-            <span className="eyebrow">receipts</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[var(--text)] font-editorial mt-1">
-              verified <span className="font-serif-italic font-normal text-amber-500">proof</span>.
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-2.5 h-2.5 rounded-sm bg-[#D9363E]" />
+              <span className="mono text-xs font-bold uppercase tracking-[0.16em] text-[#D9363E]">
+                RECEIPTS &amp; TELEMETRY
+              </span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#171416]">
+              VERIFIED <span className="font-serif italic font-normal text-[#D9363E]">PROOF</span>.
             </h2>
           </div>
-          <p className="text-sm text-[var(--text-muted)] mono">
+          <p className="text-sm text-[#81777A] mono">
             because &ldquo;trust me bro&rdquo; isn&rsquo;t a metric.
           </p>
         </div>
@@ -104,7 +109,7 @@ export default function Receipts() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.08 }}
               onMouseEnter={() => labAudio.playHover()}
-              className="p-6 rounded-2xl glass border border-[var(--border)] hover:border-[var(--border-strong)] transition-all flex flex-col justify-between group relative overflow-hidden"
+              className="p-6 rounded-2xl bg-white border border-[#E5DDDA] hover:border-[#D9363E]/40 shadow-[0_4px_20px_rgba(23,20,22,0.03)] hover:shadow-[0_8px_30px_rgba(23,20,22,0.06)] transition-all flex flex-col justify-between group relative overflow-hidden"
             >
               <div className="space-y-2">
                 <div
@@ -113,12 +118,12 @@ export default function Receipts() {
                 >
                   {item.num}
                 </div>
-                <div className="text-xs font-bold text-[var(--text)] uppercase tracking-wider leading-snug">
+                <div className="text-xs font-bold text-[#171416] uppercase tracking-wider leading-snug">
                   {item.label}
                 </div>
               </div>
 
-              <div className="pt-4 mt-4 border-t border-[var(--border)] text-[11px] text-[var(--text-sub)] font-light leading-relaxed">
+              <div className="pt-4 mt-4 border-t border-[#E5DDDA] text-[11px] text-[#81777A] font-normal leading-relaxed">
                 {item.footnote}
               </div>
             </motion.div>

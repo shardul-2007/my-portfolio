@@ -22,19 +22,21 @@ interface CommandCenterProps {
 
 export default function CommandCenter({ onOpenCommand, onOpenRecruiter }: CommandCenterProps) {
   return (
-    <section id="command-center" className="py-24 relative border-b border-[var(--border)]">
-      <div className="section-container">
+    <section id="command-center" className="py-24 relative bg-[#F8F5F1] text-[#171416] border-b border-[#E5DDDA] tech-grid overflow-hidden">
+      <div className="section-container relative z-10">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
             <div className="flex items-center gap-2 mb-3">
-              <span className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse" />
-              <span className="sys-label-accent">COMMAND DECK // TELEMETRY &amp; STATUS</span>
+              <span className="w-2.5 h-2.5 rounded-sm bg-[#D9363E]" />
+              <span className="mono text-xs font-bold uppercase tracking-[0.16em] text-[#D9363E]">
+                COMMAND DECK // TELEMETRY &amp; STATUS
+              </span>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[var(--text)] font-editorial">
-              Engineering <span className="gradient-text">Command Center</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#171416]">
+              ENGINEERING <span className="text-[#D9363E]">COMMAND CENTER</span>
             </h2>
-            <p className="text-sm text-[var(--text-muted)] max-w-xl mt-2 font-light">
+            <p className="text-sm text-[#81777A] max-w-xl mt-2 font-normal leading-relaxed">
               Real-time snapshot of active systems, technical focus vectors, learning goals, and project launchers.
             </p>
           </div>
@@ -45,9 +47,9 @@ export default function CommandCenter({ onOpenCommand, onOpenRecruiter }: Comman
                 labAudio.playClick(900);
                 onOpenCommand();
               }}
-              className="glow-btn glow-btn-ghost text-xs"
+              className="inline-flex items-center gap-2 mono text-xs px-4 py-2 rounded-full bg-white border border-[#E5DDDA] text-[#171416] hover:border-[#D9363E] hover:text-[#D9363E] font-bold transition-all shadow-xs cursor-pointer"
             >
-              <Terminal size={14} className="text-[var(--accent)]" />
+              <Terminal size={14} className="text-[#D9363E]" />
               <span>COMMAND PALETTE [⌘K]</span>
             </button>
           </div>
@@ -58,42 +60,42 @@ export default function CommandCenter({ onOpenCommand, onOpenRecruiter }: Comman
           {/* Panel 1: Live Status & Location */}
           <motion.div
             whileHover={{ y: -3 }}
-            className="glass-card p-6 rounded-2xl flex flex-col justify-between"
+            className="p-6 rounded-3xl bg-white border border-[#E5DDDA] shadow-[0_4px_20px_rgba(23,20,22,0.03)] flex flex-col justify-between"
           >
             <div>
-              <div className="flex items-center justify-between text-xs mono text-[var(--text-sub)] pb-4 border-b border-[var(--border)] mb-4">
-                <span className="flex items-center gap-1.5 text-[var(--accent)] font-semibold">
+              <div className="flex items-center justify-between text-xs mono text-[#81777A] pb-4 border-b border-[#E5DDDA] mb-4">
+                <span className="flex items-center gap-1.5 text-[#D9363E] font-bold">
                   <Activity size={14} /> LIVE STATUS
                 </span>
                 <span>PUNE, IN</span>
               </div>
               <div className="space-y-3">
                 <div className="flex items-center gap-2.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[var(--accent-lime)] animate-ping" />
-                  <span className="text-base font-bold text-[var(--text)]">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#10B981] animate-ping" />
+                  <span className="text-base font-bold text-[#171416]">
                     AVAILABLE FOR WORK
                   </span>
                 </div>
-                <p className="text-xs text-[var(--text-muted)] leading-relaxed font-light">
-                  Open to software engineering internships, freelance technical architecture, open-source collaborations, and full-stack positions.
+                <p className="text-xs text-[#81777A] leading-relaxed font-normal">
+                  Open to software engineering internships, open-source collaborations, and full-stack positions starting immediately.
                 </p>
               </div>
             </div>
 
-            <div className="mt-6 pt-4 border-t border-[var(--border)] flex items-center justify-between text-xs mono text-[var(--text-sub)]">
+            <div className="mt-6 pt-4 border-t border-[#E5DDDA] flex items-center justify-between text-xs mono text-[#81777A]">
               <span>Timezone: UTC+5:30 (IST)</span>
-              <span className="text-[var(--accent-lime)]">● ONLINE</span>
+              <span className="text-[#10B981] font-bold">● ONLINE</span>
             </div>
           </motion.div>
 
           {/* Panel 2: Current Engineering Focus */}
           <motion.div
             whileHover={{ y: -3 }}
-            className="glass-card p-6 rounded-2xl flex flex-col justify-between"
+            className="p-6 rounded-3xl bg-white border border-[#E5DDDA] shadow-[0_4px_20px_rgba(23,20,22,0.03)] flex flex-col justify-between"
           >
             <div>
-              <div className="flex items-center justify-between text-xs mono text-[var(--text-sub)] pb-4 border-b border-[var(--border)] mb-4">
-                <span className="flex items-center gap-1.5 text-[var(--accent-orange)] font-semibold">
+              <div className="flex items-center justify-between text-xs mono text-[#81777A] pb-4 border-b border-[#E5DDDA] mb-4">
+                <span className="flex items-center gap-1.5 text-[#D9363E] font-bold">
                   <Cpu size={14} /> ACTIVE FOCUS VECTORS
                 </span>
                 <span>PRIMARY STACK</span>
@@ -102,47 +104,47 @@ export default function CommandCenter({ onOpenCommand, onOpenRecruiter }: Comman
                 {PROFILE.focus.map((item, idx) => (
                   <div
                     key={item}
-                    className="flex items-center justify-between p-2 rounded-lg bg-[var(--surface-2)] text-xs mono text-[var(--text)]"
+                    className="flex items-center justify-between p-2.5 rounded-xl bg-[#F8F5F1] border border-[#E5DDDA] text-xs mono text-[#171416]"
                   >
                     <span className="flex items-center gap-2">
-                      <span className="text-[var(--accent-orange)] font-bold">0{idx + 1}</span>
-                      <span>{item}</span>
+                      <span className="text-[#D9363E] font-bold">0{idx + 1}</span>
+                      <span className="font-semibold">{item}</span>
                     </span>
-                    <span className="text-[9px] text-[var(--text-sub)]">ACTIVE</span>
+                    <span className="text-[10px] text-[#81777A] font-bold">ACTIVE</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="mt-4 pt-3 border-t border-[var(--border)] flex items-center justify-between text-[10px] mono text-[var(--text-sub)]">
+            <div className="mt-4 pt-3 border-t border-[#E5DDDA] flex items-center justify-between text-[10px] mono text-[#81777A]">
               <span>First-Principles Engineering</span>
-              <span className="text-[var(--accent-orange)]">HIGH PRIORITY</span>
+              <span className="text-[#D9363E] font-bold">HIGH PRIORITY</span>
             </div>
           </motion.div>
 
           {/* Panel 3: Active Learning Goals & Research */}
           <motion.div
             whileHover={{ y: -3 }}
-            className="glass-card p-6 rounded-2xl flex flex-col justify-between"
+            className="p-6 rounded-3xl bg-white border border-[#E5DDDA] shadow-[0_4px_20px_rgba(23,20,22,0.03)] flex flex-col justify-between"
           >
             <div>
-              <div className="flex items-center justify-between text-xs mono text-[var(--text-sub)] pb-4 border-b border-[var(--border)] mb-4">
-                <span className="flex items-center gap-1.5 text-[var(--accent)] font-semibold">
+              <div className="flex items-center justify-between text-xs mono text-[#81777A] pb-4 border-b border-[#E5DDDA] mb-4">
+                <span className="flex items-center gap-1.5 text-[#D9363E] font-bold">
                   <Compass size={14} /> ACTIVE LAB RESEARCH
                 </span>
                 <span>2026 ROADMAP</span>
               </div>
-              <div className="space-y-2.5 text-xs text-[var(--text-muted)] font-light">
-                <div className="p-3 rounded-xl bg-[var(--surface-2)] border border-[var(--border)]">
-                  <div className="font-semibold text-[var(--text)] mb-0.5">
+              <div className="space-y-2.5 text-xs text-[#81777A]">
+                <div className="p-3.5 rounded-2xl bg-[#F8F5F1] border border-[#E5DDDA]">
+                  <div className="font-bold text-[#171416] mb-0.5">
                     KV Cache Compression (adaptq)
                   </div>
                   <p className="text-[11px] leading-relaxed">
                     Researching high-performance C++ inference caching algorithms for large language models.
                   </p>
                 </div>
-                <div className="p-3 rounded-xl bg-[var(--surface-2)] border border-[var(--border)]">
-                  <div className="font-semibold text-[var(--text)] mb-0.5">
+                <div className="p-3.5 rounded-2xl bg-[#F8F5F1] border border-[#E5DDDA]">
+                  <div className="font-bold text-[#171416] mb-0.5">
                     Spatial WebGL &amp; WebXR
                   </div>
                   <p className="text-[11px] leading-relaxed">
@@ -152,24 +154,24 @@ export default function CommandCenter({ onOpenCommand, onOpenRecruiter }: Comman
               </div>
             </div>
 
-            <div className="mt-4 pt-3 border-t border-[var(--border)] flex items-center justify-between text-[10px] mono text-[var(--text-sub)]">
+            <div className="mt-4 pt-3 border-t border-[#E5DDDA] flex items-center justify-between text-[10px] mono text-[#81777A]">
               <span>Continuous Discovery</span>
-              <span className="text-[var(--accent)]">PROGRESSING</span>
+              <span className="text-[#D9363E] font-bold">PROGRESSING</span>
             </div>
           </motion.div>
         </div>
 
         {/* Featured Projects Fast Launcher Strip */}
-        <div className="mt-8 p-6 rounded-2xl glass border border-[var(--border-strong)]">
-          <div className="flex items-center justify-between mb-4 pb-3 border-b border-[var(--border)]">
-            <div className="flex items-center gap-2 mono text-xs text-[var(--text-sub)]">
-              <Layers size={14} className="text-[var(--accent)]" />
-              <span className="font-semibold text-[var(--text)]">FEATURED PRODUCTION SYSTEMS</span>
+        <div className="mt-8 p-6 sm:p-8 rounded-3xl bg-white border border-[#E5DDDA] shadow-[0_4px_20px_rgba(23,20,22,0.03)]">
+          <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#E5DDDA]">
+            <div className="flex items-center gap-2 mono text-xs text-[#81777A]">
+              <Layers size={14} className="text-[#D9363E]" />
+              <span className="font-bold text-[#171416]">FEATURED PRODUCTION SYSTEMS</span>
               <span>(4 VERIFIED PROJECTS)</span>
             </div>
             <a
               href="#projects"
-              className="mono text-xs text-[var(--accent)] hover:underline flex items-center gap-1"
+              className="mono text-xs text-[#D9363E] hover:underline font-bold flex items-center gap-1"
             >
               <span>View All 4 In Depth</span>
               <ArrowUpRight size={12} />
@@ -180,41 +182,45 @@ export default function CommandCenter({ onOpenCommand, onOpenRecruiter }: Comman
             {PROJECTS.map(proj => (
               <div
                 key={proj.id}
-                className="p-4 rounded-xl bg-[var(--surface-2)] border border-[var(--border)] hover:border-[var(--accent)] transition-all group"
+                className="p-4 rounded-2xl bg-[#F8F5F1] border border-[#E5DDDA] hover:border-[#D9363E] transition-all group"
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="mono text-[10px] text-[var(--accent-orange)] font-bold">
+                  <span className="mono text-[10px] text-[#D9363E] font-bold">
                     SYS_{proj.num}
                   </span>
-                  <span className="mono text-[9px] px-2 py-0.5 rounded-full bg-[var(--surface-3)] text-[var(--accent-lime)] font-semibold">
+                  <span className="mono text-[9px] px-2 py-0.5 rounded-full bg-white text-[#10B981] font-bold border border-[#E5DDDA]">
                     {proj.status}
                   </span>
                 </div>
-                <div className="font-bold text-base text-[var(--text)] group-hover:text-[var(--accent)] transition-colors">
+                <div className="font-bold text-base text-[#171416] group-hover:text-[#D9363E] transition-colors">
                   {proj.name}
                 </div>
-                <div className="mono text-[11px] text-[var(--text-muted)] truncate mt-0.5">
+                <div className="mono text-[11px] text-[#81777A] truncate mt-0.5">
                   {proj.tagline}
                 </div>
-                <div className="mt-4 flex items-center justify-between pt-3 border-t border-[var(--border)] text-[11px] mono">
-                  <a
-                    href={proj.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[var(--accent)] hover:underline flex items-center gap-1 font-semibold"
-                  >
-                    <span>Live Demo</span>
-                    <ArrowUpRight size={11} />
-                  </a>
-                  <a
-                    href={proj.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[var(--text-sub)] hover:text-[var(--text)] flex items-center gap-1"
-                  >
-                    <GitBranch size={11} />
-                    <span>Repo</span>
-                  </a>
+                <div className="mt-4 flex items-center justify-between pt-3 border-t border-[#E5DDDA] text-[11px] mono">
+                  {proj.liveUrl && (
+                    <a
+                      href={proj.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#D9363E] hover:underline flex items-center gap-1 font-bold"
+                    >
+                      <span>Live Demo</span>
+                      <ArrowUpRight size={11} />
+                    </a>
+                  )}
+                  {proj.githubUrl && (
+                    <a
+                      href={proj.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#81777A] hover:text-[#171416] flex items-center gap-1 font-semibold"
+                    >
+                      <GitBranch size={11} />
+                      <span>Repo</span>
+                    </a>
+                  )}
                 </div>
               </div>
             ))}

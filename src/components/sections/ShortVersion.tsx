@@ -37,20 +37,20 @@ export default function ShortVersion() {
   return (
     <section
       ref={containerRef}
-      className="py-32 relative border-b border-[var(--border)] overflow-hidden bg-[var(--bg)]"
+      className="py-32 relative border-b border-[#E5DDDA] overflow-hidden bg-[#F8F5F1] tech-grid"
     >
-      <div className="section-container max-w-5xl">
+      <div className="section-container max-w-5xl relative z-10">
         {/* Section Tag */}
         <div className="flex items-center gap-2 mb-8">
           <span className="w-2.5 h-2.5 rounded-sm bg-[#D9363E]" />
-          <span className="mono text-xs font-bold uppercase tracking-[0.16em] text-[var(--text-sub)]">
+          <span className="mono text-xs font-bold uppercase tracking-[0.16em] text-[#D9363E]">
             THE SHORT VERSION
           </span>
         </div>
 
         {/* Scroll-Driven Highlighted Typography */}
         <div className="relative">
-          <p className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.2] select-none">
+          <p className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.2] select-none text-[#171416]">
             {words.map((item, idx) => {
               const start = idx / words.length;
               const end = (idx + 1) / words.length;
@@ -71,7 +71,7 @@ export default function ShortVersion() {
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-1.5 mono text-xs px-2.5 py-1 rounded-md border border-[var(--border)] bg-[var(--surface)] text-[var(--text-sub)] shadow-sm mt-8"
+            className="inline-flex items-center gap-1.5 mono text-xs px-3 py-1.5 rounded-full border border-[#E5DDDA] bg-white text-[#81777A] shadow-sm mt-8"
           >
             <span className="text-[#12a150] font-bold">+2</span>
             <span className="text-[#D9363E] font-bold">-0</span>

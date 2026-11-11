@@ -30,25 +30,25 @@ export default function InsideMind() {
   };
 
   return (
-    <section id="mind" className="py-28 relative border-b border-[var(--border)] overflow-hidden">
-      <div className="section-container">
+    <section id="mind" className="py-28 relative bg-[#F8F5F1] text-[#171416] border-b border-[#E5DDDA] tech-grid overflow-hidden">
+      <div className="section-container relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--surface-2)] border border-[var(--border)] mb-4">
-            <Brain size={14} className="text-[var(--accent)]" />
-            <span className="sys-label-accent">IDENTITY &amp; ENGINEERING COGNITION</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-[#E5DDDA] mb-4 shadow-xs">
+            <Brain size={14} className="text-[#D9363E]" />
+            <span className="mono text-xs font-bold uppercase tracking-[0.16em] text-[#D9363E]">IDENTITY &amp; ENGINEERING COGNITION</span>
           </div>
 
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[var(--text)] font-editorial leading-tight">
-            Inside the Mind of <br />
-            <span className="gradient-text">Shardul Parihar.</span>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[#171416] leading-tight">
+            INSIDE THE MIND OF <br />
+            <span className="text-[#D9363E]">SHARDUL PARIHAR.</span>
           </h2>
-          <div className="mono text-xs sm:text-sm tracking-[0.2em] text-[var(--accent-orange)] font-semibold mt-2">
-            SOFTWARE ENGINEER / BUILDER
+          <div className="mono text-xs sm:text-sm tracking-[0.2em] text-[#81777A] font-bold mt-2">
+            INFORMATION TECHNOLOGY / SOFTWARE ENGINEER / BUILDER
           </div>
 
           {/* Verified Stats Row */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-10 p-5 rounded-2xl glass border border-[var(--border-strong)]">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-10 p-6 rounded-3xl bg-white border border-[#E5DDDA] shadow-[0_4px_20px_rgba(23,20,22,0.03)]">
             {[
               { val: '17+', label: 'Verified Programs', sub: 'Campus & Open Source' },
               { val: '16', label: 'Achievements', sub: 'Documented Badges' },
@@ -56,13 +56,13 @@ export default function InsideMind() {
               { val: '04', label: 'Featured Systems', sub: 'Production Shipped' },
             ].map(s => (
               <div key={s.label} className="text-center space-y-1">
-                <div className="text-3xl sm:text-4xl font-bold mono text-[var(--accent)]">
+                <div className="text-3xl sm:text-4xl font-bold mono text-[#D9363E]">
                   {s.val}
                 </div>
-                <div className="mono text-xs font-semibold text-[var(--text)]">
+                <div className="mono text-xs font-bold text-[#171416]">
                   {s.label}
                 </div>
-                <div className="mono text-[10px] text-[var(--text-sub)]">
+                <div className="mono text-[10px] text-[#81777A]">
                   {s.sub}
                 </div>
               </div>
@@ -88,8 +88,8 @@ export default function InsideMind() {
                   onMouseEnter={() => labAudio.playHover()}
                   className={`w-full text-left p-5 rounded-2xl transition-all duration-300 border cursor-pointer relative overflow-hidden ${
                     isSelected
-                      ? 'bg-[var(--surface-2)] border-[var(--border-glow)] shadow-[0_10px_35px_rgba(0,245,200,0.1)]'
-                      : 'bg-[var(--surface)] border-[var(--border)] hover:border-[var(--border-strong)] hover:bg-[var(--surface-2)]'
+                      ? 'bg-white border-[#D9363E] shadow-[0_8px_30px_rgba(217,54,62,0.15)] ring-2 ring-[#D9363E]/20'
+                      : 'bg-white border-[#E5DDDA] hover:border-[#D9363E]/40 hover:bg-[#FDF6F6]'
                   }`}
                 >
                   <div className="flex items-start justify-between">
@@ -106,7 +106,7 @@ export default function InsideMind() {
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="mono text-[10px] text-[var(--text-sub)] font-semibold">
+                          <span className="mono text-[10px] text-[#81777A] font-semibold">
                             PILLAR_{pillar.num}
                           </span>
                           <span
@@ -116,7 +116,7 @@ export default function InsideMind() {
                             {pillar.label}
                           </span>
                         </div>
-                        <div className="font-bold text-base text-[var(--text)] mt-0.5">
+                        <div className="font-bold text-base text-[#171416] mt-0.5">
                           {pillar.title}
                         </div>
                       </div>
@@ -126,13 +126,13 @@ export default function InsideMind() {
                       size={18}
                       className={`transition-transform duration-300 mt-2 ${
                         isSelected
-                          ? 'rotate-90 text-[var(--accent)]'
-                          : 'text-[var(--text-sub)]'
+                          ? 'rotate-90 text-[#D9363E]'
+                          : 'text-[#81777A]'
                       }`}
                     />
                   </div>
 
-                  <p className="text-xs text-[var(--text-muted)] font-light mt-3 leading-relaxed">
+                  <p className="text-xs text-[#81777A] font-normal mt-3 leading-relaxed">
                     {pillar.shortDesc}
                   </p>
 
@@ -158,15 +158,15 @@ export default function InsideMind() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -16 }}
                 transition={{ duration: 0.3 }}
-                className="p-8 sm:p-10 rounded-3xl glass border border-[var(--border-strong)] relative overflow-hidden"
+                className="p-8 sm:p-10 rounded-3xl bg-white border border-[#E5DDDA] shadow-[0_4px_20px_rgba(23,20,22,0.03)] relative overflow-hidden"
               >
                 {/* Accent Watermark */}
                 <div
-                  className="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl pointer-events-none opacity-20"
+                  className="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl pointer-events-none opacity-10"
                   style={{ background: activePillar.accentColor }}
                 />
 
-                <div className="flex items-center justify-between pb-4 border-b border-[var(--border)] mb-6 text-xs mono text-[var(--text-sub)]">
+                <div className="flex items-center justify-between pb-4 border-b border-[#E5DDDA] mb-6 text-xs mono text-[#81777A]">
                   <span>IDENTITY PERSPECTIVE // 0{activePillar.num}</span>
                   <span
                     className="font-bold tracking-wider"
@@ -176,39 +176,39 @@ export default function InsideMind() {
                   </span>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-bold text-[var(--text)] tracking-tight font-editorial mb-4">
+                <h3 className="text-2xl sm:text-3xl font-bold text-[#171416] tracking-tight mb-4">
                   {activePillar.title}
                 </h3>
 
-                <p className="text-base sm:text-lg leading-relaxed text-[var(--text-muted)] font-light mb-8">
+                <p className="text-base sm:text-lg leading-relaxed text-[#81777A] font-normal mb-8">
                   {activePillar.fullDesc}
                 </p>
 
                 {/* Quote Block */}
-                <div className="p-5 rounded-2xl bg-[var(--surface-2)] border border-[var(--border)] mb-8 relative">
+                <div className="p-5 rounded-2xl bg-[#F8F5F1] border border-[#E5DDDA] mb-8 relative">
                   <Quote
                     size={24}
                     className="opacity-20 absolute top-4 right-4"
                     style={{ color: activePillar.accentColor }}
                   />
-                  <div className="text-sm italic font-editorial text-[var(--text)] leading-relaxed">
-                    {activePillar.quote}
+                  <div className="text-sm italic font-serif text-[#171416] leading-relaxed">
+                    &ldquo;{activePillar.quote}&rdquo;
                   </div>
-                  <div className="mono text-[10px] text-[var(--text-sub)] mt-2">
+                  <div className="mono text-[10px] text-[#81777A] mt-2 font-semibold">
                     — Shardul Parihar, Core Philosophy
                   </div>
                 </div>
 
                 {/* Associated Tags */}
                 <div>
-                  <div className="mono text-[11px] text-[var(--text-sub)] uppercase tracking-wider mb-3">
+                  <div className="mono text-[11px] text-[#81777A] uppercase tracking-wider mb-3 font-bold">
                     CORE ENGINEERING CORRELATES
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {activePillar.tags.map(tag => (
                       <span
                         key={tag}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs mono font-medium bg-[var(--surface-2)] border border-[var(--border)] text-[var(--text)]"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs mono font-bold bg-[#F8F5F1] border border-[#E5DDDA] text-[#171416]"
                       >
                         <CheckCircle2 size={12} style={{ color: activePillar.accentColor }} />
                         <span>{tag}</span>
